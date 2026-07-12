@@ -1,0 +1,16 @@
+[
+  {
+    "id": "claude-3-5-sonnet-token",
+    "model": "Claude 3.5 Sonnet",
+    "billing_type": "per_token",
+    "prices": {"input": 3.00, "output": 15.00, "currency": "USD", "unit": "per_1m_tokens"},
+    "purchase_url": "https://docs.anthropic.com/en/docs/about-claude/pricing"
+  },
+  {
+    "id": "claude-pro-subscription",
+    "model": null,
+    "billing_type": "subscription",
+    "prices": {"monthly_price": 20, "currency": "USD", "features": ["5x more usage", "Priority access"]},
+    "purchase_url": "https://claude.ai/pricing"
+  }
+]
