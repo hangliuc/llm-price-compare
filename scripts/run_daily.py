@@ -3,8 +3,12 @@
 import json
 import logging
 import subprocess
+import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+
+# 确保项目根目录在 sys.path 中，支持直接 python3 scripts/run_daily.py 运行
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.adapters import ADAPTERS
 from scripts.core.manual import load_manual_providers

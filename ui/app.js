@@ -2,6 +2,9 @@ const { createApp, ref, computed, onMounted } = Vue;
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
+// 本地 /ui/ 路径用 ../data/，GitHub Pages 根路径用 data/
+const DATA_PATH = window.location.pathname.includes("/ui/") ? "../data/prices.json" : "data/prices.json";
+
 createApp({
   setup() {
     const data = ref(null);
@@ -170,7 +173,7 @@ createApp({
 
     async function loadData() {
       try {
-        const resp = await fetch("data/prices.json", { cache: "no-cache" });
+        const resp = await fetch(DATA_PATH, { cache: "no-cache" });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         data.value = await resp.json();
       } catch (e) {
