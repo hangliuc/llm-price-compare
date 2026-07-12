@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+data/run_status.json
+/var/log/llm-price/
+playwright.cfg

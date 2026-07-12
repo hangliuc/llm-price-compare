@@ -1,0 +1,14 @@
+# scripts/core/fetcher.py
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# scripts/adapters/zhipu.py, volcengine.py (headless browser)
+playwright>=1.40.0
+
+# scripts/core/manual.py
+pyyaml>=6.0
+
+# 测试
+pytest>=7.4.0
+pytest-mock>=3.12.0
+responses>=0.24.0
