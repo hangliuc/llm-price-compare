@@ -1,0 +1,20 @@
+[
+  {
+    "id": "deepseek-chat-token",
+    "model": "deepseek-chat",
+    "billing_type": "per_token",
+    "context_window": 64000,
+    "modalities": ["text"],
+    "prices": {"input": 0.27, "output": 1.10, "currency": "USD", "unit": "per_1m_tokens"},
+    "purchase_url": "https://api-docs.deepseek.com/quick_start/pricing"
+  },
+  {
+    "id": "deepseek-reasoner-token",
+    "model": "deepseek-reasoner",
+    "billing_type": "per_token",
+    "context_window": 64000,
+    "modalities": ["text"],
+    "prices": {"input": 0.55, "output": 2.19, "currency": "USD", "unit": "per_1m_tokens"},
+    "purchase_url": "https://api-docs.deepseek.com/quick_start/pricing"
+  }
+]
