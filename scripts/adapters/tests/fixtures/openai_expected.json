@@ -1,0 +1,16 @@
+[
+  {
+    "id": "gpt-4o-token",
+    "model": "GPT-4o",
+    "billing_type": "per_token",
+    "prices": {"input": 2.50, "output": 10.00, "cached_input": 1.25, "currency": "USD", "unit": "per_1m_tokens"},
+    "purchase_url": "https://openai.com/api/pricing/"
+  },
+  {
+    "id": "gpt-4o-mini-token",
+    "model": "GPT-4o mini",
+    "billing_type": "per_token",
+    "prices": {"input": 0.15, "output": 0.60, "cached_input": 0.075, "currency": "USD", "unit": "per_1m_tokens"},
+    "purchase_url": "https://openai.com/api/pricing/"
+  }
+]
