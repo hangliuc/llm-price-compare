@@ -1,10 +1,14 @@
+.git
+.github
 __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
 venv/
+node_modules/
+note/
+*.md
+!requirements.txt
 data/run_status.json
-/var/log/llm-price/
 logs/
-playwright.cfg
 .env

@@ -1,0 +1,13 @@
+services:
+  scraper:
+    build: .
+    container_name: llm-price-scraper
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - FEISHU_WEBHOOK_URL=${FEISHU_WEBHOOK_URL:-}
+      - GIT_USER_NAME=${GIT_USER_NAME:-llm-price-bot}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL:-bot@llm-price-compare}
+      - GIT_REMOTE_URL=${GIT_REMOTE_URL:-}
+    volumes:
+      - ./logs:/var/log/llm-price
