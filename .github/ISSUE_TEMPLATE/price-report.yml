@@ -1,0 +1,36 @@
+name: 价格异常报告
+description: 报告某厂商/模型的价格错误
+labels: [price-error]
+body:
+  - type: dropdown
+    id: provider
+    attributes:
+      label: 厂商
+      options:
+        - OpenAI
+        - Anthropic
+        - 智谱
+        - 火山引擎
+        - DeepSeek
+        - OpenCode
+        - Google
+        - Mistral
+        - 阿里通义
+        - 月之暗面
+        - 其他
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: 模型/产品
+      placeholder: 如 GLM-4-Plus
+    validations:
+      required: true
+  - type: textarea
+    id: correct_price
+    attributes:
+      label: 正确价格
+      description: 请附厂商定价页截图或链接
+    validations:
+      required: true

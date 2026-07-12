@@ -1,0 +1,20 @@
+name: 建议新增厂商
+description: 建议添加一家新的 LLM 厂商
+labels: [new-provider]
+body:
+  - type: input
+    id: provider_name
+    attributes:
+      label: 厂商名称
+    validations:
+      required: true
+  - type: input
+    id: pricing_url
+    attributes:
+      label: 定价页 URL
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 补充说明
