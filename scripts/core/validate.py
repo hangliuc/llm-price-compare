@@ -73,3 +73,60 @@ def validate_global(data: dict) -> bool:
         return True
     except (ValidationError, KeyError, TypeError) as e:
         return False
+
+
+# 追加到 scripts/core/validate.py 末尾
+from dataclasses import dataclass, field
+from typing import Optional
+
+
+@dataclass
+class VolatilityResult:
+    max_pct: float = 0.0
+    should_block: bool = False
+    warnings: list = field(default_factory=list)
+
+
+_PRICE_FIELDS = ["input", "output", "cached_input", "monthly_price"]
+
+
+def _pct_change(old: float, new: float) -> float:
+    if old == 0:
+        return 0.0 if new == 0 else 100.0
+    return abs((new - old) / old) * 100.0
+
+
+def check_volatility(old_provider: Optional[dict], new_products: list) -> VolatilityResult:
+    result = VolatilityResult()
+    if not old_provider:
+        return result
+
+    old_by_id = {p["id"]: p for p in old_provider.get("products", [])}
+
+    for new_prod in new_products:
+        pid = new_prod.id
+        old_prod = old_by_id.get(pid)
+        if not old_prod:
+            continue
+
+        old_prices = old_prod.get("prices", {})
+        new_prices = new_prod.prices
+
+        for f in _PRICE_FIELDS:
+            if f in old_prices and f in new_prices:
+                pct = _pct_change(float(old_prices[f]), float(new_prices[f]))
+                if pct > result.max_pct:
+                    result.max_pct = pct
+                if pct > 20.0:
+                    result.warnings.append({
+                        "product_id": pid,
+                        "field": f"prices.{f}",
+                        "old_value": old_prices[f],
+                        "new_value": new_prices[f],
+                        "volatility_pct": round(pct, 2),
+                    })
+
+    if result.max_pct > 50.0:
+        result.should_block = True
+
+    return result

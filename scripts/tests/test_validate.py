@@ -63,3 +63,50 @@ def test_validate_product_subscription_ok():
         purchase_url="https://example.com",
     )
     validate_product(p)
+
+
+# 追加到 scripts/tests/test_validate.py
+from scripts.core.validate import check_volatility, VolatilityResult
+
+
+def _old_provider_with_input(price: float):
+    return {
+        "id": "x",
+        "products": [{
+            "id": "p1",
+            "billing_type": "per_token",
+            "prices": {"input": price, "output": 10, "currency": "USD", "unit": "per_1m_tokens"},
+        }]
+    }
+
+
+def test_volatility_none_when_no_old():
+    new = [_make_per_token_product(id="p1", prices={"input": 5, "output": 10, "currency": "USD", "unit": "per_1m_tokens"})]
+    result = check_volatility(None, new)
+    assert result.max_pct == 0.0
+    assert result.warnings == []
+
+
+def test_volatility_within_threshold():
+    old = _old_provider_with_input(10.0)
+    new = [_make_per_token_product(id="p1", prices={"input": 11.0, "output": 10, "currency": "USD", "unit": "per_1m_tokens"})]
+    result = check_volatility(old, new)
+    assert result.max_pct == 10.0
+    assert result.warnings == []
+
+
+def test_volatility_warning_band():
+    old = _old_provider_with_input(10.0)
+    new = [_make_per_token_product(id="p1", prices={"input": 13.0, "output": 10, "currency": "USD", "unit": "per_1m_tokens"})]
+    result = check_volatility(old, new)
+    assert result.max_pct == 30.0
+    assert len(result.warnings) == 1
+    assert result.warnings[0]["volatility_pct"] == 30.0
+
+
+def test_volatility_block_band():
+    old = _old_provider_with_input(10.0)
+    new = [_make_per_token_product(id="p1", prices={"input": 20.0, "output": 10, "currency": "USD", "unit": "per_1m_tokens"})]
+    result = check_volatility(old, new)
+    assert result.max_pct == 100.0
+    assert result.should_block is True
