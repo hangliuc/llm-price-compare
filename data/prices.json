@@ -1,5 +1,189 @@
 {
-  "generated_at": null,
-  "providers": [],
-  "provider_status": []
+  "generated_at": "2026-07-12T18:38:39+08:00",
+  "providers": [
+    {
+      "id": "google",
+      "name": "Google",
+      "name_en": "Google",
+      "region": "us",
+      "website": "https://ai.google.dev/",
+      "pricing_url": "https://ai.google.dev/pricing",
+      "products": [
+        {
+          "id": "gemini-1.5-pro-token",
+          "model": "Gemini 1.5 Pro",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "input": 1.25,
+            "output": 5.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing"
+        }
+      ]
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "name_en": "Mistral AI",
+      "region": "eu",
+      "website": "https://mistral.ai/",
+      "pricing_url": "https://mistral.ai/pricing",
+      "products": [
+        {
+          "id": "mistral-large-token",
+          "model": "Mistral Large",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.0,
+            "output": 6.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://mistral.ai/pricing"
+        }
+      ]
+    },
+    {
+      "id": "moonshot",
+      "name": "月之暗面",
+      "name_en": "Moonshot AI",
+      "region": "cn",
+      "website": "https://platform.moonshot.cn/",
+      "pricing_url": "https://platform.moonshot.cn/pricing",
+      "products": [
+        {
+          "id": "moonshot-v1-8k-token",
+          "model": "Moonshot-v1-8k",
+          "billing_type": "per_token",
+          "context_window": 8000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 12.0,
+            "output": 12.0,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        }
+      ]
+    },
+    {
+      "id": "qwen",
+      "name": "阿里通义",
+      "name_en": "Alibaba Qwen",
+      "region": "cn",
+      "website": "https://bailian.aliyun.com/",
+      "pricing_url": "https://help.aliyun.com/zh/model-studio/billing",
+      "products": [
+        {
+          "id": "qwen-max-token",
+          "model": "Qwen-Max",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.04,
+            "output": 0.12,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        }
+      ]
+    }
+  ],
+  "provider_status": [
+    {
+      "provider_id": "openai",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "403 Client Error: Forbidden for url: https://openai.com/api/pricing/",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "anthropic",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "could not convert string to float: '10 / MTok'",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "deepseek",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "could not convert string to float: 'DeepSeek-V4-Flash'",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "opencode",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "opencode: expected >=1 products, got 0 (page structure may have changed)",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "zhipu",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "Page.wait_for_selector: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\".model-list, .plan-list\") to be visible\n",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "volcengine",
+      "status": "failed",
+      "last_success_at": null,
+      "error": "It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.",
+      "stale": true,
+      "warnings": []
+    },
+    {
+      "provider_id": "google",
+      "status": "ok",
+      "last_success_at": "2026-07-12T18:38:39+08:00",
+      "stale": false,
+      "warnings": []
+    },
+    {
+      "provider_id": "mistral",
+      "status": "ok",
+      "last_success_at": "2026-07-12T18:38:39+08:00",
+      "stale": false,
+      "warnings": []
+    },
+    {
+      "provider_id": "moonshot",
+      "status": "ok",
+      "last_success_at": "2026-07-12T18:38:39+08:00",
+      "stale": false,
+      "warnings": []
+    },
+    {
+      "provider_id": "qwen",
+      "status": "ok",
+      "last_success_at": "2026-07-12T18:38:39+08:00",
+      "stale": false,
+      "warnings": []
+    }
+  ]
 }
