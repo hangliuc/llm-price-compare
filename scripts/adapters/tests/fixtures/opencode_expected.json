@@ -1,0 +1,15 @@
+[
+  {
+    "id": "opencode-pro-plan",
+    "model": null,
+    "billing_type": "coding_plan",
+    "prices": {
+      "monthly_price": 99,
+      "currency": "CNY",
+      "included_quota": 500,
+      "quota_unit": "次",
+      "features": ["支持 GPT-4o", "支持 Claude 3.5"]
+    },
+    "purchase_url": "https://opencode.ai/zh/go/buy"
+  }
+]
