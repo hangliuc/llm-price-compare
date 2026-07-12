@@ -1,0 +1,19 @@
+# data/manual/moonshot.yaml
+id: moonshot
+name: 月之暗面
+name_en: Moonshot AI
+region: cn
+website: https://platform.moonshot.cn/
+pricing_url: https://platform.moonshot.cn/pricing
+products:
+  - id: moonshot-v1-8k-token
+    model: Moonshot-v1-8k
+    billing_type: per_token
+    context_window: 8000
+    modalities: [text]
+    prices:
+      input: 12.0
+      output: 12.0
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.moonshot.cn/pricing

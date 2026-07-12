@@ -1,0 +1,19 @@
+# data/manual/qwen.yaml
+id: qwen
+name: 阿里通义
+name_en: Alibaba Qwen
+region: cn
+website: https://bailian.aliyun.com/
+pricing_url: https://help.aliyun.com/zh/model-studio/billing
+products:
+  - id: qwen-max-token
+    model: Qwen-Max
+    billing_type: per_token
+    context_window: 32000
+    modalities: [text]
+    prices:
+      input: 0.04
+      output: 0.12
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
