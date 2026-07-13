@@ -85,7 +85,7 @@ docker compose down
 ssh user@129.226.94.179
 
 # 克隆仓库
-cd /opt
+cd /root
 git clone git@github.com:hangliuc/llm-price-compare.git
 cd llm-price-compare
 
@@ -109,7 +109,7 @@ GIT_USER_EMAIL=bot@llm-price-compare
 ### 2. 启动容器
 
 ```bash
-cd /opt/llm-price-compare
+cd /root/llm-price-compare
 docker compose up -d --build
 ```
 
