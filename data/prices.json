@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T19:40:00+08:00",
+  "generated_at": "2026-07-13T20:35:29+08:00",
   "providers": [
     {
       "id": "openai",
@@ -297,7 +297,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2024-01-25",
           "prices": {
             "input": 1.0,
             "output": 2.0,
@@ -333,7 +333,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2023-08-28",
           "prices": {
             "input": 3.0,
             "output": 4.0,
@@ -351,7 +351,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2023-09-28",
           "prices": {
             "input": 1.5,
             "output": 2.0,
@@ -369,7 +369,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2023-05-28",
           "prices": {
             "input": 0.5,
             "output": 1.5,
@@ -459,7 +459,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2023-05-28",
           "prices": {
             "input": 30.0,
             "output": 60.0,
@@ -496,7 +496,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2024-01-25",
           "prices": {
             "input": 10.0,
             "output": 30.0,
@@ -515,7 +515,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-04-09",
           "prices": {
             "input": 10.0,
             "output": 30.0,
@@ -575,7 +575,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-14",
           "prices": {
             "input": 0.4,
             "output": 1.6,
@@ -616,7 +616,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-14",
           "prices": {
             "input": 0.1,
             "output": 0.4,
@@ -637,7 +637,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-14",
           "prices": {
             "input": 2.0,
             "output": 8.0,
@@ -658,7 +658,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-05-13",
           "prices": {
             "input": 5.0,
             "output": 15.0,
@@ -678,7 +678,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-08-06",
           "prices": {
             "input": 2.5,
             "output": 10.0,
@@ -699,7 +699,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-11-20",
           "prices": {
             "input": 2.5,
             "output": 10.0,
@@ -777,7 +777,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-07-18",
           "prices": {
             "input": 0.15,
             "output": 0.6,
@@ -895,7 +895,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-03-12",
           "prices": {
             "input": 0.15,
             "output": 0.6,
@@ -916,7 +916,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-07-18",
           "prices": {
             "input": 0.15,
             "output": 0.6,
@@ -1035,7 +1035,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-03-12",
           "prices": {
             "input": 2.5,
             "output": 10.0,
@@ -1056,7 +1056,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-05-13",
           "prices": {
             "input": 2.5,
             "output": 10.0,
@@ -1136,7 +1136,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-08-07",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1156,7 +1156,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-09-23",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1177,7 +1177,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-16",
           "prices": {
             "input": 2.5,
             "output": 2.0,
@@ -1198,7 +1198,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-14",
           "prices": {
             "input": 10.0,
             "output": 10.0,
@@ -1239,7 +1239,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-08-07",
           "prices": {
             "input": 0.25,
             "output": 2.0,
@@ -1280,7 +1280,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-08-07",
           "prices": {
             "input": 0.05,
             "output": 0.4,
@@ -1301,7 +1301,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-06",
           "prices": {
             "input": 15.0,
             "output": 120.0,
@@ -1361,7 +1361,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-08-07",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1422,7 +1422,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-11-13",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1442,7 +1442,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-12-04",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1462,7 +1462,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-11-13",
           "prices": {
             "input": 0.25,
             "output": 2.0,
@@ -1482,7 +1482,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-11-13",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1503,7 +1503,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-11-13",
           "prices": {
             "input": 1.25,
             "output": 10.0,
@@ -1564,7 +1564,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-12-10",
           "prices": {
             "input": 1.75,
             "output": 14.0,
@@ -1584,7 +1584,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-01-14",
           "prices": {
             "input": 1.75,
             "output": 14.0,
@@ -1605,7 +1605,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-12-10",
           "prices": {
             "input": 21.0,
             "output": 168.0,
@@ -1625,7 +1625,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-12-10",
           "prices": {
             "input": 1.75,
             "output": 14.0,
@@ -1666,7 +1666,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-03-03",
           "prices": {
             "input": 1.75,
             "output": 14.0,
@@ -1687,7 +1687,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-02-24",
           "prices": {
             "input": 1.75,
             "output": 14.0,
@@ -1728,7 +1728,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-21",
           "prices": {
             "input": 8.0,
             "output": 15.0,
@@ -1769,7 +1769,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-03-17",
           "prices": {
             "input": 0.75,
             "output": 4.5,
@@ -1810,7 +1810,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-03-17",
           "prices": {
             "input": 0.2,
             "output": 1.25,
@@ -1831,7 +1831,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-03-05",
           "prices": {
             "input": 30.0,
             "output": 180.0,
@@ -1851,7 +1851,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-03-05",
           "prices": {
             "input": 2.5,
             "output": 15.0,
@@ -1892,7 +1892,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-24",
           "prices": {
             "input": 30.0,
             "output": 180.0,
@@ -1912,7 +1912,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-24",
           "prices": {
             "input": 5.0,
             "output": 30.0,
@@ -1933,7 +1933,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 1.0,
             "output": 6.0,
@@ -1954,7 +1954,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 1.0,
             "output": 6.0,
@@ -1975,7 +1975,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 5.0,
             "output": 30.0,
@@ -1996,7 +1996,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 5.0,
             "output": 30.0,
@@ -2017,7 +2017,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 2.5,
             "output": 15.0,
@@ -2038,7 +2038,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-07-09",
           "prices": {
             "input": 2.5,
             "output": 15.0,
@@ -2154,7 +2154,7 @@
             "audio",
             "text"
           ],
-          "release_date": null,
+          "release_date": "2026-01-19",
           "prices": {
             "input": 0.6,
             "output": 2.4,
@@ -2173,7 +2173,7 @@
             "audio",
             "text"
           ],
-          "release_date": null,
+          "release_date": "2026-01-19",
           "prices": {
             "input": 2.5,
             "output": 10.0,
@@ -2193,7 +2193,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-05-05",
           "prices": {
             "input": 5.0,
             "output": 30.0,
@@ -2214,7 +2214,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-27",
           "prices": {
             "input": 5.0,
             "output": 30.0,
@@ -2235,7 +2235,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-27",
           "prices": {
             "input": 0.75,
             "output": 4.5,
@@ -2254,7 +2254,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-08-05",
           "prices": {
             "input": 0.036,
             "output": 0.18,
@@ -2272,7 +2272,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-08-05",
           "prices": {
             "input": 0.029,
             "output": 0.14,
@@ -2290,7 +2290,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-10-29",
           "prices": {
             "input": 0.075,
             "output": 0.3,
@@ -2510,7 +2510,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-03-19",
           "prices": {
             "input": 150.0,
             "output": 600.0,
@@ -2530,7 +2530,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-12-17",
           "prices": {
             "input": 15.0,
             "output": 60.0,
@@ -2571,7 +2571,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-10",
           "prices": {
             "input": 5.0,
             "output": 20.0,
@@ -2610,7 +2610,7 @@
             "file",
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-02-12",
           "prices": {
             "input": 1.1,
             "output": 4.4,
@@ -2630,7 +2630,7 @@
             "file",
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-01-31",
           "prices": {
             "input": 1.1,
             "output": 4.4,
@@ -2651,7 +2651,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-06-10",
           "prices": {
             "input": 20.0,
             "output": 80.0,
@@ -2671,7 +2671,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-16",
           "prices": {
             "input": 2.0,
             "output": 8.0,
@@ -2712,7 +2712,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-10",
           "prices": {
             "input": 2.0,
             "output": 8.0,
@@ -2733,7 +2733,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-16",
           "prices": {
             "input": 1.1,
             "output": 4.4,
@@ -2754,7 +2754,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-04-16",
           "prices": {
             "input": 1.1,
             "output": 4.4,
@@ -2804,7 +2804,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2024-03-13",
           "prices": {
             "input": 0.25,
             "output": 1.25,
@@ -2885,7 +2885,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-09",
           "prices": {
             "input": 10.0,
             "output": 50.0,
@@ -2906,7 +2906,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-09",
           "prices": {
             "input": 10.0,
             "output": 50.0,
@@ -2947,7 +2947,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-10-15",
           "prices": {
             "input": 1.0,
             "output": 5.0,
@@ -2968,7 +2968,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-27",
           "prices": {
             "input": 1.0,
             "output": 5.0,
@@ -3109,7 +3109,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-05-22",
           "prices": {
             "input": 15.0,
             "output": 75.0,
@@ -3130,7 +3130,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-08-05",
           "prices": {
             "input": 15.0,
             "output": 75.0,
@@ -3151,7 +3151,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-11-24",
           "prices": {
             "input": 5.0,
             "output": 25.0,
@@ -3172,7 +3172,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-02-04",
           "prices": {
             "input": 5.0,
             "output": 25.0,
@@ -3193,7 +3193,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-05-12",
           "prices": {
             "input": 30.0,
             "output": 150.0,
@@ -3214,7 +3214,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-16",
           "prices": {
             "input": 5.0,
             "output": 25.0,
@@ -3235,7 +3235,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-05-27",
           "prices": {
             "input": 10.0,
             "output": 50.0,
@@ -3256,7 +3256,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-05-27",
           "prices": {
             "input": 5.0,
             "output": 25.0,
@@ -3277,7 +3277,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-21",
           "prices": {
             "input": 5.0,
             "output": 25.0,
@@ -3338,7 +3338,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-05-22",
           "prices": {
             "input": 3.0,
             "output": 15.0,
@@ -3359,7 +3359,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2025-09-29",
           "prices": {
             "input": 3.0,
             "output": 15.0,
@@ -3380,7 +3380,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-02-17",
           "prices": {
             "input": 3.0,
             "output": 15.0,
@@ -3421,7 +3421,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-30",
           "prices": {
             "input": 2.0,
             "output": 10.0,
@@ -3442,7 +3442,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-27",
           "prices": {
             "input": 2.0,
             "output": 10.0,
@@ -3471,7 +3471,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2024-12-26",
           "prices": {
             "input": 0.28,
             "output": 0.42,
@@ -3490,7 +3490,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-03-24",
           "prices": {
             "input": 0.24,
             "output": 0.9,
@@ -3509,10 +3509,10 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-08-21",
           "prices": {
-            "input": 0.21,
-            "output": 0.79,
+            "input": 0.25,
+            "output": 0.95,
             "cached_input": 0.13,
             "currency": "USD",
             "unit": "per_1m_tokens"
@@ -3546,7 +3546,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-05-28",
           "prices": {
             "input": 0.5,
             "output": 2.15,
@@ -3565,7 +3565,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-01-23",
           "prices": {
             "input": 0.8,
             "output": 0.8,
@@ -3583,7 +3583,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-01-20",
           "prices": {
             "input": 0.55,
             "output": 2.19,
@@ -3639,7 +3639,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-09-22",
           "prices": {
             "input": 0.27,
             "output": 0.95,
@@ -3658,7 +3658,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-09-29",
           "prices": {
             "input": 0.27,
             "output": 0.41,
@@ -3676,7 +3676,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-12-01",
           "prices": {
             "input": 0.28,
             "output": 0.4,
@@ -3695,7 +3695,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2026-04-24",
           "prices": {
             "input": 0.14,
             "output": 0.28,
@@ -3714,7 +3714,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2026-04-24",
           "prices": {
             "input": 0.435,
             "output": 0.87,
@@ -3724,6 +3724,1334 @@
           },
           "purchase_url": "https://api-docs.deepseek.com/quick_start/pricing",
           "notes": "{\"benchmarks\": {\"intelligence_index\": 44.3, \"coding_index\": 59.4, \"agentic_index\": 36.4}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"xhigh\", \"high\"], \"default_effort\": \"high\"}}"
+        }
+      ]
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "name_en": "Google",
+      "region": "us",
+      "website": "https://ai.google.dev/",
+      "pricing_url": "https://ai.google.dev/pricing",
+      "products": [
+        {
+          "id": "gemini-2.0-flash-001-token",
+          "model": "gemini-2.0-flash-001",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.6,
+            "cached_input": 0.0375,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-001-token",
+          "model": "gemini-2.0-flash-lite-001",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-token",
+          "model": "gemini-2.0-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-token",
+          "model": "gemini-2.0-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-computer-use-preview-10-2025-token",
+          "model": "gemini-2.5-computer-use-preview-10-2025",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-image-token",
+          "model": "gemini-2.5-flash-image",
+          "billing_type": "per_token",
+          "context_window": 32768,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-07",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-2.5-flash-image",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-06-17-token",
+          "model": "gemini-2.5-flash-lite-preview-06-17",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
+          "model": "gemini-2.5-flash-lite-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-token",
+          "model": "gemini-2.5-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-07-22",
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-latest-token",
+          "model": "gemini-2.5-flash-native-audio-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-preview-09-2025-token",
+          "model": "gemini-2.5-flash-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.075,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-token",
+          "model": "gemini-2.5-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-05-06-token",
+          "model": "gemini-2.5-pro-preview-05-06",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-05-07",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-2.5-pro-preview-05-06",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-token",
+          "model": "gemini-2.5-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-05",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-2.5-pro-preview",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-tts-token",
+          "model": "gemini-2.5-pro-preview-tts",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-token",
+          "model": "gemini-2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
+        },
+        {
+          "id": "gemini-3-flash-preview-token",
+          "model": "gemini-3-flash-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-12-17",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3-pro-image-preview-token",
+          "model": "gemini-3-pro-image-preview",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-11-20",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-3-pro-image-preview",
+          "notes": null
+        },
+        {
+          "id": "gemini-3-pro-image-token",
+          "model": "gemini-3-pro-image",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-18",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-3-pro-image",
+          "notes": null
+        },
+        {
+          "id": "gemini-3-pro-preview-token",
+          "model": "gemini-3-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3.1-flash-image-preview-token",
+          "model": "gemini-3.1-flash-image-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-26",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-image-preview",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-image-token",
+          "model": "gemini-3.1-flash-image",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-18",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-image",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-image-token",
+          "model": "gemini-3.1-flash-lite-image",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-30",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-lite-image",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview-token",
+          "model": "gemini-3.1-flash-lite-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-03-03",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-token",
+          "model": "gemini-3.1-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-07",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-live-preview-token",
+          "model": "gemini-3.1-flash-live-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.75,
+            "output": 4.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3.1-pro-preview-customtools-token",
+          "model": "gemini-3.1-pro-preview-customtools",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.1-pro-preview-token",
+          "model": "gemini-3.1-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-19",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.5-flash-token",
+          "model": "gemini-3.5-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-19",
+          "prices": {
+            "input": 1.5,
+            "output": 9.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-exp-1206-token",
+          "model": "gemini-exp-1206",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-flash-latest-token",
+          "model": "gemini-flash-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.075,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-flash-lite-latest-token",
+          "model": "gemini-flash-lite-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-gemma-2-27b-it-token",
+          "model": "gemini-gemma-2-27b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-gemma-2-9b-it-token",
+          "model": "gemini-gemma-2-9b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-pro-latest-token",
+          "model": "gemini-pro-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-robotics-er-1.5-preview-token",
+          "model": "gemini-robotics-er-1.5-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemma-2-27b-it-token",
+          "model": "gemma-2-27b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-07-13",
+          "prices": {
+            "input": 0.65,
+            "output": 0.65,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-2-27b-it",
+          "notes": null
+        },
+        {
+          "id": "gemma-3-12b-it-token",
+          "model": "gemma-3-12b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-13",
+          "prices": {
+            "input": 0.05,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-3-12b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
+        },
+        {
+          "id": "gemma-3-27b-it-token",
+          "model": "gemma-3-27b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-12",
+          "prices": {
+            "input": 0.08,
+            "output": 0.16,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-3-27b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
+        },
+        {
+          "id": "gemma-3-4b-it-token",
+          "model": "gemma-3-4b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-13",
+          "prices": {
+            "input": 0.05,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-3-4b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
+        },
+        {
+          "id": "gemma-3n-e4b-it-token",
+          "model": "gemma-3n-e4b-it",
+          "billing_type": "per_token",
+          "context_window": 32768,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-05-20",
+          "prices": {
+            "input": 0.06,
+            "output": 0.12,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-3n-e4b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
+        },
+        {
+          "id": "gemma-4-26b-a4b-it-token",
+          "model": "gemma-4-26b-a4b-it",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-03",
+          "prices": {
+            "input": 0.06,
+            "output": 0.33,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-4-26b-a4b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
+        },
+        {
+          "id": "gemma-4-31b-it-token",
+          "model": "gemma-4-31b-it",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-02",
+          "prices": {
+            "input": 0.12,
+            "output": 0.35,
+            "cached_input": 0.09,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/google/gemma-4-31b-it",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
+        },
+        {
+          "id": "xai/grok-4.1-fast-non-reasoning-token",
+          "model": "xai/grok-4.1-fast-non-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 0.5,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.1-fast-reasoning-token",
+          "model": "xai/grok-4.1-fast-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 0.5,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.20-non-reasoning-token",
+          "model": "xai/grok-4.20-non-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.20-reasoning-token",
+          "model": "xai/grok-4.20-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "name_en": "MiniMax",
+      "region": "cn",
+      "website": "https://platform.minimaxi.com/",
+      "pricing_url": "https://platform.minimaxi.com/document/Price",
+      "products": [
+        {
+          "id": "MiniMax-M2-token",
+          "model": "MiniMax-M2",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "MiniMax-M2.1-lightning-token",
+          "model": "MiniMax-M2.1-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "MiniMax-M2.1-token",
+          "model": "MiniMax-M2.1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "MiniMax-M2.5-lightning-token",
+          "model": "MiniMax-M2.5-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "MiniMax-M2.5-token",
+          "model": "MiniMax-M2.5",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "MiniMax-M3-token",
+          "model": "MiniMax-M3",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.06,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/document/Price",
+          "notes": null
+        },
+        {
+          "id": "minimax-01-token",
+          "model": "minimax-01",
+          "billing_type": "per_token",
+          "context_window": 1000192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-01-15",
+          "prices": {
+            "input": 0.2,
+            "output": 1.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-01",
+          "notes": null
+        },
+        {
+          "id": "minimax-m1-token",
+          "model": "minimax-m1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 0.4,
+            "output": 2.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m1",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2-her-token",
+          "model": "minimax-m2-her",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-01-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m2-her",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2-token",
+          "model": "minimax-m2",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-10-23",
+          "prices": {
+            "input": 0.255,
+            "output": 1.02,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m2",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.1-token",
+          "model": "minimax-m2.1",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-12-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.1",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.5-token",
+          "model": "minimax-m2.5",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-02-12",
+          "prices": {
+            "input": 0.15,
+            "output": 0.9,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.5",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.7-token",
+          "model": "minimax-m2.7",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-03-18",
+          "prices": {
+            "input": 0.24,
+            "output": 0.96,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.7",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
+        },
+        {
+          "id": "minimax-m3-token",
+          "model": "minimax-m3",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-31",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.06,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/minimax/minimax-m3",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
+        }
+      ]
+    },
+    {
+      "id": "xiaomi",
+      "name": "小米",
+      "name_en": "Xiaomi",
+      "region": "cn",
+      "website": "https://mimo.xiaomi.com/",
+      "pricing_url": "https://mimo.xiaomi.com/",
+      "products": [
+        {
+          "id": "mimo-v2.5-pro-token",
+          "model": "mimo-v2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.435,
+            "output": 0.87,
+            "cached_input": 0.0036,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5-pro",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
+        },
+        {
+          "id": "mimo-v2.5-token",
+          "model": "mimo-v2.5",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.105,
+            "output": 0.28,
+            "cached_input": 0.028,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
         }
       ]
     },
@@ -3781,7 +5109,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-09-04",
           "prices": {
             "input": 0.6,
             "output": 2.5,
@@ -3799,7 +5127,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-11-06",
           "prices": {
             "input": 0.6,
             "output": 2.5,
@@ -3837,7 +5165,7 @@
           "modalities": [
             "text"
           ],
-          "release_date": null,
+          "release_date": "2025-07-11",
           "prices": {
             "input": 0.57,
             "output": 2.3,
@@ -3875,7 +5203,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-01-27",
           "prices": {
             "input": 0.6,
             "output": 3.0,
@@ -3895,7 +5223,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-20",
           "prices": {
             "input": 0.95,
             "output": 4.0,
@@ -3915,7 +5243,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-12",
           "prices": {
             "input": 0.719,
             "output": 3.49,
@@ -3995,7 +5323,7 @@
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-27",
           "prices": {
             "input": 2.0,
             "output": 5.0,
@@ -4207,2421 +5535,6 @@
             "unit": "per_1m_tokens"
           },
           "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        }
-      ]
-    },
-    {
-      "id": "xiaomi",
-      "name": "小米",
-      "name_en": "Xiaomi",
-      "region": "cn",
-      "website": "https://mimo.xiaomi.com/",
-      "pricing_url": "https://mimo.xiaomi.com/",
-      "products": [
-        {
-          "id": "mimo-v2.5-pro-token",
-          "model": "mimo-v2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.435,
-            "output": 0.87,
-            "cached_input": 0.0036,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5-pro",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
-        },
-        {
-          "id": "mimo-v2.5-token",
-          "model": "mimo-v2.5",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.105,
-            "output": 0.28,
-            "cached_input": 0.028,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
-        }
-      ]
-    },
-    {
-      "id": "minimax",
-      "name": "MiniMax",
-      "name_en": "MiniMax",
-      "region": "cn",
-      "website": "https://platform.minimaxi.com/",
-      "pricing_url": "https://platform.minimaxi.com/document/Price",
-      "products": [
-        {
-          "id": "MiniMax-M2-token",
-          "model": "MiniMax-M2",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.1-lightning-token",
-          "model": "MiniMax-M2.1-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.1-token",
-          "model": "MiniMax-M2.1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.5-lightning-token",
-          "model": "MiniMax-M2.5-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.5-token",
-          "model": "MiniMax-M2.5",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M3-token",
-          "model": "MiniMax-M3",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "minimax-01-token",
-          "model": "minimax-01",
-          "billing_type": "per_token",
-          "context_window": 1000192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 1.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-01",
-          "notes": null
-        },
-        {
-          "id": "minimax-m1-token",
-          "model": "minimax-m1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 2.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m1",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2-her-token",
-          "model": "minimax-m2-her",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2-her",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2-token",
-          "model": "minimax-m2",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.255,
-            "output": 1.02,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.1-token",
-          "model": "minimax-m2.1",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.1",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.5-token",
-          "model": "minimax-m2.5",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.9,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.5",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.7-token",
-          "model": "minimax-m2.7",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.24,
-            "output": 0.96,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.7",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
-        },
-        {
-          "id": "minimax-m3-token",
-          "model": "minimax-m3",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m3",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
-        }
-      ]
-    },
-    {
-      "id": "qwen",
-      "name": "通义千问",
-      "name_en": "Alibaba Qwen",
-      "region": "cn",
-      "website": "https://help.aliyun.com/zh/dashscope/",
-      "pricing_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-      "products": [
-        {
-          "id": "qwen-2.5-72b-instruct-token",
-          "model": "qwen-2.5-72b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.36,
-            "output": 0.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-72b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen-2.5-7b-instruct-token",
-          "model": "qwen-2.5-7b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.04,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-7b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen-2.5-coder-32b-instruct-token",
-          "model": "qwen-2.5-coder-32b-instruct",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.66,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-coder-32b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen-coder-token",
-          "model": "qwen-coder",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-max-token",
-          "model": "qwen-max",
-          "billing_type": "per_token",
-          "context_window": 30720,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.6,
-            "output": 6.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-01-25-token",
-          "model": "qwen-plus-2025-01-25",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-04-28-token",
-          "model": "qwen-plus-2025-04-28",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-14-token",
-          "model": "qwen-plus-2025-07-14",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-28-token",
-          "model": "qwen-plus-2025-07-28",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.26,
-            "output": 0.78,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-28:thinking-token",
-          "model": "qwen-plus-2025-07-28:thinking",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.26,
-            "output": 0.78,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28:thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-token",
-          "model": "qwen-plus",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "cached_input": 0.052,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-2024-11-01-token",
-          "model": "qwen-turbo-2024-11-01",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-2025-04-28-token",
-          "model": "qwen-turbo-2025-04-28",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-latest-token",
-          "model": "qwen-turbo-latest",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-token",
-          "model": "qwen-turbo",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen2.5-vl-72b-instruct-token",
-          "model": "qwen2.5-vl-72b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 0.75,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen2.5-vl-72b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-14b-token",
-          "model": "qwen3-14b",
-          "billing_type": "per_token",
-          "context_window": 131702,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.24,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-14b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 10.4, \"coding_index\": 13.8, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-2507-token",
-          "model": "qwen3-235b-a22b-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.09,
-            "output": 0.55,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
-          "notes": null
-        },
-        {
-          "id": "qwen3-235b-a22b-thinking-2507-token",
-          "model": "qwen3-235b-a22b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1495,
-            "output": 1.495,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 19.6, \"coding_index\": 22.1, \"agentic_index\": 3.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-token",
-          "model": "qwen3-235b-a22b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.455,
-            "output": 1.82,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b",
-          "notes": null
-        },
-        {
-          "id": "qwen3-30b-a3b-instruct-2507-token",
-          "model": "qwen3-30b-a3b-instruct-2507",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.04815,
-            "output": 0.19305,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-instruct-2507",
-          "notes": null
-        },
-        {
-          "id": "qwen3-30b-a3b-thinking-2507-token",
-          "model": "qwen3-30b-a3b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-thinking-2507",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 14.4, \"coding_index\": 12.1, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-30b-a3b-token",
-          "model": "qwen3-30b-a3b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.12,
-            "output": 0.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b",
-          "notes": null
-        },
-        {
-          "id": "qwen3-32b-token",
-          "model": "qwen3-32b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.08,
-            "output": 0.28,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-32b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 11.5, \"coding_index\": 15.3, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-8b-token",
-          "model": "qwen3-8b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-8b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 8.3, \"coding_index\": 9, \"agentic_index\": 1.5}}"
-        },
-        {
-          "id": "qwen3-coder-30b-a3b-instruct-token",
-          "model": "qwen3-coder-30b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 160000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.07,
-            "output": 0.27,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-30b-a3b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-flash-token",
-          "model": "qwen3-coder-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.195,
-            "output": 0.975,
-            "cached_input": 0.039,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-flash",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-next-token",
-          "model": "qwen3-coder-next",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.11,
-            "output": 0.8,
-            "cached_input": 0.07,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-next",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.1, \"coding_index\": 36.2, \"agentic_index\": 8.8}}"
-        },
-        {
-          "id": "qwen3-coder-plus-token",
-          "model": "qwen3-coder-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.65,
-            "output": 3.25,
-            "cached_input": 0.13,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-plus",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-token",
-          "model": "qwen3-coder",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.22,
-            "output": 1.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-thinking-token",
-          "model": "qwen3-max-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-max-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-token",
-          "model": "qwen3-max",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "cached_input": 0.156,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-max",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-instruct-token",
-          "model": "qwen3-next-80b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-thinking-token",
-          "model": "qwen3-next-80b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 16.7, \"coding_index\": 17.4, \"agentic_index\": 2.1}}"
-        },
-        {
-          "id": "qwen3-vl-235b-a22b-instruct-token",
-          "model": "qwen3-vl-235b-a22b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.6,
-            "cached_input": 0.11,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-235b-a22b-thinking-token",
-          "model": "qwen3-vl-235b-a22b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 4.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-30b-a3b-instruct-token",
-          "model": "qwen3-vl-30b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.13,
-            "output": 0.52,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-30b-a3b-thinking-token",
-          "model": "qwen3-vl-30b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-instruct-token",
-          "model": "qwen3-vl-32b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.16,
-            "output": 0.64,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-thinking-token",
-          "model": "qwen3-vl-32b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.16,
-            "output": 2.87,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-instruct-token",
-          "model": "qwen3-vl-8b-instruct",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-thinking-token",
-          "model": "qwen3-vl-8b-thinking",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.117,
-            "output": 1.365,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-122b-a10b-token",
-          "model": "qwen3.5-122b-a10b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.26,
-            "output": 2.08,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 32.3, \"coding_index\": 45.7, \"agentic_index\": 20.7}}"
-        },
-        {
-          "id": "qwen3.5-27b-token",
-          "model": "qwen3.5-27b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.195,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-27b",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-35b-a3b-token",
-          "model": "qwen3.5-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-397b-a17b-token",
-          "model": "qwen3.5-397b-a17b",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.385,
-            "output": 2.45,
-            "cached_input": 0.111,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-397b-a17b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 33.7, \"coding_index\": 48.2, \"agentic_index\": 19.8}}"
-        },
-        {
-          "id": "qwen3.5-9b-token",
-          "model": "qwen3.5-9b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-9b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.4, \"coding_index\": 28.7, \"agentic_index\": 7.4}}"
-        },
-        {
-          "id": "qwen3.5-flash-02-23-token",
-          "model": "qwen3.5-flash-02-23",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.065,
-            "output": 0.26,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-flash-02-23",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-02-15-token",
-          "model": "qwen3.5-plus-02-15",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.26,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-02-15",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-20260420-token",
-          "model": "qwen3.5-plus-20260420",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-20260420",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-27b-token",
-          "model": "qwen3.6-27b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.285,
-            "output": 2.4,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-27b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.1, \"coding_index\": 53.7, \"agentic_index\": 27}}"
-        },
-        {
-          "id": "qwen3.6-35b-a3b-token",
-          "model": "qwen3.6-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-35b-a3b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 31.6, \"coding_index\": 41.9, \"agentic_index\": 21.4}}"
-        },
-        {
-          "id": "qwen3.6-flash-token",
-          "model": "qwen3.6-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1875,
-            "output": 1.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-flash",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-max-preview-token",
-          "model": "qwen3.6-max-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.04,
-            "output": 6.24,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-max-preview",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-plus-token",
-          "model": "qwen3.6-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.325,
-            "output": 1.95,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-plus",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39.6, \"coding_index\": 54.5, \"agentic_index\": 27.6}}"
-        },
-        {
-          "id": "qwen3.7-max-token",
-          "model": "qwen3.7-max",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 3.75,
-            "cached_input": 0.25,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-max",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 46, \"coding_index\": 66, \"agentic_index\": 30.6}}"
-        },
-        {
-          "id": "qwen3.7-plus-token",
-          "model": "qwen3.7-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.32,
-            "output": 1.28,
-            "cached_input": 0.064,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-plus",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39, \"coding_index\": 55.9, \"agentic_index\": 20.8}}"
-        },
-        {
-          "id": "qwq-plus-token",
-          "model": "qwq-plus",
-          "billing_type": "per_token",
-          "context_window": 98304,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 2.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        }
-      ]
-    },
-    {
-      "id": "google",
-      "name": "Google",
-      "name_en": "Google",
-      "region": "us",
-      "website": "https://ai.google.dev/",
-      "pricing_url": "https://ai.google.dev/pricing",
-      "products": [
-        {
-          "id": "gemini-2.0-flash-001-token",
-          "model": "gemini-2.0-flash-001",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.6,
-            "cached_input": 0.0375,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-001-token",
-          "model": "gemini-2.0-flash-lite-001",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-token",
-          "model": "gemini-2.0-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-token",
-          "model": "gemini-2.0-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-computer-use-preview-10-2025-token",
-          "model": "gemini-2.5-computer-use-preview-10-2025",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-image-token",
-          "model": "gemini-2.5-flash-image",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-2.5-flash-image",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-06-17-token",
-          "model": "gemini-2.5-flash-lite-preview-06-17",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
-          "model": "gemini-2.5-flash-lite-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-token",
-          "model": "gemini-2.5-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-latest-token",
-          "model": "gemini-2.5-flash-native-audio-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-preview-09-2025-token",
-          "model": "gemini-2.5-flash-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-token",
-          "model": "gemini-2.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-05-06-token",
-          "model": "gemini-2.5-pro-preview-05-06",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-2.5-pro-preview-05-06",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-token",
-          "model": "gemini-2.5-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-2.5-pro-preview",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-tts-token",
-          "model": "gemini-2.5-pro-preview-tts",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-token",
-          "model": "gemini-2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
-        },
-        {
-          "id": "gemini-3-flash-preview-token",
-          "model": "gemini-3-flash-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3-pro-image-preview-token",
-          "model": "gemini-3-pro-image-preview",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-3-pro-image-preview",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-image-token",
-          "model": "gemini-3-pro-image",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-3-pro-image",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-preview-token",
-          "model": "gemini-3-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-flash-image-preview-token",
-          "model": "gemini-3.1-flash-image-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-image-preview",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-image-token",
-          "model": "gemini-3.1-flash-image",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-image",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-image-token",
-          "model": "gemini-3.1-flash-lite-image",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemini-3.1-flash-lite-image",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-preview-token",
-          "model": "gemini-3.1-flash-lite-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-token",
-          "model": "gemini-3.1-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-live-preview-token",
-          "model": "gemini-3.1-flash-live-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.75,
-            "output": 4.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-pro-preview-customtools-token",
-          "model": "gemini-3.1-pro-preview-customtools",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.1-pro-preview-token",
-          "model": "gemini-3.1-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.5-flash-token",
-          "model": "gemini-3.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.5,
-            "output": 9.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-exp-1206-token",
-          "model": "gemini-exp-1206",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-flash-latest-token",
-          "model": "gemini-flash-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-flash-lite-latest-token",
-          "model": "gemini-flash-lite-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-27b-it-token",
-          "model": "gemini-gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-9b-it-token",
-          "model": "gemini-gemma-2-9b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-pro-latest-token",
-          "model": "gemini-pro-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-robotics-er-1.5-preview-token",
-          "model": "gemini-robotics-er-1.5-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemma-2-27b-it-token",
-          "model": "gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.65,
-            "output": 0.65,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-2-27b-it",
-          "notes": null
-        },
-        {
-          "id": "gemma-3-12b-it-token",
-          "model": "gemma-3-12b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-3-12b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-27b-it-token",
-          "model": "gemma-3-27b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.08,
-            "output": 0.16,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-3-27b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-4b-it-token",
-          "model": "gemma-3-4b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-3-4b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
-        },
-        {
-          "id": "gemma-3n-e4b-it-token",
-          "model": "gemma-3n-e4b-it",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.06,
-            "output": 0.12,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-3n-e4b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
-        },
-        {
-          "id": "gemma-4-26b-a4b-it-token",
-          "model": "gemma-4-26b-a4b-it",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.06,
-            "output": 0.33,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-4-26b-a4b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
-        },
-        {
-          "id": "gemma-4-31b-it-token",
-          "model": "gemma-4-31b-it",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.12,
-            "output": 0.35,
-            "cached_input": 0.09,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/google/gemma-4-31b-it",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
-        },
-        {
-          "id": "xai/grok-4.1-fast-non-reasoning-token",
-          "model": "xai/grok-4.1-fast-non-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.1-fast-reasoning-token",
-          "model": "xai/grok-4.1-fast-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.20-non-reasoning-token",
-          "model": "xai/grok-4.20-non-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.20-reasoning-token",
-          "model": "xai/grok-4.20-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         }
       ]
@@ -10071,6 +8984,1093 @@
       ]
     },
     {
+      "id": "qwen",
+      "name": "通义千问",
+      "name_en": "Alibaba Qwen",
+      "region": "cn",
+      "website": "https://help.aliyun.com/zh/dashscope/",
+      "pricing_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+      "products": [
+        {
+          "id": "qwen-2.5-72b-instruct-token",
+          "model": "qwen-2.5-72b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-09-19",
+          "prices": {
+            "input": 0.36,
+            "output": 0.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-72b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen-2.5-7b-instruct-token",
+          "model": "qwen-2.5-7b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-10-16",
+          "prices": {
+            "input": 0.04,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-7b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen-2.5-coder-32b-instruct-token",
+          "model": "qwen-2.5-coder-32b-instruct",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-11-11",
+          "prices": {
+            "input": 0.66,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-coder-32b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen-coder-token",
+          "model": "qwen-coder",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-max-token",
+          "model": "qwen-max",
+          "billing_type": "per_token",
+          "context_window": 30720,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.6,
+            "output": 6.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-01-25-token",
+          "model": "qwen-plus-2025-01-25",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-04-28-token",
+          "model": "qwen-plus-2025-04-28",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-14-token",
+          "model": "qwen-plus-2025-07-14",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-28-token",
+          "model": "qwen-plus-2025-07-28",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-08",
+          "prices": {
+            "input": 0.26,
+            "output": 0.78,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-28:thinking-token",
+          "model": "qwen-plus-2025-07-28:thinking",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-08",
+          "prices": {
+            "input": 0.26,
+            "output": 0.78,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28:thinking",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-token",
+          "model": "qwen-plus",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-02-01",
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "cached_input": 0.052,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-2024-11-01-token",
+          "model": "qwen-turbo-2024-11-01",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-2025-04-28-token",
+          "model": "qwen-turbo-2025-04-28",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-latest-token",
+          "model": "qwen-turbo-latest",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-token",
+          "model": "qwen-turbo",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen2.5-vl-72b-instruct-token",
+          "model": "qwen2.5-vl-72b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-02-01",
+          "prices": {
+            "input": 0.25,
+            "output": 0.75,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen2.5-vl-72b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen3-14b-token",
+          "model": "qwen3-14b",
+          "billing_type": "per_token",
+          "context_window": 131702,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.1,
+            "output": 0.24,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-14b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 10.4, \"coding_index\": 13.8, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-235b-a22b-2507-token",
+          "model": "qwen3-235b-a22b-2507",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-21",
+          "prices": {
+            "input": 0.09,
+            "output": 0.55,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
+          "notes": null
+        },
+        {
+          "id": "qwen3-235b-a22b-thinking-2507-token",
+          "model": "qwen3-235b-a22b-thinking-2507",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-25",
+          "prices": {
+            "input": 0.1495,
+            "output": 1.495,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 19.6, \"coding_index\": 22.1, \"agentic_index\": 3.8}}"
+        },
+        {
+          "id": "qwen3-235b-a22b-token",
+          "model": "qwen3-235b-a22b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.455,
+            "output": 1.82,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b",
+          "notes": null
+        },
+        {
+          "id": "qwen3-30b-a3b-instruct-2507-token",
+          "model": "qwen3-30b-a3b-instruct-2507",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-29",
+          "prices": {
+            "input": 0.04815,
+            "output": 0.19305,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-instruct-2507",
+          "notes": null
+        },
+        {
+          "id": "qwen3-30b-a3b-thinking-2507-token",
+          "model": "qwen3-30b-a3b-thinking-2507",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-08-28",
+          "prices": {
+            "input": 0.13,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-thinking-2507",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 14.4, \"coding_index\": 12.1, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-30b-a3b-token",
+          "model": "qwen3-30b-a3b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.12,
+            "output": 0.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b",
+          "notes": null
+        },
+        {
+          "id": "qwen3-32b-token",
+          "model": "qwen3-32b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.08,
+            "output": 0.28,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-32b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 11.5, \"coding_index\": 15.3, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-8b-token",
+          "model": "qwen3-8b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.117,
+            "output": 0.455,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-8b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 8.3, \"coding_index\": 9, \"agentic_index\": 1.5}}"
+        },
+        {
+          "id": "qwen3-coder-30b-a3b-instruct-token",
+          "model": "qwen3-coder-30b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 160000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-31",
+          "prices": {
+            "input": 0.07,
+            "output": 0.27,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-30b-a3b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-flash-token",
+          "model": "qwen3-coder-flash",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-17",
+          "prices": {
+            "input": 0.195,
+            "output": 0.975,
+            "cached_input": 0.039,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-flash",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-next-token",
+          "model": "qwen3-coder-next",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-02-04",
+          "prices": {
+            "input": 0.11,
+            "output": 0.8,
+            "cached_input": 0.07,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-next",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.1, \"coding_index\": 36.2, \"agentic_index\": 8.8}}"
+        },
+        {
+          "id": "qwen3-coder-plus-token",
+          "model": "qwen3-coder-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.65,
+            "output": 3.25,
+            "cached_input": 0.13,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-plus",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-token",
+          "model": "qwen3-coder",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-23",
+          "prices": {
+            "input": 0.22,
+            "output": 1.8,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder",
+          "notes": null
+        },
+        {
+          "id": "qwen3-max-thinking-token",
+          "model": "qwen3-max-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-02-09",
+          "prices": {
+            "input": 0.78,
+            "output": 3.9,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-max-thinking",
+          "notes": null
+        },
+        {
+          "id": "qwen3-max-token",
+          "model": "qwen3-max",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.78,
+            "output": 3.9,
+            "cached_input": 0.156,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-max",
+          "notes": null
+        },
+        {
+          "id": "qwen3-next-80b-a3b-instruct-token",
+          "model": "qwen3-next-80b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-11",
+          "prices": {
+            "input": 0.15,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen3-next-80b-a3b-thinking-token",
+          "model": "qwen3-next-80b-a3b-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-11",
+          "prices": {
+            "input": 0.15,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 16.7, \"coding_index\": 17.4, \"agentic_index\": 2.1}}"
+        },
+        {
+          "id": "qwen3-vl-235b-a22b-instruct-token",
+          "model": "qwen3-vl-235b-a22b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.4,
+            "output": 1.6,
+            "cached_input": 0.11,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-235b-a22b-thinking-token",
+          "model": "qwen3-vl-235b-a22b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.4,
+            "output": 4.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-30b-a3b-instruct-token",
+          "model": "qwen3-vl-30b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-06",
+          "prices": {
+            "input": 0.13,
+            "output": 0.52,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-30b-a3b-thinking-token",
+          "model": "qwen3-vl-30b-a3b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-06",
+          "prices": {
+            "input": 0.13,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-thinking",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-32b-instruct-token",
+          "model": "qwen3-vl-32b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-23",
+          "prices": {
+            "input": 0.16,
+            "output": 0.64,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-32b-thinking-token",
+          "model": "qwen3-vl-32b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.16,
+            "output": 2.87,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-8b-instruct-token",
+          "model": "qwen3-vl-8b-instruct",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-14",
+          "prices": {
+            "input": 0.117,
+            "output": 0.455,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-instruct",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-8b-thinking-token",
+          "model": "qwen3-vl-8b-thinking",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-14",
+          "prices": {
+            "input": 0.117,
+            "output": 1.365,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-thinking",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-122b-a10b-token",
+          "model": "qwen3.5-122b-a10b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.26,
+            "output": 2.08,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 32.3, \"coding_index\": 45.7, \"agentic_index\": 20.7}}"
+        },
+        {
+          "id": "qwen3.5-27b-token",
+          "model": "qwen3.5-27b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.195,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-27b",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-35b-a3b-token",
+          "model": "qwen3.5-35b-a3b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.14,
+            "output": 1.0,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-397b-a17b-token",
+          "model": "qwen3.5-397b-a17b",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-16",
+          "prices": {
+            "input": 0.385,
+            "output": 2.45,
+            "cached_input": 0.111,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-397b-a17b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 33.7, \"coding_index\": 48.2, \"agentic_index\": 19.8}}"
+        },
+        {
+          "id": "qwen3.5-9b-token",
+          "model": "qwen3.5-9b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-03-10",
+          "prices": {
+            "input": 0.1,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-9b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.4, \"coding_index\": 28.7, \"agentic_index\": 7.4}}"
+        },
+        {
+          "id": "qwen3.5-flash-02-23-token",
+          "model": "qwen3.5-flash-02-23",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.065,
+            "output": 0.26,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-flash-02-23",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-plus-02-15-token",
+          "model": "qwen3.5-plus-02-15",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-16",
+          "prices": {
+            "input": 0.26,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-02-15",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-plus-20260420-token",
+          "model": "qwen3.5-plus-20260420",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.3,
+            "output": 1.8,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-20260420",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-27b-token",
+          "model": "qwen3.6-27b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.285,
+            "output": 2.4,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-27b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.1, \"coding_index\": 53.7, \"agentic_index\": 27}}"
+        },
+        {
+          "id": "qwen3.6-35b-a3b-token",
+          "model": "qwen3.6-35b-a3b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.14,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-35b-a3b",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 31.6, \"coding_index\": 41.9, \"agentic_index\": 21.4}}"
+        },
+        {
+          "id": "qwen3.6-flash-token",
+          "model": "qwen3.6-flash",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.1875,
+            "output": 1.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-flash",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-max-preview-token",
+          "model": "qwen3.6-max-preview",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 1.04,
+            "output": 6.24,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-max-preview",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-plus-token",
+          "model": "qwen3.6-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-02",
+          "prices": {
+            "input": 0.325,
+            "output": 1.95,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-plus",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 39.6, \"coding_index\": 54.5, \"agentic_index\": 27.6}}"
+        },
+        {
+          "id": "qwen3.7-max-token",
+          "model": "qwen3.7-max",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-05-21",
+          "prices": {
+            "input": 1.25,
+            "output": 3.75,
+            "cached_input": 0.25,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-max",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 46, \"coding_index\": 66, \"agentic_index\": 30.6}}"
+        },
+        {
+          "id": "qwen3.7-plus-token",
+          "model": "qwen3.7-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-03",
+          "prices": {
+            "input": 0.32,
+            "output": 1.28,
+            "cached_input": 0.064,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-plus",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 39, \"coding_index\": 55.9, \"agentic_index\": 20.8}}"
+        },
+        {
+          "id": "qwq-plus-token",
+          "model": "qwq-plus",
+          "billing_type": "per_token",
+          "context_window": 98304,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 2.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+          "notes": null
+        }
+      ]
+    },
+    {
       "id": "opencode",
       "name": "OpenCode",
       "name_en": "OpenCode",
@@ -10381,7 +10381,7 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:39:55+08:00",
+      "last_success_at": "2026-07-13T20:35:22+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10395,7 +10395,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:28+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10409,10 +10409,18 @@
     {
       "provider_id": "deepseek",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "error": null,
       "stale": false,
-      "warnings": [],
+      "warnings": [
+        {
+          "product_id": "deepseek-chat-v3.1-token",
+          "field": "prices.output",
+          "old_value": 0.79,
+          "new_value": 0.95,
+          "volatility_pct": 20.25
+        }
+      ],
       "confidence": "low",
       "sources": [
         "litellm",
@@ -10421,9 +10429,22 @@
       ]
     },
     {
-      "provider_id": "moonshot",
+      "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
+      "provider_id": "minimax",
+      "status": "ok",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10436,7 +10457,7 @@
     {
       "provider_id": "xiaomi",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10446,35 +10467,9 @@
       ]
     },
     {
-      "provider_id": "minimax",
+      "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "qwen",
-      "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "google",
-      "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10487,7 +10482,7 @@
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10497,9 +10492,22 @@
       ]
     },
     {
+      "provider_id": "qwen",
+      "status": "ok",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10510,7 +10518,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10521,7 +10529,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-07-13T19:40:00+08:00",
+      "last_success_at": "2026-07-13T20:35:29+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
