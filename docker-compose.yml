@@ -11,3 +11,13 @@ services:
       - GIT_REMOTE_URL=${GIT_REMOTE_URL:-}
     volumes:
       - ./logs:/var/log/llm-price
+
+  web:
+    image: nginx:alpine
+    container_name: llm-price-web
+    restart: unless-stopped
+    ports:
+      - "8001:80"
+    volumes:
+      - ./ui:/usr/share/nginx/html/ui:ro
+      - ./data:/usr/share/nginx/html/data:ro
