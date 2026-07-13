@@ -47,7 +47,7 @@ const PROVIDER_META = {
   opencode: { name: 'OpenCode', name_en: 'OpenCode', region: 'cn' },
   google: { name: 'Google', name_en: 'Google', region: 'us' },
   qwen: { name: '阿里通义', name_en: 'Alibaba Qwen', region: 'cn' },
-  moonshot: { name: '月之暗面', name_en: 'Moonshot AI', region: 'cn' },
+  moonshot: { name: 'Kimi', name_en: 'Moonshot AI', region: 'cn' },
   aws: { name: 'AWS', name_en: 'Amazon Web Services', region: 'us' },
   minimax: { name: 'MiniMax', name_en: 'MiniMax', region: 'cn' },
   xiaomi: { name: '小米', name_en: 'Xiaomi', region: 'cn' },
@@ -84,6 +84,7 @@ createApp({
       if (h === "#/compare") return "compare";
       if (h === "#/about") return "about";
       if (h.startsWith("#/billing/")) return "billing";
+      if (h.startsWith("#/provider/")) return "provider";
       return "home";
     });
 
@@ -91,6 +92,24 @@ createApp({
     const billingRoute = computed(() => {
       if (routeName.value !== "billing") return null;
       return route.value.replace("#/billing/", "");
+    });
+
+    // 厂商详情路由：#/provider/{id}，仅显示该厂商产品
+    const providerRouteId = computed(() => {
+      if (routeName.value !== "provider") return null;
+      return route.value.replace("#/provider/", "");
+    });
+
+    // 当前选中厂商信息（providers 数组优先，PROVIDER_META 兜底）
+    const currentProvider = computed(() => {
+      const pid = providerRouteId.value;
+      if (!pid || !data.value) return null;
+      const p = data.value.providers.find(x => x.id === pid);
+      if (p) return p;
+      if (PROVIDER_META[pid]) {
+        return { id: pid, ...PROVIDER_META[pid] };
+      }
+      return null;
     });
 
     const regions = ["cn", "us", "eu"];
@@ -128,6 +147,10 @@ createApp({
 
     const filteredRows = computed(() => {
       let rows = allRows.value;
+      // 厂商详情页：只显示该厂商产品
+      if (routeName.value === "provider" && providerRouteId.value) {
+        rows = rows.filter(r => r.providerId === providerRouteId.value);
+      }
       // 计费类型路由页：只显示对应计费方式
       if (billingRoute.value) {
         rows = rows.filter(r => r.billing_type === billingRoute.value);
@@ -247,6 +270,47 @@ createApp({
     const successCount = computed(() => {
       if (!data.value) return 0;
       return (data.value.provider_status || []).filter(s => !s.stale).length;
+    });
+    // 三种计费方式的产品数量
+    const perTokenCount = computed(() =>
+      allRows.value.filter(r => r.billing_type === 'per_token' && !r.stale).length
+    );
+    const subscriptionCount = computed(() =>
+      allRows.value.filter(r => r.billing_type === 'subscription' && !r.stale).length
+    );
+    const codingPlanCount = computed(() =>
+      allRows.value.filter(r => r.billing_type === 'coding_plan' && !r.stale).length
+    );
+
+    // 首页「最新价格一览」预览：按模型发布时间倒序，仅 per_token，去重，取 8 条
+    const homePreviewRows = computed(() => {
+      const rows = allRows.value.filter(r =>
+        r.billing_type === 'per_token' && !r.stale && r.prices && r.prices.input != null
+      );
+      // 同一 model 取最新 release_date 的一条
+      const byModel = new Map();
+      for (const r of rows) {
+        const key = r.model || r.id;
+        const prev = byModel.get(key);
+        if (!prev) {
+          byModel.set(key, r);
+        } else {
+          const a = prev.release_date || '';
+          const b = r.release_date || '';
+          if (b > a) byModel.set(key, r);
+        }
+      }
+      const deduped = [...byModel.values()];
+      // 按 release_date 倒序（null 排到最后）
+      deduped.sort((a, b) => {
+        const da = a.release_date || '';
+        const db = b.release_date || '';
+        if (!da && !db) return 0;
+        if (!da) return 1;
+        if (!db) return -1;
+        return db.localeCompare(da);
+      });
+      return deduped.slice(0, 8);
     });
 
     // Hero ticker: 最低价卡片 + 随机展示 2 张
@@ -379,8 +443,9 @@ createApp({
     return {
       data, error, searchQuery, view, displayCurrency, expanded,
       sortKey, sortAsc, filters, regions, billingTypes, modalities,
-      route, routeName, billingRoute,
-      filteredRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
+      route, routeName, billingRoute, providerRouteId, currentProvider,
+      filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
+      perTokenCount, subscriptionCount, codingPlanCount,
       tickerFeatured, tickerCards,
       providerList, allProvidersForOrbit, orbitStyle,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel,

@@ -1,0 +1,30 @@
+# data/manual/opencode.yaml
+# OpenCode 是单一订阅服务，页面是营销落地页无结构化卡片，改用 manual 维护
+# 数据来源：https://opencode.ai/docs/zh-cn/go/（2026-07-10 更新）
+id: opencode
+name: OpenCode
+name_en: OpenCode
+region: us
+website: https://opencode.ai/
+pricing_url: https://opencode.ai/zh/go
+products:
+  - id: go-plan
+    model: null
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 10
+      currency: USD
+      included_quota: 60
+      quota_unit: USD
+      first_month_price: 5
+      features:
+        - 首月 $5，之后 $10/月
+        - 5 小时 $12 使用额度
+        - 每周 $30 使用额度
+        - 每月 $60 使用额度
+        - 包含 13 款开源编程模型（GLM-5.2, Kimi K2.7 Code, DeepSeek V4 Pro 等）
+        - 模型托管于美国/欧盟/新加坡
+        - 零保留隐私政策，不用于训练
+    purchase_url: https://opencode.ai/auth

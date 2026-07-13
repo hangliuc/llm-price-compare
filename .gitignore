@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 data/run_status.json
+data/prices.json.bak
 /var/log/llm-price/
 logs/
 playwright.cfg

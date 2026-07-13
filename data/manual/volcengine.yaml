@@ -1,0 +1,118 @@
+# data/manual/volcengine.yaml
+# 火山引擎方舟文档页需登录/地区限制，静态抓取拿不到表格，改用 manual 维护
+# 数据来源：https://www.volcengine.com/docs/82379/1099320（2025-12-09 更新）
+id: volcengine
+name: 火山引擎
+name_en: Volcengine
+region: cn
+website: https://www.volcengine.com/
+pricing_url: https://www.volcengine.com/docs/82379/1099320
+products:
+  - id: doubao-pro-32k-token
+    model: doubao-pro-32k
+    billing_type: per_token
+    context_window: 32000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 2.0
+      cached_input: 0.16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-lite-32k-token
+    model: doubao-lite-32k
+    billing_type: per_token
+    context_window: 32000
+    modalities: [text]
+    prices:
+      input: 0.3
+      output: 0.6
+      cached_input: 0.06
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-1.5-pro-32k-token
+    model: doubao-1.5-pro-32k
+    billing_type: per_token
+    context_window: 32000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 2.0
+      cached_input: 0.16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-1.5-lite-32k-token
+    model: doubao-1.5-lite-32k
+    billing_type: per_token
+    context_window: 32000
+    modalities: [text]
+    prices:
+      input: 0.3
+      output: 0.6
+      cached_input: 0.06
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-token
+    model: doubao-seed-1.6
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 2.0
+      cached_input: 0.16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-flash-token
+    model: doubao-seed-1.6-flash
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 0.15
+      output: 1.5
+      cached_input: 0.03
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: deepseek-v3.1-token
+    model: deepseek-v3.1
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 4.0
+      output: 12.0
+      cached_input: 0.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: deepseek-r1-token
+    model: deepseek-r1
+    billing_type: per_token
+    context_window: 64000
+    modalities: [text]
+    prices:
+      input: 4.0
+      output: 16.0
+      cached_input: 0.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: kimi-k2-token
+    model: kimi-k2
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 4.0
+      output: 16.0
+      cached_input: 0.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark

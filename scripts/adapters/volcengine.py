@@ -2,20 +2,35 @@
 import re
 from bs4 import BeautifulSoup
 from scripts.adapters.base import BaseAdapter
-from scripts.core.fetcher import fetch_html_browser
+from scripts.core.fetcher import fetch_html
 from scripts.core.models import Product, BillingType
 
-_PRICING_URL = "https://www.volcengine.com/product/ark"
+# 改用静态文档页（无需 Playwright），数据更完整
+_PRICING_URL = "https://www.volcengine.com/docs/82379/1099320"
+
+# 模型 → 上下文窗口 / 模态
+_MODEL_META = {
+    "doubao-pro-32k":          (32_000,   ["text"]),
+    "doubao-lite-32k":         (32_000,   ["text"]),
+    "doubao-1.5-pro-32k":      (32_000,   ["text"]),
+    "doubao-1.5-lite-32k":     (32_000,   ["text"]),
+    "doubao-seed-1.6":         (256_000,  ["text"]),
+    "doubao-seed-1.6-lite":    (256_000,  ["text"]),
+    "doubao-seed-1.6-flash":   (256_000,  ["text"]),
+    "doubao-seed-1.6-vision":  (256_000,  ["text", "vision"]),
+    "doubao-seed-1.6-thinking":(256_000,  ["text"]),
+    "deepseek-v3.1":           (128_000,  ["text"]),
+    "deepseek-r1":             (64_000,   ["text"]),
+    "kimi-k2":                 (128_000,  ["text"]),
+}
+
+# 只抓白名单内的模型（避免数据爆炸）
+_WHITELIST = set(_MODEL_META.keys())
 
 
 def _parse_cny(text: str) -> float:
     m = re.search(r"(\d+(?:\.\d+)?)", text)
     return float(m.group(1)) if m else 0.0
-
-
-def _parse_quota(text: str) -> tuple:
-    m = re.search(r"(\d+)\s*(次|token)", text)
-    return (int(m.group(1)), m.group(2)) if m else (0, "")
 
 
 class VolcengineAdapter(BaseAdapter):
@@ -27,52 +42,49 @@ class VolcengineAdapter(BaseAdapter):
     pricing_url = _PRICING_URL
 
     def fetch(self) -> list[Product]:
-        html = fetch_html_browser(_PRICING_URL, wait_selector=".ark-models, .ark-plans")
+        # 改用静态抓取，规避 Playwright sync/async 冲突
+        html = fetch_html(_PRICING_URL, timeout=20)
         soup = BeautifulSoup(html, "html.parser")
         products = []
+        seen = set()
 
-        for item in soup.select(".model"):
-            name_el = item.select_one(".name")
-            input_el = item.select_one(".input")
-            output_el = item.select_one(".output")
-            if not (name_el and input_el and output_el):
-                continue
-            model = name_el.get_text(strip=True)
-            products.append(Product(
-                id=f"{model.lower().replace(' ', '-')}-token",
-                model=model,
-                billing_type=BillingType.PER_TOKEN,
-                context_window=32000,
-                modalities=["text"],
-                prices={
-                    "input": _parse_cny(input_el.get_text()),
-                    "output": _parse_cny(output_el.get_text()),
-                    "currency": "CNY",
-                    "unit": "per_1m_tokens",
-                },
-                purchase_url=_PRICING_URL,
-            ))
+        # 文档页是标准 HTML 表格，遍历所有 table
+        for table in soup.select("table"):
+            for tr in table.select("tr"):
+                tds = tr.find_all("td")
+                if len(tds) < 2:
+                    continue
+                model_name = tds[0].get_text(strip=True)
+                # 只抓白名单模型
+                if model_name not in _WHITELIST or model_name in seen:
+                    continue
 
-        for item in soup.select(".plan"):
-            name_el = item.select_one(".plan-name")
-            price_el = item.select_one(".plan-price")
-            quota_el = item.select_one(".plan-quota")
-            if not (name_el and price_el):
-                continue
-            quota, quota_unit = _parse_quota(quota_el.get_text()) if quota_el else (0, "")
-            products.append(Product(
-                id=f"{name_el.get_text(strip=True).lower().replace(' ', '-')}-plan",
-                model=None,
-                billing_type=BillingType.CODING_PLAN,
-                prices={
-                    "monthly_price": _parse_cny(price_el.get_text()),
-                    "currency": "CNY",
-                    "included_quota": quota,
-                    "quota_unit": quota_unit,
-                    "features": [],
-                },
-                purchase_url=_PRICING_URL,
-            ))
+                # 从该行所有单元格提取价格数字
+                prices = [_parse_cny(td.get_text()) for td in tds[1:]]
+                if not prices:
+                    continue
+
+                ctx, mods = _MODEL_META[model_name]
+                # 基础档：输入取最小非零价、输出取最大价
+                # 火山文档按输入长度分档定价，这里取最便宜档作为基准
+                input_p = next((p for p in prices if p > 0), 0.0)
+                output_p = max(prices) if prices else 0.0
+
+                products.append(Product(
+                    id=f"{model_name}-token",
+                    model=model_name,
+                    billing_type=BillingType.PER_TOKEN,
+                    context_window=ctx,
+                    modalities=mods,
+                    prices={
+                        "input": input_p,
+                        "output": output_p,
+                        "currency": "CNY",
+                        "unit": "per_1m_tokens",
+                    },
+                    purchase_url=_PRICING_URL,
+                ))
+                seen.add(model_name)
 
         self.assert_min_products(products, minimum=2)
         return products

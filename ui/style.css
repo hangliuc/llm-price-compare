@@ -85,7 +85,7 @@ input { font-family: inherit; }
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.02em;
@@ -93,9 +93,9 @@ input { font-family: inherit; }
 }
 .brand-name {
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 .brand-tag {
@@ -104,42 +104,33 @@ input { font-family: inherit; }
   font-weight: 500;
   color: var(--ink-faint);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-left: 10px;
+  letter-spacing: 0.08em;
+  padding-left: 9px;
   border-left: 1px solid var(--border);
   line-height: 1.2;
 }
 .brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  background: var(--ink);
-  border-radius: var(--radius);
-  position: relative;
-}
-.brand-mark::after {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 2px;
-  box-shadow: 0 0 8px var(--accent-glow);
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 .nav-menu {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
 }
 .nav-menu a {
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--radius);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--ink-soft);
   transition: all 0.15s;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 .nav-menu a:hover {
   color: var(--ink);
@@ -183,18 +174,21 @@ input { font-family: inherit; }
 .gh-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 500;
   color: var(--ink-soft);
   transition: all 0.15s;
 }
 .gh-link:hover {
   border-color: var(--ink);
   color: var(--ink);
+  background: var(--bg-tint);
+}
+.gh-icon {
+  display: block;
 }
 
 /* ============ HERO (不对称) ============ */
@@ -354,10 +348,10 @@ input { font-family: inherit; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-  border-radius: 14px;
-  background: var(--ink);
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -366,13 +360,10 @@ input { font-family: inherit; }
   animation: coreBreath 3s ease-in-out infinite;
 }
 .orbit-core .brand-mark {
-  width: 28px;
-  height: 28px;
-  background: transparent;
-}
-.orbit-core .brand-mark::after {
-  width: 14px;
-  height: 14px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
 }
 .orbit-icon {
   position: absolute;
@@ -407,44 +398,173 @@ input { font-family: inherit; }
   object-fit: contain;
 }
 
-/* ============ STATS STRIP ============ */
-.stats-strip {
+/* ============ BILLING CARDS ============ */
+.billing-cards {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 40px 64px;
+  padding: 24px 40px 64px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
-.stat {
-  padding: 28px 24px;
-  border-right: 1px solid var(--border-light);
-  transition: background 0.2s;
+.billing-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px 22px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.18s;
+  overflow: hidden;
 }
-.stat:last-child { border-right: none; }
-.stat:hover { background: var(--bg-tint); }
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 44px;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  line-height: 1;
-  margin-bottom: 8px;
-  font-variant-numeric: tabular-nums;
+.billing-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s;
 }
-.stat-num em {
-  font-style: italic;
+.billing-card:hover {
+  border-color: var(--ink);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
+.billing-card:hover::before {
+  transform: scaleY(1);
+}
+.billing-card-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--bg-tint);
+  border: 1px solid var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent-dark);
 }
-.stat-label {
-  font-size: 12px;
+.billing-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.billing-card-title {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.billing-card-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--ink-faint);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+.billing-card-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-top: 10px;
+}
+.billing-card-arrow {
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  transition: transform 0.18s, color 0.18s;
+}
+.billing-card:hover .billing-card-arrow {
+  color: var(--accent-dark);
+  transform: translateX(3px);
+}
+
+/* 特征卡片：纯展示，动态美观 */
+.feature-cards {
+  gap: 20px;
+  padding: 32px 40px 72px;
+}
+.feature-card {
+  cursor: default;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border-light);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-tint) 100%);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
+}
+.feature-card::before {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: auto;
+  width: auto;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feature-card:hover {
+  border-color: var(--border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+}
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+.feature-card .billing-card-icon {
+  width: 100%;
+  height: 88px;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.08) 0%, rgba(0, 220, 130, 0.02) 100%);
+  color: var(--accent-dark);
+  transition: background 0.25s;
+}
+.feature-card:hover .billing-card-icon {
+  background: linear-gradient(135deg, rgba(0, 220, 130, 0.14) 0%, rgba(0, 220, 130, 0.04) 100%);
+}
+.feature-card .billing-card-icon svg {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feature-card:hover .billing-card-icon svg {
+  transform: scale(1.12) rotate(-3deg);
+}
+.feature-card .billing-card-body {
+  padding: 20px 22px 24px;
+}
+.feature-card .billing-card-title {
+  font-size: 17px;
   font-weight: 600;
+}
+.feature-card .billing-card-desc {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* 卡片入场：轻量淡入，首屏立即可见，避免动画期间卡片"显示不全" */
+.feature-card:nth-child(1) { animation: featureIn 0.4s 0s both; }
+.feature-card:nth-child(2) { animation: featureIn 0.4s 0.08s both; }
+.feature-card:nth-child(3) { animation: featureIn 0.4s 0.16s both; }
+@keyframes featureIn {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
 }
 
 /* ============ SECTION ============ */
@@ -493,6 +613,12 @@ input { font-family: inherit; }
 }
 .section-title em {
   font-style: italic;
+  color: var(--accent-dark);
+}
+.section-title .title-normal {
+  font-family: var(--font);
+  font-style: normal;
+  font-weight: 500;
   color: var(--accent-dark);
 }
 .section-sub {
@@ -641,13 +767,13 @@ input { font-family: inherit; }
   letter-spacing: 0.08em;
   color: var(--ink-faint);
   border-bottom: 1px solid var(--border);
-  cursor: pointer;
   transition: color 0.15s;
   white-space: nowrap;
   background: var(--bg-tint);
   user-select: none;
 }
-.price-table th:hover { color: var(--ink); }
+.price-table th.sortable { cursor: pointer; }
+.price-table th.sortable:hover { color: var(--ink); }
 .price-table th.sort-asc,
 .price-table th.sort-desc { color: var(--accent-dark); }
 .price-table th.sort-asc::after { content: ' ↑'; }
@@ -858,11 +984,12 @@ input { font-family: inherit; }
 }
 .provider-card-icon img { width: 100%; height: 100%; object-fit: contain; }
 .provider-card-name {
-  font-family: var(--font-display);
-  font-size: 22px;
+  font-family: var(--font);
+  font-size: 17px;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--ink-soft);
 }
 .provider-card-region {
   font-size: 12px;
@@ -1008,9 +1135,16 @@ input { font-family: inherit; }
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-weight: 600;
   font-size: 14px;
+}
+.footer-brand .brand-mark {
+  width: 26px;
+  height: 26px;
+}
+.footer-brand .brand-name {
+  font-size: 18px;
 }
 .footer-meta {
   font-size: 13px;
@@ -1056,7 +1190,7 @@ input { font-family: inherit; }
   50% { transform: translate(var(--x, 0), calc(var(--y, 0) - 6px)) scale(1.06); }
 }
 
-.section, .stats-strip, .providers-grid, .card-grid, .table-wrap {
+.section, .billing-cards, .providers-grid, .card-grid, .table-wrap {
   animation: fadeUp 0.5s ease-out;
 }
 
@@ -1069,12 +1203,10 @@ input { font-family: inherit; }
   }
   .hero-title { font-size: 56px; }
   .icon-orbit { width: 320px; height: 320px; transform: scale(0.85); }
-  .stats-strip {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 24px 40px;
+  .billing-cards {
+    grid-template-columns: 1fr;
+    padding: 16px 24px 40px;
   }
-  .stat:nth-child(2) { border-right: none; }
-  .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border-light); }
 }
 @media (max-width: 768px) {
   .header-inner { padding: 0 16px; gap: 12px; height: 56px; }
@@ -1088,9 +1220,7 @@ input { font-family: inherit; }
   .section { padding: 56px 16px; }
   .section-title { font-size: 32px; }
   .section-head { grid-template-columns: 1fr; }
-  .stats-strip { grid-template-columns: 1fr; padding: 0 16px 32px; }
-  .stat { border-right: none; border-bottom: 1px solid var(--border-light); }
-  .stat:last-child { border-bottom: none; }
+  .billing-cards { grid-template-columns: 1fr; padding: 12px 16px 32px; }
   .price-table { font-size: 13px; }
   .price-table th, .price-table td { padding: 10px 10px; }
   .providers-grid { grid-template-columns: 1fr; }

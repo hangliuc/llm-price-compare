@@ -1,0 +1,76 @@
+# data/manual/zhipu.yaml
+# 智谱开放平台是 SPA 页面，类名动态混淆，抓取不稳定，改用 manual 维护
+# 数据来源：https://open.bigmodel.cn/pricing + 2025-04 调价公告
+id: zhipu
+name: 智谱
+name_en: Zhipu AI
+region: cn
+website: https://open.bigmodel.cn/
+pricing_url: https://open.bigmodel.cn/pricing
+products:
+  - id: glm-4-plus-token
+    model: GLM-4-Plus
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text, vision]
+    prices:
+      input: 5.0
+      output: 5.0
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing
+  - id: glm-4-air-token
+    model: GLM-4-Air
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 0.5
+      output: 0.5
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing
+  - id: glm-4-flash-token
+    model: GLM-4-Flash
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text, vision]
+    prices:
+      input: 0.0
+      output: 0.0
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing
+  - id: glm-4-flashx-token
+    model: GLM-4-FlashX
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 0.1
+      output: 0.1
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing
+  - id: glm-4-long-token
+    model: GLM-4-Long
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1.0
+      output: 1.0
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing
+  - id: glm-4v-token
+    model: GLM-4V
+    billing_type: per_token
+    context_window: 2000
+    modalities: [text, vision]
+    prices:
+      input: 0.05
+      output: 0.05
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://open.bigmodel.cn/pricing

@@ -112,6 +112,13 @@ def check_volatility(old_provider: Optional[dict], new_products: list) -> Volati
         old_prices = old_prod.get("prices", {})
         new_prices = new_prod.prices
 
+        # 货币不一致时跳过价差对比（CNY vs USD 会产生假阳性阻塞）
+        # 首次从 manual 切换到 reconcile 数据源时，货币可能从 CNY 变为 USD
+        old_currency = old_prices.get("currency")
+        new_currency = new_prices.get("currency")
+        if old_currency and new_currency and old_currency != new_currency:
+            continue
+
         for f in _PRICE_FIELDS:
             if f in old_prices and f in new_prices:
                 pct = _pct_change(float(old_prices[f]), float(new_prices[f]))
