@@ -14,9 +14,11 @@ body:
         - DeepSeek
         - OpenCode
         - Google
-        - Mistral
         - 阿里通义
         - 月之暗面
+        - AWS
+        - MiniMax
+        - 小米
         - 其他
     validations:
       required: true

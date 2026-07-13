@@ -3,113 +3,443 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LLM 价格比价</title>
+  <title>PPK · Price Per Token · 主流大模型厂商价格聚合</title>
+  <meta name="description" content="PPK (Price Per Token) 聚合 OpenAI、Anthropic、Google、DeepSeek、智谱、火山引擎等主流大模型厂商的 Token 价格、订阅制与 Coding Plan">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
   <div id="app">
+
+    <!-- ============ HEADER ============ -->
     <header class="header">
-      <div class="brand">LLM 价格比价</div>
-      <input class="search" v-model="searchQuery" placeholder="搜索厂商/模型..." />
-      <a class="feedback-btn" :href="feedbackUrl" target="_blank">反馈</a>
+      <div class="header-inner">
+        <a href="#/" class="brand">
+          <span class="brand-mark"></span>
+          <span class="brand-name">PPK</span>
+          <span class="brand-tag">Price Per Token</span>
+        </a>
+        <nav class="nav-menu">
+          <a href="#/" :class="{active: routeName === 'home'}">首页</a>
+          <a href="#/providers" :class="{active: routeName === 'providers'}">厂商总览</a>
+          <a href="#/compare" :class="{active: routeName === 'compare'}">价格对比</a>
+          <a href="#/billing/per_token" :class="{active: routeName === 'billing' && billingRoute === 'per_token'}">按需计费</a>
+          <a href="#/billing/subscription" :class="{active: routeName === 'billing' && billingRoute === 'subscription'}">订阅制</a>
+          <a href="#/billing/coding_plan" :class="{active: routeName === 'billing' && billingRoute === 'coding_plan'}">Coding Plan</a>
+          <a href="#/about" :class="{active: routeName === 'about'}">关于</a>
+        </nav>
+        <div class="header-actions">
+          <input
+            class="search"
+            v-model="searchQuery"
+            placeholder="搜索厂商或模型..."
+            v-if="routeName !== 'providers' && routeName !== 'about'"
+          />
+          <a href="https://github.com/hangliuc/llm-price-compare" target="_blank" class="gh-link">GitHub ↗</a>
+        </div>
+      </div>
     </header>
 
-    <section class="filters">
-      <div class="filter-group">
-        <span class="filter-label">地区</span>
-        <button v-for="r in regions" :key="r" @click="toggleFilter('region', r)"
-          :class="['chip', {active: filters.region.includes(r)}]">{{ r === 'cn' ? '国内' : (r === 'us' ? '美国' : '欧洲') }}</button>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">计费</span>
-        <button v-for="b in billingTypes" :key="b" @click="toggleFilter('billing', b)"
-          :class="['chip', {active: filters.billing.includes(b)}]">{{ billingLabel(b) }}</button>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">能力</span>
-        <button v-for="m in modalities" :key="m" @click="toggleFilter('modality', m)"
-          :class="['chip', {active: filters.modality.includes(m)}]">{{ m }}</button>
-      </div>
-    </section>
+    <!-- ============ LOADING ============ -->
+    <div v-if="!data && !error" class="loading-state">加载中</div>
 
-    <section class="freshness" v-if="data">
-      <span>最近更新: {{ freshnessText }}</span>
-      <span>·</span>
-      <span>{{ data.providers.length }} 家厂商</span>
-      <span>·</span>
-      <span>{{ totalProducts }} 个产品</span>
-      <span class="stale-warning" v-if="staleCount > 0">⚠ {{ staleCount }} 家厂商数据可能过期</span>
-    </section>
-
-    <section class="result" v-if="data">
-      <div class="view-toggle">
-        <button :class="{active: view === 'table'}" @click="view = 'table'">表格</button>
-        <button :class="{active: view === 'card'}" @click="view = 'card'">卡片</button>
-        <div class="currency-toggle">
-          <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥</button>
-          <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$</button>
-        </div>
-      </div>
-
-      <table class="price-table" v-show="view === 'table'">
-        <thead>
-          <tr>
-            <th @click="sortBy('providerName')">厂商</th>
-            <th @click="sortBy('model')">模型</th>
-            <th @click="sortBy('billing_type')">计费</th>
-            <th @click="sortBy('inputPrice')">输入价</th>
-            <th @click="sortBy('outputPrice')">输出价</th>
-            <th>购买</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in filteredRows" :key="row.id" @click="toggleExpand(row.id)"
-            :class="{stale: row.stale, expanded: expanded === row.id}">
-            <td>{{ row.providerName }}</td>
-            <td>{{ row.model || '—' }}</td>
-            <td>{{ billingLabel(row.billing_type) }}</td>
-            <td>{{ formatPrice(row, 'input') }}</td>
-            <td>{{ formatPrice(row, 'output') }}</td>
-            <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
-          </tr>
-          <tr v-if="expanded" class="detail-row">
-            <td colspan="6">
-              <div class="detail">
-                <p>上下文窗口: {{ currentRow.context_window || '—' }}</p>
-                <p>能力: {{ (currentRow.modalities || []).join(', ') || '—' }}</p>
-                <p v-if="currentRow.notes">备注: {{ currentRow.notes }}</p>
-                <p v-if="currentRow.stale" class="stale-detail">⚠ 数据来自 {{ staleHours(currentRow) }} 小时前，可能过期</p>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="card-grid" v-show="view === 'card'">
-        <div v-for="row in filteredRows" :key="row.id" class="card" :class="{stale: row.stale}">
-          <div class="card-header">
-            <span class="card-provider">{{ row.providerName }}</span>
-            <span class="card-billing">{{ billingLabel(row.billing_type) }}</span>
-          </div>
-          <div class="card-model">{{ row.model || '—' }}</div>
-          <div class="card-prices">
-            <div v-if="row.prices.input">输入: {{ formatPrice(row, 'input') }}</div>
-            <div v-if="row.prices.output">输出: {{ formatPrice(row, 'output') }}</div>
-            <div v-if="row.prices.monthly_price">月费: {{ formatPrice(row, 'monthly_price') }}</div>
-          </div>
-          <a class="card-buy" :href="row.purchase_url" target="_blank">购买</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="error" v-if="error">
+    <!-- ============ ERROR ============ -->
+    <section v-if="error" class="error">
       <p>数据暂不可用：{{ error }}</p>
     </section>
 
+    <!-- ============ 首页 ============ -->
+    <template v-if="data && routeName === 'home'">
+      <!-- 不对称 Hero -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-eyebrow">每日定时更新 · 数据公开透明</div>
+          <h1 class="hero-title">大模型价格<br><em>一目了然</em></h1>
+          <p class="hero-sub">聚合 OpenAI、Anthropic、Google、AWS、DeepSeek、智谱等 12 家主流厂商的 Token 计费、订阅制与 Coding Plan，帮助开发者快速对比与选型</p>
+          <div class="hero-cta">
+            <a href="#/compare" class="btn btn-primary">查看价格对比 →</a>
+            <a href="#/providers" class="btn btn-secondary">浏览厂商</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="icon-orbit">
+            <div class="orbit-ring orbit-ring-1"></div>
+            <div class="orbit-ring orbit-ring-2"></div>
+            <div class="orbit-ring orbit-ring-3"></div>
+            <div class="orbit-core">
+              <span class="brand-mark"></span>
+            </div>
+            <div
+              v-for="(p, i) in allProvidersForOrbit"
+              :key="p.id"
+              class="orbit-icon"
+              :style="orbitStyle(i, allProvidersForOrbit.length)"
+            >
+              <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <div class="stats-strip">
+        <div class="stat">
+          <div class="stat-num">{{ data.providers.length }}</div>
+          <div class="stat-label">家厂商</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">{{ totalProducts }}</div>
+          <div class="stat-label">个产品</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><em>3</em></div>
+          <div class="stat-label">种计费方式</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><em>{{ successCount }}</em></div>
+          <div class="stat-label">家数据正常</div>
+        </div>
+      </div>
+
+      <!-- 厂商速览 -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">厂商速览</div>
+            <h2 class="section-title">主流大模型<em>厂商</em></h2>
+            <p class="section-sub">覆盖国内外 12 家主流大模型厂商，点击查看完整产品线与定价</p>
+          </div>
+          <a href="#/providers" class="section-link">查看全部 →</a>
+        </div>
+        <div class="providers-grid">
+          <div v-for="p in providerList.slice(0, 6)" :key="p.id" class="provider-card" @click="goHash('#/compare')">
+            <div class="provider-card-head">
+              <span class="provider-card-icon">
+                <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+              </span>
+              <div>
+                <div class="provider-card-name">{{ p.name }}</div>
+                <div class="provider-card-region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</div>
+              </div>
+            </div>
+            <div class="provider-card-meta">
+              <span>{{ p.productCount }} 个产品</span>
+              <a :href="p.website" target="_blank" @click.stop>官网 ↗</a>
+            </div>
+            <div class="provider-card-status">
+              <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
+              <span :style="{color: p.statusOk ? 'var(--green)' : 'var(--amber)'}">{{ p.statusOk ? '数据正常' : p.statusText }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 价格预览 -->
+      <section class="section" style="padding-top: 0;">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">价格预览</div>
+            <h2 class="section-title">最新<em>价格</em>一览</h2>
+            <p class="section-sub">所有厂商产品的最新定价，支持筛选与排序</p>
+          </div>
+          <a href="#/compare" class="section-link">完整对比 →</a>
+        </div>
+        <div class="freshness">
+          <span>最近更新 <b>{{ freshnessText }}</b></span>
+          <span class="freshness-sep">·</span>
+          <span><b>{{ data.providers.length }}</b> 家厂商</span>
+          <span class="freshness-sep">·</span>
+          <span><b>{{ totalProducts }}</b> 个产品</span>
+          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
+        </div>
+        <div class="view-toggle">
+          <div>
+            <button :class="{active: view === 'table'}" @click="view = 'table'">表格</button>
+            <button :class="{active: view === 'card'}" @click="view = 'card'">卡片</button>
+          </div>
+          <div class="currency-toggle">
+            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
+            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
+          </div>
+        </div>
+        <div class="table-wrap" v-show="view === 'table'">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th @click="sortBy('providerName')" :class="{'sort-asc': sortKey === 'providerName' && sortAsc, 'sort-desc': sortKey === 'providerName' && !sortAsc}">厂商</th>
+                <th @click="sortBy('model')" :class="{'sort-asc': sortKey === 'model' && sortAsc, 'sort-desc': sortKey === 'model' && !sortAsc}">模型</th>
+                <th @click="sortBy('billing_type')" :class="{'sort-asc': sortKey === 'billing_type' && sortAsc, 'sort-desc': sortKey === 'billing_type' && !sortAsc}">计费</th>
+                <th @click="sortBy('inputPrice')" :class="{'sort-asc': sortKey === 'inputPrice' && sortAsc, 'sort-desc': sortKey === 'inputPrice' && !sortAsc}" style="text-align:right">输入价</th>
+                <th @click="sortBy('outputPrice')" :class="{'sort-asc': sortKey === 'outputPrice' && sortAsc, 'sort-desc': sortKey === 'outputPrice' && !sortAsc}" style="text-align:right">输出价</th>
+                <th>购买</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in filteredRows.slice(0, 8)" :key="row.id" @click="toggleExpand(row.id)"
+                :class="{stale: row.stale, expanded: expanded === row.id}">
+                <td>
+                  <div class="provider-cell">
+                    <span class="provider-icon">
+                      <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
+                    </span>
+                    {{ row.providerName }}
+                  </div>
+                </td>
+                <td class="mono">{{ row.model || '—' }}</td>
+                <td>{{ billingLabel(row.billing_type) }}</td>
+                <td class="num">{{ formatPrice(row, 'input') }}</td>
+                <td class="num">{{ formatPrice(row, 'output') }}</td>
+                <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-grid" v-show="view === 'card'">
+          <div v-for="row in filteredRows.slice(0, 8)" :key="row.id" class="card" :class="{stale: row.stale}">
+            <div class="card-header">
+              <div class="card-provider-wrap">
+                <span class="provider-icon">
+                  <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
+                </span>
+                <span class="card-provider">{{ row.providerName }}</span>
+              </div>
+              <span class="card-billing">{{ billingLabel(row.billing_type) }}</span>
+            </div>
+            <div class="card-model">{{ row.model || '—' }}</div>
+            <div class="card-prices">
+              <div v-if="row.prices.input"><span>输入</span><span>{{ formatPrice(row, 'input') }}</span></div>
+              <div v-if="row.prices.output"><span>输出</span><span>{{ formatPrice(row, 'output') }}</span></div>
+              <div v-if="row.prices.monthly_price"><span>月费</span><span>{{ formatPrice(row, 'monthly_price') }}</span></div>
+            </div>
+            <a class="card-buy" :href="row.purchase_url" target="_blank">购买 →</a>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <!-- ============ 厂商总览 ============ -->
+    <template v-if="data && routeName === 'providers'">
+      <section class="section section-page">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">全部厂商</div>
+            <h1 class="section-title">厂商<em>总览</em></h1>
+            <p class="section-sub">主流大模型厂商一览，点击卡片进入价格对比</p>
+          </div>
+        </div>
+        <div class="freshness">
+          <span>最近更新 <b>{{ freshnessText }}</b></span>
+          <span class="freshness-sep">·</span>
+          <span><b>{{ data.providers.length }}</b> 家厂商</span>
+          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
+        </div>
+        <div class="providers-grid">
+          <div v-for="p in providerList" :key="p.id" class="provider-card" @click="goHash('#/compare')">
+            <div class="provider-card-head">
+              <span class="provider-card-icon">
+                <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+              </span>
+              <div>
+                <div class="provider-card-name">{{ p.name }}</div>
+                <div class="provider-card-region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</div>
+              </div>
+            </div>
+            <div class="provider-card-meta">
+              <span>{{ p.productCount }} 个产品</span>
+              <a :href="p.website" target="_blank" @click.stop>官网 ↗</a>
+            </div>
+            <div class="provider-card-status">
+              <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
+              <span :style="{color: p.statusOk ? 'var(--green)' : 'var(--amber)'}">{{ p.statusOk ? '数据正常' : p.statusText }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <!-- ============ 价格对比 / 计费类型页 ============ -->
+    <template v-if="data && (routeName === 'compare' || routeName === 'billing')">
+      <section class="section section-page">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow" v-if="routeName === 'compare'">全部产品</div>
+            <h1 class="section-title" v-if="routeName === 'compare'">价格<em>对比</em></h1>
+            <p class="section-sub" v-if="routeName === 'compare'">所有厂商产品价格一览，支持筛选与排序</p>
+
+            <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'per_token'">Token 计费</div>
+            <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'per_token'">按需<em>计费</em></h1>
+            <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'per_token'">按实际 Token 用量计费，适合低频或弹性调用</p>
+
+            <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'subscription'">周期订阅</div>
+            <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'subscription'">订阅<em>制</em></h1>
+            <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'subscription'">月付或年付固定费用，适合高频稳定使用</p>
+
+            <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">编程套餐</div>
+            <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">Coding <em>Plan</em></h1>
+            <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">面向 AI 编程工具的套餐方案，支持 Claude Code、Cursor 等</p>
+          </div>
+        </div>
+
+        <div class="filters">
+          <div class="filter-group">
+            <span class="filter-label">地区</span>
+            <button v-for="r in regions" :key="r" @click="toggleFilter('region', r)"
+              :class="['chip', {active: filters.region.includes(r)}]">{{ r === 'cn' ? '国内' : (r === 'us' ? '美国' : '欧洲') }}</button>
+          </div>
+          <div class="filter-group" v-if="routeName !== 'billing'">
+            <span class="filter-label">计费</span>
+            <button v-for="b in billingTypes" :key="b" @click="toggleFilter('billing', b)"
+              :class="['chip', {active: filters.billing.includes(b)}]">{{ billingLabel(b) }}</button>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">能力</span>
+            <button v-for="m in modalities" :key="m" @click="toggleFilter('modality', m)"
+              :class="['chip', {active: filters.modality.includes(m)}]">{{ m }}</button>
+          </div>
+        </div>
+
+        <div class="freshness">
+          <span>最近更新 <b>{{ freshnessText }}</b></span>
+          <span class="freshness-sep">·</span>
+          <span><b>{{ filteredRows.length }}</b> 个产品</span>
+          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
+        </div>
+
+        <div class="view-toggle">
+          <div>
+            <button :class="{active: view === 'table'}" @click="view = 'table'">表格</button>
+            <button :class="{active: view === 'card'}" @click="view = 'card'">卡片</button>
+          </div>
+          <div class="currency-toggle">
+            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
+            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
+          </div>
+        </div>
+
+        <div class="table-wrap" v-show="view === 'table'">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th @click="sortBy('providerName')" :class="{'sort-asc': sortKey === 'providerName' && sortAsc, 'sort-desc': sortKey === 'providerName' && !sortAsc}">厂商</th>
+                <th @click="sortBy('model')" :class="{'sort-asc': sortKey === 'model' && sortAsc, 'sort-desc': sortKey === 'model' && !sortAsc}">模型</th>
+                <th @click="sortBy('billing_type')" :class="{'sort-asc': sortKey === 'billing_type' && sortAsc, 'sort-desc': sortKey === 'billing_type' && !sortAsc}">计费</th>
+                <th @click="sortBy('inputPrice')" :class="{'sort-asc': sortKey === 'inputPrice' && sortAsc, 'sort-desc': sortKey === 'inputPrice' && !sortAsc}" style="text-align:right">输入价</th>
+                <th @click="sortBy('outputPrice')" :class="{'sort-asc': sortKey === 'outputPrice' && sortAsc, 'sort-desc': sortKey === 'outputPrice' && !sortAsc}" style="text-align:right">输出价</th>
+                <th>购买</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in filteredRows" :key="row.id" @click="toggleExpand(row.id)"
+                :class="{stale: row.stale, expanded: expanded === row.id}">
+                <td>
+                  <div class="provider-cell">
+                    <span class="provider-icon">
+                      <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
+                    </span>
+                    {{ row.providerName }}
+                  </div>
+                </td>
+                <td class="mono">{{ row.model || '—' }}</td>
+                <td>{{ billingLabel(row.billing_type) }}</td>
+                <td class="num">{{ formatPrice(row, 'input') }}</td>
+                <td class="num">{{ formatPrice(row, 'output') }}</td>
+                <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
+              </tr>
+              <tr v-if="expanded" class="detail-row">
+                <td colspan="6">
+                  <div class="detail">
+                    <p>上下文窗口: {{ currentRow.context_window || '—' }}</p>
+                    <p>能力: {{ (currentRow.modalities || []).join(', ') || '—' }}</p>
+                    <p v-if="currentRow.notes">备注: {{ currentRow.notes }}</p>
+                    <p v-if="currentRow.stale" class="stale-detail">数据来自 {{ staleHours(currentRow) }} 小时前，可能过期</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-grid" v-show="view === 'card'">
+          <div v-for="row in filteredRows" :key="row.id" class="card" :class="{stale: row.stale}">
+            <div class="card-header">
+              <div class="card-provider-wrap">
+                <span class="provider-icon">
+                  <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
+                </span>
+                <span class="card-provider">{{ row.providerName }}</span>
+              </div>
+              <span class="card-billing">{{ billingLabel(row.billing_type) }}</span>
+            </div>
+            <div class="card-model">{{ row.model || '—' }}</div>
+            <div class="card-prices">
+              <div v-if="row.prices.input"><span>输入</span><span>{{ formatPrice(row, 'input') }}</span></div>
+              <div v-if="row.prices.output"><span>输出</span><span>{{ formatPrice(row, 'output') }}</span></div>
+              <div v-if="row.prices.monthly_price"><span>月费</span><span>{{ formatPrice(row, 'monthly_price') }}</span></div>
+            </div>
+            <a class="card-buy" :href="row.purchase_url" target="_blank">购买 →</a>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <!-- ============ 关于 ============ -->
+    <template v-if="data && routeName === 'about'">
+      <section class="section section-page">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">关于本项目</div>
+            <h1 class="section-title">关于</h1>
+            <p class="section-sub">非商业的大模型价格聚合工具</p>
+          </div>
+        </div>
+        <div class="about-page">
+          <p>PPK (Price Per Token) 帮助开发者快速对比各主流厂商的 Token 价格、订阅制和 Coding Plan。数据通过 Python 爬虫定时抓取各厂商公开定价页面，经校验后生成静态 JSON，由前端实时渲染。单个厂商抓取失败不影响其他厂商数据展示。</p>
+
+          <h2>数据<em>来源</em></h2>
+          <ul>
+            <li>OpenAI</li>
+            <li>Anthropic</li>
+            <li>Google</li>
+            <li>DeepSeek</li>
+            <li>智谱</li>
+            <li>火山引擎</li>
+            <li>OpenCode</li>
+            <li>通义千问</li>
+            <li>月之暗面</li>
+            <li>AWS</li>
+            <li>MiniMax</li>
+            <li>小米</li>
+          </ul>
+
+          <h2>技术<em>栈</em></h2>
+          <ul>
+            <li>后端：Python 爬虫 + Playwright</li>
+            <li>前端：Vue 3 CDN（无构建步骤）</li>
+            <li>部署：Docker + Cron + GitHub Pages</li>
+          </ul>
+
+          <h2>反馈</h2>
+          <p>如发现价格错误或有新厂商建议，请通过 <a :href="feedbackUrl" target="_blank">GitHub Issues</a> 反馈。</p>
+        </div>
+      </section>
+    </template>
+
+    <!-- ============ FOOTER ============ -->
     <footer class="footer">
-      数据仅供参考 · 价格以厂商官方为准 ·
-      <a href="https://github.com/llm-price-compare/llm-price-compare" target="_blank">GitHub</a>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark"></span>
+          <span class="brand-name">PPK</span>
+          <span class="brand-tag">Price Per Token</span>
+        </div>
+        <div class="footer-meta">
+          数据仅供参考 · 价格以厂商官方为准 ·
+          <a href="https://github.com/hangliuc/llm-price-compare" target="_blank">GitHub</a>
+        </div>
+      </div>
     </footer>
   </div>
 

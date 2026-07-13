@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-12T19:17:07+08:00",
+  "generated_at": "2026-07-13T12:10:48+08:00",
   "providers": [
     {
       "id": "google",
@@ -26,32 +26,6 @@
             "unit": "per_1m_tokens"
           },
           "purchase_url": "https://ai.google.dev/pricing"
-        }
-      ]
-    },
-    {
-      "id": "mistral",
-      "name": "Mistral AI",
-      "name_en": "Mistral AI",
-      "region": "eu",
-      "website": "https://mistral.ai/",
-      "pricing_url": "https://mistral.ai/pricing",
-      "products": [
-        {
-          "id": "mistral-large-token",
-          "model": "Mistral Large",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.0,
-            "output": 6.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://mistral.ai/pricing"
         }
       ]
     },
@@ -145,7 +119,7 @@
       "provider_id": "zhipu",
       "status": "failed",
       "last_success_at": null,
-      "error": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://open.bigmodel.cn/pricing\", waiting until \"load\"\n",
+      "error": "Page.wait_for_selector: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\".model-list, .plan-list\") to be visible\n",
       "stale": true,
       "warnings": []
     },
@@ -160,28 +134,21 @@
     {
       "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-07-12T19:17:07+08:00",
-      "stale": false,
-      "warnings": []
-    },
-    {
-      "provider_id": "mistral",
-      "status": "ok",
-      "last_success_at": "2026-07-12T19:17:07+08:00",
+      "last_success_at": "2026-07-13T12:10:48+08:00",
       "stale": false,
       "warnings": []
     },
     {
       "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-07-12T19:17:07+08:00",
+      "last_success_at": "2026-07-13T12:10:48+08:00",
       "stale": false,
       "warnings": []
     },
     {
       "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-07-12T19:17:07+08:00",
+      "last_success_at": "2026-07-13T12:10:48+08:00",
       "stale": false,
       "warnings": []
     }
