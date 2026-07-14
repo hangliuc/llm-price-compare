@@ -202,3 +202,50 @@ products:
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://open.bigmodel.cn/pricing
+  # ========== GLM Coding Plan ==========
+  # 数据来源：https://www.bigmodel.cn/glm-coding (2026.6.22 官方定价)
+  - id: glm-coding-plan-lite
+    model: GLM Coding Plan Lite
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 49
+      currency: CNY
+      included_quota: 80
+      quota_unit: prompts_per_5h
+      features:
+        - 每月约 80 次/5小时，约 400 次/周
+        - 可用模型：GLM-4.7 / 4.6
+        - MCP 工具 100 次/月
+    purchase_url: https://www.bigmodel.cn/glm-coding
+  - id: glm-coding-plan-pro
+    model: GLM Coding Plan Pro
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 149
+      currency: CNY
+      included_quota: 400
+      quota_unit: prompts_per_5h
+      features:
+        - 每月约 400 次/5小时，约 2,000 次/周
+        - 可用模型：GLM-5.2 / 5.1 / 5 / 4.7 全量
+        - MCP 工具 1,000 次/月
+    purchase_url: https://www.bigmodel.cn/glm-coding
+  - id: glm-coding-plan-max
+    model: GLM Coding Plan Max
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 469
+      currency: CNY
+      included_quota: 1600
+      quota_unit: prompts_per_5h
+      features:
+        - 每月约 1,600 次/5小时，约 8,000 次/周
+        - 全量模型 + 首发新模型
+        - MCP 工具 4,000 次/月 + 专属保障
+    purchase_url: https://www.bigmodel.cn/glm-coding

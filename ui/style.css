@@ -981,6 +981,160 @@ input { font-family: inherit; }
 }
 .card-buy:hover { gap: 8px; }
 
+/* ============ PROVIDER PLAN CARDS (coding_plan / subscription) ============ */
+.provider-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 18px;
+  padding-top: 8px;
+}
+.provider-plan-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.provider-plan-card:hover {
+  border-color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.provider-plan-card.stale {
+  border-color: var(--amber);
+  border-style: dashed;
+}
+.provider-plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.provider-plan-id {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.provider-plan-id .provider-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-tint);
+}
+.provider-plan-id .provider-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.provider-plan-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.provider-plan-count {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+.provider-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.plan-item {
+  padding: 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg-tint);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.plan-item:hover {
+  border-color: var(--border-strong);
+  background: var(--bg);
+}
+.plan-item.expanded {
+  background: var(--bg);
+  border-color: var(--ink);
+}
+.plan-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.plan-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.plan-item-price {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.plan-item-period {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  margin-left: 2px;
+  font-family: var(--font);
+}
+.plan-item-quota {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+}
+.plan-item-promo {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--accent-dark);
+  font-weight: 600;
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.plan-item-features {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.plan-item-features ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style: disc;
+}
+.plan-item-features li {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.plan-item-buy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+  transition: gap 0.15s;
+}
+.plan-item-buy:hover { gap: 8px; }
+
 /* ============ PROVIDER CARDS ============ */
 .providers-grid {
   display: grid;

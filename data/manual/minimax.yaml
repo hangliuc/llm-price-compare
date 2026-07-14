@@ -1,0 +1,62 @@
+# data/manual/minimax.yaml
+# MiniMax 开放平台 Token Plan，全模态额度共享
+# 数据来源：https://platform.minimaxi.com/subscribe/token-plan (2026.7 官方定价)
+id: minimax
+name: MiniMax
+name_en: MiniMax
+region: cn
+website: https://platform.minimaxi.com/
+pricing_url: https://platform.minimaxi.com/subscribe/token-plan
+products:
+  # ========== Token Plan（原 Coding Plan 升级） ==========
+  - id: minimax-token-plan-plus
+    model: MiniMax Token Plan Plus
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text, vision]
+    prices:
+      monthly_price: 49
+      currency: CNY
+      included_quota: 12000
+      quota_unit: calls_per_month
+      features:
+        - 约 12,000 次/月（按 50K Token/次估算）
+        - 3-4 个 Agent 并发
+        - 1 条视频生成/日
+        - 1M 上下文
+        - 仅支持编程 + 图像理解
+    purchase_url: https://platform.minimaxi.com/subscribe/token-plan
+  - id: minimax-token-plan-max
+    model: MiniMax Token Plan Max
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text, vision, audio]
+    prices:
+      monthly_price: 119
+      currency: CNY
+      included_quota: 36000
+      quota_unit: calls_per_month
+      features:
+        - 约 36,000 次/月（热门档）
+        - 4-5 个 Agent 并发
+        - 3 条视频生成/日
+        - 1M 上下文
+        - 全模态：编程 + 生图 + 语音 + 视频
+    purchase_url: https://platform.minimaxi.com/subscribe/token-plan
+  - id: minimax-token-plan-ultra
+    model: MiniMax Token Plan Ultra
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text, vision, audio]
+    prices:
+      monthly_price: 469
+      currency: CNY
+      included_quota: 140000
+      quota_unit: calls_per_month
+      features:
+        - 约 140,000 次/月
+        - 6-7 个 Agent 并发
+        - 5 条视频生成/日
+        - 1M 上下文
+        - 全模态重度使用
+    purchase_url: https://platform.minimaxi.com/subscribe/token-plan

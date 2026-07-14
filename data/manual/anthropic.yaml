@@ -1,0 +1,52 @@
+# data/manual/anthropic.yaml
+# Anthropic 订阅制产品（per_token 产品由 LiteLLM + OpenRouter 采集，此处仅维护订阅制）
+# 数据来源：https://www.anthropic.com/pricing (2026.6 官方定价)
+id: anthropic
+name: Anthropic
+name_en: Anthropic
+region: us
+website: https://www.anthropic.com/
+pricing_url: https://www.anthropic.com/pricing
+products:
+  - id: claude-pro
+    model: Claude Pro
+    billing_type: subscription
+    context_window: 200000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 20
+      currency: USD
+      features:
+        - 不限量使用 Claude（限制速率）
+        - 优先访问新模型
+        - Projects、扩展思考
+        - 集成 Google Workspace
+    purchase_url: https://www.anthropic.com/pricing
+  - id: claude-max-5x
+    model: Claude Max 5x
+    billing_type: subscription
+    context_window: 200000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 100
+      currency: USD
+      features:
+        - 5 倍 Pro 用量
+        - 不限量 Claude Sonnet 5
+        - Claude Code 高额度
+        - 优先访问新模型
+    purchase_url: https://www.anthropic.com/pricing
+  - id: claude-max-20x
+    model: Claude Max 20x
+    billing_type: subscription
+    context_window: 200000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 200
+      currency: USD
+      features:
+        - 20 倍 Pro 用量
+        - 不限量 Claude Opus 4.5 + Sonnet 5
+        - Claude Code 最高额度
+        - 优先访问新模型
+    purchase_url: https://www.anthropic.com/pricing

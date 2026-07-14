@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T20:58:23+08:00",
+  "generated_at": "2026-07-14T21:10:19+08:00",
   "providers": [
     {
       "id": "openai",
@@ -2764,6 +2764,48 @@
           },
           "purchase_url": "https://platform.openai.com/docs/pricing",
           "notes": null
+        },
+        {
+          "id": "chatgpt-plus",
+          "model": "ChatGPT Plus",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 20,
+            "currency": "USD",
+            "features": [
+              "不限量使用 GPT-5、GPT-5 mini",
+              "有限次数使用 o系列推理模型",
+              "优先访问新功能",
+              "高级数据分析、文件上传"
+            ]
+          },
+          "purchase_url": "https://openai.com/chatgpt/pricing"
+        },
+        {
+          "id": "chatgpt-pro",
+          "model": "ChatGPT Pro",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 200,
+            "currency": "USD",
+            "features": [
+              "不限量使用所有模型",
+              "不限量 o系列推理模型",
+              "Pro Mode 更高算力",
+              "优先访问新功能"
+            ]
+          },
+          "purchase_url": "https://openai.com/chatgpt/pricing"
         }
       ]
     },
@@ -3452,6 +3494,69 @@
           },
           "purchase_url": "https://openrouter.ai/~anthropic/claude-sonnet-latest",
           "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"max\", \"xhigh\", \"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "claude-pro",
+          "model": "Claude Pro",
+          "billing_type": "subscription",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 20,
+            "currency": "USD",
+            "features": [
+              "不限量使用 Claude（限制速率）",
+              "优先访问新模型",
+              "Projects、扩展思考",
+              "集成 Google Workspace"
+            ]
+          },
+          "purchase_url": "https://www.anthropic.com/pricing"
+        },
+        {
+          "id": "claude-max-5x",
+          "model": "Claude Max 5x",
+          "billing_type": "subscription",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 100,
+            "currency": "USD",
+            "features": [
+              "5 倍 Pro 用量",
+              "不限量 Claude Sonnet 5",
+              "Claude Code 高额度",
+              "优先访问新模型"
+            ]
+          },
+          "purchase_url": "https://www.anthropic.com/pricing"
+        },
+        {
+          "id": "claude-max-20x",
+          "model": "Claude Max 20x",
+          "billing_type": "subscription",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 200,
+            "currency": "USD",
+            "features": [
+              "20 倍 Pro 用量",
+              "不限量 Claude Opus 4.5 + Sonnet 5",
+              "Claude Code 最高额度",
+              "优先访问新模型"
+            ]
+          },
+          "purchase_url": "https://www.anthropic.com/pricing"
         }
       ]
     },
@@ -4736,272 +4841,81 @@
       "name_en": "MiniMax",
       "region": "cn",
       "website": "https://platform.minimaxi.com/",
-      "pricing_url": "https://platform.minimaxi.com/document/Price",
+      "pricing_url": "https://platform.minimaxi.com/subscribe/token-plan",
       "products": [
         {
-          "id": "MiniMax-M2-token",
-          "model": "MiniMax-M2",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.1-lightning-token",
-          "model": "MiniMax-M2.1-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.1-token",
-          "model": "MiniMax-M2.1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.5-lightning-token",
-          "model": "MiniMax-M2.5-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M2.5-token",
-          "model": "MiniMax-M2.5",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "MiniMax-M3-token",
-          "model": "MiniMax-M3",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/document/Price",
-          "notes": null
-        },
-        {
-          "id": "minimax-01-token",
-          "model": "minimax-01",
-          "billing_type": "per_token",
-          "context_window": 1000192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-01-15",
-          "prices": {
-            "input": 0.2,
-            "output": 1.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-01",
-          "notes": null
-        },
-        {
-          "id": "minimax-m1-token",
-          "model": "minimax-m1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 0.4,
-            "output": 2.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m1",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2-her-token",
-          "model": "minimax-m2-her",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-01-23",
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2-her",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2-token",
-          "model": "minimax-m2",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-10-23",
-          "prices": {
-            "input": 0.255,
-            "output": 1.02,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.1-token",
-          "model": "minimax-m2.1",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-12-23",
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.1",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.5-token",
-          "model": "minimax-m2.5",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-02-12",
-          "prices": {
-            "input": 0.15,
-            "output": 0.9,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.5",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.7-token",
-          "model": "minimax-m2.7",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-03-18",
-          "prices": {
-            "input": 0.24,
-            "output": 0.96,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m2.7",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
-        },
-        {
-          "id": "minimax-m3-token",
-          "model": "minimax-m3",
-          "billing_type": "per_token",
+          "id": "minimax-token-plan-plus",
+          "model": "MiniMax Token Plan Plus",
+          "billing_type": "coding_plan",
           "context_window": 1048576,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2026-05-31",
           "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 12000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 12,000 次/月（按 50K Token/次估算）",
+              "3-4 个 Agent 并发",
+              "1 条视频生成/日",
+              "1M 上下文",
+              "仅支持编程 + 图像理解"
+            ]
           },
-          "purchase_url": "https://openrouter.ai/minimax/minimax-m3",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-max",
+          "model": "MiniMax Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 119,
+            "currency": "CNY",
+            "included_quota": 36000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 36,000 次/月（热门档）",
+              "4-5 个 Agent 并发",
+              "3 条视频生成/日",
+              "1M 上下文",
+              "全模态：编程 + 生图 + 语音 + 视频"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-ultra",
+          "model": "MiniMax Token Plan Ultra",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 469,
+            "currency": "CNY",
+            "included_quota": 140000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 140,000 次/月",
+              "6-7 个 Agent 并发",
+              "5 条视频生成/日",
+              "1M 上下文",
+              "全模态重度使用"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
         }
       ]
     },
@@ -5010,48 +4924,92 @@
       "name": "小米",
       "name_en": "Xiaomi",
       "region": "cn",
-      "website": "https://mimo.xiaomi.com/",
-      "pricing_url": "https://mimo.xiaomi.com/",
+      "website": "https://platform.xiaomimimo.com/",
+      "pricing_url": "https://platform.xiaomimimo.com/",
       "products": [
         {
-          "id": "mimo-v2.5-pro-token",
-          "model": "mimo-v2.5-pro",
-          "billing_type": "per_token",
+          "id": "mimo-token-plan-lite",
+          "model": "MiMo Token Plan Lite",
+          "billing_type": "coding_plan",
           "context_window": 1048576,
           "modalities": [
             "text"
           ],
-          "release_date": "2026-04-22",
           "prices": {
-            "input": 0.435,
-            "output": 0.87,
-            "cached_input": 0.0036,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 39,
+            "currency": "CNY",
+            "included_quota": 41,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "41 亿 Credits",
+              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
+              "1M 超长上下文"
+            ]
           },
-          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5-pro",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
+          "purchase_url": "https://platform.xiaomimimo.com/"
         },
         {
-          "id": "mimo-v2.5-token",
-          "model": "mimo-v2.5",
-          "billing_type": "per_token",
+          "id": "mimo-token-plan-standard",
+          "model": "MiMo Token Plan Standard",
+          "billing_type": "coding_plan",
           "context_window": 1048576,
           "modalities": [
-            "audio",
-            "text",
-            "vision"
+            "text"
           ],
-          "release_date": "2026-04-22",
           "prices": {
-            "input": 0.105,
-            "output": 0.28,
-            "cached_input": 0.028,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 110,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "110 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
           },
-          "purchase_url": "https://openrouter.ai/xiaomi/mimo-v2.5",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-pro",
+          "model": "MiMo Token Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 329,
+            "currency": "CNY",
+            "included_quota": 380,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "380 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-max",
+          "model": "MiMo Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 659,
+            "currency": "CNY",
+            "included_quota": 820,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "820 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
         }
       ]
     },
@@ -5061,481 +5019,107 @@
       "name_en": "Moonshot AI",
       "region": "cn",
       "website": "https://platform.moonshot.cn/",
-      "pricing_url": "https://platform.moonshot.cn/docs/pricing",
+      "pricing_url": "https://platform.moonshot.cn/pricing",
       "products": [
         {
-          "id": "kimi-k2-0711-preview-token",
-          "model": "kimi-k2-0711-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-0905-preview-token",
-          "model": "kimi-k2-0905-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-0905-token",
-          "model": "kimi-k2-0905",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-04",
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/moonshotai/kimi-k2-0905",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-thinking-token",
-          "model": "kimi-k2-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-11-06",
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 17.3, \"coding_index\": 21, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "kimi-k2-thinking-turbo-token",
-          "model": "kimi-k2-thinking-turbo",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.15,
-            "output": 8.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-token",
-          "model": "kimi-k2",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-11",
-          "prices": {
-            "input": 0.57,
-            "output": 2.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/moonshotai/kimi-k2",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-turbo-preview-token",
-          "model": "kimi-k2-turbo-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.15,
-            "output": 8.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2.5-token",
-          "model": "kimi-k2.5",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-01-27",
-          "prices": {
-            "input": 0.6,
-            "output": 3.0,
-            "cached_input": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2.6-token",
-          "model": "kimi-k2.6",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-20",
-          "prices": {
-            "input": 0.95,
-            "output": 4.0,
-            "cached_input": 0.16,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.2, \"coding_index\": 61.8, \"agentic_index\": 30.3}}"
-        },
-        {
-          "id": "kimi-k2.7-code-token",
-          "model": "kimi-k2.7-code",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-12",
-          "prices": {
-            "input": 0.719,
-            "output": 3.49,
-            "cached_input": 0.149,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/moonshotai/kimi-k2.7-code",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 41.9, \"coding_index\": 60.8, \"agentic_index\": 29.6}}"
-        },
-        {
-          "id": "kimi-latest-128k-token",
-          "model": "kimi-latest-128k",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-32k-token",
-          "model": "kimi-latest-32k",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-8k-token",
-          "model": "kimi-latest-8k",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-token",
-          "model": "kimi-latest",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-thinking-preview-token",
-          "model": "kimi-thinking-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-0430-token",
-          "model": "moonshot-v1-128k-0430",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-token",
-          "model": "moonshot-v1-128k",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-vision-preview-token",
-          "model": "moonshot-v1-128k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-0430-token",
-          "model": "moonshot-v1-32k-0430",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-token",
-          "model": "moonshot-v1-32k",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-vision-preview-token",
-          "model": "moonshot-v1-32k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-8k-0430-token",
-          "model": "moonshot-v1-8k-0430",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
-        },
-        {
           "id": "moonshot-v1-8k-token",
-          "model": "moonshot-v1-8k",
+          "model": "Moonshot-v1-8k",
           "billing_type": "per_token",
-          "context_window": 8192,
+          "context_window": 8000,
           "modalities": [
             "text"
           ],
-          "release_date": null,
           "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "currency": "USD",
+            "input": 12.0,
+            "output": 12.0,
+            "currency": "CNY",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
+          "purchase_url": "https://platform.moonshot.cn/pricing"
         },
         {
-          "id": "moonshot-v1-8k-vision-preview-token",
-          "model": "moonshot-v1-8k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 8192,
+          "id": "kimi-member-andante",
+          "model": "Kimi 会员 Andante",
+          "billing_type": "coding_plan",
+          "context_window": 32768,
           "modalities": [
-            "text",
-            "vision"
+            "text"
           ],
-          "release_date": null,
           "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 1,
+            "quota_unit": "base",
+            "features": [
+              "入门档，更多 Agent 额度",
+              "32K 上下文",
+              "1 个 Agent 并行"
+            ]
           },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
+          "purchase_url": "https://www.kimi.com/code"
         },
         {
-          "id": "moonshot-v1-auto-token",
-          "model": "moonshot-v1-auto",
-          "billing_type": "per_token",
+          "id": "kimi-member-moderato",
+          "model": "Kimi 会员 Moderato",
+          "billing_type": "coding_plan",
           "context_window": 131072,
           "modalities": [
             "text"
           ],
-          "release_date": null,
           "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 2,
+            "quota_unit": "base",
+            "features": [
+              "主力档，2 倍免费额度",
+              "128K 上下文",
+              "2 个 Agent 并行"
+            ]
           },
-          "purchase_url": "https://platform.moonshot.cn/docs/pricing",
-          "notes": null
+          "purchase_url": "https://www.kimi.com/code"
+        },
+        {
+          "id": "kimi-member-allegretto",
+          "model": "Kimi 会员 Allegretto",
+          "billing_type": "coding_plan",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 199,
+            "currency": "CNY",
+            "included_quota": 4,
+            "quota_unit": "base",
+            "features": [
+              "专业档，4 倍免费额度",
+              "Kimi Code 20 倍系数",
+              "128K+ 上下文，2 个 Agent 并行"
+            ]
+          },
+          "purchase_url": "https://www.kimi.com/code"
+        },
+        {
+          "id": "kimi-member-allegro",
+          "model": "Kimi 会员 Allegro",
+          "billing_type": "coding_plan",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 699,
+            "currency": "CNY",
+            "included_quota": 10,
+            "quota_unit": "base",
+            "features": [
+              "尊享档，10 倍免费额度",
+              "最高倍率，全量上下文",
+              "4 个 Agent 并行"
+            ]
+          },
+          "purchase_url": "https://www.kimi.com/code"
         }
       ]
     },
@@ -8985,1088 +8569,46 @@
     },
     {
       "id": "qwen",
-      "name": "通义千问",
+      "name": "阿里通义",
       "name_en": "Alibaba Qwen",
       "region": "cn",
-      "website": "https://help.aliyun.com/zh/dashscope/",
-      "pricing_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+      "website": "https://bailian.aliyun.com/",
+      "pricing_url": "https://help.aliyun.com/zh/model-studio/billing",
       "products": [
         {
-          "id": "qwen-2.5-72b-instruct-token",
-          "model": "qwen-2.5-72b-instruct",
+          "id": "qwen-max-token",
+          "model": "Qwen-Max",
           "billing_type": "per_token",
-          "context_window": 131072,
+          "context_window": 32000,
           "modalities": [
             "text"
           ],
-          "release_date": "2024-09-19",
-          "prices": {
-            "input": 0.36,
-            "output": 0.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-72b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen-2.5-7b-instruct-token",
-          "model": "qwen-2.5-7b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2024-10-16",
           "prices": {
             "input": 0.04,
-            "output": 0.1,
-            "currency": "USD",
+            "output": 0.12,
+            "currency": "CNY",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-7b-instruct",
-          "notes": null
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
         },
         {
-          "id": "qwen-2.5-coder-32b-instruct-token",
-          "model": "qwen-2.5-coder-32b-instruct",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2024-11-11",
+          "id": "bailian-coding-plan",
+          "model": "百炼 Coding Plan",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
           "prices": {
-            "input": 0.66,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
+            "monthly_price": 200,
+            "currency": "CNY",
+            "included_quota": 90000,
+            "quota_unit": "prompts_per_month",
+            "features": [
+              "6,000 次/5小时，45,000 次/周，90,000 次/月",
+              "支持 Qwen3.7-Plus、Qwen3.6-Plus、Kimi-K2.5、GLM-5、MiniMax-M2.5",
+              "每日 09:30 限量抢购"
+            ]
           },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-2.5-coder-32b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen-coder-token",
-          "model": "qwen-coder",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-max-token",
-          "model": "qwen-max",
-          "billing_type": "per_token",
-          "context_window": 30720,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.6,
-            "output": 6.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-01-25-token",
-          "model": "qwen-plus-2025-01-25",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-04-28-token",
-          "model": "qwen-plus-2025-04-28",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-14-token",
-          "model": "qwen-plus-2025-07-14",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-28-token",
-          "model": "qwen-plus-2025-07-28",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-08",
-          "prices": {
-            "input": 0.26,
-            "output": 0.78,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-2025-07-28:thinking-token",
-          "model": "qwen-plus-2025-07-28:thinking",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-08",
-          "prices": {
-            "input": 0.26,
-            "output": 0.78,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28:thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen-plus-token",
-          "model": "qwen-plus",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-02-01",
-          "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "cached_input": 0.052,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-2024-11-01-token",
-          "model": "qwen-turbo-2024-11-01",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-2025-04-28-token",
-          "model": "qwen-turbo-2025-04-28",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-latest-token",
-          "model": "qwen-turbo-latest",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-token",
-          "model": "qwen-turbo",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen2.5-vl-72b-instruct-token",
-          "model": "qwen2.5-vl-72b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-02-01",
-          "prices": {
-            "input": 0.25,
-            "output": 0.75,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen2.5-vl-72b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-14b-token",
-          "model": "qwen3-14b",
-          "billing_type": "per_token",
-          "context_window": 131702,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.1,
-            "output": 0.24,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-14b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 10.4, \"coding_index\": 13.8, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-2507-token",
-          "model": "qwen3-235b-a22b-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-21",
-          "prices": {
-            "input": 0.09,
-            "output": 0.55,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
-          "notes": null
-        },
-        {
-          "id": "qwen3-235b-a22b-thinking-2507-token",
-          "model": "qwen3-235b-a22b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-25",
-          "prices": {
-            "input": 0.1495,
-            "output": 1.495,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 19.6, \"coding_index\": 22.1, \"agentic_index\": 3.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-token",
-          "model": "qwen3-235b-a22b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.455,
-            "output": 1.82,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-235b-a22b",
-          "notes": null
-        },
-        {
-          "id": "qwen3-30b-a3b-instruct-2507-token",
-          "model": "qwen3-30b-a3b-instruct-2507",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-29",
-          "prices": {
-            "input": 0.04815,
-            "output": 0.19305,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-instruct-2507",
-          "notes": null
-        },
-        {
-          "id": "qwen3-30b-a3b-thinking-2507-token",
-          "model": "qwen3-30b-a3b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-08-28",
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-thinking-2507",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 14.4, \"coding_index\": 12.1, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-30b-a3b-token",
-          "model": "qwen3-30b-a3b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.12,
-            "output": 0.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-30b-a3b",
-          "notes": null
-        },
-        {
-          "id": "qwen3-32b-token",
-          "model": "qwen3-32b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.08,
-            "output": 0.28,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-32b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 11.5, \"coding_index\": 15.3, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-8b-token",
-          "model": "qwen3-8b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-8b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 8.3, \"coding_index\": 9, \"agentic_index\": 1.5}}"
-        },
-        {
-          "id": "qwen3-coder-30b-a3b-instruct-token",
-          "model": "qwen3-coder-30b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 160000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-31",
-          "prices": {
-            "input": 0.07,
-            "output": 0.27,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-30b-a3b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-flash-token",
-          "model": "qwen3-coder-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-17",
-          "prices": {
-            "input": 0.195,
-            "output": 0.975,
-            "cached_input": 0.039,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-flash",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-next-token",
-          "model": "qwen3-coder-next",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-02-04",
-          "prices": {
-            "input": 0.11,
-            "output": 0.8,
-            "cached_input": 0.07,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-next",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.1, \"coding_index\": 36.2, \"agentic_index\": 8.8}}"
-        },
-        {
-          "id": "qwen3-coder-plus-token",
-          "model": "qwen3-coder-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.65,
-            "output": 3.25,
-            "cached_input": 0.13,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder-plus",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-token",
-          "model": "qwen3-coder",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-23",
-          "prices": {
-            "input": 0.22,
-            "output": 1.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-coder",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-thinking-token",
-          "model": "qwen3-max-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-02-09",
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-max-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-token",
-          "model": "qwen3-max",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "cached_input": 0.156,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-max",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-instruct-token",
-          "model": "qwen3-next-80b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-11",
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-thinking-token",
-          "model": "qwen3-next-80b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-11",
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 16.7, \"coding_index\": 17.4, \"agentic_index\": 2.1}}"
-        },
-        {
-          "id": "qwen3-vl-235b-a22b-instruct-token",
-          "model": "qwen3-vl-235b-a22b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.4,
-            "output": 1.6,
-            "cached_input": 0.11,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-235b-a22b-thinking-token",
-          "model": "qwen3-vl-235b-a22b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.4,
-            "output": 4.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-30b-a3b-instruct-token",
-          "model": "qwen3-vl-30b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-06",
-          "prices": {
-            "input": 0.13,
-            "output": 0.52,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-30b-a3b-thinking-token",
-          "model": "qwen3-vl-30b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-06",
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-instruct-token",
-          "model": "qwen3-vl-32b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-23",
-          "prices": {
-            "input": 0.16,
-            "output": 0.64,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-thinking-token",
-          "model": "qwen3-vl-32b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.16,
-            "output": 2.87,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-instruct-token",
-          "model": "qwen3-vl-8b-instruct",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-14",
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-instruct",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-thinking-token",
-          "model": "qwen3-vl-8b-thinking",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-14",
-          "prices": {
-            "input": 0.117,
-            "output": 1.365,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3-vl-8b-thinking",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-122b-a10b-token",
-          "model": "qwen3.5-122b-a10b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.26,
-            "output": 2.08,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 32.3, \"coding_index\": 45.7, \"agentic_index\": 20.7}}"
-        },
-        {
-          "id": "qwen3.5-27b-token",
-          "model": "qwen3.5-27b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.195,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-27b",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-35b-a3b-token",
-          "model": "qwen3.5-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-397b-a17b-token",
-          "model": "qwen3.5-397b-a17b",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-16",
-          "prices": {
-            "input": 0.385,
-            "output": 2.45,
-            "cached_input": 0.111,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-397b-a17b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 33.7, \"coding_index\": 48.2, \"agentic_index\": 19.8}}"
-        },
-        {
-          "id": "qwen3.5-9b-token",
-          "model": "qwen3.5-9b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-03-10",
-          "prices": {
-            "input": 0.1,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-9b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.4, \"coding_index\": 28.7, \"agentic_index\": 7.4}}"
-        },
-        {
-          "id": "qwen3.5-flash-02-23-token",
-          "model": "qwen3.5-flash-02-23",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.065,
-            "output": 0.26,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-flash-02-23",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-02-15-token",
-          "model": "qwen3.5-plus-02-15",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-16",
-          "prices": {
-            "input": 0.26,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-02-15",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-20260420-token",
-          "model": "qwen3.5-plus-20260420",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.3,
-            "output": 1.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.5-plus-20260420",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-27b-token",
-          "model": "qwen3.6-27b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.285,
-            "output": 2.4,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-27b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.1, \"coding_index\": 53.7, \"agentic_index\": 27}}"
-        },
-        {
-          "id": "qwen3.6-35b-a3b-token",
-          "model": "qwen3.6-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-35b-a3b",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 31.6, \"coding_index\": 41.9, \"agentic_index\": 21.4}}"
-        },
-        {
-          "id": "qwen3.6-flash-token",
-          "model": "qwen3.6-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.1875,
-            "output": 1.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-flash",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-max-preview-token",
-          "model": "qwen3.6-max-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 1.04,
-            "output": 6.24,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-max-preview",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-plus-token",
-          "model": "qwen3.6-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-02",
-          "prices": {
-            "input": 0.325,
-            "output": 1.95,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.6-plus",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39.6, \"coding_index\": 54.5, \"agentic_index\": 27.6}}"
-        },
-        {
-          "id": "qwen3.7-max-token",
-          "model": "qwen3.7-max",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-05-21",
-          "prices": {
-            "input": 1.25,
-            "output": 3.75,
-            "cached_input": 0.25,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-max",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 46, \"coding_index\": 66, \"agentic_index\": 30.6}}"
-        },
-        {
-          "id": "qwen3.7-plus-token",
-          "model": "qwen3.7-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-03",
-          "prices": {
-            "input": 0.32,
-            "output": 1.28,
-            "cached_input": 0.064,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://openrouter.ai/qwen/qwen3.7-plus",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39, \"coding_index\": 55.9, \"agentic_index\": 20.8}}"
-        },
-        {
-          "id": "qwq-plus-token",
-          "model": "qwq-plus",
-          "billing_type": "per_token",
-          "context_window": 98304,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 2.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
-          "notes": null
+          "purchase_url": "https://common-buy.aliyun.com/coding-plan"
         }
       ]
     },
@@ -10262,6 +8804,46 @@
             "cached_input": 0.8,
             "currency": "CNY",
             "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.volcengine.com/product/ark"
+        },
+        {
+          "id": "ark-coding-plan-lite",
+          "model": "方舟 Coding Plan Lite",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 40,
+            "first_month_price": 9.9,
+            "currency": "CNY",
+            "included_quota": 1,
+            "quota_unit": "base",
+            "features": [
+              "2026.6.8-8.8 活动期首两月 ¥9.9",
+              "基础额度",
+              "支持 Doubao-Seed-2.0、DeepSeek V4、GLM-5.2、Kimi-K2.6/2.7、MiniMax-M3 等 6+ 款"
+            ]
+          },
+          "purchase_url": "https://www.volcengine.com/product/ark"
+        },
+        {
+          "id": "ark-coding-plan-pro",
+          "model": "方舟 Coding Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 200,
+            "first_month_price": 49.9,
+            "currency": "CNY",
+            "included_quota": 5,
+            "quota_unit": "base",
+            "features": [
+              "2026.6.8-8.8 活动期首两月 ¥49.9",
+              "5 倍 Lite 额度",
+              "全量模型 + Auto 自动选模 + 优先调度"
+            ]
           },
           "purchase_url": "https://www.volcengine.com/product/ark"
         }
@@ -10553,6 +9135,163 @@
             "unit": "per_1m_tokens"
           },
           "purchase_url": "https://open.bigmodel.cn/pricing"
+        },
+        {
+          "id": "glm-coding-plan-lite",
+          "model": "GLM Coding Plan Lite",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 80,
+            "quota_unit": "prompts_per_5h",
+            "features": [
+              "每月约 80 次/5小时，约 400 次/周",
+              "可用模型：GLM-4.7 / 4.6",
+              "MCP 工具 100 次/月"
+            ]
+          },
+          "purchase_url": "https://www.bigmodel.cn/glm-coding"
+        },
+        {
+          "id": "glm-coding-plan-pro",
+          "model": "GLM Coding Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 149,
+            "currency": "CNY",
+            "included_quota": 400,
+            "quota_unit": "prompts_per_5h",
+            "features": [
+              "每月约 400 次/5小时，约 2,000 次/周",
+              "可用模型：GLM-5.2 / 5.1 / 5 / 4.7 全量",
+              "MCP 工具 1,000 次/月"
+            ]
+          },
+          "purchase_url": "https://www.bigmodel.cn/glm-coding"
+        },
+        {
+          "id": "glm-coding-plan-max",
+          "model": "GLM Coding Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 469,
+            "currency": "CNY",
+            "included_quota": 1600,
+            "quota_unit": "prompts_per_5h",
+            "features": [
+              "每月约 1,600 次/5小时，约 8,000 次/周",
+              "全量模型 + 首发新模型",
+              "MCP 工具 4,000 次/月 + 专属保障"
+            ]
+          },
+          "purchase_url": "https://www.bigmodel.cn/glm-coding"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "name_en": "Cursor",
+      "region": "us",
+      "website": "https://cursor.com/",
+      "pricing_url": "https://cursor.com/pricing",
+      "products": [
+        {
+          "id": "cursor-pro",
+          "model": "Cursor Pro",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 20,
+            "currency": "USD",
+            "features": [
+              "500 次 fast 请求/月",
+              "不限量 slow 请求",
+              "支持 Claude、GPT、Gemini 等多模型",
+              "Agent 模式多文件编辑"
+            ]
+          },
+          "purchase_url": "https://cursor.com/pricing"
+        },
+        {
+          "id": "cursor-pro-plus",
+          "model": "Cursor Pro+",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 60,
+            "currency": "USD",
+            "features": [
+              "20 倍 Pro 用量",
+              "优先访问旗舰模型",
+              "更高并发",
+              "Agent 模式多文件编辑"
+            ]
+          },
+          "purchase_url": "https://cursor.com/pricing"
+        }
+      ]
+    },
+    {
+      "id": "githubcopilot",
+      "name": "GitHub Copilot",
+      "name_en": "GitHub Copilot",
+      "region": "us",
+      "website": "https://github.com/features/copilot",
+      "pricing_url": "https://github.com/features/copilot",
+      "products": [
+        {
+          "id": "copilot-pro",
+          "model": "Copilot Pro",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 10,
+            "currency": "USD",
+            "features": [
+              "不限量补全和聊天",
+              "支持 GPT-5、Claude Sonnet 5 等多模型",
+              "集成 VS Code、JetBrains、Visual Studio",
+              "按 Token 用量计费（2026.6 起）"
+            ]
+          },
+          "purchase_url": "https://github.com/features/copilot"
+        },
+        {
+          "id": "copilot-pro-plus",
+          "model": "Copilot Pro+",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 39,
+            "currency": "USD",
+            "features": [
+              "更高模型用量额度",
+              "支持旗舰模型（GPT-5 Pro、Claude Opus 等）",
+              "优先访问新模型",
+              "集成 VS Code、JetBrains、Visual Studio"
+            ]
+          },
+          "purchase_url": "https://github.com/features/copilot"
         }
       ]
     }
@@ -10561,7 +9300,7 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:22+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10575,7 +9314,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:28+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10624,7 +9363,7 @@
     {
       "provider_id": "minimax",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10637,7 +9376,7 @@
     {
       "provider_id": "xiaomi",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10649,7 +9388,7 @@
     {
       "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10674,7 +9413,7 @@
     {
       "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10687,7 +9426,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10698,7 +9437,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-07-13T20:35:29+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10709,7 +9448,29 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-07-14T20:58:23+08:00",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
+      "stale": false,
+      "warnings": [],
+      "confidence": "manual",
+      "sources": [
+        "manual"
+      ]
+    },
+    {
+      "provider_id": "cursor",
+      "status": "ok",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
+      "stale": false,
+      "warnings": [],
+      "confidence": "manual",
+      "sources": [
+        "manual"
+      ]
+    },
+    {
+      "provider_id": "githubcopilot",
+      "status": "ok",
+      "last_success_at": "2026-07-14T21:10:19+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",

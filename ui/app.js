@@ -21,6 +21,8 @@ const ICON_FILES = {
   aws: 'aws',
   minimax: 'minimax',
   xiaomi: '小米',
+  githubcopilot: 'githubcopilot',
+  cursor: 'cursor',
 };
 const PNG_ICONS = ['volcengine'];
 const iconUrl = (id) => {
@@ -35,6 +37,7 @@ const PROVIDER_COLORS = {
   deepseek: '#5786FE', opencode: '#1a1a1a', google: '#4285F4',
   qwen: '#6950EF', moonshot: '#000000',
   aws: '#FF9900', minimax: '#FF6B6B', xiaomi: '#FF6900',
+  githubcopilot: '#24292E', cursor: '#000000',
 };
 
 // 厂商元数据（用于 provider_status 中存在但 providers 数组中没有的抓取失败厂商）
@@ -51,6 +54,8 @@ const PROVIDER_META = {
   aws: { name: 'AWS', name_en: 'Amazon Web Services', region: 'us' },
   minimax: { name: 'MiniMax', name_en: 'MiniMax', region: 'cn' },
   xiaomi: { name: '小米', name_en: 'Xiaomi', region: 'cn' },
+  githubcopilot: { name: 'GitHub Copilot', name_en: 'GitHub Copilot', region: 'us' },
+  cursor: { name: 'Cursor', name_en: 'Cursor', region: 'us' },
 };
 
 createApp({
@@ -58,7 +63,20 @@ createApp({
     const data = ref(null);
     const error = ref(null);
     const searchQuery = ref("");
-    const view = ref("table");
+    // 视图模式：coding_plan/subscription 默认卡片，其它默认表格
+    // _viewOverride 记录用户手动切换后的值，避免路由变化时覆盖
+    const _viewOverride = ref(null);
+    const view = computed({
+      get() {
+        if (_viewOverride.value) return _viewOverride.value;
+        // coding_plan/subscription 路由默认卡片
+        if (billingRoute.value === 'coding_plan' || billingRoute.value === 'subscription') {
+          return 'card';
+        }
+        return 'table';
+      },
+      set(v) { _viewOverride.value = v; },
+    });
     const displayCurrency = ref("CNY");
     const expanded = ref(null);
     const sortKey = ref("release_date");
@@ -74,6 +92,7 @@ createApp({
     // 监听 hash 变化
     window.addEventListener("hashchange", () => {
       route.value = window.location.hash || "#/";
+      _viewOverride.value = null;  // 重置视图切换，恢复路由默认
       window.scrollTo(0, 0);
     });
 
@@ -214,11 +233,39 @@ createApp({
       });
     });
 
+    // 按厂商分组的卡片视图数据（coding_plan/subscription 用）
+    // 一张卡片一个厂商，含该厂商当前 billing_type 下所有套餐
+    const groupedRows = computed(() => {
+      const rows = filteredRows.value;
+      const map = new Map();  // providerId -> { provider, products }
+      for (const r of rows) {
+        if (!map.has(r.providerId)) {
+          map.set(r.providerId, {
+            providerId: r.providerId,
+            providerName: r.providerName,
+            region: r.region,
+            stale: r.stale,
+            status: r.status,
+            products: [],
+          });
+        }
+        map.get(r.providerId).products.push(r);
+      }
+      return [...map.values()];
+    });
+
     // 筛选区厂商列表：按产品数降序，排除 0 产品的厂商
+    // billing 路由下只显示当前 billing_type 有产品的厂商
     const providerFilterList = computed(() => {
       if (!data.value) return [];
       return data.value.providers
-        .map(p => ({ id: p.id, name: p.name, count: (p.products || []).length }))
+        .map(p => ({
+          id: p.id,
+          name: p.name,
+          count: billingRoute.value
+            ? (p.products || []).filter(pr => pr.billing_type === billingRoute.value).length
+            : (p.products || []).length,
+        }))
         .filter(p => p.count > 0)
         .sort((a, b) => b.count - a.count);
     });
@@ -278,6 +325,7 @@ createApp({
       if (key === "outputPrice") return row.prices?.output;
       if (key === "cachedInput") return row.prices?.cached_input;
       if (key === "contextWindow") return row.context_window;
+      if (key === "monthlyPrice") return row.prices?.monthly_price;
       if (key === "release_date") return row.release_date || "";
       return null;
     }
@@ -465,6 +513,42 @@ createApp({
       return `${ctx}`;
     }
 
+    // 月费格式化（coding_plan / subscription）
+    function formatMonthly(row) {
+      const p = row.prices;
+      if (!p || p.monthly_price == null) return "—";
+      const cur = p.currency;
+      let val = p.monthly_price;
+      const sym = displayCurrency.value === "CNY" ? "¥" : "$";
+      if (cur === displayCurrency.value) {
+        val = val;
+      } else if (cur === "USD" && displayCurrency.value === "CNY") {
+        val = (val * USD_TO_CNY).toFixed(0);
+      } else if (cur === "CNY" && displayCurrency.value === "USD") {
+        val = (val / USD_TO_CNY).toFixed(2);
+      }
+      return `${sym}${val}`;
+    }
+
+    // 额度格式化（coding_plan / subscription）
+    function formatQuota(row) {
+      const p = row.prices;
+      if (!p) return "—";
+      if (p.included_quota == null) return "不限量";
+      const q = p.included_quota;
+      const unitText = {
+        prompts_per_5h: "次/5小时",
+        prompts_per_month: "次/月",
+        calls_per_month: "次/月",
+        base: "倍额度",
+        credits_in_billions: "亿 credits",
+        USD: "美元额度",
+      }[p.quota_unit] || p.quota_unit || "";
+      if (p.quota_unit === "base") return `${q} ${unitText}`;
+      if (p.quota_unit === "USD") return `$${q} ${unitText}`;
+      return `${q.toLocaleString()} ${unitText}`.trim();
+    }
+
     // 能力评分（notes 字段为 JSON，含 OpenRouter benchmarks）
     function benchmarkText(row) {
       if (!row.notes) return null;
@@ -507,9 +591,9 @@ createApp({
       filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
       perTokenCount, subscriptionCount, codingPlanCount,
       tickerFeatured, tickerCards,
-      providerList, providerFilterList, allProvidersForOrbit, orbitStyle,
+      providerList, providerFilterList, groupedRows, allProvidersForOrbit, orbitStyle,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel,
-      formatPrice, formatContext, benchmarkText, staleHours, iconUrl, onIconError, goHash,
+      formatPrice, formatContext, formatMonthly, formatQuota, benchmarkText, staleHours, iconUrl, onIconError, goHash,
     };
   },
 }).mount("#app");

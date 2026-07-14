@@ -1,0 +1,38 @@
+# data/manual/cursor.yaml
+# Cursor IDE 订阅制产品
+# 数据来源：https://cursor.com/pricing (2026.6 官方定价)
+id: cursor
+name: Cursor
+name_en: Cursor
+region: us
+website: https://cursor.com/
+pricing_url: https://cursor.com/pricing
+products:
+  - id: cursor-pro
+    model: Cursor Pro
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 20
+      currency: USD
+      features:
+        - 500 次 fast 请求/月
+        - 不限量 slow 请求
+        - 支持 Claude、GPT、Gemini 等多模型
+        - Agent 模式多文件编辑
+    purchase_url: https://cursor.com/pricing
+  - id: cursor-pro-plus
+    model: Cursor Pro+
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 60
+      currency: USD
+      features:
+        - 20 倍 Pro 用量
+        - 优先访问旗舰模型
+        - 更高并发
+        - Agent 模式多文件编辑
+    purchase_url: https://cursor.com/pricing

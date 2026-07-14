@@ -116,3 +116,37 @@ products:
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://www.volcengine.com/product/ark
+  # ========== 方舟 Coding Plan ==========
+  # 数据来源：https://www.volcengine.com/product/ark (2026.7 活动价)
+  - id: ark-coding-plan-lite
+    model: 方舟 Coding Plan Lite
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 40
+      first_month_price: 9.9
+      currency: CNY
+      included_quota: 1
+      quota_unit: base
+      features:
+        - 2026.6.8-8.8 活动期首两月 ¥9.9
+        - 基础额度
+        - 支持 Doubao-Seed-2.0、DeepSeek V4、GLM-5.2、Kimi-K2.6/2.7、MiniMax-M3 等 6+ 款
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: ark-coding-plan-pro
+    model: 方舟 Coding Plan Pro
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 200
+      first_month_price: 49.9
+      currency: CNY
+      included_quota: 5
+      quota_unit: base
+      features:
+        - 2026.6.8-8.8 活动期首两月 ¥49.9
+        - 5 倍 Lite 额度
+        - 全量模型 + Auto 自动选模 + 优先调度
+    purchase_url: https://www.volcengine.com/product/ark

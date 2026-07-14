@@ -1,0 +1,71 @@
+# data/manual/xiaomi.yaml
+# 小米 MiMo 开放平台 Token Plan
+# 数据来源：https://platform.xiaomimimo.com (2026.7 官方定价)
+id: xiaomi
+name: 小米
+name_en: Xiaomi
+region: cn
+website: https://platform.xiaomimimo.com/
+pricing_url: https://platform.xiaomimimo.com/
+products:
+  # ========== MiMo Token Plan ==========
+  - id: mimo-token-plan-lite
+    model: MiMo Token Plan Lite
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text]
+    prices:
+      monthly_price: 39
+      currency: CNY
+      included_quota: 41
+      quota_unit: credits_in_billions
+      features:
+        - 41 亿 Credits
+        - 支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）
+        - 1M 超长上下文
+    purchase_url: https://platform.xiaomimimo.com/
+  - id: mimo-token-plan-standard
+    model: MiMo Token Plan Standard
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text]
+    prices:
+      monthly_price: 99
+      currency: CNY
+      included_quota: 110
+      quota_unit: credits_in_billions
+      features:
+        - 110 亿 Credits
+        - 支持 V2.5 全系列模型
+        - 1M 超长上下文
+    purchase_url: https://platform.xiaomimimo.com/
+  - id: mimo-token-plan-pro
+    model: MiMo Token Plan Pro
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text]
+    prices:
+      monthly_price: 329
+      currency: CNY
+      included_quota: 380
+      quota_unit: credits_in_billions
+      features:
+        - 380 亿 Credits
+        - 支持 V2.5 全系列模型
+        - 1M 超长上下文
+    purchase_url: https://platform.xiaomimimo.com/
+  - id: mimo-token-plan-max
+    model: MiMo Token Plan Max
+    billing_type: coding_plan
+    context_window: 1048576
+    modalities: [text]
+    prices:
+      monthly_price: 659
+      currency: CNY
+      included_quota: 820
+      quota_unit: credits_in_billions
+      features:
+        - 820 亿 Credits
+        - 支持 V2.5 全系列模型
+        - 1M 超长上下文
+    purchase_url: https://platform.xiaomimimo.com/

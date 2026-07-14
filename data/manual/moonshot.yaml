@@ -17,3 +17,66 @@ products:
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://platform.moonshot.cn/pricing
+  # ========== Kimi 会员体系（统一 Token 池） ==========
+  # 数据来源：https://www.kimi.com/code (2026.7 官方会员体系)
+  # 2026.4 起 Coding Plan 合并为统一 Token 额度池，Kimi Code 按系数从总池扣减
+  - id: kimi-member-andante
+    model: Kimi 会员 Andante
+    billing_type: coding_plan
+    context_window: 32768
+    modalities: [text]
+    prices:
+      monthly_price: 49
+      currency: CNY
+      included_quota: 1
+      quota_unit: base
+      features:
+        - 入门档，更多 Agent 额度
+        - 32K 上下文
+        - 1 个 Agent 并行
+    purchase_url: https://www.kimi.com/code
+  - id: kimi-member-moderato
+    model: Kimi 会员 Moderato
+    billing_type: coding_plan
+    context_window: 131072
+    modalities: [text]
+    prices:
+      monthly_price: 99
+      currency: CNY
+      included_quota: 2
+      quota_unit: base
+      features:
+        - 主力档，2 倍免费额度
+        - 128K 上下文
+        - 2 个 Agent 并行
+    purchase_url: https://www.kimi.com/code
+  - id: kimi-member-allegretto
+    model: Kimi 会员 Allegretto
+    billing_type: coding_plan
+    context_window: 131072
+    modalities: [text]
+    prices:
+      monthly_price: 199
+      currency: CNY
+      included_quota: 4
+      quota_unit: base
+      features:
+        - 专业档，4 倍免费额度
+        - Kimi Code 20 倍系数
+        - 128K+ 上下文，2 个 Agent 并行
+    purchase_url: https://www.kimi.com/code
+  - id: kimi-member-allegro
+    model: Kimi 会员 Allegro
+    billing_type: coding_plan
+    context_window: 256000
+    modalities: [text]
+    prices:
+      monthly_price: 699
+      currency: CNY
+      included_quota: 10
+      quota_unit: base
+      features:
+        - 尊享档，10 倍免费额度
+        - 最高倍率，全量上下文
+        - 4 个 Agent 并行
+    purchase_url: https://www.kimi.com/code

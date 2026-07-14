@@ -1,0 +1,39 @@
+# data/manual/githubcopilot.yaml
+# GitHub Copilot 订阅制产品
+# 数据来源：https://github.com/features/copilot (2026.6 官方定价)
+# 注：2026.6.1 起从每次请求计费切换为按 Token 用量计费，年付套餐停售
+id: githubcopilot
+name: GitHub Copilot
+name_en: GitHub Copilot
+region: us
+website: https://github.com/features/copilot
+pricing_url: https://github.com/features/copilot
+products:
+  - id: copilot-pro
+    model: Copilot Pro
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 10
+      currency: USD
+      features:
+        - 不限量补全和聊天
+        - 支持 GPT-5、Claude Sonnet 5 等多模型
+        - 集成 VS Code、JetBrains、Visual Studio
+        - 按 Token 用量计费（2026.6 起）
+    purchase_url: https://github.com/features/copilot
+  - id: copilot-pro-plus
+    model: Copilot Pro+
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 39
+      currency: USD
+      features:
+        - 更高模型用量额度
+        - 支持旗舰模型（GPT-5 Pro、Claude Opus 等）
+        - 优先访问新模型
+        - 集成 VS Code、JetBrains、Visual Studio
+    purchase_url: https://github.com/features/copilot
