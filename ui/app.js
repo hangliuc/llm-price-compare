@@ -376,7 +376,7 @@ createApp({
     });
 
     const feedbackUrl = computed(() => {
-      const base = "https://github.com/llm-price-compare/llm-price-compare/issues/new";
+      const base = "https://github.com/hangliuc/llm-price-compare/issues/new";
       const params = new URLSearchParams({
         template: "price-report.yml",
         labels: "price-error",

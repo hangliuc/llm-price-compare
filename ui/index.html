@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=8">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -39,7 +39,7 @@
             class="search"
             v-model="searchQuery"
             placeholder="搜索厂商或模型..."
-            v-if="routeName !== 'providers' && routeName !== 'about'"
+            v-if="routeName === 'compare' || routeName === 'billing' || routeName === 'provider'"
           />
           <a href="https://github.com/hangliuc/llm-price-compare" target="_blank" class="gh-link" aria-label="GitHub">
             <svg class="gh-icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
@@ -131,117 +131,164 @@
         </div>
       </div>
 
+      <!-- 计费方式动态卡片 -->
+      <section class="section billing-showcase">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">三种<em>计费</em>方式</h2>
+            <p class="section-sub">按需计费、订阅制、Coding Plan，总有一款适合你的使用场景</p>
+          </div>
+        </div>
+        <div class="billing-showcase-grid">
+          <a href="#/billing/per_token" class="billing-showcase-card" style="--card-delay: 0s">
+            <div class="billing-showcase-inner">
+              <div class="billing-showcase-icon">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 38l8-24 8 16 8-12 8 20"/>
+                </svg>
+              </div>
+              <div class="billing-showcase-label">Per Token</div>
+              <div class="billing-showcase-name">按需计费</div>
+              <div class="billing-showcase-desc">按实际 Token 用量计费，输入输出分别定价，适合低频或弹性调用</div>
+              <div class="billing-showcase-stat">
+                <span class="stat-num">{{ perTokenCount }}</span>
+                <span class="stat-unit">款产品</span>
+              </div>
+              <div class="billing-showcase-cta">查看价格 →</div>
+            </div>
+            <div class="billing-showcase-glow"></div>
+          </a>
+
+          <a href="#/billing/subscription" class="billing-showcase-card" style="--card-delay: 0.1s">
+            <div class="billing-showcase-inner">
+              <div class="billing-showcase-icon">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="14" width="32" height="24" rx="3"/>
+                  <path d="M14 14v-4M34 14v-4M8 22h32"/>
+                  <circle cx="16" cy="28" r="1.5" fill="currentColor"/>
+                  <circle cx="24" cy="28" r="1.5" fill="currentColor"/>
+                  <circle cx="32" cy="28" r="1.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="billing-showcase-label">Subscription</div>
+              <div class="billing-showcase-name">订阅制</div>
+              <div class="billing-showcase-desc">月付或年付固定费用，额度内不限量使用，适合高频稳定场景</div>
+              <div class="billing-showcase-stat">
+                <span class="stat-num">{{ subscriptionCount }}</span>
+                <span class="stat-unit">款产品</span>
+              </div>
+              <div class="billing-showcase-cta">查看套餐 →</div>
+            </div>
+            <div class="billing-showcase-glow"></div>
+          </a>
+
+          <a href="#/billing/coding_plan" class="billing-showcase-card" style="--card-delay: 0.2s">
+            <div class="billing-showcase-inner">
+              <div class="billing-showcase-icon">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 8 26 16 34"/>
+                  <polyline points="32 18 40 26 32 34"/>
+                  <line x1="28" y1="14" x2="20" y2="38"/>
+                </svg>
+              </div>
+              <div class="billing-showcase-label">Coding Plan</div>
+              <div class="billing-showcase-name">编程套餐</div>
+              <div class="billing-showcase-desc">面向 AI 编程工具的套餐方案，支持 Claude Code、Cursor 等</div>
+              <div class="billing-showcase-stat">
+                <span class="stat-num">{{ codingPlanCount }}</span>
+                <span class="stat-unit">款产品</span>
+              </div>
+              <div class="billing-showcase-cta">查看套餐 →</div>
+            </div>
+            <div class="billing-showcase-glow"></div>
+          </a>
+        </div>
+      </section>
+
       <!-- 厂商速览 -->
       <section class="section">
         <div class="section-head">
           <div>
-            <div class="section-eyebrow">厂商速览</div>
             <h2 class="section-title">主流大模型<span class="title-normal">厂商</span></h2>
-            <p class="section-sub">覆盖国内外 12 家主流大模型厂商，点击查看完整产品线与定价</p>
+            <p class="section-sub">覆盖国内外 {{ providerList.length }} 家主流大模型厂商，点击查看完整产品线与定价</p>
           </div>
-          <a href="#/providers" class="section-link">查看全部 →</a>
+          <a href="#/providers" class="section-link">厂商总览 -></a>
         </div>
-        <div class="providers-grid">
-          <div v-for="p in providerList.slice(0, 6)" :key="p.id" class="provider-card" @click="goHash('#/provider/' + p.id)">
+        <div class="providers-grid providers-grid-home">
+          <div v-for="p in providerList" :key="p.id" class="provider-card" @click="goHash('#/provider/' + p.id)">
             <div class="provider-card-head">
               <span class="provider-card-icon">
                 <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
               </span>
-              <div>
+              <div class="provider-card-info">
                 <div class="provider-card-name">{{ p.name }}</div>
-                <div class="provider-card-region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</div>
+                <span class="region-badge" :class="p.region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</span>
               </div>
+              <span class="provider-card-status-badge" :class="p.statusOk ? 'ok' : 'fail'">
+                <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
+                {{ p.statusOk ? '正常' : p.statusText }}
+              </span>
             </div>
             <div class="provider-card-meta">
-              <span>{{ p.productCount }} 个产品</span>
-              <a :href="p.website" target="_blank" @click.stop>官网 ↗</a>
-            </div>
-            <div class="provider-card-status">
-              <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
-              <span :style="{color: p.statusOk ? 'var(--green)' : 'var(--amber)'}">{{ p.statusOk ? '数据正常' : p.statusText }}</span>
+              <span class="provider-card-count">{{ p.productCount }}<span class="count-unit"> 款产品</span></span>
+              <a :href="p.website" target="_blank" @click.stop class="provider-card-site">官网 ↗</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 价格预览 -->
-      <section class="section" style="padding-top: 0;">
-        <div class="section-head">
-          <div>
-            <div class="section-eyebrow">价格预览</div>
-            <h2 class="section-title">最新<em>价格</em>一览</h2>
-            <p class="section-sub">按模型发布时间倒序，展示最新上架的 8 款产品</p>
+      <!-- FAQ + 社群 -->
+      <section class="section faq-community" style="padding-top: 0;">
+        <div class="faq-community-grid">
+          <!-- FAQ -->
+          <div class="faq-block">
+            <h2 class="section-title">常见问题</h2>
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>什么是按需计费、订阅制、Coding Plan？</summary>
+                <div class="faq-answer">
+                  <p><b>按需计费（Per Token）</b>：按实际使用的 Token 数量计费，输入和输出分别定价，适合低频或弹性调用场景。</p>
+                  <p><b>订阅制（Subscription）</b>：月付或年付固定费用，在额度内不限量使用，适合高频稳定使用的个人用户，如 ChatGPT Plus、Claude Pro。</p>
+                  <p><b>Coding Plan</b>：面向 AI 编程工具（Claude Code、Cursor 等）的套餐方案，通常按月计费并包含一定 Token 额度，适合开发者日常编程。</p>
+                </div>
+              </details>
+              <details class="faq-item">
+                <summary>这里的价格数据多久更新一次？准确吗？</summary>
+                <div class="faq-answer">
+                  <p>数据每日北京时间 11:00 通过 Python 爬虫自动抓取各家厂商官网定价页，经三源交叉验证（LiteLLM JSON + OpenRouter API + 官网 Scraper）后落盘。</p>
+                  <p>每家厂商独立状态标记（正常 / 失败 / 过期），失败时回退至上次成功数据并标注「可能过期」。价格异常波动 &gt;20% 警告、&gt;50% 阻断，确保数据可信。</p>
+                </div>
+              </details>
+              <details class="faq-item">
+                <summary>什么是输入（Input）、输出（Output）与缓存读取（Cache Read）？</summary>
+                <div class="faq-answer">
+                  <p><b>输入（Input）</b>：你发送给模型的 Prompt（含系统提示、上下文、问题）按 Token 计费。</p>
+                  <p><b>输出（Output）</b>：模型生成的回复按 Token 计费，通常比输入贵 3-4 倍。</p>
+                  <p><b>缓存读取（Cache Read）</b>：部分厂商（如 Anthropic、DeepSeek）支持 Prompt 缓存，重复使用的上下文以更低价格计费（通常为输入价的 10%-50%），可大幅降低长上下文场景成本。</p>
+                </div>
+              </details>
+              <details class="faq-item">
+                <summary>如果我发现价格有误，或者想新增其他厂商怎么办？</summary>
+                <div class="faq-answer">
+                  <p>欢迎通过 <a :href="feedbackUrl" target="_blank">GitHub Issues</a> 反馈，提供预填模板选择「价格异常报告」或「新增厂商建议」。</p>
+                  <p>也可以通过下方社群二维码加入我们的飞书群，直接与维护者沟通。</p>
+                </div>
+              </details>
+            </div>
           </div>
-          <a href="#/compare" class="section-link">完整对比 →</a>
-        </div>
-        <div class="freshness">
-          <span>最近更新 <b>{{ freshnessText }}</b></span>
-          <span class="freshness-sep">·</span>
-          <span><b>{{ data.providers.length }}</b> 家厂商</span>
-          <span class="freshness-sep">·</span>
-          <span><b>{{ totalProducts }}</b> 个产品</span>
-          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
-        </div>
-        <div class="view-toggle">
-          <div>
-            <button :class="{active: view === 'table'}" @click="view = 'table'">表格</button>
-            <button :class="{active: view === 'card'}" @click="view = 'card'">卡片</button>
-          </div>
-          <div class="currency-toggle">
-            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
-            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
-          </div>
-        </div>
-        <div class="table-wrap" v-show="view === 'table'">
-          <table class="price-table">
-            <thead>
-              <tr>
-                <th>厂商</th>
-                <th>模型</th>
-                <th>计费</th>
-                <th style="text-align:right">输入价</th>
-                <th style="text-align:right">输出价</th>
-                <th>购买</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="row in homePreviewRows" :key="row.id" @click="toggleExpand(row.id)"
-                :class="{stale: row.stale, expanded: expanded === row.id}">
-                <td>
-                  <div class="provider-cell">
-                    <span class="provider-icon">
-                      <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
-                    </span>
-                    {{ row.providerName }}
-                  </div>
-                </td>
-                <td class="mono">{{ row.model || '—' }}</td>
-                <td>{{ billingLabel(row.billing_type) }}</td>
-                <td class="num">{{ formatPrice(row, 'input') }}</td>
-                <td class="num">{{ formatPrice(row, 'output') }}</td>
-                <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card-grid" v-show="view === 'card'">
-          <div v-for="row in homePreviewRows" :key="row.id" class="card" :class="{stale: row.stale}">
-            <div class="card-header">
-              <div class="card-provider-wrap">
-                <span class="provider-icon">
-                  <img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)">
-                </span>
-                <span class="card-provider">{{ row.providerName }}</span>
+
+          <!-- 社群 -->
+          <div class="community-block">
+            <h2 class="section-title">加入社群</h2>
+            <p class="section-sub">与开发者交流大模型选型经验，第一时间获取价格变动通知</p>
+            <div class="community-card">
+              <img src="image/feishu-qr.png" alt="飞书社群二维码" class="qr-img">
+              <div class="community-info">
+                <div class="community-name">飞书用户交流群</div>
+                <div class="community-desc">扫码加入 · 实时价格提醒 · 选型讨论</div>
+                <a href="https://app.feishu.cn/" target="_blank" class="community-link">没有飞书？下载 →</a>
               </div>
-              <span class="card-billing">{{ billingLabel(row.billing_type) }}</span>
             </div>
-            <div class="card-model">{{ row.model || '—' }}</div>
-            <div class="card-prices">
-              <div v-if="row.prices.input"><span>输入</span><span>{{ formatPrice(row, 'input') }}</span></div>
-              <div v-if="row.prices.output"><span>输出</span><span>{{ formatPrice(row, 'output') }}</span></div>
-              <div v-if="row.prices.monthly_price"><span>月费</span><span>{{ formatPrice(row, 'monthly_price') }}</span></div>
-            </div>
-            <a class="card-buy" :href="row.purchase_url" target="_blank">购买 →</a>
           </div>
         </div>
       </section>
@@ -475,6 +522,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
