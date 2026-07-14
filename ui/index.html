@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=11">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -364,9 +364,9 @@
 
         <div class="filters">
           <div class="filter-group">
-            <span class="filter-label">地区</span>
-            <button v-for="r in regions" :key="r" @click="toggleFilter('region', r)"
-              :class="['chip', {active: filters.region.includes(r)}]">{{ r === 'cn' ? '国内' : (r === 'us' ? '美国' : '欧洲') }}</button>
+            <span class="filter-label">厂商</span>
+            <button v-for="p in providerFilterList" :key="p.id" @click="toggleFilter('provider', p.id)"
+              :class="['chip', {active: filters.provider.includes(p.id)}]">{{ p.name }}</button>
           </div>
           <div class="filter-group" v-if="routeName !== 'billing'">
             <span class="filter-label">计费</span>
@@ -374,7 +374,7 @@
               :class="['chip', {active: filters.billing.includes(b)}]">{{ billingLabel(b) }}</button>
           </div>
           <div class="filter-group">
-            <span class="filter-label">能力</span>
+            <span class="filter-label">类型</span>
             <button v-for="m in modalities" :key="m" @click="toggleFilter('modality', m)"
               :class="['chip', {active: filters.modality.includes(m)}]">{{ m }}</button>
           </div>
@@ -400,13 +400,25 @@
 
         <div class="table-wrap" v-show="view === 'table'">
           <table class="price-table">
+            <colgroup>
+              <col style="width: 11%">
+              <col style="width: 22%">
+              <col style="width: 14%">
+              <col style="width: 12%">
+              <col style="width: 12%">
+              <col style="width: 11%">
+              <col style="width: 9%">
+              <col style="width: 9%">
+            </colgroup>
             <thead>
               <tr>
                 <th class="sortable" @click="sortBy('providerName')" :class="{'sort-asc': sortKey === 'providerName' && sortAsc, 'sort-desc': sortKey === 'providerName' && !sortAsc}">厂商</th>
                 <th class="sortable" @click="sortBy('model')" :class="{'sort-asc': sortKey === 'model' && sortAsc, 'sort-desc': sortKey === 'model' && !sortAsc}">模型</th>
-                <th class="sortable" @click="sortBy('billing_type')" :class="{'sort-asc': sortKey === 'billing_type' && sortAsc, 'sort-desc': sortKey === 'billing_type' && !sortAsc}">计费</th>
-                <th class="sortable" @click="sortBy('inputPrice')" :class="{'sort-asc': sortKey === 'inputPrice' && sortAsc, 'sort-desc': sortKey === 'inputPrice' && !sortAsc}" style="text-align:right">输入价</th>
-                <th class="sortable" @click="sortBy('outputPrice')" :class="{'sort-asc': sortKey === 'outputPrice' && sortAsc, 'sort-desc': sortKey === 'outputPrice' && !sortAsc}" style="text-align:right">输出价</th>
+                <th class="sortable" @click="sortBy('modalities')" :class="{'sort-asc': sortKey === 'modalities' && sortAsc, 'sort-desc': sortKey === 'modalities' && !sortAsc}">类型</th>
+                <th class="sortable" @click="sortBy('inputPrice')" :class="{'sort-asc': sortKey === 'inputPrice' && sortAsc, 'sort-desc': sortKey === 'inputPrice' && !sortAsc}" style="text-align:right">输入价<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('outputPrice')" :class="{'sort-asc': sortKey === 'outputPrice' && sortAsc, 'sort-desc': sortKey === 'outputPrice' && !sortAsc}" style="text-align:right">输出价<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('cachedInput')" :class="{'sort-asc': sortKey === 'cachedInput' && sortAsc, 'sort-desc': sortKey === 'cachedInput' && !sortAsc}" style="text-align:right">缓存命中<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('contextWindow')" :class="{'sort-asc': sortKey === 'contextWindow' && sortAsc, 'sort-desc': sortKey === 'contextWindow' && !sortAsc}" style="text-align:right">上下文</th>
                 <th>购买</th>
               </tr>
             </thead>
@@ -422,17 +434,17 @@
                   </div>
                 </td>
                 <td class="mono">{{ row.model || '—' }}</td>
-                <td>{{ billingLabel(row.billing_type) }}</td>
+                <td class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
                 <td class="num">{{ formatPrice(row, 'input') }}</td>
                 <td class="num">{{ formatPrice(row, 'output') }}</td>
+                <td class="num">{{ formatPrice(row, 'cached_input') }}</td>
+                <td class="num">{{ formatContext(row.context_window) }}</td>
                 <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
               </tr>
-              <tr v-if="expanded" class="detail-row">
-                <td colspan="6">
+              <tr v-if="expanded && currentRow" class="detail-row">
+                <td colspan="8">
                   <div class="detail">
-                    <p>上下文窗口: {{ currentRow.context_window || '—' }}</p>
-                    <p>能力: {{ (currentRow.modalities || []).join(', ') || '—' }}</p>
-                    <p v-if="currentRow.notes">备注: {{ currentRow.notes }}</p>
+                    <p v-if="benchmarkText(currentRow)">能力评分: {{ benchmarkText(currentRow) }}</p>
                     <p v-if="currentRow.stale" class="stale-detail">数据来自 {{ staleHours(currentRow) }} 小时前，可能过期</p>
                   </div>
                 </td>
@@ -453,9 +465,14 @@
               <span class="card-billing">{{ billingLabel(row.billing_type) }}</span>
             </div>
             <div class="card-model">{{ row.model || '—' }}</div>
+            <div class="card-meta-row">
+              <span class="card-mods">{{ (row.modalities || []).join(', ') || '—' }}</span>
+              <span class="card-ctx">{{ formatContext(row.context_window) }}</span>
+            </div>
             <div class="card-prices">
-              <div v-if="row.prices.input"><span>输入</span><span>{{ formatPrice(row, 'input') }}</span></div>
-              <div v-if="row.prices.output"><span>输出</span><span>{{ formatPrice(row, 'output') }}</span></div>
+              <div v-if="row.prices.input"><span>输入<span class="price-unit">/1M</span></span><span>{{ formatPrice(row, 'input') }}</span></div>
+              <div v-if="row.prices.output"><span>输出<span class="price-unit">/1M</span></span><span>{{ formatPrice(row, 'output') }}</span></div>
+              <div v-if="row.prices.cached_input"><span>缓存<span class="price-unit">/1M</span></span><span>{{ formatPrice(row, 'cached_input') }}</span></div>
               <div v-if="row.prices.monthly_price"><span>月费</span><span>{{ formatPrice(row, 'monthly_price') }}</span></div>
             </div>
             <a class="card-buy" :href="row.purchase_url" target="_blank">购买 →</a>
@@ -522,6 +539,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>

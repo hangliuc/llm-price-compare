@@ -61,13 +61,14 @@ createApp({
     const view = ref("table");
     const displayCurrency = ref("CNY");
     const expanded = ref(null);
-    const sortKey = ref("inputPrice");
-    const sortAsc = ref(true);
+    const sortKey = ref("release_date");
+    const sortAsc = ref(false);
     const route = ref(window.location.hash || "#/");
     const filters = ref({
       region: [],
       billing: [],
       modality: [],
+      provider: [],
     });
 
     // 监听 hash 变化
@@ -114,7 +115,7 @@ createApp({
 
     const regions = ["cn", "us", "eu"];
     const billingTypes = ["per_token", "subscription", "coding_plan"];
-    const modalities = ["text", "vision", "audio"];
+    const modalities = ["text", "vision", "audio", "file"];
 
     const providerStatusMap = computed(() => {
       const m = {};
@@ -165,6 +166,9 @@ createApp({
       if (filters.value.region.length) {
         rows = rows.filter(r => filters.value.region.includes(r.region));
       }
+      if (filters.value.provider.length) {
+        rows = rows.filter(r => filters.value.provider.includes(r.providerId));
+      }
       if (filters.value.billing.length) {
         rows = rows.filter(r => filters.value.billing.includes(r.billing_type));
       }
@@ -180,7 +184,15 @@ createApp({
         if (va == null) va = Infinity;
         if (vb == null) vb = Infinity;
         if (typeof va === "string") {
-          return sortAsc.value ? va.localeCompare(vb) : vb.localeCompare(va);
+          const cmp = sortAsc.value ? va.localeCompare(vb) : vb.localeCompare(va);
+          if (cmp !== 0) return cmp;
+          // 二级排序：release_date 相同时按 inputPrice 升序
+          if (sortKey.value === 'release_date') {
+            const pa = a.prices?.input ?? Infinity;
+            const pb = b.prices?.input ?? Infinity;
+            return pa - pb;
+          }
+          return cmp;
         }
         return sortAsc.value ? va - vb : vb - va;
       });
@@ -200,6 +212,15 @@ createApp({
           statusOk: status.status === "ok",
         };
       });
+    });
+
+    // 筛选区厂商列表：按产品数降序，排除 0 产品的厂商
+    const providerFilterList = computed(() => {
+      if (!data.value) return [];
+      return data.value.providers
+        .map(p => ({ id: p.id, name: p.name, count: (p.products || []).length }))
+        .filter(p => p.count > 0)
+        .sort((a, b) => b.count - a.count);
     });
 
     // Hero 动态呼吸图标集合：包含所有厂商（含抓取失败的），
@@ -252,8 +273,12 @@ createApp({
       if (key === "providerName") return row.providerName;
       if (key === "model") return row.model || "";
       if (key === "billing_type") return row.billing_type;
+      if (key === "modalities") return (row.modalities || []).join(", ");
       if (key === "inputPrice") return row.prices?.input;
       if (key === "outputPrice") return row.prices?.output;
+      if (key === "cachedInput") return row.prices?.cached_input;
+      if (key === "contextWindow") return row.context_window;
+      if (key === "release_date") return row.release_date || "";
       return null;
     }
 
@@ -385,7 +410,8 @@ createApp({
     });
 
     function toggleFilter(kind, value) {
-      const arr = filters.value[kind === "region" ? "region" : (kind === "billing" ? "billing" : "modality")];
+      const arr = filters.value[kind];
+      if (!arr) return;
       const i = arr.indexOf(value);
       if (i >= 0) arr.splice(i, 1);
       else arr.push(value);
@@ -408,17 +434,51 @@ createApp({
       const v = row.prices?.[field];
       if (v == null) return "—";
       const cur = row.prices.currency;
+      let val;
       if (cur === displayCurrency.value) {
-        return displayCurrency.value === "CNY" ? `¥${v}` : `$${v}`;
+        val = v;
+      } else if (cur === "USD" && displayCurrency.value === "CNY") {
+        val = (v * USD_TO_CNY).toFixed(2);
+      } else if (cur === "CNY" && displayCurrency.value === "USD") {
+        val = (v / USD_TO_CNY).toFixed(2);
+      } else {
+        val = v;
       }
-      // 换算
-      if (cur === "USD" && displayCurrency.value === "CNY") {
-        return `¥${(v * USD_TO_CNY).toFixed(2)}`;
+      const sym = displayCurrency.value === "CNY" ? "¥" : "$";
+      // monthly_price 等非 token 计价字段不加 /1M
+      if (field === 'monthly_price' || field === 'first_month_price') {
+        return `${sym}${val}`;
       }
-      if (cur === "CNY" && displayCurrency.value === "USD") {
-        return `$${(v / USD_TO_CNY).toFixed(2)}`;
+      return `${sym}${val} /1M`;
+    }
+
+    // 上下文窗口格式化：128000 → 128K，2000000 → 2M
+    function formatContext(ctx) {
+      if (ctx == null) return '—';
+      if (ctx >= 1000000) {
+        const m = ctx / 1000000;
+        return m % 1 === 0 ? `${m}M` : `${m.toFixed(1)}M`;
       }
-      return v;
+      if (ctx >= 1000) {
+        return `${Math.round(ctx / 1000)}K`;
+      }
+      return `${ctx}`;
+    }
+
+    // 能力评分（notes 字段为 JSON，含 OpenRouter benchmarks）
+    function benchmarkText(row) {
+      if (!row.notes) return null;
+      try {
+        const obj = typeof row.notes === 'string' ? JSON.parse(row.notes) : row.notes;
+        const bm = obj.benchmarks || {};
+        const parts = [];
+        if (bm.intelligence_index != null) parts.push(`智力 ${bm.intelligence_index}`);
+        if (bm.coding_index != null) parts.push(`编码 ${bm.coding_index}`);
+        if (bm.agentic_index != null) parts.push(`Agent ${bm.agentic_index}`);
+        return parts.length ? parts.join(' · ') : null;
+      } catch {
+        return null;
+      }
     }
 
     function staleHours(row) {
@@ -447,9 +507,9 @@ createApp({
       filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
       perTokenCount, subscriptionCount, codingPlanCount,
       tickerFeatured, tickerCards,
-      providerList, allProvidersForOrbit, orbitStyle,
+      providerList, providerFilterList, allProvidersForOrbit, orbitStyle,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel,
-      formatPrice, staleHours, iconUrl, onIconError, goHash,
+      formatPrice, formatContext, benchmarkText, staleHours, iconUrl, onIconError, goHash,
     };
   },
 }).mount("#app");
