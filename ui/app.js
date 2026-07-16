@@ -355,6 +355,50 @@ createApp({
       allRows.value.filter(r => r.billing_type === 'coding_plan' && !r.stale).length
     );
 
+    // 首页「三种计费方式」编辑杂志式轮播
+    const billingSlides = computed(() => [
+      {
+        index: '01',
+        label: 'Per Token',
+        name: '按需计费',
+        desc: '按实际 Token 用量计费，输入输出分别定价，适合低频或弹性调用',
+        count: perTokenCount.value,
+        href: '#/billing/per_token',
+        image: 'image/Pay as you go.png',
+        cta: '查看价格',
+      },
+      {
+        index: '02',
+        label: 'Subscription',
+        name: '订阅制',
+        desc: '面向终端用户的产品订阅，固定月费换不限量使用，代表 ChatGPT Plus、Claude Pro',
+        count: subscriptionCount.value,
+        href: '#/billing/subscription',
+        image: 'image/Subscribe.png',
+        cta: '查看套餐',
+      },
+      {
+        index: '03',
+        label: 'Coding Plan',
+        name: '编程套餐',
+        desc: '面向开发者的 API 额度套餐，月付换 Token 池，代表 GLM Coding、方舟 Coding Plan',
+        count: codingPlanCount.value,
+        href: '#/billing/coding_plan',
+        image: 'image/coding plan.png',
+        cta: '查看套餐',
+      },
+    ]);
+    const billingSlideIndex = ref(0);
+    const billingSlideDir = ref('next');
+    function goBillingSlide(i) {
+      const total = billingSlides.value.length;
+      billingSlideDir.value = i > billingSlideIndex.value ? 'next' : 'prev';
+      // 循环边界
+      if (i < 0) i = total - 1;
+      if (i >= total) i = 0;
+      billingSlideIndex.value = i;
+    }
+
     // 首页「最新价格一览」预览：按模型发布时间倒序，仅 per_token，去重，取 8 条
     const homePreviewRows = computed(() => {
       const rows = allRows.value.filter(r =>
@@ -590,6 +634,7 @@ createApp({
       route, routeName, billingRoute, providerRouteId, currentProvider,
       filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
       perTokenCount, subscriptionCount, codingPlanCount,
+      billingSlides, billingSlideIndex, billingSlideDir, goBillingSlide,
       tickerFeatured, tickerCards,
       providerList, providerFilterList, groupedRows, allProvidersForOrbit, orbitStyle,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel,

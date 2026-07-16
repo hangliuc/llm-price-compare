@@ -1398,147 +1398,165 @@ input { font-family: inherit; }
   font-size: 15px;
 }
 
-/* ============ 计费方式动态卡片 ============ */
+/* ============ 计费方式 · 编辑杂志式三列专栏 ============ */
 .billing-showcase {
   padding-bottom: 40px;
 }
-.billing-showcase-grid {
+
+.billing-columns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  perspective: 1200px;
+  gap: 40px;
 }
-.billing-showcase-card {
-  position: relative;
-  display: block;
+.billing-column {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
-  transform-style: preserve-3d;
   opacity: 0;
-  animation: bsFadeIn 0.6s ease forwards;
-  animation-delay: var(--card-delay, 0s);
+  animation: billingColFadeIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
 }
-.billing-showcase-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  border-color: var(--accent);
-  box-shadow: 0 16px 40px rgba(0, 220, 130, 0.12);
-}
-.billing-showcase-inner {
-  position: relative;
-  padding: 32px 28px;
-  z-index: 2;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.billing-showcase-card:hover .billing-showcase-inner {
-  transform: translateZ(20px);
-}
-.billing-showcase-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--accent-soft);
-  color: var(--accent-dark);
+.billing-column:nth-child(1) { --i: 0; }
+.billing-column:nth-child(2) { --i: 1; }
+.billing-column:nth-child(3) { --i: 2; }
+
+/* 头部：序号 + label 同行 */
+.billing-col-head {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
 }
-.billing-showcase-card:hover .billing-showcase-icon {
-  transform: rotate(-8deg) scale(1.08);
-}
-.billing-showcase-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-}
-.billing-showcase-name {
+.billing-col-index {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-ghost);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 0.4s ease;
+}
+.billing-column:hover .billing-col-index {
+  color: var(--accent-dark);
+}
+.billing-col-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+}
+
+.billing-col-name {
+  font-family: var(--font-display);
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.1;
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
 }
-.billing-showcase-desc {
+
+/* 图片：无容器痕迹，直接展示内容 */
+.billing-col-image {
+  width: 100%;
+  margin-bottom: 20px;
+  /* 无 border / 无 background / 无 border-radius / 无 box-shadow */
+}
+.billing-col-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* 默认杂志感：轻微降饱和 */
+  filter: saturate(0.9) contrast(0.98);
+  transform: scale(1);
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 0.7s ease;
+}
+.billing-column:hover .billing-col-image img {
+  /* hover 动态：放大 + 彩色化 */
+  transform: scale(1.025);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.billing-col-desc {
+  font-family: var(--font);
   font-size: 13px;
   color: var(--ink-soft);
-  line-height: 1.6;
-  margin-bottom: 24px;
-  min-height: 62px;
+  line-height: 1.65;
+  letter-spacing: 0.002em;
+  margin-bottom: 20px;
+  min-height: 64px;
 }
-.billing-showcase-stat {
+.billing-col-stat {
   display: flex;
   align-items: baseline;
   gap: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   padding-top: 16px;
   border-top: 1px solid var(--border-light);
 }
-.billing-showcase-stat .stat-num {
+.billing-col-stat .stat-num {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 500;
   color: var(--ink);
   line-height: 1;
+  letter-spacing: -0.02em;
 }
-.billing-showcase-stat .stat-unit {
+.billing-col-stat .stat-unit {
+  font-family: var(--font);
   font-size: 13px;
   color: var(--ink-faint);
+  font-weight: 400;
 }
-.billing-showcase-cta {
+.billing-col-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.005em;
+  transition: color 0.2s ease;
+  margin-top: auto;
+}
+.billing-col-cta .arrow {
+  font-family: var(--font);
+  font-size: 14px;
   color: var(--accent-dark);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.billing-showcase-card:hover .billing-showcase-cta {
-  transform: translateX(4px);
+.billing-column:hover .billing-col-cta {
+  color: var(--accent-dark);
 }
-.billing-showcase-glow {
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.billing-showcase-card:hover .billing-showcase-glow {
-  opacity: 0.6;
+.billing-column:hover .billing-col-cta .arrow {
+  transform: translateX(5px);
 }
 
-@keyframes bsFadeIn {
+@keyframes billingColFadeIn {
   from {
     opacity: 0;
-    transform: translateY(24px) rotateX(-6deg);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 900px) {
-  .billing-showcase-grid {
+  .billing-columns {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 32px;
   }
-  .billing-showcase-desc {
+  .billing-col-desc {
     min-height: auto;
   }
 }

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=17">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -131,76 +131,36 @@
         </div>
       </div>
 
-      <!-- 计费方式动态卡片 -->
+      <!-- 计费方式 · 编辑杂志式三列专栏 -->
       <section class="section billing-showcase">
         <div class="section-head">
           <div>
-            <h2 class="section-title">三种<em>计费</em>方式</h2>
+            <h2 class="section-title">三种<span class="title-normal">计费</span>方式</h2>
             <p class="section-sub">按需计费、订阅制、Coding Plan，总有一款适合你的使用场景</p>
           </div>
         </div>
-        <div class="billing-showcase-grid">
-          <a href="#/billing/per_token" class="billing-showcase-card" style="--card-delay: 0s">
-            <div class="billing-showcase-inner">
-              <div class="billing-showcase-icon">
-                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 38l8-24 8 16 8-12 8 20"/>
-                </svg>
-              </div>
-              <div class="billing-showcase-label">Per Token</div>
-              <div class="billing-showcase-name">按需计费</div>
-              <div class="billing-showcase-desc">按实际 Token 用量计费，输入输出分别定价，适合低频或弹性调用</div>
-              <div class="billing-showcase-stat">
-                <span class="stat-num">{{ perTokenCount }}</span>
-                <span class="stat-unit">款产品</span>
-              </div>
-              <div class="billing-showcase-cta">查看价格 →</div>
-            </div>
-            <div class="billing-showcase-glow"></div>
-          </a>
 
-          <a href="#/billing/subscription" class="billing-showcase-card" style="--card-delay: 0.1s">
-            <div class="billing-showcase-inner">
-              <div class="billing-showcase-icon">
-                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="8" y="14" width="32" height="24" rx="3"/>
-                  <path d="M14 14v-4M34 14v-4M8 22h32"/>
-                  <circle cx="16" cy="28" r="1.5" fill="currentColor"/>
-                  <circle cx="24" cy="28" r="1.5" fill="currentColor"/>
-                  <circle cx="32" cy="28" r="1.5" fill="currentColor"/>
-                </svg>
-              </div>
-              <div class="billing-showcase-label">Subscription</div>
-              <div class="billing-showcase-name">订阅制</div>
-              <div class="billing-showcase-desc">面向终端用户的产品订阅，固定月费换不限量使用，代表 ChatGPT Plus、Claude Pro</div>
-              <div class="billing-showcase-stat">
-                <span class="stat-num">{{ subscriptionCount }}</span>
-                <span class="stat-unit">款产品</span>
-              </div>
-              <div class="billing-showcase-cta">查看套餐 →</div>
+        <div class="billing-columns">
+          <a
+            v-for="(slide, i) in billingSlides"
+            :key="i"
+            :href="slide.href"
+            class="billing-column"
+          >
+            <div class="billing-col-head">
+              <span class="billing-col-index">{{ slide.index }}</span>
+              <span class="billing-col-label">{{ slide.label }}</span>
             </div>
-            <div class="billing-showcase-glow"></div>
-          </a>
-
-          <a href="#/billing/coding_plan" class="billing-showcase-card" style="--card-delay: 0.2s">
-            <div class="billing-showcase-inner">
-              <div class="billing-showcase-icon">
-                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 8 26 16 34"/>
-                  <polyline points="32 18 40 26 32 34"/>
-                  <line x1="28" y1="14" x2="20" y2="38"/>
-                </svg>
-              </div>
-              <div class="billing-showcase-label">Coding Plan</div>
-              <div class="billing-showcase-name">编程套餐</div>
-              <div class="billing-showcase-desc">面向开发者的 API 额度套餐，月付换 Token 池，代表 GLM Coding、方舟 Coding Plan</div>
-              <div class="billing-showcase-stat">
-                <span class="stat-num">{{ codingPlanCount }}</span>
-                <span class="stat-unit">款产品</span>
-              </div>
-              <div class="billing-showcase-cta">查看套餐 →</div>
+            <h3 class="billing-col-name">{{ slide.name }}</h3>
+            <div class="billing-col-image">
+              <img :src="slide.image" :alt="slide.name + ' 预览'" loading="lazy">
             </div>
-            <div class="billing-showcase-glow"></div>
+            <p class="billing-col-desc">{{ slide.desc }}</p>
+            <div class="billing-col-stat">
+              <span class="stat-num">{{ slide.count }}</span>
+              <span class="stat-unit">款产品</span>
+            </div>
+            <span class="billing-col-cta">{{ slide.cta }} <span class="arrow">→</span></span>
           </a>
         </div>
       </section>
@@ -628,6 +588,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
