@@ -1,4 +1,4 @@
-const { createApp, ref, computed, onMounted } = Vue;
+const { createApp, ref, computed, onMounted, watch } = Vue;
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
@@ -78,6 +78,8 @@ createApp({
       set(v) { _viewOverride.value = v; },
     });
     const displayCurrency = ref("CNY");
+    // 厂商详情页：当前选中的计费方式 tab（per_token / subscription / coding_plan）
+    const providerBillingTab = ref(null);
     const expanded = ref(null);
     const sortKey = ref("release_date");
     const sortAsc = ref(false);
@@ -130,6 +132,46 @@ createApp({
         return { id: pid, ...PROVIDER_META[pid] };
       }
       return null;
+    });
+
+    // 厂商详情页：该厂商可用的计费方式 tab 列表（按固定顺序，只保留有产品的）
+    const providerBillingTabs = computed(() => {
+      if (routeName.value !== 'provider') return [];
+      const order = ['per_token', 'subscription', 'coding_plan'];
+      const counts = {};
+      for (const r of filteredRows.value) {
+        counts[r.billing_type] = (counts[r.billing_type] || 0) + 1;
+      }
+      return order
+        .filter(bt => counts[bt] > 0)
+        .map(bt => ({ key: bt, label: billingLabel(bt), count: counts[bt] }));
+    });
+
+    // 进入厂商详情页时：根据厂商 region 自动切换货币
+    watch(currentProvider, (p) => {
+      if (!p) return;
+      // 国内厂商默认 CNY，国外厂商默认 USD
+      displayCurrency.value = p.region === 'cn' ? 'CNY' : 'USD';
+    });
+
+    // 当可用 tab 列表变化时，如果当前选中的 tab 不在其中，则自动选第一个
+    watch(providerBillingTabs, (tabs) => {
+      if (!tabs.length) {
+        providerBillingTab.value = null;
+        return;
+      }
+      const stillValid = tabs.some(t => t.key === providerBillingTab.value);
+      if (!stillValid) {
+        providerBillingTab.value = tabs[0].key;
+      }
+    });
+
+    // 厂商详情页：当前 tab 对应的产品列表
+    const providerCurrentRows = computed(() => {
+      if (routeName.value !== 'provider' || !providerBillingTab.value) return [];
+      if (providerBillingTab.value === 'per_token') return providerPerTokenRows.value;
+      const group = providerPlanGroups.value.find(g => g.billingType === providerBillingTab.value);
+      return group ? group.products : [];
     });
 
     const regions = ["cn", "us", "eu"];
@@ -223,14 +265,44 @@ createApp({
       if (!data.value) return [];
       return data.value.providers.map(p => {
         const status = providerStatusMap.value[p.id] || {};
+        const products = p.products || [];
+        // 计费方式分布：{per_token: bool, subscription: bool, coding_plan: bool}
+        const billingTypes = { per_token: false, subscription: false, coding_plan: false };
+        for (const prod of products) {
+          if (billingTypes.hasOwnProperty(prod.billing_type)) {
+            billingTypes[prod.billing_type] = true;
+          }
+        }
         return {
           ...p,
-          productCount: (p.products || []).length,
+          productCount: products.length,
+          billingTypes,
           stale: status.stale === true,
           statusText: status.status === "ok" ? "正常" : (status.stale ? "数据过期" : "抓取失败"),
           statusOk: status.status === "ok",
         };
       });
+    });
+
+    // 简短计费方式标签（用于厂商卡片 chips）
+    function billingLabelShort(b) {
+      return { per_token: "Token", subscription: "订阅", coding_plan: "Coding" }[b] || b;
+    }
+
+    // 厂商总览页：按地区分组（国内 cn / 国外 us+eu），支持本地搜索过滤
+    const providerSearch = ref('');
+    const providerListByRegion = computed(() => {
+      const q = providerSearch.value.trim().toLowerCase();
+      const list = q
+        ? providerList.value.filter(p =>
+            (p.name || '').toLowerCase().includes(q) ||
+            (p.name_en || '').toLowerCase().includes(q) ||
+            (p.id || '').toLowerCase().includes(q)
+          )
+        : providerList.value;
+      const cn = list.filter(p => p.region === 'cn');
+      const intl = list.filter(p => p.region !== 'cn');
+      return { cn, intl, total: list.length };
     });
 
     // 按厂商分组的卡片视图数据（coding_plan/subscription 用）
@@ -252,6 +324,32 @@ createApp({
         map.get(r.providerId).products.push(r);
       }
       return [...map.values()];
+    });
+
+    // 厂商详情页：按计费方式分区展示
+    // providerPerTokenRows - 该厂商的 per_token 产品（用 8 列表格展示）
+    // providerPlanGroups - 该厂商的 subscription/coding_plan 产品，按 billing_type 分组（用卡片展示）
+    const providerPerTokenRows = computed(() => {
+      if (routeName.value !== 'provider') return [];
+      return filteredRows.value.filter(r => r.billing_type === 'per_token');
+    });
+    const providerPlanGroups = computed(() => {
+      if (routeName.value !== 'provider') return [];
+      const rows = filteredRows.value.filter(r => r.billing_type !== 'per_token');
+      const groups = {};
+      for (const r of rows) {
+        if (!groups[r.billing_type]) {
+          groups[r.billing_type] = {
+            billingType: r.billing_type,
+            label: billingLabel(r.billing_type),
+            products: [],
+          };
+        }
+        groups[r.billing_type].products.push(r);
+      }
+      // 保持 subscription 在前、coding_plan 在后
+      const order = ['subscription', 'coding_plan'];
+      return order.map(bt => groups[bt]).filter(g => g);
     });
 
     // 筛选区厂商列表：按产品数降序，排除 0 产品的厂商
@@ -636,8 +734,10 @@ createApp({
       perTokenCount, subscriptionCount, codingPlanCount,
       billingSlides, billingSlideIndex, billingSlideDir, goBillingSlide,
       tickerFeatured, tickerCards,
-      providerList, providerFilterList, groupedRows, allProvidersForOrbit, orbitStyle,
-      feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel,
+      providerList, providerFilterList, providerSearch, providerListByRegion, groupedRows, allProvidersForOrbit, orbitStyle,
+      providerPerTokenRows, providerPlanGroups,
+      providerBillingTabs, providerBillingTab, providerCurrentRows,
+      feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
       formatPrice, formatContext, formatMonthly, formatQuota, benchmarkText, staleHours, iconUrl, onIconError, goHash,
     };
   },

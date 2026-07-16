@@ -581,7 +581,8 @@ input { font-family: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-family: var(--font);
+  font-size: 11px;
   font-weight: 600;
   color: var(--accent-dark);
   margin-bottom: 10px;
@@ -690,8 +691,9 @@ input { font-family: inherit; }
 }
 .freshness-sep { color: var(--ink-line); }
 .freshness b {
+  font-family: var(--font-mono);
   color: var(--ink-soft);
-  font-weight: 600;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 .stale-warning {
@@ -983,6 +985,79 @@ input { font-family: inherit; }
 }
 .card-buy:hover { gap: 8px; }
 
+/* ============ PROVIDER DETAIL 计费方式 tab 切换 ============ */
+.provider-detail-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0 14px;
+  flex-wrap: wrap;
+}
+.provider-billing-tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--bg-tint);
+  border-radius: var(--radius);
+}
+.provider-billing-tab {
+  padding: 7px 14px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.provider-billing-tab .tab-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.provider-billing-tab:hover {
+  color: var(--ink);
+}
+.provider-billing-tab.active {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+.provider-billing-tab.active .tab-count {
+  color: var(--accent-dark);
+}
+/* 单一计费方式：不显示 tab，只显示标题 */
+.provider-billing-tabs-single {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 7px 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.provider-billing-tabs-single .tab-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+/* 厂商详情页套餐列表：单列全宽 */
+.provider-plan-list--full {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* ============ PROVIDER PLAN CARDS (coding_plan / subscription) ============ */
 .provider-card-grid {
   display: grid;
@@ -1147,6 +1222,121 @@ input { font-family: inherit; }
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 16px;
 }
+.providers-grid-compact {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+/* 厂商总览页：地区分组 */
+.provider-region-group {
+  margin-top: 40px;
+}
+.provider-region-group:first-of-type {
+  margin-top: 0;
+}
+.provider-region-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+.provider-region-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+.provider-region-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 厂商搜索框 */
+.providers-search {
+  align-self: end;
+}
+.providers-search-input {
+  width: 260px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--bg);
+  transition: all 0.15s;
+}
+.providers-search-input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(10,10,10,0.06);
+}
+.providers-search-input::placeholder {
+  color: var(--ink-ghost);
+}
+
+/* 紧凑横向卡片 */
+.provider-card-compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: pointer;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+.provider-card-compact:hover {
+  border-color: var(--ink);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+.provider-card-compact .provider-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+}
+.provider-card-compact:hover .provider-card-icon {
+  transform: scale(1.04);
+}
+.provider-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.provider-card-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.provider-card-count {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0;
+}
+.provider-card-site {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  letter-spacing: 0;
+  transition: color 0.15s;
+}
+.provider-card-site:hover {
+  color: var(--accent-dark);
+}
+
+/* 保留首页大卡片样式 */
 .provider-card {
   position: relative;
   padding: 22px 22px 18px;
@@ -1201,14 +1391,6 @@ input { font-family: inherit; }
   transform: scale(1.06);
 }
 .provider-card-icon img { width: 80%; height: 80%; object-fit: contain; }
-.provider-card-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 .provider-card-name {
   font-family: var(--font);
   font-size: 15px;
@@ -1216,89 +1398,6 @@ input { font-family: inherit; }
   letter-spacing: -0.01em;
   line-height: 1.2;
   color: var(--ink);
-}
-.region-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-family: var(--font);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.4;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--ink-faint);
-}
-.region-badge.cn {
-  color: var(--ink-soft);
-  background: var(--bg-tint);
-  border-color: var(--border);
-}
-.region-badge.us {
-  color: var(--ink-soft);
-  background: var(--bg-tint);
-  border-color: var(--border);
-}
-.region-badge.eu {
-  color: var(--ink-soft);
-  background: var(--bg-tint);
-  border-color: var(--border);
-}
-.provider-card-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  font-family: var(--font);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-.provider-card-status-badge.ok {
-  color: var(--green);
-  background: var(--green-soft);
-}
-.provider-card-status-badge.fail {
-  color: var(--amber);
-  background: var(--amber-soft);
-}
-.provider-card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-light);
-}
-.provider-card-count {
-  font-family: var(--font);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink-soft);
-  letter-spacing: -0.01em;
-}
-.count-unit {
-  font-family: var(--font);
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--ink-faint);
-  margin-left: 2px;
-}
-.provider-card-site {
-  font-family: var(--font);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--ink-faint);
-  letter-spacing: 0;
-  transition: color 0.15s;
-}
-.provider-card-site:hover {
-  color: var(--accent-dark);
 }
 .status-dot {
   display: inline-block;
@@ -1314,6 +1413,181 @@ input { font-family: inherit; }
 .status-dot.fail {
   background: var(--amber);
   box-shadow: 0 0 0 2px var(--amber-soft);
+}
+
+/* ============ PROVIDERS SECTION (首页主流大模型厂商) ============ */
+.providers-section {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+}
+.providers-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  flex: 1;
+  align-content: start;
+}
+.pv-card {
+  position: relative;
+  padding: 24px 22px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-tint) 100%);
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.22s, border-color 0.22s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: pvCardIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+@keyframes pvCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.pv-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pv-card:hover {
+  border-color: var(--border);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.pv-card:hover::before {
+  transform: scaleX(1);
+}
+.pv-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pv-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+.pv-card:hover .pv-card-icon {
+  transform: scale(1.08);
+}
+.pv-card-icon img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
+.pv-card-site {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s;
+}
+.pv-card:hover .pv-card-site {
+  opacity: 1;
+}
+.pv-card-site:hover {
+  color: var(--accent-dark);
+}
+.pv-card-name {
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.pv-card-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: auto;
+}
+.pv-card-num {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.pv-card-unit {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+/* 厂商总览入口卡片（最后一张） */
+.pv-card-more {
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg);
+  border: 1px dashed var(--border-strong);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.pv-card-more:hover {
+  border-color: var(--accent);
+  border-style: solid;
+  background: var(--accent-soft);
+}
+.pv-card-more::before {
+  background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent) 100%);
+}
+.pv-card-more-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.pv-card-more-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-ghost);
+  line-height: 0;
+  transition: color 0.22s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pv-card-more:hover .pv-card-more-mark {
+  color: var(--accent-dark);
+  transform: rotate(-45deg);
+}
+.pv-card-more .pv-card-name {
+  font-size: 16px;
+}
+.pv-card-more-sub {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 720px) {
+  .providers-home-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============ ABOUT ============ */

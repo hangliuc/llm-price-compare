@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=27">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -165,35 +165,48 @@
         </div>
       </section>
 
-      <!-- 厂商速览 -->
-      <section class="section">
+      <!-- 主流大模型厂商 -->
+      <section class="section providers-section">
         <div class="section-head">
           <div>
-            <h2 class="section-title">主流大模型<span class="title-normal">厂商</span></h2>
-            <p class="section-sub">覆盖国内外 {{ providerList.length }} 家主流大模型厂商，点击查看完整产品线与定价</p>
+            <div class="section-eyebrow">PARTNERS · {{ providerList.length }} 家</div>
+            <h2 class="section-title">主流大模型<em>厂商</em></h2>
+            <p class="section-sub">覆盖国内外 {{ providerList.length }} 家主流大模型厂商，点击卡片查看完整产品线与定价</p>
           </div>
-          <a href="#/providers" class="section-link">厂商总览 -></a>
         </div>
-        <div class="providers-grid providers-grid-home">
-          <div v-for="p in providerList" :key="p.id" class="provider-card" @click="goHash('#/provider/' + p.id)">
-            <div class="provider-card-head">
-              <span class="provider-card-icon">
+
+        <div class="providers-home-grid">
+          <div v-for="(p, i) in providerList" :key="p.id"
+               class="pv-card"
+               :style="{ animationDelay: (i * 0.04) + 's' }"
+               @click="goHash('#/provider/' + p.id)">
+            <div class="pv-card-top">
+              <span class="pv-card-icon">
                 <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
               </span>
-              <div class="provider-card-info">
-                <div class="provider-card-name">{{ p.name }}</div>
-                <span class="region-badge" :class="p.region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</span>
-              </div>
-              <span class="provider-card-status-badge" :class="p.statusOk ? 'ok' : 'fail'">
-                <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
-                {{ p.statusOk ? '正常' : p.statusText }}
-              </span>
+              <a :href="p.website" target="_blank" @click.stop class="pv-card-site">官网 ↗</a>
             </div>
-            <div class="provider-card-meta">
-              <span class="provider-card-count">{{ p.productCount }}<span class="count-unit"> 款产品</span></span>
-              <a :href="p.website" target="_blank" @click.stop class="provider-card-site">官网 ↗</a>
+            <div class="pv-card-name">{{ p.name }}</div>
+            <div class="pv-card-stats">
+              <span class="pv-card-num">{{ p.productCount }}</span>
+              <span class="pv-card-unit">款产品</span>
             </div>
           </div>
+
+          <!-- 最后一张：厂商总览入口 -->
+          <a href="#/providers" class="pv-card pv-card-more"
+             :style="{ animationDelay: (providerList.length * 0.04) + 's' }">
+            <div class="pv-card-more-inner">
+              <span class="pv-card-more-mark">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14"/>
+                  <path d="m13 5 7 7-7 7"/>
+                </svg>
+              </span>
+              <div class="pv-card-name">厂商总览</div>
+              <div class="pv-card-more-sub">浏览全部厂商</div>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -261,41 +274,68 @@
           <div>
             <div class="section-eyebrow">全部厂商</div>
             <h1 class="section-title">厂商<em>总览</em></h1>
-            <p class="section-sub">主流大模型厂商一览，点击卡片进入价格对比</p>
+            <p class="section-sub">主流大模型厂商一览，点击卡片进入价格对比。共 {{ providerListByRegion.total }} 家厂商，按地区分组</p>
+          </div>
+          <div class="providers-search">
+            <input
+              v-model="providerSearch"
+              placeholder="搜索厂商名称..."
+              class="providers-search-input"
+            />
           </div>
         </div>
-        <div class="freshness">
-          <span>最近更新 <b>{{ freshnessText }}</b></span>
-          <span class="freshness-sep">·</span>
-          <span><b>{{ data.providers.length }}</b> 家厂商</span>
-          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
-        </div>
-        <div class="providers-grid">
-          <div v-for="p in providerList" :key="p.id" class="provider-card" @click="goHash('#/provider/' + p.id)">
-            <div class="provider-card-head">
+
+        <!-- 国内厂商分组 -->
+        <div v-if="providerListByRegion.cn.length" class="provider-region-group">
+          <div class="provider-region-head">
+            <h2 class="provider-region-title">国内厂商</h2>
+            <span class="provider-region-count">{{ providerListByRegion.cn.length }} 家</span>
+          </div>
+          <div class="providers-grid providers-grid-compact">
+            <div v-for="p in providerListByRegion.cn" :key="p.id" class="provider-card provider-card-compact" @click="goHash('#/provider/' + p.id)">
               <span class="provider-card-icon">
                 <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
               </span>
-              <div>
+              <div class="provider-card-body">
                 <div class="provider-card-name">{{ p.name }}</div>
-                <div class="provider-card-region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</div>
+                <div class="provider-card-meta-row">
+                  <span class="provider-card-count">{{ p.productCount }} 款产品</span>
+                  <a :href="p.website" target="_blank" @click.stop class="provider-card-site">官网 ↗</a>
+                </div>
               </div>
-            </div>
-            <div class="provider-card-meta">
-              <span>{{ p.productCount }} 个产品</span>
-              <a :href="p.website" target="_blank" @click.stop>官网 ↗</a>
-            </div>
-            <div class="provider-card-status">
-              <span class="status-dot" :class="p.statusOk ? 'ok' : 'fail'"></span>
-              <span :style="{color: p.statusOk ? 'var(--green)' : 'var(--amber)'}">{{ p.statusOk ? '数据正常' : p.statusText }}</span>
             </div>
           </div>
         </div>
+
+        <!-- 国外厂商分组 -->
+        <div v-if="providerListByRegion.intl.length" class="provider-region-group">
+          <div class="provider-region-head">
+            <h2 class="provider-region-title">国外厂商</h2>
+            <span class="provider-region-count">{{ providerListByRegion.intl.length }} 家</span>
+          </div>
+          <div class="providers-grid providers-grid-compact">
+            <div v-for="p in providerListByRegion.intl" :key="p.id" class="provider-card provider-card-compact" @click="goHash('#/provider/' + p.id)">
+              <span class="provider-card-icon">
+                <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+              </span>
+              <div class="provider-card-body">
+                <div class="provider-card-name">{{ p.name }}</div>
+                <div class="provider-card-meta-row">
+                  <span class="provider-card-count">{{ p.productCount }} 款产品</span>
+                  <a :href="p.website" target="_blank" @click.stop class="provider-card-site">官网 ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 搜索无结果 -->
+        <div v-if="!providerListByRegion.total" class="loading-state">没有找到匹配的厂商</div>
       </section>
     </template>
 
-    <!-- ============ 价格对比 / 计费类型页 / 厂商详情页 ============ -->
-    <template v-if="data && (routeName === 'compare' || routeName === 'billing' || routeName === 'provider')">
+    <!-- ============ 价格对比 / 计费类型页 ============ -->
+    <template v-if="data && (routeName === 'compare' || routeName === 'billing')">
       <section class="section section-page">
         <div class="section-head">
           <div>
@@ -314,12 +354,7 @@
             <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">编程套餐</div>
             <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">Coding <em>Plan</em></h1>
             <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">面向开发者的 API 额度套餐：月付固定费用换取 Token 额度池，通过 API 接入 Claude Code、GLM Coding、方舟等编程工具，按调用扣减</p>
-
-            <div class="section-eyebrow" v-if="routeName === 'provider' && currentProvider">厂商产品</div>
-            <h1 class="section-title" v-if="routeName === 'provider' && currentProvider">{{ currentProvider.name }}<em> 全部产品</em></h1>
-            <p class="section-sub" v-if="routeName === 'provider' && currentProvider">{{ currentProvider.name_en || currentProvider.name }} 的全部计费方式产品，含按需计费、订阅制与 Coding Plan</p>
           </div>
-          <a v-if="routeName === 'provider'" href="#/providers" class="section-link">← 返回全部厂商</a>
         </div>
 
         <div class="filters">
@@ -360,7 +395,7 @@
 
         <div class="table-wrap" v-show="view === 'table'">
           <!-- 按需计费表（8 列） -->
-          <table class="price-table" v-if="billingRoute === 'per_token' || routeName === 'compare' || routeName === 'provider'">
+          <table class="price-table" v-if="billingRoute === 'per_token' || routeName === 'compare'">
             <colgroup>
               <col style="width: 11%">
               <col style="width: 22%">
@@ -530,6 +565,113 @@
       </section>
     </template>
 
+    <!-- ============ 厂商详情页：计费方式 tab 切换 ============ -->
+    <template v-if="data && routeName === 'provider' && currentProvider">
+      <section class="section section-page">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">厂商产品</div>
+            <h1 class="section-title">{{ currentProvider.name }}<em> 全部产品</em></h1>
+            <p class="section-sub">{{ currentProvider.name_en || currentProvider.name }} 的全部计费方式产品，含按需计费、订阅制与 Coding Plan</p>
+          </div>
+          <a href="#/providers" class="section-link">← 返回全部厂商</a>
+        </div>
+
+        <div class="freshness">
+          <span>最近更新 <b>{{ freshnessText }}</b></span>
+          <span class="freshness-sep">·</span>
+          <span><b>{{ filteredRows.length }}</b> 个产品</span>
+          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
+        </div>
+
+        <!-- 计费方式 tab + 货币切换 -->
+        <div class="provider-detail-toolbar">
+          <div class="provider-billing-tabs" v-if="providerBillingTabs.length > 1">
+            <button
+              v-for="t in providerBillingTabs"
+              :key="t.key"
+              :class="['provider-billing-tab', {active: providerBillingTab === t.key}]"
+              @click="providerBillingTab = t.key"
+            >{{ t.label }} <span class="tab-count">{{ t.count }}</span></button>
+          </div>
+          <div v-else class="provider-billing-tabs-single">
+            {{ providerBillingTabs[0]?.label }} <span class="tab-count">{{ providerBillingTabs[0]?.count }}</span>
+          </div>
+          <div class="currency-toggle">
+            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
+            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
+          </div>
+        </div>
+
+        <!-- 当前 tab：按需计费表格 -->
+        <div v-if="providerBillingTab === 'per_token' && providerCurrentRows.length" class="table-wrap">
+          <table class="price-table">
+            <colgroup>
+              <col style="width: 25%">
+              <col style="width: 14%">
+              <col style="width: 14%">
+              <col style="width: 14%">
+              <col style="width: 14%">
+              <col style="width: 12%">
+              <col style="width: 7%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="sortable" @click="sortBy('model')" :class="{'sort-asc': sortKey === 'model' && sortAsc, 'sort-desc': sortKey === 'model' && !sortAsc}">模型</th>
+                <th class="sortable" @click="sortBy('modalities')" :class="{'sort-asc': sortKey === 'modalities' && sortAsc, 'sort-desc': sortKey === 'modalities' && !sortAsc}">类型</th>
+                <th class="sortable" @click="sortBy('inputPrice')" :class="{'sort-asc': sortKey === 'inputPrice' && sortAsc, 'sort-desc': sortKey === 'inputPrice' && !sortAsc}" style="text-align:right">输入价<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('outputPrice')" :class="{'sort-asc': sortKey === 'outputPrice' && sortAsc, 'sort-desc': sortKey === 'outputPrice' && !sortAsc}" style="text-align:right">输出价<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('cachedInput')" :class="{'sort-asc': sortKey === 'cachedInput' && sortAsc, 'sort-desc': sortKey === 'cachedInput' && !sortAsc}" style="text-align:right">缓存命中<span class="th-unit">/1M</span></th>
+                <th class="sortable" @click="sortBy('contextWindow')" :class="{'sort-asc': sortKey === 'contextWindow' && sortAsc, 'sort-desc': sortKey === 'contextWindow' && !sortAsc}" style="text-align:right">上下文</th>
+                <th>购买</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in providerCurrentRows" :key="row.id" @click="toggleExpand(row.id)"
+                :class="{stale: row.stale, expanded: expanded === row.id}">
+                <td class="mono">{{ row.model || '—' }}</td>
+                <td class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
+                <td class="num">{{ formatPrice(row, 'input') }}</td>
+                <td class="num">{{ formatPrice(row, 'output') }}</td>
+                <td class="num">{{ formatPrice(row, 'cached_input') }}</td>
+                <td class="num">{{ formatContext(row.context_window) }}</td>
+                <td><a :href="row.purchase_url" target="_blank" @click.stop>购买</a></td>
+              </tr>
+              <tr v-if="expanded && currentRow" class="detail-row">
+                <td colspan="7">
+                  <div class="detail">
+                    <p v-if="benchmarkText(currentRow)">能力评分: {{ benchmarkText(currentRow) }}</p>
+                    <p v-if="currentRow.stale" class="stale-detail">数据来自 {{ staleHours(currentRow) }} 小时前，可能过期</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 当前 tab：订阅制 / Coding Plan 套餐卡片 -->
+        <div v-if="providerBillingTab && providerBillingTab !== 'per_token' && providerCurrentRows.length" class="provider-plan-list provider-plan-list--full">
+          <div v-for="p in providerCurrentRows" :key="p.id" class="plan-item" @click="toggleExpand(p.id)" :class="{expanded: expanded === p.id}">
+            <div class="plan-item-head">
+              <div class="plan-item-name">{{ p.model || '—' }}</div>
+              <div class="plan-item-price">{{ formatMonthly(p) }}<span class="plan-item-period">/月</span></div>
+            </div>
+            <div class="plan-item-quota">{{ formatQuota(p) }}</div>
+            <div v-if="p.prices.first_month_price" class="plan-item-promo">首月 {{ formatPrice(p, 'first_month_price') }}</div>
+            <div v-if="expanded === p.id && (p.prices.features || []).length" class="plan-item-features">
+              <ul>
+                <li v-for="(f, i) in p.prices.features" :key="i">{{ f }}</li>
+              </ul>
+            </div>
+            <a class="plan-item-buy" :href="p.purchase_url" target="_blank" @click.stop>购买 →</a>
+          </div>
+        </div>
+
+        <!-- 空状态 -->
+        <div v-if="!filteredRows.length" class="loading-state">该厂商暂无产品数据</div>
+      </section>
+    </template>
+
     <!-- ============ 关于 ============ -->
     <template v-if="data && routeName === 'about'">
       <section class="section section-page">
@@ -588,6 +730,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=14"></script>
+  <script src="app.js?v=19"></script>
 </body>
 </html>

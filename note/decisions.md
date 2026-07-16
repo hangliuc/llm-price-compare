@@ -16,6 +16,40 @@
 
 ---
 
+## 2026-07-16 · 厂商总览页与首页厂商模块重构 + 字体合规
+
+- **commit**: pending（待提交）
+- **背景**:
+  1. 厂商总览页（/providers）大卡片过于拥挤，难以快速定位厂商，且"数据正常"提示干扰浏览
+  2. 首页"主流大模型厂商"模块排版拥挤，缺乏章节感，与首页其他模块视觉节奏不协调
+  3. billing/* 页面 `.freshness b`（包裹日期和产品数，属数据层）未用 mono 字体，违反字体系统三层角色分工
+- **决策**:
+  1. 厂商总览页：紧凑横向卡片（图标+名称+产品数+官网）+ 地区分组（国内/国外）+ 搜索框；移除"数据正常"提示
+  2. 首页厂商模块：回归 `.section` 排版保持一致性；卡片用渐变背景+hover 顶部强调色条；产品数用 Geist Mono 600（数据层合规）；最后一张为"厂商总览"入口卡片（虚线边框+右箭头 SVG，hover 旋转 -45°）
+  3. 字体合规：`.freshness b` 补上 `font-family: var(--font-mono)`，weight 600→500
+- **被否决方案**:
+  - 首页厂商模块用左栏 sticky 标题 + 右栏网格的不对称分栏：与首页其他模块（.section）排版不一致
+  - 入口卡片用 `+` 字符或 `···` 带方框图标：视觉过重，不如简约 SVG 箭头
+  - 厂商卡片显示计费方式 chips 和地区标签：信息过载，核心需求是快速识别厂商
+- **影响**: `ui/index.html`（厂商总览页模板+首页厂商模块+缓存 v18→v27）、`ui/style.css`（PROVIDERS SECTION 区块+freshness b 修正+缓存 v21→v27）、`ui/app.js`（providerList 增 billingTypes+billingLabelShort，v18→v19）。后续新增厂商自动出现在首页网格，无需改模板
+
+## 2026-07-16 · 厂商详情页 tab 切换 + 货币自动适配
+
+- **commit**: pending（待提交）
+- **背景**: 三个问题
+  1. 厂商详情页强制用 per_token 表格渲染所有产品，导致 subscription/coding_plan 产品字段不匹配（Cursor/Copilot 显示空白）
+  2. 混合计费方式厂商（如 OpenAI 139 per_token + 2 subscription），用户需滚动很久才能看到订阅制
+  3. 货币无自动适配，国内厂商也默认显示 USD
+- **决策**:
+  1. 厂商详情页改为计费方式 tab 切换：per_token / subscription / coding_plan 各为一个 tab，只显示该厂商有的计费方式，默认选中第一个。单一计费方式时不显示 tab，只显示标题。per_token tab 用表格，subscription/coding_plan tab 用卡片
+  2. 货币自动适配：watch currentProvider，cn→CNY，us/eu→USD。用户仍可手动切换
+  3. watch providerBillingTabs 自动设置默认 tab（解决 currentProvider 变化时 filteredRows 未更新的时序问题）
+- **被否决方案**:
+  - 分区展示（滚动浏览所有计费方式）：OpenAI 139 款 per_token 表格太长，订阅制被压到底部体验差
+  - sticky 快速跳转锚点：保留分区但加锚点导航，仍需滚动，不如 tab 切换直接
+  - watch currentProvider 同时设置 tab 和货币：filteredRows 在 watch 触发时还未更新，providerBillingTabs 为空，导致 tab 设置失败
+- **影响**: `ui/app.js`（新增 providerBillingTabs/providerBillingTab/providerCurrentRows + 两个 watch）、`ui/index.html`（厂商详情页模板改造为 tab 切换）、`ui/style.css`（新增 tab 样式）。后续新增计费方式需在 providerBillingTabs order 数组中添加
+
 ## 2026-07-16 · 字体系统统一为三层角色分工
 
 - **commit**: `fb3f3f7` `refactor(ui): 统一字体系统为三层角色分工`
