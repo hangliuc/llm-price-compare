@@ -1,14 +1,86 @@
 # data/manual/minimax.yaml
-# MiniMax 开放平台 Token Plan，全模态额度共享
-# 数据来源：https://platform.minimaxi.com/subscribe/token-plan (2026.7 官方定价)
+# MiniMax 开放平台
+# 数据来源：https://platform.minimaxi.com/document/Price (2026.7 官方定价)
+# 注：M2.7/M2.1 价格未公开确认，不录入；视频/语音/图像模型暂不录入
 id: minimax
 name: MiniMax
 name_en: MiniMax
 region: cn
 website: https://platform.minimaxi.com/
-pricing_url: https://platform.minimaxi.com/subscribe/token-plan
+pricing_url: https://platform.minimaxi.com/document/Price
 products:
-  # ========== Token Plan（原 Coding Plan 升级） ==========
+  # ========== per_token 按需计费 ==========
+  - id: minimax-m3-token
+    model: MiniMax-M3
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text, vision]
+    prices:
+      input: 4.2
+      output: 16.8
+      cached_input: 0.42
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+  - id: minimax-m2.5-token
+    model: MiniMax-M2.5
+    billing_type: per_token
+    context_window: 204800
+    modalities: [text]
+    prices:
+      input: 2.1
+      output: 16.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+  - id: minimax-m2-token
+    model: MiniMax-M2
+    billing_type: per_token
+    context_window: 204800
+    modalities: [text]
+    prices:
+      input: 2.1
+      output: 8.4
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+  # M1 分段定价（0-32k / 32k-128k / 128k-1M）
+  - id: minimax-m1-32k
+    model: MiniMax-M1 (0-32K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+  - id: minimax-m1-128k
+    model: MiniMax-M1 (32K-128K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1.2
+      output: 16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+  - id: minimax-m1-1m
+    model: MiniMax-M1 (128K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 2.4
+      output: 24
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.minimaxi.com/document/Price
+
+  # ========== Token Plan（coding_plan）==========
+  # 原 Coding Plan 已升级为 Token Plan，全模态额度共享
   - id: minimax-token-plan-plus
     model: MiniMax Token Plan Plus
     billing_type: coding_plan

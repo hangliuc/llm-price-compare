@@ -1,6 +1,7 @@
 # data/manual/openai.yaml
 # OpenAI 订阅制产品（per_token 产品由 LiteLLM + OpenRouter 采集，此处仅维护订阅制）
-# 数据来源：https://openai.com/chatgpt/pricing (2026.6 官方定价)
+# 数据来源：https://openai.com/chatgpt/pricing (2026.7 官方定价)
+# 注：Enterprise 需联系销售，价格未公开，不录入
 id: openai
 name: OpenAI
 name_en: OpenAI
@@ -8,6 +9,20 @@ region: us
 website: https://openai.com/
 pricing_url: https://openai.com/chatgpt/pricing
 products:
+  - id: chatgpt-free
+    model: ChatGPT Free
+    billing_type: subscription
+    context_window: null
+    modalities: [text, vision]
+    prices:
+      monthly_price: 0
+      currency: USD
+      features:
+        - 无限消息与历史
+        - 访问基础模型
+        - 有限使用 GPT-5 / o 系列推理模型
+        - Web/iOS/Android 全平台
+    purchase_url: https://openai.com/chatgpt/pricing
   - id: chatgpt-plus
     model: ChatGPT Plus
     billing_type: subscription
@@ -36,3 +51,19 @@ products:
         - Pro Mode 更高算力
         - 优先访问新功能
     purchase_url: https://openai.com/chatgpt/pricing
+  - id: chatgpt-business
+    model: ChatGPT Business
+    billing_type: subscription
+    context_window: null
+    modalities: [text, vision]
+    prices:
+      monthly_price: 25
+      currency: USD
+      features:
+        - 含 Plus 全部功能
+        - 更高 GPT 模型消息上限
+        - 团队工作区共享 GPTs
+        - 管理控制台
+        - 数据默认不用于训练
+        - 最少 2 个标准席位
+    purchase_url: https://openai.com/chatgpt/business

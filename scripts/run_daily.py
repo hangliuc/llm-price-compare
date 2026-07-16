@@ -8,12 +8,13 @@
        - 无 adapter：L1 + L2 双源仲裁
     3. 现有 20%/50% 波动检测保留（与仲裁是两个维度）
     4. manual yaml 合并：
-       - reconcile 处理过的 provider：跳过 per_token 产品，保留订阅/coding_plan
+       - reconcile 处理过的 provider：归一化 id 去重，manual 优先覆盖 sources
        - 未处理的 provider：完整保留
     5. 写盘 + git push + 飞书告警
 """
 import json
 import logging
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
@@ -32,6 +33,8 @@ from scripts.core.alert import send_feishu_alerts
 from scripts.core.status import update_run_status
 from scripts.core.reconcile import reconcile_provider
 from scripts.sources import fetch_all_sources
+from scripts.core.db import get_connection
+from scripts.core import history
 
 logging.basicConfig(
     level=logging.INFO,
@@ -75,6 +78,9 @@ def has_changed(old: dict, new: dict) -> bool:
 
 
 def git_commit_push() -> bool:
+    if os.environ.get("SKIP_PUSH"):
+        log.info("SKIP_PUSH set, skipping git commit/push")
+        return True
     try:
         subprocess.run(["git", "add", str(_PRICES_PATH)], check=True)
         subprocess.run(
@@ -93,6 +99,20 @@ def _find_last_success(old_data: dict, pid: str) -> str:
         if s.get("provider_id") == pid:
             return s.get("last_success_at")
     return None
+
+
+def _products_to_dicts(products: list) -> list:
+    """把 Product 对象列表转成 dict 列表（兼容已是 dict 的手动数据）。"""
+    from scripts.core.models import Product, product_to_dict
+    result = []
+    for p in products:
+        if isinstance(p, Product):
+            result.append(product_to_dict(p))
+        elif isinstance(p, dict):
+            result.append(p)
+        else:
+            log.warning(f"unknown product type: {type(p)}, skipping")
+    return result
 
 
 def _build_provider_dict(
@@ -145,7 +165,7 @@ _PROVIDER_META = {
         "pricing_url": "https://platform.moonshot.cn/docs/pricing",
     },
     "qwen": {
-        "name": "通义千问", "name_en": "Alibaba Qwen", "region": "cn",
+        "name": "阿里通义", "name_en": "Alibaba Qwen", "region": "cn",
         "website": "https://help.aliyun.com/zh/dashscope/",
         "pricing_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
     },
@@ -175,6 +195,9 @@ def main() -> int:
     alerts = []
     summary = {}
 
+    # 初始化 SQLite 连接（自动建表）
+    db_conn = get_connection()
+
     # ========== 1. 采集外部数据源 ==========
     log.info("step 1: fetching external sources")
     sources_data = fetch_all_sources()
@@ -184,6 +207,18 @@ def main() -> int:
         "sources fetched: litellm=%d providers, openrouter=%d providers",
         len(litellm_data), len(openrouter_data),
     )
+
+    # 写入 L1/L2 原始数据留痕（便于仲裁失败时回溯）
+    for pid, products in litellm_data.items():
+        try:
+            history.write_raw_fetch(db_conn, "litellm", pid, _products_to_dicts(products))
+        except Exception as e:
+            log.error(f"write_raw_fetch litellm/{pid} failed: {e}")
+    for pid, products in openrouter_data.items():
+        try:
+            history.write_raw_fetch(db_conn, "openrouter", pid, _products_to_dicts(products))
+        except Exception as e:
+            log.error(f"write_raw_fetch openrouter/{pid} failed: {e}")
 
     # 记录已通过 reconcile 处理的 provider_id（用于后续 manual 合并）
     reconciled_pids = set()
@@ -198,6 +233,12 @@ def main() -> int:
             # L3: 官网 Scraper
             adapter_products = adapter.fetch()
             adapter_products = adapter.validate(adapter_products)
+
+            # L3 原始数据留痕
+            try:
+                history.write_raw_fetch(db_conn, "adapter", pid, _products_to_dicts(adapter_products))
+            except Exception as e:
+                log.error(f"write_raw_fetch adapter/{pid} failed: {e}")
 
             # L1 + L2 + L3 仲裁
             litellm_products = litellm_data.get(pid, [])
@@ -246,6 +287,13 @@ def main() -> int:
             status_dict["sources"] = reconcile_result.sources_used
             provider_status.append(status_dict)
             summary[pid] = "ok"
+
+            # 写入 SQLite 历史快照
+            history.write_provider_snapshots(
+                db_conn, pid, _products_to_dicts(products),
+                confidence=reconcile_result.confidence,
+                sources_used=reconcile_result.sources_used,
+            )
 
         except Exception as e:
             log.error(f"{pid} failed: {e}")
@@ -324,6 +372,13 @@ def main() -> int:
             provider_status.append(status_dict)
             summary[pid] = "ok"
 
+            # 写入 SQLite 历史快照
+            history.write_provider_snapshots(
+                db_conn, pid, _products_to_dicts(products),
+                confidence=reconcile_result.confidence,
+                sources_used=reconcile_result.sources_used,
+            )
+
         except Exception as e:
             log.error(f"{pid} sources-only reconcile failed: {e}")
             # 降级：交给 manual 兜底
@@ -335,27 +390,54 @@ def main() -> int:
     for mp in manual_providers:
         pid = mp["id"]
         if pid in reconciled_pids:
-            # 已通过 reconcile 处理：跳过 manual 的 per_token 产品，
-            # 仅保留订阅/coding_plan 产品（追加到 new_providers 中对应的 provider）
+            # 已通过 reconcile 处理：归一化 id 去重，manual 优先覆盖 sources
+            # manual 的人工确认数据（官网 CNY 定价）覆盖 sources 的低置信度数据（USD）
+            # manual 的分段产品（id 不同）自动补充，不覆盖 sources 中无对应 manual 的产品
             existing = next((p for p in new_providers if p["id"] == pid), None)
             if existing:
-                non_per_token = [
-                    prod for prod in mp.get("products", [])
-                    if prod.get("billing_type") != BillingType.PER_TOKEN.value
+                manual_products = mp.get("products", [])
+                manual_norm_ids = {
+                    (prod.get("id") or "").lower() for prod in manual_products
+                }
+                # 保留 sources 中不被 manual 覆盖的产品
+                kept = [
+                    prod for prod in existing.get("products", [])
+                    if (prod.get("id") or "").lower() not in manual_norm_ids
                 ]
-                if non_per_token:
-                    existing["products"].extend(non_per_token)
-                    log.info(f"{pid}: merged {len(non_per_token)} non-per_token from manual")
+                # manual 产品覆盖（含 per_token/subscription/coding_plan）
+                kept.extend(manual_products)
+                existing["products"] = kept
+
+                if manual_products:
+                    log.info(
+                        f"{pid}: merged {len(manual_products)} manual products "
+                        f"(overrode sources where id matched)"
+                    )
+                    history.write_provider_snapshots(
+                        db_conn, pid, manual_products,
+                        confidence="manual",
+                        sources_used=["manual"],
+                    )
                 # reconcile 已写入 status，不重复追加
                 continue
             else:
                 # reconcile 失败但 manual 有该 provider，全部保留
                 new_providers.append(mp)
                 log.info(f"{pid}: reconcile failed, kept all manual products")
+                history.write_provider_snapshots(
+                    db_conn, pid, mp.get("products", []),
+                    confidence="manual",
+                    sources_used=["manual"],
+                )
         else:
             # 未被 reconcile 处理（opencode/zhipu/volcengine），完整保留 manual
             new_providers.append(mp)
             log.info(f"{pid}: kept all manual products (not in sources)")
+            history.write_provider_snapshots(
+                db_conn, pid, mp.get("products", []),
+                confidence="manual",
+                sources_used=["manual"],
+            )
 
         # 仅对未被 reconcile 处理的 manual provider 补充 status
         provider_status.append({
@@ -369,7 +451,25 @@ def main() -> int:
         })
         summary[pid] = "ok"
 
-    # ========== 5. 写盘 + 告警 ==========
+    # ========== 5. 价格变动检测（对比今日与昨日快照）==========
+    log.info("step 5: detecting price changes")
+    try:
+        changes = history.detect_price_changes(db_conn)
+        if changes:
+            log.info(f"detected {len(changes)} price changes")
+            # 大幅变动（>20%）加入告警
+            for c in changes:
+                pct = c.get("change_pct")
+                if pct is not None and abs(pct) >= 20:
+                    alerts.append((
+                        "warning",
+                        c["provider_id"],
+                        f"{c['product_id']}.{c['field']} 变动 {pct}% ({c['old_value']}→{c['new_value']})",
+                    ))
+    except Exception as e:
+        log.error(f"detect_price_changes failed: {e}")
+
+    # ========== 6. 写盘 + 告警 ==========
     new_data = {
         "generated_at": _now_iso(),
         "providers": new_providers,
@@ -383,12 +483,14 @@ def main() -> int:
         update_run_status(success=True, providers_summary=summary)
         if alerts:
             send_feishu_alerts(alerts)
+        db_conn.close()
         log.info(f"run_daily finished, {len(summary)} providers, {len(alerts)} alerts")
         return 0
     else:
         alerts.append(("fatal", "global", "Global validation failed"))
         update_run_status(success=False, providers_summary=summary)
         send_feishu_alerts(alerts)
+        db_conn.close()
         log.error("run_daily failed: global validation failed")
         return 1
 

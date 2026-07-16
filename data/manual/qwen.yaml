@@ -1,4 +1,9 @@
 # data/manual/qwen.yaml
+# 阿里通义（Qwen）产品
+# per_token 模型由 LiteLLM + OpenRouter 采集部分，此处补全缺失模型
+# 数据来源：https://help.aliyun.com/zh/model-studio/billing (2026.7 官方定价)
+# 注：Qwen-VL 视觉模型价格未在公开页面完整披露，暂不录入
+# 注：Qwen-Turbo 已下线，由 qwen-flash 替代
 id: qwen
 name: 阿里通义
 name_en: Alibaba Qwen
@@ -6,21 +11,261 @@ region: cn
 website: https://bailian.aliyun.com/
 pricing_url: https://help.aliyun.com/zh/model-studio/billing
 products:
-  - id: qwen-max-token
-    model: Qwen-Max
+  # ========== per_token 按需计费 ==========
+  # Qwen3.7-Max（2026.5 最新旗舰）
+  - id: qwen3.7-max-token
+    model: Qwen3.7-Max
     billing_type: per_token
-    context_window: 32000
+    context_window: 1000000
     modalities: [text]
     prices:
-      input: 0.04
-      output: 0.12
+      input: 12
+      output: 36
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://help.aliyun.com/zh/model-studio/billing
-  # ========== 百炼 Coding Plan ==========
+
+  # Qwen3-Max 分段定价
+  - id: qwen3-max-32k
+    model: Qwen3-Max (0-32K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 2.5
+      output: 10
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3-max-128k
+    model: Qwen3-Max (32K-128K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 4
+      output: 16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3-max-256k
+    model: Qwen3-Max (128K-256K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 7
+      output: 28
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen3.6-Plus 分段定价
+  - id: qwen3.6-plus-256k
+    model: Qwen3.6-Plus (0-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 2
+      output: 12
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.6-plus-1m
+    model: Qwen3.6-Plus (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 8
+      output: 48
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen3.5-Plus 分段定价
+  - id: qwen3.5-plus-128k
+    model: Qwen3.5-Plus (0-128K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 4.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.5-plus-256k
+    model: Qwen3.5-Plus (128K-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 2
+      output: 12
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.5-plus-1m
+    model: Qwen3.5-Plus (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 4
+      output: 24
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen-Plus 分段定价
+  - id: qwen-plus-128k
+    model: Qwen-Plus (0-128K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 2
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen-plus-256k
+    model: Qwen-Plus (128K-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 2.4
+      output: 20
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen-plus-1m
+    model: Qwen-Plus (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 4.8
+      output: 48
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen3.6-Flash 分段定价
+  - id: qwen3.6-flash-256k
+    model: Qwen3.6-Flash (0-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1.2
+      output: 7.2
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.6-flash-1m
+    model: Qwen3.6-Flash (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 4.8
+      output: 28.8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen3.5-Flash 分段定价
+  - id: qwen3.5-flash-128k
+    model: Qwen3.5-Flash (0-128K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.2
+      output: 2
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.5-flash-256k
+    model: Qwen3.5-Flash (128K-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.8
+      output: 8
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen3.5-flash-1m
+    model: Qwen3.5-Flash (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1.2
+      output: 12
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen-Flash 分段定价（最便宜，替代已下线的 Turbo）
+  - id: qwen-flash-128k
+    model: Qwen-Flash (0-128K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.15
+      output: 1.5
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen-flash-256k
+    model: Qwen-Flash (128K-256K)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 0.6
+      output: 6
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+  - id: qwen-flash-1m
+    model: Qwen-Flash (256K-1M)
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1.2
+      output: 12
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # Qwen-Long（长上下文专项，10M 上下文）
+  - id: qwen-long-token
+    model: Qwen-Long
+    billing_type: per_token
+    context_window: 10000000
+    modalities: [text]
+    prices:
+      input: 0.5
+      output: 2
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://help.aliyun.com/zh/model-studio/billing
+
+  # ========== Coding Plan ==========
   # 数据来源：https://common-buy.aliyun.com/coding-plan (2026.7 官方定价)
-  - id: bailian-coding-plan
-    model: 百炼 Coding Plan
+  # 注：Coding Plan Lite 已于 2026-04-13 停售，不录入
+  - id: bailian-coding-plan-pro
+    model: 百炼 Coding Plan Pro
     billing_type: coding_plan
     context_window: null
     modalities: []
@@ -31,6 +276,25 @@ products:
       quota_unit: prompts_per_month
       features:
         - 6,000 次/5小时，45,000 次/周，90,000 次/月
-        - 支持 Qwen3.7-Plus、Qwen3.6-Plus、Kimi-K2.5、GLM-5、MiniMax-M2.5
+        - 支持 Qwen3.5-Plus、Qwen3-Max、Qwen3-Coder-Next、Qwen3-Coder-Plus
+        - 含部分第三方模型（Kimi-K2.5、GLM-5、MiniMax-M2.5）
         - 每日 09:30 限量抢购
     purchase_url: https://common-buy.aliyun.com/coding-plan
+
+  # ========== Token Plan 团队版（subscription）==========
+  # 数据来源：https://developer.aliyun.com/article/1745577
+  - id: bailian-token-plan-team
+    model: 百炼 Token Plan 团队版
+    billing_type: subscription
+    context_window: null
+    modalities: [text, vision]
+    prices:
+      monthly_price: 198
+      currency: CNY
+      features:
+        - 按坐席计费，198 元/坐席/月起
+        - Credits 统一计费，支持多模型
+        - 含 Qwen3.7-Max、DeepSeek、Kimi 等多模型
+        - 兼容主流编程及智能体工具
+        - 适合 5 人以上协作团队
+    purchase_url: https://developer.aliyun.com/article/1745577

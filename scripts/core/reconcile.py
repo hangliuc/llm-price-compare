@@ -81,11 +81,11 @@ def reconcile_provider(
         sources_used.append("adapter")
     result.sources_used = sources_used
 
-    # 按 product_id 索引
+    # 按 product_id 索引（归一化为小写，避免 LiteLLM/OpenRouter 大小写不一致导致同模型重复）
     by_id = {
-        "litellm": {p.id: p for p in litellm_products if p.billing_type == BillingType.PER_TOKEN},
-        "openrouter": {p.id: p for p in openrouter_products if p.billing_type == BillingType.PER_TOKEN},
-        "adapter": {p.id: p for p in adapter_products if p.billing_type == BillingType.PER_TOKEN},
+        "litellm": {(p.id or "").lower(): p for p in litellm_products if p.billing_type == BillingType.PER_TOKEN},
+        "openrouter": {(p.id or "").lower(): p for p in openrouter_products if p.billing_type == BillingType.PER_TOKEN},
+        "adapter": {(p.id or "").lower(): p for p in adapter_products if p.billing_type == BillingType.PER_TOKEN},
     }
 
     # 所有出现过的 product_id

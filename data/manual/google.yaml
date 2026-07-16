@@ -1,19 +1,76 @@
 # data/manual/google.yaml
+# Google Gemini 产品
+# per_token 产品由 LiteLLM + OpenRouter 采集，此处维护订阅制
+# 数据来源：https://one.google.com/about/ai-premium (2026.7 官方定价)
+# 注：Ultra 20x 价格未公开，不录入
 id: google
 name: Google
 name_en: Google
 region: us
 website: https://ai.google.dev/
-pricing_url: https://ai.google.dev/pricing
+pricing_url: https://one.google.com/about/ai-premium
 products:
-  - id: gemini-1.5-pro-token
-    model: Gemini 1.5 Pro
-    billing_type: per_token
-    context_window: 2000000
-    modalities: [text, vision, audio]
+  # ========== 订阅制（消费者版，集成在 Google One 中）==========
+  - id: gemini-free
+    model: Gemini Free
+    billing_type: subscription
+    context_window: null
+    modalities: [text, vision]
     prices:
-      input: 1.25
-      output: 5.0
+      monthly_price: 0
       currency: USD
-      unit: per_1m_tokens
-    purchase_url: https://ai.google.dev/pricing
+      features:
+        - 有限的 Gemini 访问
+        - 基础模型
+        - Google AI Studio 有限访问
+    purchase_url: https://one.google.com/about/ai-premium
+  - id: gemini-ai-plus
+    model: Google AI Plus
+    billing_type: subscription
+    context_window: 1000000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 4.99
+      currency: USD
+      features:
+        - 400 GB 存储
+        - 2x 使用限额
+        - Gemini Omni
+        - NotebookLM
+        - Deep Research
+        - Google Flow（200 credits/月）
+    purchase_url: https://one.google.com/about/ai-premium
+  - id: gemini-ai-pro
+    model: Google AI Pro
+    billing_type: subscription
+    context_window: 1000000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 19.99
+      currency: USD
+      features:
+        - 5 TB 存储
+        - 4x 使用限额
+        - YouTube Premium Lite
+        - Google Developer Programme（$10/月 Cloud 赠金）
+        - Deep Search
+        - Google Flow（1,000 credits/月）
+    purchase_url: https://one.google.com/about/ai-premium
+  - id: gemini-ai-ultra-5x
+    model: Google AI Ultra 5x
+    billing_type: subscription
+    context_window: 1000000
+    modalities: [text, vision]
+    prices:
+      monthly_price: 249.99
+      currency: USD
+      features:
+        - 20 TB 存储
+        - 5x Pro 限额
+        - YouTube Premium 个人版
+        - Gemini Spark
+        - Deep Think 推理模式
+        - Project Genie
+        - Google Developer Programme（$40/月 Cloud 赠金）
+        - Google Flow（10,000 credits/月）
+    purchase_url: https://one.google.com/about/ai-premium
