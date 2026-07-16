@@ -2,9 +2,9 @@ const { createApp, ref, computed, onMounted, watch } = Vue;
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
-// 本地 /ui/ 路径用 ../data/，GitHub Pages 根路径用 data/
-const inUiDir = window.location.pathname.includes("/ui/");
-const DATA_PATH = inUiDir ? "../data/prices.json" : "data/prices.json";
+// 加了 <base href="/ui/"> 后，所有相对路径基于 /ui/
+// 数据文件在 /data/，图标在 /ui/icons/，统一用相对路径
+const DATA_PATH = "../data/prices.json";
 
 // 厂商图标路径（/ui/ 下用相对路径，根路径用 ui/icons/）
 // 图标文件名映射（厂商 id → 实际文件名，不含扩展名）
@@ -28,7 +28,8 @@ const PNG_ICONS = ['volcengine'];
 const iconUrl = (id) => {
   const name = ICON_FILES[id] || id;
   const ext = PNG_ICONS.includes(id) ? 'png' : 'svg';
-  return inUiDir ? `icons/${name}.${ext}` : `ui/icons/${name}.${ext}`;
+  // <base href="/ui/"> 已让相对路径基于 /ui/，统一用 icons/相对路径
+  return `icons/${name}.${ext}`;
 };
 
 // 厂商品牌色（图标加载失败时用作占位背景）
