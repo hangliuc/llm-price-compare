@@ -21,8 +21,8 @@ COPY . .
 
 RUN mkdir -p /var/log/llm-price
 
-# cron: 每日 11:00 北京时间
-RUN echo "0 11 * * * cd /app && /usr/local/bin/python3 scripts/run_daily.py >> /var/log/llm-price/cron.log 2>&1" \
+# cron: 每 6 小时（05:00 / 11:00 / 17:00 / 23:00 北京时间）
+RUN echo "0 5,11,17,23 * * * cd /app && /usr/local/bin/python3 scripts/run_daily.py >> /var/log/llm-price/cron.log 2>&1" \
     > /etc/cron.d/llm-price \
     && chmod 0644 /etc/cron.d/llm-price \
     && crontab /etc/cron.d/llm-price

@@ -31,6 +31,6 @@ fi
 echo "============================================"
 echo " LLM Price Compare - Cron Service"
 echo " TZ: Asia/Shanghai"
-echo " Schedule: 0 11 * * * (每日 11:00)"
+echo " Schedule: 0 5,11,17,23 * * * (每 6 小时)"
 echo "============================================"
 exec cron -f
