@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=31">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -35,12 +35,36 @@
           <a href="#/about" :class="{active: routeName === 'about'}">关于</a>
         </nav>
         <div class="header-actions">
-          <input
-            class="search"
-            v-model="searchQuery"
-            placeholder="搜索厂商或模型..."
-            v-if="routeName === 'compare' || routeName === 'billing' || routeName === 'provider'"
-          />
+          <div class="header-search" v-if="routeName === 'home' || routeName === 'compare' || routeName === 'billing' || routeName === 'provider' || routeName === 'providers'">
+            <input
+              class="search"
+              v-model="globalSearch"
+              placeholder="搜索厂商..."
+              @focus="searchFocused = true"
+              @blur="searchFocused = false"
+              @keydown.enter="searchSubmit"
+              @keydown.esc="globalSearch = ''"
+            />
+            <div class="search-suggestions" v-if="searchFocused && searchSuggestions.length">
+              <a
+                v-for="p in searchSuggestions"
+                :key="p.id"
+                class="search-suggestion"
+                @mousedown.prevent="goProvider(p.id)"
+              >
+                <span class="provider-icon provider-icon--sm">
+                  <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+                </span>
+                <div class="search-suggestion-text">
+                  <div class="search-suggestion-name">{{ p.name }}</div>
+                  <div class="search-suggestion-en" v-if="p.name_en && p.name_en !== p.name">{{ p.name_en }}</div>
+                </div>
+                <svg class="search-suggestion-arrow" width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
           <a href="https://github.com/hangliuc/llm-price-compare" target="_blank" class="gh-link" aria-label="GitHub">
             <svg class="gh-icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
               <path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/>
@@ -64,7 +88,7 @@
       <section class="hero">
         <div class="hero-left">
           <h1 class="hero-title">选大模型<br><em>从定价开始</em></h1>
-          <p class="hero-sub">聚合 OpenAI、Anthropic、Google、AWS、DeepSeek、智谱等 12 家主流厂商的 Token 计费、订阅制与 Coding Plan，帮助开发者快速对比与选型</p>
+          <p class="hero-sub">聚合 OpenAI、Anthropic、Google、AWS、DeepSeek、智谱等主流厂商的 Token 计费、订阅制与 Coding Plan，帮助开发者快速对比与选型</p>
           <div class="hero-cta">
             <a href="#/compare" class="btn btn-primary">查看价格对比 →</a>
             <a href="#/providers" class="btn btn-secondary">浏览厂商</a>
@@ -379,7 +403,6 @@
           <span>最近更新 <b>{{ freshnessText }}</b></span>
           <span class="freshness-sep">·</span>
           <span><b>{{ filteredRows.length }}</b> 个产品</span>
-          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
         </div>
 
         <div class="view-toggle">
@@ -499,37 +522,51 @@
           </table>
         </div>
 
-        <!-- billing 路由（coding_plan/subscription）：按厂商分组的卡片 -->
-        <div class="provider-card-grid" v-if="routeName === 'billing' && view === 'card'">
-          <div v-for="g in groupedRows" :key="g.providerId" class="provider-plan-card" :class="{stale: g.stale}">
-            <div class="provider-plan-header">
-              <div class="provider-plan-id">
-                <span class="provider-icon">
-                  <img :src="iconUrl(g.providerId)" :alt="g.providerName" @error="onIconError($event, g.providerId)">
+        <!-- billing 路由（coding_plan/subscription）：套餐卡片网格 -->
+        <div class="plan-card-grid" v-if="routeName === 'billing' && view === 'card'">
+          <div v-for="p in billingFlatProducts" :key="p.id" class="plan-card" :class="{stale: p.stale, 'plan-card--promo': p.prices.first_month_price}">
+            <div class="plan-card-head">
+              <div class="plan-card-provider">
+                <span class="provider-icon provider-icon--sm">
+                  <img :src="iconUrl(p.providerId)" :alt="p.providerName" @error="onIconError($event, p.providerId)">
                 </span>
-                <div>
-                  <div class="provider-plan-name">{{ g.providerName }}</div>
-                  <div class="provider-plan-count">{{ g.products.length }} 个套餐</div>
-                </div>
+                <span class="plan-card-provider-name">{{ p.providerName }}</span>
               </div>
-              <span class="region-badge" :class="g.region">{{ g.region === 'cn' ? '国内' : (g.region === 'us' ? '美国' : '欧洲') }}</span>
+              <span class="plan-card-region" :class="p.region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</span>
             </div>
-            <div class="provider-plan-list">
-              <div v-for="p in g.products" :key="p.id" class="plan-item" @click="toggleExpand(p.id)" :class="{expanded: expanded === p.id}">
-                <div class="plan-item-head">
-                  <div class="plan-item-name">{{ p.model || '—' }}</div>
-                  <div class="plan-item-price">{{ formatMonthly(p) }}<span class="plan-item-period">/月</span></div>
-                </div>
-                <div class="plan-item-quota">{{ formatQuota(p) }}</div>
-                <div v-if="p.prices.first_month_price" class="plan-item-promo">首月 {{ formatPrice(p, 'first_month_price') }}</div>
-                <div v-if="expanded === p.id && (p.prices.features || []).length" class="plan-item-features">
-                  <ul>
-                    <li v-for="(f, i) in p.prices.features" :key="i">{{ f }}</li>
-                  </ul>
-                </div>
-                <a class="plan-item-buy" :href="p.purchase_url" target="_blank" @click.stop>购买 →</a>
+
+            <div class="plan-card-name">{{ p.model || '—' }}</div>
+
+            <div class="plan-card-price-row">
+              <div class="plan-card-price">
+                <span class="plan-card-price-symbol">{{ displayCurrency === 'CNY' ? '¥' : '$' }}</span>
+                <span class="plan-card-price-value">{{ formatMonthlyValue(p) }}</span>
+                <span class="plan-card-price-period">/月</span>
+              </div>
+              <div v-if="p.prices.first_month_price" class="plan-card-promo">
+                <span class="plan-card-promo-label">首月</span>
+                <span class="plan-card-promo-price">{{ formatPrice(p, 'first_month_price') }}</span>
               </div>
             </div>
+
+            <div class="plan-card-quota">
+              <span class="plan-card-quota-label">额度</span>
+              <span class="plan-card-quota-value">{{ formatQuota(p) }}</span>
+            </div>
+
+            <ul v-if="(p.prices.features || []).length" class="plan-card-features">
+              <li v-for="(f, i) in p.prices.features" :key="i">
+                <svg class="plan-card-feature-dot" width="6" height="6" viewBox="0 0 6 6" aria-hidden="true"><circle cx="3" cy="3" r="2.5" fill="currentColor"/></svg>
+                <span>{{ f }}</span>
+              </li>
+            </ul>
+
+            <a class="plan-card-buy" :href="p.purchase_url" target="_blank">
+              <span>前往订阅</span>
+              <svg class="plan-card-buy-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -581,7 +618,6 @@
           <span>最近更新 <b>{{ freshnessText }}</b></span>
           <span class="freshness-sep">·</span>
           <span><b>{{ filteredRows.length }}</b> 个产品</span>
-          <span class="stale-warning" v-if="staleCount > 0">{{ staleCount }} 家数据可能过期</span>
         </div>
 
         <!-- 计费方式 tab + 货币切换 -->
@@ -650,20 +686,40 @@
         </div>
 
         <!-- 当前 tab：订阅制 / Coding Plan 套餐卡片 -->
-        <div v-if="providerBillingTab && providerBillingTab !== 'per_token' && providerCurrentRows.length" class="provider-plan-list provider-plan-list--full">
-          <div v-for="p in providerCurrentRows" :key="p.id" class="plan-item" @click="toggleExpand(p.id)" :class="{expanded: expanded === p.id}">
-            <div class="plan-item-head">
-              <div class="plan-item-name">{{ p.model || '—' }}</div>
-              <div class="plan-item-price">{{ formatMonthly(p) }}<span class="plan-item-period">/月</span></div>
+        <div v-if="providerBillingTab && providerBillingTab !== 'per_token' && providerCurrentRows.length" class="plan-card-grid plan-card-grid--provider">
+          <div v-for="p in providerCurrentRows" :key="p.id" class="plan-card" :class="{stale: p.stale, 'plan-card--promo': p.prices.first_month_price}">
+            <div class="plan-card-name">{{ p.model || '—' }}</div>
+
+            <div class="plan-card-price-row">
+              <div class="plan-card-price">
+                <span class="plan-card-price-symbol">{{ displayCurrency === 'CNY' ? '¥' : '$' }}</span>
+                <span class="plan-card-price-value">{{ formatMonthlyValue(p) }}</span>
+                <span class="plan-card-price-period">/月</span>
+              </div>
+              <div v-if="p.prices.first_month_price" class="plan-card-promo">
+                <span class="plan-card-promo-label">首月</span>
+                <span class="plan-card-promo-price">{{ formatPrice(p, 'first_month_price') }}</span>
+              </div>
             </div>
-            <div class="plan-item-quota">{{ formatQuota(p) }}</div>
-            <div v-if="p.prices.first_month_price" class="plan-item-promo">首月 {{ formatPrice(p, 'first_month_price') }}</div>
-            <div v-if="expanded === p.id && (p.prices.features || []).length" class="plan-item-features">
-              <ul>
-                <li v-for="(f, i) in p.prices.features" :key="i">{{ f }}</li>
-              </ul>
+
+            <div class="plan-card-quota">
+              <span class="plan-card-quota-label">额度</span>
+              <span class="plan-card-quota-value">{{ formatQuota(p) }}</span>
             </div>
-            <a class="plan-item-buy" :href="p.purchase_url" target="_blank" @click.stop>购买 →</a>
+
+            <ul v-if="(p.prices.features || []).length" class="plan-card-features">
+              <li v-for="(f, i) in p.prices.features" :key="i">
+                <svg class="plan-card-feature-dot" width="6" height="6" viewBox="0 0 6 6" aria-hidden="true"><circle cx="3" cy="3" r="2.5" fill="currentColor"/></svg>
+                <span>{{ f }}</span>
+              </li>
+            </ul>
+
+            <a class="plan-card-buy" :href="p.purchase_url" target="_blank">
+              <span>前往订阅</span>
+              <svg class="plan-card-buy-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -678,38 +734,93 @@
         <div class="section-head">
           <div>
             <div class="section-eyebrow">关于本项目</div>
-            <h1 class="section-title">关于</h1>
+            <h1 class="section-title">关于 <em>PPK</em></h1>
             <p class="section-sub">非商业的大模型价格聚合工具</p>
           </div>
         </div>
+
         <div class="about-page">
-          <p>PPK (Price Per Token) 帮助开发者快速对比各主流厂商的 Token 价格、订阅制和 Coding Plan。数据通过 Python 爬虫定时抓取各厂商公开定价页面，经校验后生成静态 JSON，由前端实时渲染。单个厂商抓取失败不影响其他厂商数据展示。</p>
 
+          <!-- 项目简介 -->
+          <p class="lead">
+            PPK（Price Per Token）是一个非商业的大模型价格聚合工具，
+            帮助开发者快速对比各主流厂商的 <strong>Token 计费</strong>、
+            <strong>订阅制</strong> 与 <strong>Coding Plan</strong>。
+            数据通过 Python 爬虫定时抓取厂商公开定价页面，
+            经多源交叉校验后生成静态 JSON，由前端实时渲染。
+            单个厂商抓取失败不影响其他厂商数据展示。
+          </p>
+
+          <!-- 数据来源（动态） -->
           <h2>数据<em>来源</em></h2>
-          <ul>
-            <li>OpenAI</li>
-            <li>Anthropic</li>
-            <li>Google</li>
-            <li>DeepSeek</li>
-            <li>智谱</li>
-            <li>火山引擎</li>
-            <li>OpenCode</li>
-            <li>通义千问</li>
-            <li>Kimi</li>
-            <li>AWS</li>
-            <li>MiniMax</li>
-            <li>小米</li>
-          </ul>
+          <p class="about-note">目前聚合以下 {{ providerList.length }} 家厂商，持续扩充中：</p>
+          <div class="about-providers">
+            <div v-for="p in providerList" :key="p.id" class="about-provider" @click="goHash(`#/provider/${p.id}`)">
+              <span class="provider-icon provider-icon--sm">
+                <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
+              </span>
+              <div class="about-provider-text">
+                <div class="about-provider-name">{{ p.name }}</div>
+                <div class="about-provider-en" v-if="p.name_en && p.name_en !== p.name">{{ p.name_en }}</div>
+              </div>
+              <span class="about-provider-region" :class="p.region">{{ p.region === 'cn' ? '国内' : (p.region === 'us' ? '美国' : '欧洲') }}</span>
+            </div>
+          </div>
 
+          <!-- 数据采集流程 -->
+          <h2>采集<em>流程</em></h2>
+          <p>采用三源交叉验证架构，确保数据准确性：</p>
+          <ol class="about-flow">
+            <li>
+              <span class="about-flow-num">L1</span>
+              <div>
+                <strong>LiteLLM</strong> — 社区维护的统一价格 JSON，作为主源采集大部分厂商的 per_token 价格。
+              </div>
+            </li>
+            <li>
+              <span class="about-flow-num">L2</span>
+              <div>
+                <strong>OpenRouter API</strong> — 提供 benchmark 指标和元数据，用于交叉验证 L1 数据的准确性。
+              </div>
+            </li>
+            <li>
+              <span class="about-flow-num">L3</span>
+              <div>
+                <strong>官网爬虫</strong> — 针对部分厂商（如 DeepSeek、智谱、Cursor）开发专属 Adapter，直接抓取官方定价页。
+              </div>
+            </li>
+            <li>
+              <span class="about-flow-num">M</span>
+              <div>
+                <strong>人工补充</strong> — 订阅制与 Coding Plan 套餐多为 YAML 手工维护，确保套餐详情完整。
+              </div>
+            </li>
+          </ol>
+          <p class="about-note">仲裁层（reconcile）会对比三源数据，标记置信度（high / medium / low / manual），价格波动超过 20% 触发警告，超过 50% 阻断更新以防止异常数据。</p>
+
+          <!-- 历史数据 -->
+          <h2>历史<em>追溯</em></h2>
+          <p>所有快照同步写入 SQLite 数据库（每日 500+ 条记录），支持按厂商、产品、日期查询历史价格变动，便于追溯调价轨迹。原始抓取数据完整留痕，便于回溯仲裁决策。</p>
+
+          <!-- 技术栈 -->
           <h2>技术<em>栈</em></h2>
           <ul>
-            <li>后端：Python 爬虫 + Playwright</li>
-            <li>前端：Vue 3 CDN（无构建步骤）</li>
-            <li>部署：Docker + Cron + GitHub Pages</li>
+            <li><strong>数据采集</strong>：Python + Playwright + 多源仲裁</li>
+            <li><strong>数据存储</strong>：SQLite（历史快照）+ JSON（前端数据契约）</li>
+            <li><strong>前端</strong>：Vue 3 CDN（无构建步骤）+ Instrument Serif / Geist / Geist Mono 三层字体系统</li>
+            <li><strong>部署</strong>：Docker Compose + Cron（自有服务器调度）+ GitHub Pages（静态站点）</li>
+            <li><strong>告警</strong>：飞书 Webhook 实时推送抓取失败与价格异常</li>
           </ul>
 
-          <h2>反馈</h2>
-          <p>如发现价格错误或有新厂商建议，请通过 <a :href="feedbackUrl" target="_blank">GitHub Issues</a> 反馈。</p>
+          <!-- 反馈 -->
+          <h2>反馈<em>与贡献</em></h2>
+          <p>本项目开源且非商业。如发现价格错误、数据过期或有新厂商建议，欢迎通过以下方式参与：</p>
+          <ul>
+            <li><a :href="feedbackUrl" target="_blank">GitHub Issues</a> — 提交价格纠错或新厂商建议（含预填模板）</li>
+            <li><a href="https://github.com/hangliuc/llm-price-compare" target="_blank">GitHub 仓库</a> — 查看源码、提交 PR</li>
+          </ul>
+          <p class="about-note">数据仅供参考，实际价格以厂商官方为准。本项目不对数据准确性作出担保。</p>
+
         </div>
       </section>
     </template>
@@ -730,6 +841,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=19"></script>
+  <script src="app.js?v=23"></script>
 </body>
 </html>

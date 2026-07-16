@@ -63,6 +63,9 @@ createApp({
     const data = ref(null);
     const error = ref(null);
     const searchQuery = ref("");
+    // 全局导航搜索（首页/比较页共用）：输入厂商中英文名/ID 模糊匹配，下拉建议跳转
+    const globalSearch = ref("");
+    const searchFocused = ref(false);
     // 视图模式：coding_plan/subscription 默认卡片，其它默认表格
     // _viewOverride 记录用户手动切换后的值，避免路由变化时覆盖
     const _viewOverride = ref(null);
@@ -289,6 +292,38 @@ createApp({
       return { per_token: "Token", subscription: "订阅", coding_plan: "Coding" }[b] || b;
     }
 
+    // 全局搜索匹配列表（用于下拉建议 + 回车跳转到第一个匹配项）
+    const searchMatches = computed(() => {
+      const q = globalSearch.value.trim().toLowerCase();
+      if (!q) return [];
+      const list = providerList.value || [];
+      return list.filter(p => {
+        const name = (p.name || '').toLowerCase();
+        const nameEn = (p.name_en || '').toLowerCase();
+        const id = (p.id || '').toLowerCase();
+        return name.includes(q) || nameEn.includes(q) || id.includes(q);
+      });
+    });
+    // 下拉建议最多 8 条
+    const searchSuggestions = computed(() => searchMatches.value.slice(0, 8));
+
+    // 回车跳转到第一个匹配项；无匹配则跳转到厂商总览页
+    function goProvider(pid) {
+      globalSearch.value = "";
+      searchFocused.value = false;
+      goHash(`#/provider/${pid}`);
+    }
+    function searchSubmit() {
+      const matches = searchMatches.value;
+      if (matches.length > 0) {
+        goProvider(matches[0].id);
+      } else {
+        goHash('#/providers');
+        globalSearch.value = "";
+        searchFocused.value = false;
+      }
+    }
+
     // 厂商总览页：按地区分组（国内 cn / 国外 us+eu），支持本地搜索过滤
     const providerSearch = ref('');
     const providerListByRegion = computed(() => {
@@ -305,11 +340,10 @@ createApp({
       return { cn, intl, total: list.length };
     });
 
-    // 按厂商分组的卡片视图数据（coding_plan/subscription 用）
-    // 一张卡片一个厂商，含该厂商当前 billing_type 下所有套餐
+    // 按厂商分组的卡片视图数据（兼容旧引用，保留但不再用于渲染）
     const groupedRows = computed(() => {
       const rows = filteredRows.value;
-      const map = new Map();  // providerId -> { provider, products }
+      const map = new Map();
       for (const r of rows) {
         if (!map.has(r.providerId)) {
           map.set(r.providerId, {
@@ -324,6 +358,22 @@ createApp({
         map.get(r.providerId).products.push(r);
       }
       return [...map.values()];
+    });
+
+    // billing 路由扁平化产品列表：一张卡片一个套餐
+    // 按厂商分组，同厂商内按月费升序
+    const billingFlatProducts = computed(() => {
+      const rows = filteredRows.value.slice();
+      // 稳定排序：厂商名 → 月费
+      rows.sort((a, b) => {
+        const pa = a.providerName || '';
+        const pb = b.providerName || '';
+        if (pa !== pb) return pa.localeCompare(pb, 'zh');
+        const ma = a.prices?.monthly_price ?? Infinity;
+        const mb = b.prices?.monthly_price ?? Infinity;
+        return ma - mb;
+      });
+      return rows;
     });
 
     // 厂商详情页：按计费方式分区展示
@@ -672,6 +722,23 @@ createApp({
       return `${sym}${val}`;
     }
 
+    // 月费数字部分（符号由模板渲染，便于大字号排版）
+    function formatMonthlyValue(row) {
+      const p = row.prices;
+      if (!p || p.monthly_price == null) return "—";
+      const cur = p.currency;
+      let val = p.monthly_price;
+      if (cur === displayCurrency.value) {
+        val = val;
+      } else if (cur === "USD" && displayCurrency.value === "CNY") {
+        val = (val * USD_TO_CNY).toFixed(0);
+      } else if (cur === "CNY" && displayCurrency.value === "USD") {
+        val = (val / USD_TO_CNY).toFixed(2);
+      }
+      // 整数不带小数
+      return Number.isInteger(Number(val)) ? String(val) : String(val);
+    }
+
     // 额度格式化（coding_plan / subscription）
     function formatQuota(row) {
       const p = row.prices;
@@ -727,18 +794,18 @@ createApp({
     onMounted(loadData);
 
     return {
-      data, error, searchQuery, view, displayCurrency, expanded,
+      data, error, searchQuery, globalSearch, searchFocused, searchMatches, searchSuggestions, goProvider, searchSubmit, view, displayCurrency, expanded,
       sortKey, sortAsc, filters, regions, billingTypes, modalities,
       route, routeName, billingRoute, providerRouteId, currentProvider,
       filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
       perTokenCount, subscriptionCount, codingPlanCount,
       billingSlides, billingSlideIndex, billingSlideDir, goBillingSlide,
       tickerFeatured, tickerCards,
-      providerList, providerFilterList, providerSearch, providerListByRegion, groupedRows, allProvidersForOrbit, orbitStyle,
+      providerList, providerFilterList, providerSearch, providerListByRegion, groupedRows, billingFlatProducts, allProvidersForOrbit, orbitStyle,
       providerPerTokenRows, providerPlanGroups,
       providerBillingTabs, providerBillingTab, providerCurrentRows,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
-      formatPrice, formatContext, formatMonthly, formatQuota, benchmarkText, staleHours, iconUrl, onIconError, goHash,
+      formatPrice, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, staleHours, iconUrl, onIconError, goHash,
     };
   },
 }).mount("#app");
