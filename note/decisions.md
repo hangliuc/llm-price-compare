@@ -16,6 +16,30 @@
 
 ---
 
+## 2026-07-17 · 统一 per_token purchase_url 为厂商官方定价页
+
+- **commit**: pending（待提交）
+- **背景**:
+  1. per_token 产品的 `purchase_url` 来自多个数据源，混杂 OpenRouter (`openrouter.ai/<vendor>/<model>`)、LiteLLM（部分厂商官方页）、manual yaml（官方定价页）
+  2. 90%+ 的 per_token 产品走 OpenRouter 来源，点击"购买"跳转到 openrouter.ai 的模型详情页，对终端用户无意义——用户想看官方定价、去官方充值，而不是通过 OpenRouter 中转
+  3. OpenRouter 对国内厂商（阿里通义/MiniMax/火山引擎等）充值不便，用户体验差
+- **决策**:
+  1. 在 `run_daily.py` 新增 step 4.5：统一覆盖所有 per_token 产品的 `purchase_url` 为厂商官方 `pricing_url`
+  2. 数据来源：manual yaml 的 `pricing_url` + `_PROVIDER_META` 的 `pricing_url` + adapter 的 `pricing_url`，所有 14 个厂商已覆盖
+  3. **subscription / coding_plan 保持 manual yaml 的精准购买页不变**（如 `openai.com/chatgpt/business`、`common-buy.aliyun.com/coding-plan`），因为它们的购买页比 `pricing_url` 更精准，直接对应具体套餐
+- **被否决方案**:
+  - **保留 OpenRouter 链接 + 改文案"通过 OpenRouter"**：OpenRouter 对国内用户充值不便，且暴露数据源给终端用户不专业
+  - **取消购买按钮**：失去跳转便利，用户需要自己去搜索厂商定价页
+  - **双链接（官方 + OpenRouter）**：UI 复杂度高，按钮区放两个链接拥挤，不符合 MVP 简洁原则
+  - **在 reconcile 层处理**：reconcile 的 `_pick_purchase_url` 按 adapter > litellm > openrouter 优先级取值，但 sources-only 厂商（google/aws/moonshot 等）没 adapter，仍会取 OpenRouter 链接。放在 run_daily 统一处理更干净
+- **影响**:
+  - [scripts/run_daily.py](file:///Users/shareit/personal/llm-price-compare/scripts/run_daily.py) 新增 step 4.5
+  - 11 个有 per_token 产品的厂商共 565 条产品链接被统一覆盖
+  - `data/prices.json` 的 per_token 产品 purchase_url 全部指向厂商官方定价页
+  - 前端 UI 无需改动，按钮文案和样式保持不变
+
+---
+
 ## 2026-07-16 · 修复 product_id 大小写归一化 + manual 优先覆盖
 
 - **commit**: pending（待提交）

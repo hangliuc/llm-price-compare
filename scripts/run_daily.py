@@ -451,6 +451,24 @@ def main() -> int:
         })
         summary[pid] = "ok"
 
+    # ========== 4.5 统一 per_token 产品的 purchase_url 为厂商官方定价页 ==========
+    # OpenRouter/LiteLLM 来源的 purchase_url 指向 openrouter.ai，对终端用户无意义
+    # 统一覆盖为厂商官方 pricing_url，subscription/coding_plan 保持 manual 的精准购买页
+    log.info("step 4.5: unifying per_token purchase_url to vendor pricing page")
+    for provider in new_providers:
+        pid = provider.get("id", "")
+        pricing_url = provider.get("pricing_url", "")
+        if not pricing_url:
+            log.warning(f"{pid}: missing pricing_url, skip purchase_url override")
+            continue
+        per_token_count = 0
+        for prod in provider.get("products", []):
+            if prod.get("billing_type") == "per_token":
+                prod["purchase_url"] = pricing_url
+                per_token_count += 1
+        if per_token_count:
+            log.info(f"{pid}: unified {per_token_count} per_token purchase_url → {pricing_url}")
+
     # ========== 5. 价格变动检测（对比今日与昨日快照）==========
     log.info("step 5: detecting price changes")
     try:
