@@ -87,7 +87,20 @@ def git_commit_push() -> bool:
             ["git", "commit", "-m", f"chore(data): update prices {_now_iso()}", "--", str(_PRICES_PATH)],
             check=True,
         )
-        subprocess.run(["git", "push"], check=True)
+        # 兼容容器内首次 push 无 upstream 的情况
+        # git push 失败时回退到 --set-upstream 重试一次
+        result = subprocess.run(["git", "push"], capture_output=True, text=True)
+        if result.returncode != 0:
+            if "no upstream branch" in result.stderr or "set-upstream" in result.stderr:
+                log.info("no upstream set, retrying with --set-upstream origin master")
+                subprocess.run(
+                    ["git", "push", "--set-upstream", "origin", "master"],
+                    check=True,
+                )
+            else:
+                raise subprocess.CalledProcessError(
+                    result.returncode, ["git", "push"], result.stdout, result.stderr
+                )
         return True
     except subprocess.CalledProcessError as e:
         log.error(f"git push failed: {e}")
