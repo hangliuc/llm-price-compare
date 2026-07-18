@@ -8,6 +8,7 @@ name_en: Zhipu AI
 region: cn
 website: https://open.bigmodel.cn/
 pricing_url: https://open.bigmodel.cn/pricing
+pricing_url_overseas: https://open.bigmodel.ai/pricing
 products:
   # ========== 旗舰文本模型 ==========
   - id: glm-5.2-token

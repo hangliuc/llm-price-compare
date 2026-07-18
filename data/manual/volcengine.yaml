@@ -56,8 +56,8 @@ products:
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://www.volcengine.com/product/ark
-  - id: doubao-seed-1.6-token
-    model: doubao-seed-1.6
+  - id: doubao-seed-1.6-32k-token
+    model: doubao-seed-1.6 (0-32K)
     billing_type: per_token
     context_window: 256000
     modalities: [text]
@@ -68,14 +68,62 @@ products:
       currency: CNY
       unit: per_1m_tokens
     purchase_url: https://www.volcengine.com/product/ark
-  - id: doubao-seed-1.6-flash-token
-    model: doubao-seed-1.6-flash
+  - id: doubao-seed-1.6-128k-token
+    model: doubao-seed-1.6 (32K-128K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 1.2
+      output: 16.0
+      cached_input: 0.16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-256k-token
+    model: doubao-seed-1.6 (128K-256K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 2.4
+      output: 24.0
+      cached_input: 0.16
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-flash-32k-token
+    model: doubao-seed-1.6-flash (0-32K)
     billing_type: per_token
     context_window: 256000
     modalities: [text]
     prices:
       input: 0.15
       output: 1.5
+      cached_input: 0.03
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-flash-128k-token
+    model: doubao-seed-1.6-flash (32K-128K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 0.3
+      output: 3.0
+      cached_input: 0.03
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://www.volcengine.com/product/ark
+  - id: doubao-seed-1.6-flash-256k-token
+    model: doubao-seed-1.6-flash (128K-256K)
+    billing_type: per_token
+    context_window: 256000
+    modalities: [text]
+    prices:
+      input: 0.6
+      output: 6.0
       cached_input: 0.03
       currency: CNY
       unit: per_1m_tokens
@@ -150,3 +198,76 @@ products:
         - 5 倍 Lite 额度
         - 全量模型 + Auto 自动选模 + 优先调度
     purchase_url: https://www.volcengine.com/product/ark
+  # ========== 方舟 Agent Plan ==========
+  # 数据来源：https://www.volcengine.com/activity/agentplan (2026.7 活动价)
+  # Agent Plan 采用 Agent 燃料值（AFP）统一计量，支持编程+多模态+Harness
+  - id: ark-agent-plan-small
+    model: 方舟 Agent Plan Small
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 40
+      first_month_price: 9.9
+      currency: CNY
+      included_quota: 20000
+      quota_unit: afp_per_month
+      features:
+        - 20,000 AFP/月，7,000 AFP/周，2,000 AFP/5小时
+        - 主流编程模型（Doubao-Seed-2.0、DeepSeek V4、GLM-5.2 等）
+        - Seedream 5.0 lite 图片生成
+        - 联网搜索 Harness
+        - 不支持视频生成
+    purchase_url: https://www.volcengine.com/activity/agentplan
+  - id: ark-agent-plan-medium
+    model: 方舟 Agent Plan Medium
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 200
+      first_month_price: 49.9
+      currency: CNY
+      included_quota: 100000
+      quota_unit: afp_per_month
+      features:
+        - 100,000 AFP/月，35,000 AFP/周，10,000 AFP/5小时
+        - 5 倍 Small 用量
+        - 赠送 ArkClaw 轻量版
+        - 支持 Seedance 1.5 Pro 视频生成
+        - 多模态及联网搜索 Harness 升级
+    purchase_url: https://www.volcengine.com/activity/agentplan
+  - id: ark-agent-plan-large
+    model: 方舟 Agent Plan Large
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 500
+      currency: CNY
+      included_quota: 250000
+      quota_unit: afp_per_month
+      features:
+        - 250,000 AFP/月，87,500 AFP/周，25,000 AFP/5小时
+        - 12.5 倍 Small 用量
+        - 赠送 ArkClaw 轻量版
+        - 领先支持 Seedance 2.0
+        - 高阶多模态及联网搜索 Harness
+    purchase_url: https://www.volcengine.com/activity/agentplan
+  - id: ark-agent-plan-max
+    model: 方舟 Agent Plan Max
+    billing_type: coding_plan
+    context_window: null
+    modalities: []
+    prices:
+      monthly_price: 1000
+      currency: CNY
+      included_quota: 500000
+      quota_unit: afp_per_month
+      features:
+        - 500,000 AFP/月，175,000 AFP/周，50,000 AFP/5小时
+        - 25 倍 Small 用量
+        - 赠送 ArkClaw 轻量版
+        - 领先支持 Seedance 2.0
+        - 极致多模态及联网搜索 Harness
+    purchase_url: https://www.volcengine.com/activity/agentplan

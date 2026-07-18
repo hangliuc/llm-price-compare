@@ -7,7 +7,7 @@ name: OpenAI
 name_en: OpenAI
 region: us
 website: https://openai.com/
-pricing_url: https://openai.com/chatgpt/pricing
+pricing_url: https://platform.openai.com/docs/pricing
 products:
   - id: chatgpt-free
     model: ChatGPT Free

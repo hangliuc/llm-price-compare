@@ -8,6 +8,31 @@ region: cn
 website: https://platform.xiaomimimo.com/
 pricing_url: https://platform.xiaomimimo.com/
 products:
+  # ========== per_token 按需计费 ==========
+  - id: mimo-v2.5-pro-cn-token
+    model: MiMo-V2.5-Pro
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 3
+      output: 6
+      cached_input: 0.025
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.xiaomimimo.com/
+  - id: mimo-v2.5-cn-token
+    model: MiMo-V2.5
+    billing_type: per_token
+    context_window: 128000
+    modalities: [text]
+    prices:
+      input: 1
+      output: 2
+      cached_input: 0.02
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://platform.xiaomimimo.com/
   # ========== MiMo Token Plan ==========
   - id: mimo-token-plan-lite
     model: MiMo Token Plan Lite

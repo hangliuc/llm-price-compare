@@ -87,7 +87,12 @@ class VolatilityResult:
     warnings: list = field(default_factory=list)
 
 
+# 参与波动检测的字段
+# cached_input 不参与 block 判断：缓存价格通常很低（如 0.02），小绝对值变化会产生
+# 大百分比（如 0.02145 → 0.1345 = 527%），容易误 block 正常调价
+# 但 cached_input 仍参与 warning（>20% 提醒），只不触发 >50% block
 _PRICE_FIELDS = ["input", "output", "cached_input", "monthly_price"]
+_PRICE_FIELDS_BLOCK = ["input", "output", "monthly_price"]
 
 
 def _pct_change(old: float, new: float) -> float:
@@ -119,11 +124,17 @@ def check_volatility(old_provider: Optional[dict], new_products: list) -> Volati
         if old_currency and new_currency and old_currency != new_currency:
             continue
 
+        # 所有字段都参与 warning（>20%）
+        # 但只有 _PRICE_FIELDS_BLOCK 中的字段参与 block 判断（>50%）
+        block_max_pct = 0.0
         for f in _PRICE_FIELDS:
             if f in old_prices and f in new_prices:
                 pct = _pct_change(float(old_prices[f]), float(new_prices[f]))
                 if pct > result.max_pct:
                     result.max_pct = pct
+                if f in _PRICE_FIELDS_BLOCK:
+                    if pct > block_max_pct:
+                        block_max_pct = pct
                 if pct > 20.0:
                     result.warnings.append({
                         "product_id": pid,
@@ -133,7 +144,7 @@ def check_volatility(old_provider: Optional[dict], new_products: list) -> Volati
                         "volatility_pct": round(pct, 2),
                     })
 
-    if result.max_pct > 50.0:
+    if block_max_pct > 50.0:
         result.should_block = True
 
     return result

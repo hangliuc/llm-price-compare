@@ -1,0 +1,71 @@
+# data/manual/kiro.yaml
+# AWS Kiro 订阅制产品
+# Kiro 是 AWS 推出的 Agentic AI IDE，支持 spec-driven development
+# 数据来源：https://kiro.dev/ (2026.7 官方定价)
+# 注：Pro/Pro+/Power 的精确 credits 额度未公开，仅 Free = 50 credits/月已确认
+id: kiro
+name: Kiro
+name_en: Kiro
+region: us
+website: https://kiro.dev/
+pricing_url: https://kiro.dev/
+products:
+  - id: kiro-free
+    model: Kiro Free
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 0
+      currency: USD
+      features:
+        - 50 credits/月
+        - 新用户 500 额外 credits（14 天内有效）
+        - Auto 模式（多模型组合）
+        - IDE + CLI + Web + Mobile
+    purchase_url: https://kiro.dev/
+  - id: kiro-pro
+    model: Kiro Pro
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 20
+      currency: USD
+      features:
+        - 个人开发者基础付费档
+        - 统一 credit 池，按任务复杂度计费
+        - Auto 模式 + 指定模型模式
+        - 可开启超额使用（$0.04/credit）
+        - IDE + CLI + Web + Mobile
+    purchase_url: https://kiro.dev/
+  - id: kiro-pro-plus
+    model: Kiro Pro+
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 40
+      currency: USD
+      features:
+        - 个人开发者进阶档
+        - 更高 credit 额度
+        - 统一 credit 池，按任务复杂度计费
+        - Auto 模式 + 指定模型模式
+        - 可开启超额使用（$0.04/credit）
+    purchase_url: https://kiro.dev/
+  - id: kiro-power
+    model: Kiro Power
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 200
+      currency: USD
+      features:
+        - 重度专业用户旗舰档
+        - 最高 credit 额度
+        - 统一 credit 池，按任务复杂度计费
+        - Auto 模式 + 指定模型模式
+        - 可开启超额使用（$0.04/credit）
+    purchase_url: https://kiro.dev/

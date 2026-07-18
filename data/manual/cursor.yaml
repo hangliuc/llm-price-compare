@@ -1,6 +1,6 @@
 # data/manual/cursor.yaml
 # Cursor IDE 订阅制产品
-# 数据来源：https://cursor.com/pricing (2026.6 官方定价)
+# 数据来源：https://cursor.com/pricing + https://cursor.com/docs/account/pricing (2026.7 官方定价)
 id: cursor
 name: Cursor
 name_en: Cursor
@@ -8,6 +8,20 @@ region: us
 website: https://cursor.com/
 pricing_url: https://cursor.com/pricing
 products:
+  # ========== 个人版 ==========
+  - id: cursor-hobby
+    model: Cursor Hobby
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 0
+      currency: USD
+      features:
+        - 无需信用卡
+        - 有限 Agent 请求
+        - 有限 Tab 补全
+    purchase_url: https://cursor.com/pricing
   - id: cursor-pro
     model: Cursor Pro
     billing_type: subscription
@@ -17,10 +31,12 @@ products:
       monthly_price: 20
       currency: USD
       features:
-        - 500 次 fast 请求/月
-        - 不限量 slow 请求
-        - 支持 Claude、GPT、Gemini 等多模型
-        - Agent 模式多文件编辑
+        - 包含 $20 API 用量
+        - 扩展 Agent 使用限额
+        - 支持 Claude、GPT、Gemini、Grok 等前沿模型
+        - MCPs、Skills 和 Hooks
+        - Cloud agents
+        - Bugbot 按用量计费
     purchase_url: https://cursor.com/pricing
   - id: cursor-pro-plus
     model: Cursor Pro+
@@ -31,8 +47,42 @@ products:
       monthly_price: 60
       currency: USD
       features:
-        - 20 倍 Pro 用量
-        - 优先访问旗舰模型
-        - 更高并发
-        - Agent 模式多文件编辑
+        - 包含 $70 API 用量
+        - 适合日常 Agent 用户
+        - 扩展 Agent 使用限额
+        - 支持前沿模型 + Composer 2
+        - Cloud agents + Bugbot
+    purchase_url: https://cursor.com/pricing
+  - id: cursor-ultra
+    model: Cursor Ultra
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 200
+      currency: USD
+      features:
+        - 包含 $400 API 用量
+        - 适合 Agent 重度用户
+        - 最大用量额度
+        - 全量前沿模型 + Composer 2
+        - Cloud agents + Bugbot
+    purchase_url: https://cursor.com/pricing
+  # ========== 团队版 ==========
+  - id: cursor-teams
+    model: Cursor Teams
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 40
+      currency: USD
+      features:
+        - 集中团队计费和管理
+        - 团队市场（内部 rules、skills、plugins）
+        - Agent 代码审查（Bugbot）
+        - 共享团队上下文的 Cloud agents
+        - 团队行为用量分析
+        - 团队级隐私模式
+        - SAML/OIDC SSO
     purchase_url: https://cursor.com/pricing

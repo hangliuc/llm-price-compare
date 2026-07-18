@@ -10,6 +10,7 @@ name_en: Alibaba Qwen
 region: cn
 website: https://bailian.aliyun.com/
 pricing_url: https://help.aliyun.com/zh/model-studio/billing
+pricing_url_overseas: https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio
 products:
   # ========== per_token 按需计费 ==========
   # Qwen3.7-Max（2026.5 最新旗舰）

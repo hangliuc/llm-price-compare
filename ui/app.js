@@ -23,6 +23,7 @@ const ICON_FILES = {
   xiaomi: '小米',
   githubcopilot: 'githubcopilot',
   cursor: 'cursor',
+  kiro: 'kiro',
 };
 const PNG_ICONS = ['volcengine'];
 const iconUrl = (id) => {
@@ -39,6 +40,7 @@ const PROVIDER_COLORS = {
   qwen: '#6950EF', moonshot: '#000000',
   aws: '#FF9900', minimax: '#FF6B6B', xiaomi: '#FF6900',
   githubcopilot: '#24292E', cursor: '#000000',
+  kiro: '#FF9900',
 };
 
 // 厂商元数据（用于 provider_status 中存在但 providers 数组中没有的抓取失败厂商）
@@ -57,6 +59,7 @@ const PROVIDER_META = {
   xiaomi: { name: '小米', name_en: 'Xiaomi', region: 'cn' },
   githubcopilot: { name: 'GitHub Copilot', name_en: 'GitHub Copilot', region: 'us' },
   cursor: { name: 'Cursor', name_en: 'Cursor', region: 'us' },
+  kiro: { name: 'Kiro', name_en: 'Kiro', region: 'us' },
 };
 
 createApp({
@@ -377,6 +380,37 @@ createApp({
       return rows;
     });
 
+    // billing 路由：按实际货币分组（CNY / USD），同一厂商可能两边都有
+    const billingCurrencyTab = ref('CNY');
+
+    const billingCnyCount = computed(() => {
+      if (routeName.value !== 'billing') return 0;
+      return filteredRows.value.filter(r => r.prices?.currency === 'CNY').length;
+    });
+    const billingUsdCount = computed(() => {
+      if (routeName.value !== 'billing') return 0;
+      return filteredRows.value.filter(r => r.prices?.currency === 'USD').length;
+    });
+
+    // 进入 billing 路由时：默认显示产品数量多的货币 Tab
+    watch(billingRoute, () => {
+      if (routeName.value !== 'billing') return;
+      billingCurrencyTab.value = billingCnyCount.value >= billingUsdCount.value ? 'CNY' : 'USD';
+    });
+
+    // billing 路由表格用：按选中货币筛选
+    const displayRows = computed(() => {
+      if (routeName.value !== 'billing') return filteredRows.value;
+      return filteredRows.value.filter(r => r.prices?.currency === billingCurrencyTab.value);
+    });
+
+    // billing 路由卡片用：按选中货币筛选
+    const billingCardGroups = computed(() => {
+      if (routeName.value !== 'billing') return [];
+      const products = billingFlatProducts.value.filter(p => p.prices?.currency === billingCurrencyTab.value);
+      return [{ label: billingCurrencyTab.value, products }];
+    });
+
     // 厂商详情页：按计费方式分区展示
     // providerPerTokenRows - 该厂商的 per_token 产品（用 8 列表格展示）
     // providerPlanGroups - 该厂商的 subscription/coding_plan 产品，按 billing_type 分组（用卡片展示）
@@ -671,21 +705,28 @@ createApp({
       return { per_token: "Token", subscription: "订阅", coding_plan: "Coding Plan" }[b] || b;
     }
 
+    // billing 路由下使用本币不换算，其他路由使用 displayCurrency
+    function rowDisplayCurrency(row) {
+      if (routeName.value === 'billing') return row.prices?.currency || 'CNY';
+      return displayCurrency.value;
+    }
+
+    function currencySymbol(row) {
+      const cur = rowDisplayCurrency(row);
+      return cur === 'CNY' ? '¥' : '$';
+    }
+
     function formatPrice(row, field) {
       const v = row.prices?.[field];
       if (v == null) return "—";
-      const cur = row.prices.currency;
-      let val;
-      if (cur === displayCurrency.value) {
-        val = v;
-      } else if (cur === "USD" && displayCurrency.value === "CNY") {
-        val = (v * USD_TO_CNY).toFixed(2);
-      } else if (cur === "CNY" && displayCurrency.value === "USD") {
-        val = (v / USD_TO_CNY).toFixed(2);
-      } else {
-        val = v;
+      const origCur = row.prices.currency;
+      const dispCur = rowDisplayCurrency(row);
+      let val = v;
+      if (origCur !== dispCur) {
+        if (origCur === "USD" && dispCur === "CNY") val = (v * USD_TO_CNY).toFixed(2);
+        else if (origCur === "CNY" && dispCur === "USD") val = (v / USD_TO_CNY).toFixed(2);
       }
-      const sym = displayCurrency.value === "CNY" ? "¥" : "$";
+      const sym = dispCur === "CNY" ? "¥" : "$";
       // monthly_price 等非 token 计价字段不加 /1M
       if (field === 'monthly_price' || field === 'first_month_price') {
         return `${sym}${val}`;
@@ -710,16 +751,14 @@ createApp({
     function formatMonthly(row) {
       const p = row.prices;
       if (!p || p.monthly_price == null) return "—";
-      const cur = p.currency;
+      const origCur = p.currency;
+      const dispCur = rowDisplayCurrency(row);
       let val = p.monthly_price;
-      const sym = displayCurrency.value === "CNY" ? "¥" : "$";
-      if (cur === displayCurrency.value) {
-        val = val;
-      } else if (cur === "USD" && displayCurrency.value === "CNY") {
-        val = (val * USD_TO_CNY).toFixed(0);
-      } else if (cur === "CNY" && displayCurrency.value === "USD") {
-        val = (val / USD_TO_CNY).toFixed(2);
+      if (origCur !== dispCur) {
+        if (origCur === "USD" && dispCur === "CNY") val = (val * USD_TO_CNY).toFixed(0);
+        else if (origCur === "CNY" && dispCur === "USD") val = (val / USD_TO_CNY).toFixed(2);
       }
+      const sym = dispCur === "CNY" ? "¥" : "$";
       return `${sym}${val}`;
     }
 
@@ -727,16 +766,13 @@ createApp({
     function formatMonthlyValue(row) {
       const p = row.prices;
       if (!p || p.monthly_price == null) return "—";
-      const cur = p.currency;
+      const origCur = p.currency;
+      const dispCur = rowDisplayCurrency(row);
       let val = p.monthly_price;
-      if (cur === displayCurrency.value) {
-        val = val;
-      } else if (cur === "USD" && displayCurrency.value === "CNY") {
-        val = (val * USD_TO_CNY).toFixed(0);
-      } else if (cur === "CNY" && displayCurrency.value === "USD") {
-        val = (val / USD_TO_CNY).toFixed(2);
+      if (origCur !== dispCur) {
+        if (origCur === "USD" && dispCur === "CNY") val = (val * USD_TO_CNY).toFixed(0);
+        else if (origCur === "CNY" && dispCur === "USD") val = (val / USD_TO_CNY).toFixed(2);
       }
-      // 整数不带小数
       return Number.isInteger(Number(val)) ? String(val) : String(val);
     }
 
@@ -775,6 +811,15 @@ createApp({
       }
     }
 
+    // 纯文本备注（非 JSON 的 notes，如 AWS 区域说明）
+    function textNote(row) {
+      if (!row.notes) return null;
+      if (typeof row.notes === 'string') {
+        try { JSON.parse(row.notes); return null; } catch { return row.notes; }
+      }
+      return null;
+    }
+
     function staleHours(row) {
       const last = row.status?.last_success_at;
       if (!last) return "?";
@@ -805,8 +850,9 @@ createApp({
       providerList, providerFilterList, providerSearch, providerListByRegion, groupedRows, billingFlatProducts, allProvidersForOrbit, orbitStyle,
       providerPerTokenRows, providerPlanGroups,
       providerBillingTabs, providerBillingTab, providerCurrentRows,
+      displayRows, billingCardGroups, billingCurrencyTab, billingCnyCount, billingUsdCount,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
-      formatPrice, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, staleHours, iconUrl, onIconError, goHash,
+      formatPrice, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
     };
   },
 }).mount("#app");

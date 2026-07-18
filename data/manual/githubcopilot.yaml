@@ -1,14 +1,29 @@
 # data/manual/githubcopilot.yaml
 # GitHub Copilot 订阅制产品
-# 数据来源：https://github.com/features/copilot (2026.6 官方定价)
+# 数据来源：https://github.com/features/copilot/plans (2026.7 官方定价)
 # 注：2026.6.1 起从每次请求计费切换为按 Token 用量计费，年付套餐停售
 id: githubcopilot
 name: GitHub Copilot
 name_en: GitHub Copilot
 region: us
 website: https://github.com/features/copilot
-pricing_url: https://github.com/features/copilot
+pricing_url: https://github.com/features/copilot/plans
 products:
+  # ========== 个人版 ==========
+  - id: copilot-free
+    model: Copilot Free
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 0
+      currency: USD
+      features:
+        - 每月 2,000 次代码补全
+        - 访问 Haiku 4.5、GPT-5 mini 等模型
+        - Copilot CLI 命令行工具
+        - 社区支持
+    purchase_url: https://github.com/features/copilot/plans
   - id: copilot-pro
     model: Copilot Pro
     billing_type: subscription
@@ -21,8 +36,9 @@ products:
         - 不限量补全和聊天
         - 支持 GPT-5、Claude Sonnet 5 等多模型
         - 集成 VS Code、JetBrains、Visual Studio
-        - 按 Token 用量计费（2026.6 起）
-    purchase_url: https://github.com/features/copilot
+        - 每月 $15 GitHub AI Credits
+        - Cloud agent 和代码审查
+    purchase_url: https://github.com/features/copilot/plans
   - id: copilot-pro-plus
     model: Copilot Pro+
     billing_type: subscription
@@ -32,8 +48,54 @@ products:
       monthly_price: 39
       currency: USD
       features:
-        - 更高模型用量额度
-        - 支持旗舰模型（GPT-5 Pro、Claude Opus 等）
-        - 优先访问新模型
+        - 访问高端模型（含 Opus）
+        - 比 Pro 多 4 倍以上包含用量
+        - 每月 $70 GitHub AI Credits
+        - 审计日志
         - 集成 VS Code、JetBrains、Visual Studio
-    purchase_url: https://github.com/features/copilot
+    purchase_url: https://github.com/features/copilot/plans
+  - id: copilot-max
+    model: Copilot Max
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 100
+      currency: USD
+      features:
+        - 优先访问新模型和新功能
+        - 比 Pro+ 多 2.9 倍以上包含用量
+        - 每月 $200 GitHub AI Credits
+        - 持续高并发 Agent 工作流
+    purchase_url: https://github.com/features/copilot/plans
+  # ========== 企业版 ==========
+  - id: copilot-business
+    model: Copilot Business
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 19
+      currency: USD
+      features:
+        - 不限量代码补全和下一次编辑
+        - 访问广泛模型目录和第三方 Agent
+        - Cloud agent 和代码审查
+        - 访问控制、预算控制和治理
+        - IP indemnity 和数据隐私
+    purchase_url: https://github.com/features/copilot/plans
+  - id: copilot-enterprise
+    model: Copilot Enterprise
+    billing_type: subscription
+    context_window: null
+    modalities: [text]
+    prices:
+      monthly_price: 39
+      currency: USD
+      features:
+        - 包含 Business 全部功能
+        - 优先访问新模型和新功能
+        - 比 Business 多 2 倍包含用量
+        - 组织级用户管理、用量指标
+        - SAML SSO 身份验证
+    purchase_url: https://github.com/features/copilot/plans

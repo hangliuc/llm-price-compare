@@ -1,0 +1,35 @@
+# data/manual/deepseek.yaml
+# DeepSeek 国内 CNY 定价
+# 数据来源：https://api-docs.deepseek.com/zh-cn/quick_start/pricing (2026.7 官方定价)
+id: deepseek
+name: DeepSeek
+name_en: DeepSeek
+region: cn
+website: https://platform.deepseek.com/
+pricing_url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+pricing_url_overseas: https://api-docs.deepseek.com/quick_start/pricing
+products:
+  - id: deepseek-v4-flash-cn-token
+    model: DeepSeek-V4-Flash
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 1
+      output: 2
+      cached_input: 0.02
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+  - id: deepseek-v4-pro-cn-token
+    model: DeepSeek-V4-Pro
+    billing_type: per_token
+    context_window: 1000000
+    modalities: [text]
+    prices:
+      input: 3
+      output: 6
+      cached_input: 0.025
+      currency: CNY
+      unit: per_1m_tokens
+    purchase_url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing

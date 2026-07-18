@@ -163,11 +163,13 @@ _PROVIDER_META = {
         "name": "Kimi", "name_en": "Moonshot AI", "region": "cn",
         "website": "https://platform.moonshot.cn/",
         "pricing_url": "https://platform.moonshot.cn/docs/pricing",
+        "pricing_url_overseas": "https://platform.moonshot.ai/docs/pricing",
     },
     "qwen": {
         "name": "阿里通义", "name_en": "Alibaba Qwen", "region": "cn",
         "website": "https://help.aliyun.com/zh/dashscope/",
         "pricing_url": "https://help.aliyun.com/zh/dashscope/product-overview/billing",
+        "pricing_url_overseas": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
     },
     "volcengine": {
         "name": "火山引擎", "name_en": "Volcengine", "region": "cn",
@@ -177,12 +179,12 @@ _PROVIDER_META = {
     "minimax": {
         "name": "MiniMax", "name_en": "MiniMax", "region": "cn",
         "website": "https://platform.minimaxi.com/",
-        "pricing_url": "https://platform.minimaxi.com/document/Price",
+        "pricing_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
     },
     "xiaomi": {
         "name": "小米", "name_en": "Xiaomi", "region": "cn",
         "website": "https://mimo.xiaomi.com/",
-        "pricing_url": "https://mimo.xiaomi.com/",
+        "pricing_url": "https://platform.xiaomimimo.com/",
     },
 }
 
@@ -332,6 +334,17 @@ def main() -> int:
             )
             products = reconcile_result.products
 
+            # AWS Bedrock: 只保留 us-east-1 region 的产品（同一模型不同 region 价格不同）
+            if pid == "aws":
+                original_count = len(products)
+                products = [
+                    p for p in products
+                    if p.id.startswith("us-east-1/") or "/" not in p.id
+                ]
+                for p in products:
+                    p.notes = "us-east-1 区域价格，其他区域可能不同"
+                log.info(f"aws: filtered to us-east-1 only: {original_count} → {len(products)}")
+
             if not products:
                 log.info(f"{pid}: reconcile returned 0 products, fallback to manual")
                 continue
@@ -395,6 +408,12 @@ def main() -> int:
             # manual 的分段产品（id 不同）自动补充，不覆盖 sources 中无对应 manual 的产品
             existing = next((p for p in new_providers if p["id"] == pid), None)
             if existing:
+                # manual 的 provider 级别字段覆盖 existing（如 pricing_url、pricing_url_overseas）
+                for key in ("name", "name_en", "region", "website",
+                            "pricing_url", "pricing_url_overseas"):
+                    if key in mp:
+                        existing[key] = mp[key]
+
                 manual_products = mp.get("products", [])
                 manual_norm_ids = {
                     (prod.get("id") or "").lower() for prod in manual_products
@@ -413,11 +432,22 @@ def main() -> int:
                         f"{pid}: merged {len(manual_products)} manual products "
                         f"(overrode sources where id matched)"
                     )
-                    history.write_provider_snapshots(
-                        db_conn, pid, manual_products,
-                        confidence="manual",
-                        sources_used=["manual"],
-                    )
+                    # 被波动 block 的厂商：existing 来自 old_provider，step 2/3 未写快照
+                    # 需要写入完整产品列表（旧 sources + 新 manual）作为今日快照
+                    # 正常 reconcile 的厂商：step 2/3 已写 sources 快照，这里只补 manual 部分
+                    if summary.get(pid) == "blocked":
+                        history.write_provider_snapshots(
+                            db_conn, pid, existing.get("products", []),
+                            confidence="manual",
+                            sources_used=["manual", "stale_sources"],
+                        )
+                        log.info(f"{pid}: wrote full snapshot (blocked, includes stale sources + fresh manual)")
+                    else:
+                        history.write_provider_snapshots(
+                            db_conn, pid, manual_products,
+                            confidence="manual",
+                            sources_used=["manual"],
+                        )
                 # reconcile 已写入 status，不重复追加
                 continue
             else:
@@ -454,20 +484,26 @@ def main() -> int:
     # ========== 4.5 统一 per_token 产品的 purchase_url 为厂商官方定价页 ==========
     # OpenRouter/LiteLLM 来源的 purchase_url 指向 openrouter.ai，对终端用户无意义
     # 统一覆盖为厂商官方 pricing_url，subscription/coding_plan 保持 manual 的精准购买页
+    # 双定价厂商：CNY 产品 → pricing_url（国内），USD 产品 → pricing_url_overseas（海外）
     log.info("step 4.5: unifying per_token purchase_url to vendor pricing page")
     for provider in new_providers:
         pid = provider.get("id", "")
         pricing_url = provider.get("pricing_url", "")
+        pricing_url_overseas = provider.get("pricing_url_overseas", "")
         if not pricing_url:
             log.warning(f"{pid}: missing pricing_url, skip purchase_url override")
             continue
         per_token_count = 0
         for prod in provider.get("products", []):
             if prod.get("billing_type") == "per_token":
-                prod["purchase_url"] = pricing_url
+                cur = prod.get("prices", {}).get("currency", "")
+                if cur == "USD" and pricing_url_overseas:
+                    prod["purchase_url"] = pricing_url_overseas
+                else:
+                    prod["purchase_url"] = pricing_url
                 per_token_count += 1
         if per_token_count:
-            log.info(f"{pid}: unified {per_token_count} per_token purchase_url → {pricing_url}")
+            log.info(f"{pid}: unified {per_token_count} per_token purchase_url")
 
     # ========== 5. 价格变动检测（对比今日与昨日快照）==========
     log.info("step 5: detecting price changes")
