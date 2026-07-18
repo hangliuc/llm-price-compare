@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T20:04:07+08:00",
+  "generated_at": "2026-07-18T23:00:04+08:00",
   "providers": [
     {
       "id": "openai",
@@ -3913,1119 +3913,6 @@
       "pricing_url_overseas": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "id": "google",
-      "name": "Google",
-      "name_en": "Google",
-      "region": "us",
-      "website": "https://ai.google.dev/",
-      "pricing_url": "https://ai.google.dev/pricing",
-      "products": [
-        {
-          "id": "gemini-2.0-flash-001-token",
-          "model": "gemini-2.0-flash-001",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.6,
-            "cached_input": 0.0375,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-001-token",
-          "model": "gemini-2.0-flash-lite-001",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-token",
-          "model": "gemini-2.0-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-token",
-          "model": "gemini-2.0-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-computer-use-preview-10-2025-token",
-          "model": "gemini-2.5-computer-use-preview-10-2025",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-image-token",
-          "model": "gemini-2.5-flash-image",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-07",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-06-17-token",
-          "model": "gemini-2.5-flash-lite-preview-06-17",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
-          "model": "gemini-2.5-flash-lite-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-token",
-          "model": "gemini-2.5-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-07-22",
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-latest-token",
-          "model": "gemini-2.5-flash-native-audio-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-preview-09-2025-token",
-          "model": "gemini-2.5-flash-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-token",
-          "model": "gemini-2.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-05-06-token",
-          "model": "gemini-2.5-pro-preview-05-06",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-05-07",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-token",
-          "model": "gemini-2.5-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-05",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-tts-token",
-          "model": "gemini-2.5-pro-preview-tts",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-token",
-          "model": "gemini-2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
-        },
-        {
-          "id": "gemini-3-flash-preview-token",
-          "model": "gemini-3-flash-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-12-17",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3-pro-image-preview-token",
-          "model": "gemini-3-pro-image-preview",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-11-20",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-image-token",
-          "model": "gemini-3-pro-image",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-18",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-preview-token",
-          "model": "gemini-3-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-flash-image-preview-token",
-          "model": "gemini-3.1-flash-image-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-26",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-image-token",
-          "model": "gemini-3.1-flash-image",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-18",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-image-token",
-          "model": "gemini-3.1-flash-lite-image",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-30",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-preview-token",
-          "model": "gemini-3.1-flash-lite-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-03-03",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-token",
-          "model": "gemini-3.1-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-05-07",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-live-preview-token",
-          "model": "gemini-3.1-flash-live-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.75,
-            "output": 4.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-pro-preview-customtools-token",
-          "model": "gemini-3.1-pro-preview-customtools",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.1-pro-preview-token",
-          "model": "gemini-3.1-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-19",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.5-flash-token",
-          "model": "gemini-3.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-05-19",
-          "prices": {
-            "input": 1.5,
-            "output": 9.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-exp-1206-token",
-          "model": "gemini-exp-1206",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-flash-latest-token",
-          "model": "gemini-flash-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-flash-lite-latest-token",
-          "model": "gemini-flash-lite-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-27b-it-token",
-          "model": "gemini-gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-9b-it-token",
-          "model": "gemini-gemma-2-9b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-omni-flash-preview-token",
-          "model": "gemini-omni-flash-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.5,
-            "output": 9.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-pro-latest-token",
-          "model": "gemini-pro-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-robotics-er-1.5-preview-token",
-          "model": "gemini-robotics-er-1.5-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemma-2-27b-it-token",
-          "model": "gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2024-07-13",
-          "prices": {
-            "input": 0.65,
-            "output": 0.65,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemma-3-12b-it-token",
-          "model": "gemma-3-12b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-13",
-          "prices": {
-            "input": 0.05,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-27b-it-token",
-          "model": "gemma-3-27b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-12",
-          "prices": {
-            "input": 0.1,
-            "output": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-4b-it-token",
-          "model": "gemma-3-4b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-13",
-          "prices": {
-            "input": 0.05,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
-        },
-        {
-          "id": "gemma-3n-e4b-it-token",
-          "model": "gemma-3n-e4b-it",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-05-20",
-          "prices": {
-            "input": 0.06,
-            "output": 0.12,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
-        },
-        {
-          "id": "gemma-4-26b-a4b-it-token",
-          "model": "gemma-4-26b-a4b-it",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-03",
-          "prices": {
-            "input": 0.1,
-            "output": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
-        },
-        {
-          "id": "gemma-4-31b-it-token",
-          "model": "gemma-4-31b-it",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-02",
-          "prices": {
-            "input": 0.12,
-            "output": 0.37,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
-        },
-        {
-          "id": "xai/grok-4.1-fast-non-reasoning-token",
-          "model": "xai/grok-4.1-fast-non-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.1-fast-reasoning-token",
-          "model": "xai/grok-4.1-fast-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.20-non-reasoning-token",
-          "model": "xai/grok-4.20-non-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "xai/grok-4.20-reasoning-token",
-          "model": "xai/grok-4.20-reasoning",
-          "billing_type": "per_token",
-          "context_window": 2000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-free",
-          "model": "Gemini Free",
-          "billing_type": "subscription",
-          "context_window": null,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "monthly_price": 0,
-            "currency": "USD",
-            "features": [
-              "有限的 Gemini 访问",
-              "基础模型",
-              "Google AI Studio 有限访问"
-            ]
-          },
-          "purchase_url": "https://one.google.com/about/ai-premium"
-        },
-        {
-          "id": "gemini-ai-plus",
-          "model": "Google AI Plus",
-          "billing_type": "subscription",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "monthly_price": 4.99,
-            "currency": "USD",
-            "features": [
-              "400 GB 存储",
-              "2x 使用限额",
-              "Gemini Omni",
-              "NotebookLM",
-              "Deep Research",
-              "Google Flow（200 credits/月）"
-            ]
-          },
-          "purchase_url": "https://one.google.com/about/ai-premium"
-        },
-        {
-          "id": "gemini-ai-pro",
-          "model": "Google AI Pro",
-          "billing_type": "subscription",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "monthly_price": 19.99,
-            "currency": "USD",
-            "features": [
-              "5 TB 存储",
-              "4x 使用限额",
-              "YouTube Premium Lite",
-              "Google Developer Programme（$10/月 Cloud 赠金）",
-              "Deep Search",
-              "Google Flow（1,000 credits/月）"
-            ]
-          },
-          "purchase_url": "https://one.google.com/about/ai-premium"
-        },
-        {
-          "id": "gemini-ai-ultra-5x",
-          "model": "Google AI Ultra 5x",
-          "billing_type": "subscription",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "monthly_price": 249.99,
-            "currency": "USD",
-            "features": [
-              "20 TB 存储",
-              "5x Pro 限额",
-              "YouTube Premium 个人版",
-              "Gemini Spark",
-              "Deep Think 推理模式",
-              "Project Genie",
-              "Google Developer Programme（$40/月 Cloud 赠金）",
-              "Google Flow（10,000 credits/月）"
-            ]
-          },
-          "purchase_url": "https://one.google.com/about/ai-premium"
-        }
-      ]
-    },
-    {
       "id": "moonshot",
       "name": "Kimi",
       "name_en": "Moonshot AI",
@@ -5715,6 +4602,1453 @@
         }
       ],
       "pricing_url_overseas": "https://platform.moonshot.ai/docs/pricing"
+    },
+    {
+      "id": "qwen",
+      "name": "阿里通义",
+      "name_en": "Alibaba Qwen",
+      "region": "cn",
+      "website": "https://bailian.aliyun.com/",
+      "pricing_url": "https://help.aliyun.com/zh/model-studio/billing",
+      "products": [
+        {
+          "id": "qwen-2.5-72b-instruct-token",
+          "model": "qwen-2.5-72b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-09-19",
+          "prices": {
+            "input": 0.36,
+            "output": 0.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-2.5-7b-instruct-token",
+          "model": "qwen-2.5-7b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-10-16",
+          "prices": {
+            "input": 0.04,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-2.5-coder-32b-instruct-token",
+          "model": "qwen-2.5-coder-32b-instruct",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2024-11-11",
+          "prices": {
+            "input": 0.66,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-coder-token",
+          "model": "qwen-coder",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-max-token",
+          "model": "qwen-max",
+          "billing_type": "per_token",
+          "context_window": 30720,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.6,
+            "output": 6.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-01-25-token",
+          "model": "qwen-plus-2025-01-25",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-04-28-token",
+          "model": "qwen-plus-2025-04-28",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-14-token",
+          "model": "qwen-plus-2025-07-14",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-28-token",
+          "model": "qwen-plus-2025-07-28",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-08",
+          "prices": {
+            "input": 0.26,
+            "output": 0.78,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-2025-07-28:thinking-token",
+          "model": "qwen-plus-2025-07-28:thinking",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-08",
+          "prices": {
+            "input": 0.26,
+            "output": 0.78,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-plus-token",
+          "model": "qwen-plus",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-02-01",
+          "prices": {
+            "input": 0.4,
+            "output": 1.2,
+            "cached_input": 0.052,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-2024-11-01-token",
+          "model": "qwen-turbo-2024-11-01",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-2025-04-28-token",
+          "model": "qwen-turbo-2025-04-28",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-latest-token",
+          "model": "qwen-turbo-latest",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen-turbo-token",
+          "model": "qwen-turbo",
+          "billing_type": "per_token",
+          "context_window": 129024,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.05,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen2.5-vl-72b-instruct-token",
+          "model": "qwen2.5-vl-72b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-02-01",
+          "prices": {
+            "input": 0.8,
+            "output": 1.0,
+            "cached_input": 0.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-14b-token",
+          "model": "qwen3-14b",
+          "billing_type": "per_token",
+          "context_window": 131702,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.2275,
+            "output": 0.91,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 10.4, \"coding_index\": 13.8, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-235b-a22b-2507-token",
+          "model": "qwen3-235b-a22b-2507",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-21",
+          "prices": {
+            "input": 0.09,
+            "output": 0.55,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-235b-a22b-thinking-2507-token",
+          "model": "qwen3-235b-a22b-thinking-2507",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-25",
+          "prices": {
+            "input": 0.1495,
+            "output": 1.495,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 19.6, \"coding_index\": 22.1, \"agentic_index\": 3.8}}"
+        },
+        {
+          "id": "qwen3-235b-a22b-token",
+          "model": "qwen3-235b-a22b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.455,
+            "output": 1.82,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-30b-a3b-instruct-2507-token",
+          "model": "qwen3-30b-a3b-instruct-2507",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-29",
+          "prices": {
+            "input": 0.1,
+            "output": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-30b-a3b-thinking-2507-token",
+          "model": "qwen3-30b-a3b-thinking-2507",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-08-28",
+          "prices": {
+            "input": 0.13,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 14.4, \"coding_index\": 12.1, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-30b-a3b-token",
+          "model": "qwen3-30b-a3b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.13,
+            "output": 0.52,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-32b-token",
+          "model": "qwen3-32b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.08,
+            "output": 0.28,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 11.5, \"coding_index\": 15.3, \"agentic_index\": 1.8}}"
+        },
+        {
+          "id": "qwen3-8b-token",
+          "model": "qwen3-8b",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-04-28",
+          "prices": {
+            "input": 0.117,
+            "output": 0.455,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 8.3, \"coding_index\": 9, \"agentic_index\": 1.5}}"
+        },
+        {
+          "id": "qwen3-coder-30b-a3b-instruct-token",
+          "model": "qwen3-coder-30b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 160000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-31",
+          "prices": {
+            "input": 0.07,
+            "output": 0.27,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-flash-token",
+          "model": "qwen3-coder-flash",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-17",
+          "prices": {
+            "input": 0.195,
+            "output": 0.975,
+            "cached_input": 0.039,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-next-token",
+          "model": "qwen3-coder-next",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-02-04",
+          "prices": {
+            "input": 0.11,
+            "output": 0.8,
+            "cached_input": 0.07,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.1, \"coding_index\": 36.2, \"agentic_index\": 8.8}}"
+        },
+        {
+          "id": "qwen3-coder-plus-token",
+          "model": "qwen3-coder-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.65,
+            "output": 3.25,
+            "cached_input": 0.13,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-coder-token",
+          "model": "qwen3-coder",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.0,
+            "cached_input": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-max-thinking-token",
+          "model": "qwen3-max-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-02-09",
+          "prices": {
+            "input": 0.78,
+            "output": 3.9,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-max-token",
+          "model": "qwen3-max",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.78,
+            "output": 3.9,
+            "cached_input": 0.156,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-next-80b-a3b-instruct-token",
+          "model": "qwen3-next-80b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-11",
+          "prices": {
+            "input": 0.15,
+            "output": 1.2,
+            "cached_input": 0.07,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-next-80b-a3b-thinking-token",
+          "model": "qwen3-next-80b-a3b-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-09-11",
+          "prices": {
+            "input": 0.15,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 16.7, \"coding_index\": 17.4, \"agentic_index\": 2.1}}"
+        },
+        {
+          "id": "qwen3-vl-235b-a22b-instruct-token",
+          "model": "qwen3-vl-235b-a22b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.4,
+            "output": 1.6,
+            "cached_input": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-235b-a22b-thinking-token",
+          "model": "qwen3-vl-235b-a22b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-09-23",
+          "prices": {
+            "input": 0.4,
+            "output": 4.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-30b-a3b-instruct-token",
+          "model": "qwen3-vl-30b-a3b-instruct",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-06",
+          "prices": {
+            "input": 0.13,
+            "output": 0.52,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-30b-a3b-thinking-token",
+          "model": "qwen3-vl-30b-a3b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-06",
+          "prices": {
+            "input": 0.13,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-32b-instruct-token",
+          "model": "qwen3-vl-32b-instruct",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-23",
+          "prices": {
+            "input": 0.16,
+            "output": 0.64,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-32b-thinking-token",
+          "model": "qwen3-vl-32b-thinking",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.16,
+            "output": 2.87,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-8b-instruct-token",
+          "model": "qwen3-vl-8b-instruct",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-14",
+          "prices": {
+            "input": 0.117,
+            "output": 0.455,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3-vl-8b-thinking-token",
+          "model": "qwen3-vl-8b-thinking",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-14",
+          "prices": {
+            "input": 0.117,
+            "output": 1.365,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-122b-a10b-token",
+          "model": "qwen3.5-122b-a10b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.26,
+            "output": 2.08,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 32.3, \"coding_index\": 45.7, \"agentic_index\": 20.7}}"
+        },
+        {
+          "id": "qwen3.5-27b-token",
+          "model": "qwen3.5-27b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.26,
+            "output": 2.6,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-35b-a3b-token",
+          "model": "qwen3.5-35b-a3b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.14,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 24, \"coding_index\": 37, \"agentic_index\": 11.8}}"
+        },
+        {
+          "id": "qwen3.5-397b-a17b-token",
+          "model": "qwen3.5-397b-a17b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-16",
+          "prices": {
+            "input": 0.39,
+            "output": 2.34,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 33.7, \"coding_index\": 48.2, \"agentic_index\": 19.8}}"
+        },
+        {
+          "id": "qwen3.5-9b-token",
+          "model": "qwen3.5-9b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-03-10",
+          "prices": {
+            "input": 0.1,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.4, \"coding_index\": 28.7, \"agentic_index\": 7.4}}"
+        },
+        {
+          "id": "qwen3.5-flash-02-23-token",
+          "model": "qwen3.5-flash-02-23",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 0.065,
+            "output": 0.26,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-plus-02-15-token",
+          "model": "qwen3.5-plus-02-15",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-16",
+          "prices": {
+            "input": 0.26,
+            "output": 1.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.5-plus-20260420-token",
+          "model": "qwen3.5-plus-20260420",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.3,
+            "output": 1.8,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-27b-token",
+          "model": "qwen3.6-27b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.45,
+            "output": 2.7,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.1, \"coding_index\": 53.7, \"agentic_index\": 27}}"
+        },
+        {
+          "id": "qwen3.6-35b-a3b-token",
+          "model": "qwen3.6-35b-a3b",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.14,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 31.6, \"coding_index\": 41.9, \"agentic_index\": 21.4}}"
+        },
+        {
+          "id": "qwen3.6-flash-token",
+          "model": "qwen3.6-flash",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.1875,
+            "output": 1.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-max-preview-token",
+          "model": "qwen3.6-max-preview",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 1.04,
+            "output": 6.24,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.6-plus-token",
+          "model": "qwen3.6-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-02",
+          "prices": {
+            "input": 0.325,
+            "output": 1.95,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 39.6, \"coding_index\": 54.5, \"agentic_index\": 27.6}}"
+        },
+        {
+          "id": "qwen3.7-plus-token",
+          "model": "qwen3.7-plus",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-03",
+          "prices": {
+            "input": 0.32,
+            "output": 1.28,
+            "cached_input": 0.064,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 39, \"coding_index\": 55.9, \"agentic_index\": 20.8}}"
+        },
+        {
+          "id": "qwq-plus-token",
+          "model": "qwq-plus",
+          "billing_type": "per_token",
+          "context_window": 98304,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 2.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "notes": null
+        },
+        {
+          "id": "qwen3.7-max-token",
+          "model": "Qwen3.7-Max",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 12,
+            "output": 36,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3-max-32k",
+          "model": "Qwen3-Max (0-32K)",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.5,
+            "output": 10,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3-max-128k",
+          "model": "Qwen3-Max (32K-128K)",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 4,
+            "output": 16,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3-max-256k",
+          "model": "Qwen3-Max (128K-256K)",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 7,
+            "output": 28,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.6-plus-256k",
+          "model": "Qwen3.6-Plus (0-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2,
+            "output": 12,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.6-plus-1m",
+          "model": "Qwen3.6-Plus (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 8,
+            "output": 48,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-plus-128k",
+          "model": "Qwen3.5-Plus (0-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.8,
+            "output": 4.8,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-plus-256k",
+          "model": "Qwen3.5-Plus (128K-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2,
+            "output": 12,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-plus-1m",
+          "model": "Qwen3.5-Plus (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 4,
+            "output": 24,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-plus-128k",
+          "model": "Qwen-Plus (0-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.8,
+            "output": 2,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-plus-256k",
+          "model": "Qwen-Plus (128K-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.4,
+            "output": 20,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-plus-1m",
+          "model": "Qwen-Plus (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 4.8,
+            "output": 48,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.6-flash-256k",
+          "model": "Qwen3.6-Flash (0-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1.2,
+            "output": 7.2,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.6-flash-1m",
+          "model": "Qwen3.6-Flash (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 4.8,
+            "output": 28.8,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-flash-128k",
+          "model": "Qwen3.5-Flash (0-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.2,
+            "output": 2,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-flash-256k",
+          "model": "Qwen3.5-Flash (128K-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.8,
+            "output": 8,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen3.5-flash-1m",
+          "model": "Qwen3.5-Flash (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1.2,
+            "output": 12,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-flash-128k",
+          "model": "Qwen-Flash (0-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.15,
+            "output": 1.5,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-flash-256k",
+          "model": "Qwen-Flash (128K-256K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.6,
+            "output": 6,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-flash-1m",
+          "model": "Qwen-Flash (256K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1.2,
+            "output": 12,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "qwen-long-token",
+          "model": "Qwen-Long",
+          "billing_type": "per_token",
+          "context_window": 10000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.5,
+            "output": 2,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+        },
+        {
+          "id": "bailian-coding-plan-pro",
+          "model": "百炼 Coding Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": null,
+          "modalities": [],
+          "prices": {
+            "monthly_price": 200,
+            "currency": "CNY",
+            "included_quota": 90000,
+            "quota_unit": "prompts_per_month",
+            "features": [
+              "6,000 次/5小时，45,000 次/周，90,000 次/月",
+              "支持 Qwen3.5-Plus、Qwen3-Max、Qwen3-Coder-Next、Qwen3-Coder-Plus",
+              "含部分第三方模型（Kimi-K2.5、GLM-5、MiniMax-M2.5）",
+              "每日 09:30 限量抢购"
+            ]
+          },
+          "purchase_url": "https://common-buy.aliyun.com/coding-plan"
+        },
+        {
+          "id": "bailian-token-plan-team",
+          "model": "百炼 Token Plan 团队版",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 198,
+            "currency": "CNY",
+            "features": [
+              "按坐席计费，198 元/坐席/月起",
+              "Credits 统一计费，支持多模型",
+              "含 Qwen3.7-Max、DeepSeek、Kimi 等多模型",
+              "兼容主流编程及智能体工具",
+              "适合 5 人以上协作团队"
+            ]
+          },
+          "purchase_url": "https://developer.aliyun.com/article/1745577"
+        }
+      ],
+      "pricing_url_overseas": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio"
     },
     {
       "id": "aws",
@@ -7424,1430 +7758,1028 @@
       ]
     },
     {
-      "id": "qwen",
-      "name": "阿里通义",
-      "name_en": "Alibaba Qwen",
-      "region": "cn",
-      "website": "https://bailian.aliyun.com/",
-      "pricing_url": "https://help.aliyun.com/zh/model-studio/billing",
+      "id": "google",
+      "name": "Google",
+      "name_en": "Google",
+      "region": "us",
+      "website": "https://ai.google.dev/",
+      "pricing_url": "https://ai.google.dev/pricing",
       "products": [
         {
-          "id": "qwen-2.5-72b-instruct-token",
-          "model": "qwen-2.5-72b-instruct",
+          "id": "gemini-2.0-flash-001-token",
+          "model": "gemini-2.0-flash-001",
           "billing_type": "per_token",
-          "context_window": 131072,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "text",
+            "vision"
           ],
-          "release_date": "2024-09-19",
+          "release_date": null,
           "prices": {
-            "input": 0.36,
+            "input": 0.15,
+            "output": 0.6,
+            "cached_input": 0.0375,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-001-token",
+          "model": "gemini-2.0-flash-lite-001",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-token",
+          "model": "gemini-2.0-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-token",
+          "model": "gemini-2.0-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
             "output": 0.4,
+            "cached_input": 0.025,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-2.5-7b-instruct-token",
-          "model": "qwen-2.5-7b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2024-10-16",
-          "prices": {
-            "input": 0.04,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen-2.5-coder-32b-instruct-token",
-          "model": "qwen-2.5-coder-32b-instruct",
+          "id": "gemini-2.5-computer-use-preview-10-2025-token",
+          "model": "gemini-2.5-computer-use-preview-10-2025",
           "billing_type": "per_token",
           "context_window": 128000,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "release_date": "2024-11-11",
+          "release_date": null,
           "prices": {
-            "input": 0.66,
-            "output": 1.0,
+            "input": 1.25,
+            "output": 10.0,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-coder-token",
-          "model": "qwen-coder",
+          "id": "gemini-2.5-flash-image-token",
+          "model": "gemini-2.5-flash-image",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 32768,
           "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-07",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-06-17-token",
+          "model": "gemini-2.5-flash-lite-preview-06-17",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
+          "model": "gemini-2.5-flash-lite-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-token",
+          "model": "gemini-2.5-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-07-22",
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-latest-token",
+          "model": "gemini-2.5-flash-native-audio-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
             "text"
           ],
           "release_date": null,
           "prices": {
             "input": 0.3,
-            "output": 1.5,
+            "output": 2.5,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-max-token",
-          "model": "qwen-max",
+          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
           "billing_type": "per_token",
-          "context_window": 30720,
+          "context_window": 1048576,
           "modalities": [
+            "audio",
             "text"
           ],
           "release_date": null,
           "prices": {
-            "input": 1.6,
-            "output": 6.4,
+            "input": 0.3,
+            "output": 2.5,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-plus-2025-01-25-token",
-          "model": "qwen-plus-2025-01-25",
+          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
           "billing_type": "per_token",
-          "context_window": 129024,
+          "context_window": 1048576,
           "modalities": [
+            "audio",
             "text"
           ],
           "release_date": null,
           "prices": {
-            "input": 0.4,
-            "output": 1.2,
+            "input": 0.3,
+            "output": 2.5,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-plus-2025-04-28-token",
-          "model": "qwen-plus-2025-04-28",
+          "id": "gemini-2.5-flash-preview-09-2025-token",
+          "model": "gemini-2.5-flash-preview-09-2025",
           "billing_type": "per_token",
-          "context_window": 129024,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
           "release_date": null,
           "prices": {
-            "input": 0.4,
-            "output": 1.2,
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.075,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-plus-2025-07-14-token",
-          "model": "qwen-plus-2025-07-14",
+          "id": "gemini-2.5-flash-token",
+          "model": "gemini-2.5-flash",
           "billing_type": "per_token",
-          "context_window": 129024,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-05-06-token",
+          "model": "gemini-2.5-pro-preview-05-06",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-05-07",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-token",
+          "model": "gemini-2.5-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-05",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-tts-token",
+          "model": "gemini-2.5-pro-preview-tts",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
           ],
           "release_date": null,
           "prices": {
-            "input": 0.4,
-            "output": 1.2,
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-plus-2025-07-28-token",
-          "model": "qwen-plus-2025-07-28",
+          "id": "gemini-2.5-pro-token",
+          "model": "gemini-2.5-pro",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "file",
+            "text",
+            "vision"
           ],
-          "release_date": "2025-09-08",
+          "release_date": "2025-06-17",
           "prices": {
-            "input": 0.26,
-            "output": 0.78,
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
         },
         {
-          "id": "qwen-plus-2025-07-28:thinking-token",
-          "model": "qwen-plus-2025-07-28:thinking",
+          "id": "gemini-3-flash-preview-token",
+          "model": "gemini-3-flash-preview",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "file",
+            "text",
+            "vision"
           ],
-          "release_date": "2025-09-08",
+          "release_date": "2025-12-17",
           "prices": {
-            "input": 0.26,
-            "output": 0.78,
+            "input": 0.5,
+            "output": 3.0,
+            "cached_input": 0.05,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
         },
         {
-          "id": "qwen-plus-token",
-          "model": "qwen-plus",
+          "id": "gemini-3-pro-image-preview-token",
+          "model": "gemini-3-pro-image-preview",
           "billing_type": "per_token",
-          "context_window": 129024,
+          "context_window": 65536,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "release_date": "2025-02-01",
+          "release_date": "2025-11-20",
           "prices": {
-            "input": 0.4,
-            "output": 1.2,
-            "cached_input": 0.052,
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-turbo-2024-11-01-token",
-          "model": "qwen-turbo-2024-11-01",
+          "id": "gemini-3-pro-image-token",
+          "model": "gemini-3-pro-image",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 65536,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-18",
           "prices": {
-            "input": 0.05,
-            "output": 0.2,
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-turbo-2025-04-28-token",
-          "model": "qwen-turbo-2025-04-28",
+          "id": "gemini-3-pro-preview-token",
+          "model": "gemini-3-pro-preview",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 1048576,
           "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen-turbo-latest-token",
-          "model": "qwen-turbo-latest",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
+            "audio",
+            "text",
+            "vision"
           ],
           "release_date": null,
           "prices": {
-            "input": 0.05,
-            "output": 0.2,
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen-turbo-token",
-          "model": "qwen-turbo",
-          "billing_type": "per_token",
-          "context_window": 129024,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.05,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen2.5-vl-72b-instruct-token",
-          "model": "qwen2.5-vl-72b-instruct",
+          "id": "gemini-3.1-flash-image-preview-token",
+          "model": "gemini-3.1-flash-image-preview",
           "billing_type": "per_token",
           "context_window": 131072,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2025-02-01",
+          "release_date": "2026-02-26",
           "prices": {
-            "input": 0.8,
-            "output": 1.0,
-            "cached_input": 0.4,
+            "input": 0.5,
+            "output": 3.0,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
         },
         {
-          "id": "qwen3-14b-token",
-          "model": "qwen3-14b",
-          "billing_type": "per_token",
-          "context_window": 131702,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.2275,
-            "output": 0.91,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 10.4, \"coding_index\": 13.8, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-2507-token",
-          "model": "qwen3-235b-a22b-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-21",
-          "prices": {
-            "input": 0.09,
-            "output": 0.55,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-235b-a22b-thinking-2507-token",
-          "model": "qwen3-235b-a22b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-25",
-          "prices": {
-            "input": 0.1495,
-            "output": 1.495,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 19.6, \"coding_index\": 22.1, \"agentic_index\": 3.8}}"
-        },
-        {
-          "id": "qwen3-235b-a22b-token",
-          "model": "qwen3-235b-a22b",
+          "id": "gemini-3.1-flash-image-token",
+          "model": "gemini-3.1-flash-image",
           "billing_type": "per_token",
           "context_window": 131072,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "release_date": "2025-04-28",
+          "release_date": "2026-06-18",
           "prices": {
-            "input": 0.455,
-            "output": 1.82,
+            "input": 0.5,
+            "output": 3.0,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-image-token",
+          "model": "gemini-3.1-flash-lite-image",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-30",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview-token",
+          "model": "gemini-3.1-flash-lite-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-03-03",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-token",
+          "model": "gemini-3.1-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-07",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-live-preview-token",
+          "model": "gemini-3.1-flash-live-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.75,
+            "output": 4.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen3-30b-a3b-instruct-2507-token",
-          "model": "qwen3-30b-a3b-instruct-2507",
+          "id": "gemini-3.1-pro-preview-customtools-token",
+          "model": "gemini-3.1-pro-preview-customtools",
           "billing_type": "per_token",
-          "context_window": 262144,
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.1-pro-preview-token",
+          "model": "gemini-3.1-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-19",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.5-flash-token",
+          "model": "gemini-3.5-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-19",
+          "prices": {
+            "input": 1.5,
+            "output": 9.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-exp-1206-token",
+          "model": "gemini-exp-1206",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-flash-latest-token",
+          "model": "gemini-flash-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.075,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-flash-lite-latest-token",
+          "model": "gemini-flash-lite-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-gemma-2-27b-it-token",
+          "model": "gemini-gemma-2-27b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-gemma-2-9b-it-token",
+          "model": "gemini-gemma-2-9b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-omni-flash-preview-token",
+          "model": "gemini-omni-flash-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.5,
+            "output": 9.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-pro-latest-token",
+          "model": "gemini-pro-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-robotics-er-1.5-preview-token",
+          "model": "gemini-robotics-er-1.5-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemma-2-27b-it-token",
+          "model": "gemma-2-27b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
           "modalities": [
             "text"
           ],
-          "release_date": "2025-07-29",
+          "release_date": "2024-07-13",
+          "prices": {
+            "input": 0.65,
+            "output": 0.65,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemma-3-12b-it-token",
+          "model": "gemma-3-12b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-13",
+          "prices": {
+            "input": 0.05,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
+        },
+        {
+          "id": "gemma-3-27b-it-token",
+          "model": "gemma-3-27b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-12",
           "prices": {
             "input": 0.1,
             "output": 0.3,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
         },
         {
-          "id": "qwen3-30b-a3b-thinking-2507-token",
-          "model": "qwen3-30b-a3b-thinking-2507",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-08-28",
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 14.4, \"coding_index\": 12.1, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-30b-a3b-token",
-          "model": "qwen3-30b-a3b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.13,
-            "output": 0.52,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-32b-token",
-          "model": "qwen3-32b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.08,
-            "output": 0.28,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 11.5, \"coding_index\": 15.3, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "qwen3-8b-token",
-          "model": "qwen3-8b",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-04-28",
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 8.3, \"coding_index\": 9, \"agentic_index\": 1.5}}"
-        },
-        {
-          "id": "qwen3-coder-30b-a3b-instruct-token",
-          "model": "qwen3-coder-30b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 160000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-31",
-          "prices": {
-            "input": 0.07,
-            "output": 0.27,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-flash-token",
-          "model": "qwen3-coder-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-17",
-          "prices": {
-            "input": 0.195,
-            "output": 0.975,
-            "cached_input": 0.039,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-next-token",
-          "model": "qwen3-coder-next",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-02-04",
-          "prices": {
-            "input": 0.11,
-            "output": 0.8,
-            "cached_input": 0.07,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.1, \"coding_index\": 36.2, \"agentic_index\": 8.8}}"
-        },
-        {
-          "id": "qwen3-coder-plus-token",
-          "model": "qwen3-coder-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.65,
-            "output": 3.25,
-            "cached_input": 0.13,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-coder-token",
-          "model": "qwen3-coder",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-23",
-          "prices": {
-            "input": 0.3,
-            "output": 1.0,
-            "cached_input": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-thinking-token",
-          "model": "qwen3-max-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-02-09",
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-max-token",
-          "model": "qwen3-max",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-23",
-          "prices": {
-            "input": 0.78,
-            "output": 3.9,
-            "cached_input": 0.156,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-instruct-token",
-          "model": "qwen3-next-80b-a3b-instruct",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-11",
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "cached_input": 0.07,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-next-80b-a3b-thinking-token",
-          "model": "qwen3-next-80b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-11",
-          "prices": {
-            "input": 0.15,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 16.7, \"coding_index\": 17.4, \"agentic_index\": 2.1}}"
-        },
-        {
-          "id": "qwen3-vl-235b-a22b-instruct-token",
-          "model": "qwen3-vl-235b-a22b-instruct",
+          "id": "gemma-3-4b-it-token",
+          "model": "gemma-3-4b-it",
           "billing_type": "per_token",
           "context_window": 131072,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2025-09-23",
+          "release_date": "2025-03-13",
           "prices": {
-            "input": 0.4,
-            "output": 1.6,
-            "cached_input": 0.1,
+            "input": 0.05,
+            "output": 0.1,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
         },
         {
-          "id": "qwen3-vl-235b-a22b-thinking-token",
-          "model": "qwen3-vl-235b-a22b-thinking",
+          "id": "gemma-3n-e4b-it-token",
+          "model": "gemma-3n-e4b-it",
           "billing_type": "per_token",
-          "context_window": 131072,
+          "context_window": 32768,
           "modalities": [
-            "text",
-            "vision"
+            "text"
           ],
-          "release_date": "2025-09-23",
+          "release_date": "2025-05-20",
           "prices": {
-            "input": 0.4,
-            "output": 4.0,
+            "input": 0.06,
+            "output": 0.12,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
         },
         {
-          "id": "qwen3-vl-30b-a3b-instruct-token",
-          "model": "qwen3-vl-30b-a3b-instruct",
+          "id": "gemma-4-26b-a4b-it-token",
+          "model": "gemma-4-26b-a4b-it",
           "billing_type": "per_token",
           "context_window": 262144,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2025-10-06",
-          "prices": {
-            "input": 0.13,
-            "output": 0.52,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-30b-a3b-thinking-token",
-          "model": "qwen3-vl-30b-a3b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-06",
-          "prices": {
-            "input": 0.13,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-instruct-token",
-          "model": "qwen3-vl-32b-instruct",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-23",
-          "prices": {
-            "input": 0.16,
-            "output": 0.64,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-32b-thinking-token",
-          "model": "qwen3-vl-32b-thinking",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.16,
-            "output": 2.87,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-instruct-token",
-          "model": "qwen3-vl-8b-instruct",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-14",
-          "prices": {
-            "input": 0.117,
-            "output": 0.455,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3-vl-8b-thinking-token",
-          "model": "qwen3-vl-8b-thinking",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-14",
-          "prices": {
-            "input": 0.117,
-            "output": 1.365,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-122b-a10b-token",
-          "model": "qwen3.5-122b-a10b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.26,
-            "output": 2.08,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 32.3, \"coding_index\": 45.7, \"agentic_index\": 20.7}}"
-        },
-        {
-          "id": "qwen3.5-27b-token",
-          "model": "qwen3.5-27b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.26,
-            "output": 2.6,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-35b-a3b-token",
-          "model": "qwen3.5-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 24, \"coding_index\": 37, \"agentic_index\": 11.8}}"
-        },
-        {
-          "id": "qwen3.5-397b-a17b-token",
-          "model": "qwen3.5-397b-a17b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-16",
-          "prices": {
-            "input": 0.39,
-            "output": 2.34,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 33.7, \"coding_index\": 48.2, \"agentic_index\": 19.8}}"
-        },
-        {
-          "id": "qwen3.5-9b-token",
-          "model": "qwen3.5-9b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-03-10",
+          "release_date": "2026-04-03",
           "prices": {
             "input": 0.1,
-            "output": 0.15,
+            "output": 0.3,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 21.4, \"coding_index\": 28.7, \"agentic_index\": 7.4}}"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
         },
         {
-          "id": "qwen3.5-flash-02-23-token",
-          "model": "qwen3.5-flash-02-23",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 0.065,
-            "output": 0.26,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-02-15-token",
-          "model": "qwen3.5-plus-02-15",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-16",
-          "prices": {
-            "input": 0.26,
-            "output": 1.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.5-plus-20260420-token",
-          "model": "qwen3.5-plus-20260420",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.3,
-            "output": 1.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-27b-token",
-          "model": "qwen3.6-27b",
+          "id": "gemma-4-31b-it-token",
+          "model": "gemma-4-31b-it",
           "billing_type": "per_token",
           "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.45,
-            "output": 2.7,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.1, \"coding_index\": 53.7, \"agentic_index\": 27}}"
-        },
-        {
-          "id": "qwen3.6-35b-a3b-token",
-          "model": "qwen3.6-35b-a3b",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.14,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 31.6, \"coding_index\": 41.9, \"agentic_index\": 21.4}}"
-        },
-        {
-          "id": "qwen3.6-flash-token",
-          "model": "qwen3.6-flash",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.1875,
-            "output": 1.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-max-preview-token",
-          "model": "qwen3.6-max-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 1.04,
-            "output": 6.24,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": null
-        },
-        {
-          "id": "qwen3.6-plus-token",
-          "model": "qwen3.6-plus",
-          "billing_type": "per_token",
-          "context_window": 1000000,
           "modalities": [
             "text",
             "vision"
           ],
           "release_date": "2026-04-02",
           "prices": {
-            "input": 0.325,
-            "output": 1.95,
+            "input": 0.12,
+            "output": 0.37,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39.6, \"coding_index\": 54.5, \"agentic_index\": 27.6}}"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
         },
         {
-          "id": "qwen3.7-plus-token",
-          "model": "qwen3.7-plus",
+          "id": "xai/grok-4.1-fast-non-reasoning-token",
+          "model": "xai/grok-4.1-fast-non-reasoning",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 2000000,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2026-06-03",
-          "prices": {
-            "input": 0.32,
-            "output": 1.28,
-            "cached_input": 0.064,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 39, \"coding_index\": 55.9, \"agentic_index\": 20.8}}"
-        },
-        {
-          "id": "qwq-plus-token",
-          "model": "qwq-plus",
-          "billing_type": "per_token",
-          "context_window": 98304,
-          "modalities": [
-            "text"
-          ],
           "release_date": null,
           "prices": {
-            "input": 0.8,
-            "output": 2.4,
+            "input": 0.2,
+            "output": 0.5,
+            "cached_input": 0.05,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "qwen3.7-max-token",
-          "model": "Qwen3.7-Max",
+          "id": "xai/grok-4.1-fast-reasoning-token",
+          "model": "xai/grok-4.1-fast-reasoning",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 2000000,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "prices": {
-            "input": 12,
-            "output": 36,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3-max-32k",
-          "model": "Qwen3-Max (0-32K)",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.5,
-            "output": 10,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3-max-128k",
-          "model": "Qwen3-Max (32K-128K)",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 4,
-            "output": 16,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3-max-256k",
-          "model": "Qwen3-Max (128K-256K)",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 7,
-            "output": 28,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.6-plus-256k",
-          "model": "Qwen3.6-Plus (0-256K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2,
-            "output": 12,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.6-plus-1m",
-          "model": "Qwen3.6-Plus (256K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 8,
-            "output": 48,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.5-plus-128k",
-          "model": "Qwen3.5-Plus (0-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.8,
-            "output": 4.8,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.5-plus-256k",
-          "model": "Qwen3.5-Plus (128K-256K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2,
-            "output": 12,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.5-plus-1m",
-          "model": "Qwen3.5-Plus (256K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 4,
-            "output": 24,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-plus-128k",
-          "model": "Qwen-Plus (0-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.8,
-            "output": 2,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-plus-256k",
-          "model": "Qwen-Plus (128K-256K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.4,
-            "output": 20,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-plus-1m",
-          "model": "Qwen-Plus (256K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 4.8,
-            "output": 48,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.6-flash-256k",
-          "model": "Qwen3.6-Flash (0-256K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1.2,
-            "output": 7.2,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.6-flash-1m",
-          "model": "Qwen3.6-Flash (256K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 4.8,
-            "output": 28.8,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen3.5-flash-128k",
-          "model": "Qwen3.5-Flash (0-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
+          "release_date": null,
           "prices": {
             "input": 0.2,
-            "output": 2,
-            "currency": "CNY",
+            "output": 0.5,
+            "cached_input": 0.05,
+            "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
         },
         {
-          "id": "qwen3.5-flash-256k",
-          "model": "Qwen3.5-Flash (128K-256K)",
+          "id": "xai/grok-4.20-non-reasoning-token",
+          "model": "xai/grok-4.20-non-reasoning",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 2000000,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
+          "release_date": null,
           "prices": {
-            "input": 0.8,
-            "output": 8,
-            "currency": "CNY",
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
         },
         {
-          "id": "qwen3.5-flash-1m",
-          "model": "Qwen3.5-Flash (256K-1M)",
+          "id": "xai/grok-4.20-reasoning-token",
+          "model": "xai/grok-4.20-reasoning",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 2000000,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
+          "release_date": null,
           "prices": {
-            "input": 1.2,
-            "output": 12,
-            "currency": "CNY",
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
         },
         {
-          "id": "qwen-flash-128k",
-          "model": "Qwen-Flash (0-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.15,
-            "output": 1.5,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-flash-256k",
-          "model": "Qwen-Flash (128K-256K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.6,
-            "output": 6,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-flash-1m",
-          "model": "Qwen-Flash (256K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1.2,
-            "output": 12,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "qwen-long-token",
-          "model": "Qwen-Long",
-          "billing_type": "per_token",
-          "context_window": 10000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.5,
-            "output": 2,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://help.aliyun.com/zh/model-studio/billing"
-        },
-        {
-          "id": "bailian-coding-plan-pro",
-          "model": "百炼 Coding Plan Pro",
-          "billing_type": "coding_plan",
-          "context_window": null,
-          "modalities": [],
-          "prices": {
-            "monthly_price": 200,
-            "currency": "CNY",
-            "included_quota": 90000,
-            "quota_unit": "prompts_per_month",
-            "features": [
-              "6,000 次/5小时，45,000 次/周，90,000 次/月",
-              "支持 Qwen3.5-Plus、Qwen3-Max、Qwen3-Coder-Next、Qwen3-Coder-Plus",
-              "含部分第三方模型（Kimi-K2.5、GLM-5、MiniMax-M2.5）",
-              "每日 09:30 限量抢购"
-            ]
-          },
-          "purchase_url": "https://common-buy.aliyun.com/coding-plan"
-        },
-        {
-          "id": "bailian-token-plan-team",
-          "model": "百炼 Token Plan 团队版",
+          "id": "gemini-free",
+          "model": "Gemini Free",
           "billing_type": "subscription",
           "context_window": null,
           "modalities": [
@@ -8855,20 +8787,88 @@
             "vision"
           ],
           "prices": {
-            "monthly_price": 198,
-            "currency": "CNY",
+            "monthly_price": 0,
+            "currency": "USD",
             "features": [
-              "按坐席计费，198 元/坐席/月起",
-              "Credits 统一计费，支持多模型",
-              "含 Qwen3.7-Max、DeepSeek、Kimi 等多模型",
-              "兼容主流编程及智能体工具",
-              "适合 5 人以上协作团队"
+              "有限的 Gemini 访问",
+              "基础模型",
+              "Google AI Studio 有限访问"
             ]
           },
-          "purchase_url": "https://developer.aliyun.com/article/1745577"
+          "purchase_url": "https://one.google.com/about/ai-premium"
+        },
+        {
+          "id": "gemini-ai-plus",
+          "model": "Google AI Plus",
+          "billing_type": "subscription",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 4.99,
+            "currency": "USD",
+            "features": [
+              "400 GB 存储",
+              "2x 使用限额",
+              "Gemini Omni",
+              "NotebookLM",
+              "Deep Research",
+              "Google Flow（200 credits/月）"
+            ]
+          },
+          "purchase_url": "https://one.google.com/about/ai-premium"
+        },
+        {
+          "id": "gemini-ai-pro",
+          "model": "Google AI Pro",
+          "billing_type": "subscription",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 19.99,
+            "currency": "USD",
+            "features": [
+              "5 TB 存储",
+              "4x 使用限额",
+              "YouTube Premium Lite",
+              "Google Developer Programme（$10/月 Cloud 赠金）",
+              "Deep Search",
+              "Google Flow（1,000 credits/月）"
+            ]
+          },
+          "purchase_url": "https://one.google.com/about/ai-premium"
+        },
+        {
+          "id": "gemini-ai-ultra-5x",
+          "model": "Google AI Ultra 5x",
+          "billing_type": "subscription",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 249.99,
+            "currency": "USD",
+            "features": [
+              "20 TB 存储",
+              "5x Pro 限额",
+              "YouTube Premium 个人版",
+              "Gemini Spark",
+              "Deep Think 推理模式",
+              "Project Genie",
+              "Google Developer Programme（$40/月 Cloud 赠金）",
+              "Google Flow（10,000 credits/月）"
+            ]
+          },
+          "purchase_url": "https://one.google.com/about/ai-premium"
         }
-      ],
-      "pricing_url_overseas": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio"
+      ]
     },
     {
       "id": "minimax",
@@ -10308,7 +10308,7 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:05+08:00",
+      "last_success_at": "2026-07-18T23:00:02+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10322,7 +10322,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:06+08:00",
+      "last_success_at": "2026-07-18T23:00:03+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10336,7 +10336,7 @@
     {
       "provider_id": "deepseek",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10348,9 +10348,9 @@
       ]
     },
     {
-      "provider_id": "google",
+      "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10361,9 +10361,9 @@
       ]
     },
     {
-      "provider_id": "moonshot",
+      "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10376,7 +10376,7 @@
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10388,7 +10388,7 @@
     {
       "provider_id": "xiaomi",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10398,9 +10398,9 @@
       ]
     },
     {
-      "provider_id": "qwen",
+      "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10413,7 +10413,7 @@
     {
       "provider_id": "minimax",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10426,7 +10426,7 @@
     {
       "provider_id": "cursor",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10437,7 +10437,7 @@
     {
       "provider_id": "githubcopilot",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10448,7 +10448,7 @@
     {
       "provider_id": "kiro",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10459,7 +10459,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10470,7 +10470,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10481,7 +10481,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-07-18T20:04:07+08:00",
+      "last_success_at": "2026-07-18T23:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
