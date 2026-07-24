@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T11:00:04+08:00",
+  "generated_at": "2026-07-24T17:00:05+08:00",
   "providers": [
     {
       "id": "openai",
@@ -3633,354 +3633,1162 @@
       "pricing_url_overseas": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "id": "minimax",
-      "name": "MiniMax",
-      "name_en": "MiniMax",
-      "region": "cn",
-      "website": "https://platform.minimaxi.com/",
-      "pricing_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+      "id": "google",
+      "name": "Google",
+      "name_en": "Google",
+      "region": "us",
+      "website": "https://ai.google.dev/",
+      "pricing_url": "https://ai.google.dev/pricing",
       "products": [
         {
-          "id": "minimax-01-token",
-          "model": "minimax-01",
+          "id": "gemini-2.0-flash-001-token",
+          "model": "gemini-2.0-flash-001",
           "billing_type": "per_token",
-          "context_window": 1000192,
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.6,
+            "cached_input": 0.0375,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-001-token",
+          "model": "gemini-2.0-flash-lite-001",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-lite-token",
+          "model": "gemini-2.0-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.075,
+            "output": 0.3,
+            "cached_input": 0.01875,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.0-flash-token",
+          "model": "gemini-2.0-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-computer-use-preview-10-2025-token",
+          "model": "gemini-2.5-computer-use-preview-10-2025",
+          "billing_type": "per_token",
+          "context_window": 128000,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2025-01-15",
+          "release_date": null,
           "prices": {
-            "input": 0.2,
-            "output": 1.1,
+            "input": 1.25,
+            "output": 10.0,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "minimax-m1-token",
-          "model": "minimax-m1",
+          "id": "gemini-2.5-flash-image-token",
+          "model": "gemini-2.5-flash-image",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 32768,
           "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-10-07",
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-06-17-token",
+          "model": "gemini-2.5-flash-lite-preview-06-17",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
+          "model": "gemini-2.5-flash-lite-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite-token",
+          "model": "gemini-2.5-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-07-22",
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.01,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-latest-token",
+          "model": "gemini-2.5-flash-native-audio-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
             "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
+          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-preview-09-2025-token",
+          "model": "gemini-2.5-flash-preview-09-2025",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.075,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-flash-token",
+          "model": "gemini-2.5-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
           ],
           "release_date": "2025-06-17",
           "prices": {
-            "input": 0.55,
-            "output": 2.2,
+            "input": 0.3,
+            "output": 2.5,
+            "cached_input": 0.03,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "minimax-m2-her-token",
-          "model": "minimax-m2-her",
+          "id": "gemini-2.5-pro-preview-05-06-token",
+          "model": "gemini-2.5-pro-preview-05-06",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-05-07",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-token",
+          "model": "gemini-2.5-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-05",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-preview-tts-token",
+          "model": "gemini-2.5-pro-preview-tts",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-2.5-pro-token",
+          "model": "gemini-2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
+        },
+        {
+          "id": "gemini-3-flash-preview-token",
+          "model": "gemini-3-flash-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-12-17",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3-pro-image-preview-token",
+          "model": "gemini-3-pro-image-preview",
           "billing_type": "per_token",
           "context_window": 65536,
           "modalities": [
-            "text"
+            "text",
+            "vision"
           ],
-          "release_date": "2026-01-23",
+          "release_date": "2025-11-20",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3-pro-image-token",
+          "model": "gemini-3-pro-image",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-18",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3-pro-preview-token",
+          "model": "gemini-3-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3.1-flash-image-preview-token",
+          "model": "gemini-3.1-flash-image-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-26",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-image-token",
+          "model": "gemini-3.1-flash-image",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-18",
+          "prices": {
+            "input": 0.5,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-image-token",
+          "model": "gemini-3.1-flash-lite-image",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-06-30",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview-token",
+          "model": "gemini-3.1-flash-lite-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-03-03",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-lite-token",
+          "model": "gemini-3.1-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-07",
+          "prices": {
+            "input": 0.25,
+            "output": 1.5,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
+        },
+        {
+          "id": "gemini-3.1-flash-live-preview-token",
+          "model": "gemini-3.1-flash-live-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.75,
+            "output": 4.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-3.1-pro-preview-customtools-token",
+          "model": "gemini-3.1-pro-preview-customtools",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-25",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.1-pro-preview-token",
+          "model": "gemini-3.1-pro-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-02-19",
+          "prices": {
+            "input": 2.0,
+            "output": 12.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.5-flash-lite-token",
+          "model": "gemini-3.5-flash-lite",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-07-21",
           "prices": {
             "input": 0.3,
-            "output": 1.2,
+            "output": 2.5,
             "cached_input": 0.03,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 36.5, \"coding_index\": 49.3, \"agentic_index\": 26.8}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
         },
         {
-          "id": "minimax-m2.1-lightning-token",
-          "model": "MiniMax-M2.1-lightning",
+          "id": "gemini-3.5-flash-token",
+          "model": "gemini-3.5-flash",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-19",
+          "prices": {
+            "input": 1.5,
+            "output": 9.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-3.6-flash-token",
+          "model": "gemini-3.6-flash",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-07-21",
+          "prices": {
+            "input": 1.5,
+            "output": 7.5,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.1, \"coding_index\": 69.2, \"agentic_index\": 38.7}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-exp-1206-token",
+          "model": "gemini-exp-1206",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
           ],
           "release_date": null,
           "prices": {
             "input": 0.3,
-            "output": 2.4,
+            "output": 2.5,
             "cached_input": 0.03,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "minimax-m2.1-token",
-          "model": "MiniMax-M2.1",
+          "id": "gemini-flash-latest-token",
+          "model": "gemini-flash-latest",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 1048576,
           "modalities": [
-            "text"
+            "audio",
+            "file",
+            "text",
+            "vision"
           ],
-          "release_date": "2025-12-23",
+          "release_date": "2026-04-27",
           "prices": {
             "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
+            "output": 2.5,
+            "cached_input": 0.075,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-flash-lite-latest-token",
+          "model": "gemini-flash-lite-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.4,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "minimax-m2.5-lightning-token",
-          "model": "MiniMax-M2.5-lightning",
+          "id": "gemini-gemma-2-27b-it-token",
+          "model": "gemini-gemma-2-27b-it",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 8192,
           "modalities": [
-            "text"
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-gemma-2-9b-it-token",
+          "model": "gemini-gemma-2-9b-it",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 1.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-omni-flash-preview-token",
+          "model": "gemini-omni-flash-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.5,
+            "output": 9.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-pro-latest-token",
+          "model": "gemini-pro-latest",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "audio",
+            "file",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 1.25,
+            "output": 10.0,
+            "cached_input": 0.125,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
+        },
+        {
+          "id": "gemini-robotics-er-1.5-preview-token",
+          "model": "gemini-robotics-er-1.5-preview",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
           ],
           "release_date": null,
           "prices": {
             "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
+            "output": 2.5,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "purchase_url": "https://ai.google.dev/pricing",
           "notes": null
         },
         {
-          "id": "minimax-m2.7-token",
-          "model": "minimax-m2.7",
+          "id": "gemma-2-27b-it-token",
+          "model": "gemma-2-27b-it",
           "billing_type": "per_token",
-          "context_window": 204800,
+          "context_window": 8192,
           "modalities": [
             "text"
           ],
-          "release_date": "2026-03-18",
+          "release_date": "2024-07-13",
           "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
+            "input": 0.65,
+            "output": 0.65,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
         },
         {
-          "id": "minimax-m3-token",
-          "model": "MiniMax-M3",
+          "id": "gemma-3-12b-it-token",
+          "model": "gemma-3-12b-it",
           "billing_type": "per_token",
-          "context_window": 1000000,
+          "context_window": 131072,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2026-05-31",
+          "release_date": "2025-03-13",
           "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
+            "input": 0.05,
+            "output": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
         },
         {
-          "id": "minimax-m3-512k-token",
-          "model": "MiniMax-M3 (≤512K)",
+          "id": "gemma-3-27b-it-token",
+          "model": "gemma-3-27b-it",
           "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-12",
+          "prices": {
+            "input": 0.08,
+            "output": 0.45,
+            "cached_input": 0.04,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
+        },
+        {
+          "id": "gemma-3-4b-it-token",
+          "model": "gemma-3-4b-it",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-03-13",
+          "prices": {
+            "input": 0.05,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
+        },
+        {
+          "id": "gemma-3n-e4b-it-token",
+          "model": "gemma-3n-e4b-it",
+          "billing_type": "per_token",
+          "context_window": 32768,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-05-20",
+          "prices": {
+            "input": 0.06,
+            "output": 0.12,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
+        },
+        {
+          "id": "gemma-4-26b-a4b-it-token",
+          "model": "gemma-4-26b-a4b-it",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-03",
+          "prices": {
+            "input": 0.12,
+            "output": 0.35,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
+        },
+        {
+          "id": "gemma-4-31b-it-token",
+          "model": "gemma-4-31b-it",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-02",
+          "prices": {
+            "input": 0.1,
+            "output": 0.35,
+            "cached_input": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
+        },
+        {
+          "id": "xai/grok-4.1-fast-non-reasoning-token",
+          "model": "xai/grok-4.1-fast-non-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 0.5,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.1-fast-reasoning-token",
+          "model": "xai/grok-4.1-fast-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 0.5,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.20-non-reasoning-token",
+          "model": "xai/grok-4.20-non-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "xai/grok-4.20-reasoning-token",
+          "model": "xai/grok-4.20-reasoning",
+          "billing_type": "per_token",
+          "context_window": 2000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 6.0,
+            "cached_input": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://ai.google.dev/pricing",
+          "notes": null
+        },
+        {
+          "id": "gemini-free",
+          "model": "Gemini Free",
+          "billing_type": "subscription",
+          "context_window": null,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 0,
+            "currency": "USD",
+            "features": [
+              "有限的 Gemini 访问",
+              "基础模型",
+              "Google AI Studio 有限访问"
+            ]
+          },
+          "purchase_url": "https://one.google.com/about/ai-premium"
+        },
+        {
+          "id": "gemini-ai-plus",
+          "model": "Google AI Plus",
+          "billing_type": "subscription",
           "context_window": 1000000,
           "modalities": [
             "text",
             "vision"
           ],
           "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "cached_input": 0.42,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
+            "monthly_price": 4.99,
+            "currency": "USD",
+            "features": [
+              "400 GB 存储",
+              "2x 使用限额",
+              "Gemini Omni",
+              "NotebookLM",
+              "Deep Research",
+              "Google Flow（200 credits/月）"
+            ]
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+          "purchase_url": "https://one.google.com/about/ai-premium"
         },
         {
-          "id": "minimax-m3-1m-token",
-          "model": "MiniMax-M3 (>512K)",
-          "billing_type": "per_token",
+          "id": "gemini-ai-pro",
+          "model": "Google AI Pro",
+          "billing_type": "subscription",
           "context_window": 1000000,
           "modalities": [
             "text",
             "vision"
           ],
           "prices": {
-            "input": 4.2,
-            "output": 16.8,
-            "cached_input": 0.84,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
+            "monthly_price": 19.99,
+            "currency": "USD",
+            "features": [
+              "5 TB 存储",
+              "4x 使用限额",
+              "YouTube Premium Lite",
+              "Google Developer Programme（$10/月 Cloud 赠金）",
+              "Deep Search",
+              "Google Flow（1,000 credits/月）"
+            ]
           },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+          "purchase_url": "https://one.google.com/about/ai-premium"
         },
         {
-          "id": "minimax-m2.5-token",
-          "model": "MiniMax-M2.5",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m2-token",
-          "model": "MiniMax-M2",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-32k",
-          "model": "MiniMax-M1 (0-32K)",
-          "billing_type": "per_token",
+          "id": "gemini-ai-ultra-5x",
+          "model": "Google AI Ultra 5x",
+          "billing_type": "subscription",
           "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.8,
-            "output": 8,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-128k",
-          "model": "MiniMax-M1 (32K-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1.2,
-            "output": 16,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-1m",
-          "model": "MiniMax-M1 (128K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.4,
-            "output": 24,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-token-plan-plus",
-          "model": "MiniMax Token Plan Plus",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
           "modalities": [
             "text",
             "vision"
           ],
           "prices": {
-            "monthly_price": 49,
-            "currency": "CNY",
-            "included_quota": 12000,
-            "quota_unit": "calls_per_month",
+            "monthly_price": 249.99,
+            "currency": "USD",
             "features": [
-              "约 12,000 次/月（按 50K Token/次估算）",
-              "3-4 个 Agent 并发",
-              "1 条视频生成/日",
-              "1M 上下文",
-              "仅支持编程 + 图像理解"
+              "20 TB 存储",
+              "5x Pro 限额",
+              "YouTube Premium 个人版",
+              "Gemini Spark",
+              "Deep Think 推理模式",
+              "Project Genie",
+              "Google Developer Programme（$40/月 Cloud 赠金）",
+              "Google Flow（10,000 credits/月）"
             ]
           },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
-        },
-        {
-          "id": "minimax-token-plan-max",
-          "model": "MiniMax Token Plan Max",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision",
-            "audio"
-          ],
-          "prices": {
-            "monthly_price": 119,
-            "currency": "CNY",
-            "included_quota": 36000,
-            "quota_unit": "calls_per_month",
-            "features": [
-              "约 36,000 次/月（热门档）",
-              "4-5 个 Agent 并发",
-              "3 条视频生成/日",
-              "1M 上下文",
-              "全模态：编程 + 生图 + 语音 + 视频"
-            ]
-          },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
-        },
-        {
-          "id": "minimax-token-plan-ultra",
-          "model": "MiniMax Token Plan Ultra",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision",
-            "audio"
-          ],
-          "prices": {
-            "monthly_price": 469,
-            "currency": "CNY",
-            "included_quota": 140000,
-            "quota_unit": "calls_per_month",
-            "features": [
-              "约 140,000 次/月",
-              "6-7 个 Agent 并发",
-              "5 条视频生成/日",
-              "1M 上下文",
-              "全模态重度使用"
-            ]
-          },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+          "purchase_url": "https://one.google.com/about/ai-premium"
         }
       ]
     },
@@ -5524,1037 +6332,229 @@
       ]
     },
     {
-      "id": "google",
-      "name": "Google",
-      "name_en": "Google",
-      "region": "us",
-      "website": "https://ai.google.dev/",
-      "pricing_url": "https://ai.google.dev/pricing",
+      "id": "moonshot",
+      "name": "Kimi",
+      "name_en": "Moonshot AI",
+      "region": "cn",
+      "website": "https://platform.moonshot.cn/",
+      "pricing_url": "https://platform.moonshot.cn/pricing",
       "products": [
         {
-          "id": "gemini-2.0-flash-001-token",
-          "model": "gemini-2.0-flash-001",
+          "id": "kimi-k2-0711-preview-token",
+          "model": "kimi-k2-0711-preview",
           "billing_type": "per_token",
-          "context_window": 1048576,
+          "context_window": 131072,
           "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.6,
-            "cached_input": 0.0375,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-001-token",
-          "model": "gemini-2.0-flash-lite-001",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-lite-token",
-          "model": "gemini-2.0-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.075,
-            "output": 0.3,
-            "cached_input": 0.01875,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.0-flash-token",
-          "model": "gemini-2.0-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-computer-use-preview-10-2025-token",
-          "model": "gemini-2.5-computer-use-preview-10-2025",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-image-token",
-          "model": "gemini-2.5-flash-image",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-10-07",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-06-17-token",
-          "model": "gemini-2.5-flash-lite-preview-06-17",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-preview-09-2025-token",
-          "model": "gemini-2.5-flash-lite-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-lite-token",
-          "model": "gemini-2.5-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-07-22",
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.01,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-latest-token",
-          "model": "gemini-2.5-flash-native-audio-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
             "text"
           ],
           "release_date": null,
           "prices": {
-            "input": 0.3,
+            "input": 0.6,
             "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-09-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-native-audio-preview-12-2025-token",
-          "model": "gemini-2.5-flash-native-audio-preview-12-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-preview-09-2025-token",
-          "model": "gemini-2.5-flash-preview-09-2025",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-flash-token",
-          "model": "gemini-2.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-05-06-token",
-          "model": "gemini-2.5-pro-preview-05-06",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-05-07",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-token",
-          "model": "gemini-2.5-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-05",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-preview-tts-token",
-          "model": "gemini-2.5-pro-preview-tts",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-2.5-pro-token",
-          "model": "gemini-2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.8, \"coding_index\": 33.3, \"agentic_index\": 7.1}}"
-        },
-        {
-          "id": "gemini-3-flash-preview-token",
-          "model": "gemini-3-flash-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-12-17",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3-pro-image-preview-token",
-          "model": "gemini-3-pro-image-preview",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-11-20",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-image-token",
-          "model": "gemini-3-pro-image",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-18",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3-pro-preview-token",
-          "model": "gemini-3-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-flash-image-preview-token",
-          "model": "gemini-3.1-flash-image-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-26",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-image-token",
-          "model": "gemini-3.1-flash-image",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-18",
-          "prices": {
-            "input": 0.5,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-image-token",
-          "model": "gemini-3.1-flash-lite-image",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-30",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-preview-token",
-          "model": "gemini-3.1-flash-lite-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-03-03",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25, \"coding_index\": 34.7, \"agentic_index\": 6.2}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-lite-token",
-          "model": "gemini-3.1-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-05-07",
-          "prices": {
-            "input": 0.25,
-            "output": 1.5,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.1-flash-live-preview-token",
-          "model": "gemini-3.1-flash-live-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.75,
-            "output": 4.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-3.1-pro-preview-customtools-token",
-          "model": "gemini-3.1-pro-preview-customtools",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-25",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.1-pro-preview-token",
-          "model": "gemini-3.1-pro-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-02-19",
-          "prices": {
-            "input": 2.0,
-            "output": 12.0,
-            "cached_input": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 46.5, \"coding_index\": 68.8, \"agentic_index\": 21.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-3.5-flash-lite-token",
-          "model": "gemini-3.5-flash-lite",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-07-21",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 36.5, \"coding_index\": 49.3, \"agentic_index\": 26.8}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"minimal\"}}"
-        },
-        {
-          "id": "gemini-3.5-flash-token",
-          "model": "gemini-3.5-flash",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-05-19",
-          "prices": {
-            "input": 1.5,
-            "output": 9.0,
             "cached_input": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.2, \"coding_index\": 70.1, \"agentic_index\": 37.4}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
         },
         {
-          "id": "gemini-3.6-flash-token",
-          "model": "gemini-3.6-flash",
+          "id": "kimi-k2-0905-preview-token",
+          "model": "kimi-k2-0905-preview",
           "billing_type": "per_token",
-          "context_window": 1048576,
+          "context_window": 262144,
           "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
+            "text"
           ],
-          "release_date": "2026-07-21",
+          "release_date": null,
           "prices": {
-            "input": 1.5,
-            "output": 7.5,
+            "input": 0.6,
+            "output": 2.5,
             "cached_input": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 50.1, \"coding_index\": 69.2, \"agentic_index\": 38.7}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-exp-1206-token",
-          "model": "gemini-exp-1206",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
           "notes": null
         },
         {
-          "id": "gemini-flash-latest-token",
-          "model": "gemini-flash-latest",
+          "id": "kimi-k2-0905-token",
+          "model": "kimi-k2-0905",
           "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "cached_input": 0.075,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\", \"minimal\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-flash-lite-latest-token",
-          "model": "gemini-flash-lite-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.4,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-27b-it-token",
-          "model": "gemini-gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-gemma-2-9b-it-token",
-          "model": "gemini-gemma-2-9b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 1.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-omni-flash-preview-token",
-          "model": "gemini-omni-flash-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.5,
-            "output": 9.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemini-pro-latest-token",
-          "model": "gemini-pro-latest",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "audio",
-            "file",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 1.25,
-            "output": 10.0,
-            "cached_input": 0.125,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"high\", \"medium\", \"low\"], \"default_effort\": \"medium\"}}"
-        },
-        {
-          "id": "gemini-robotics-er-1.5-preview-token",
-          "model": "gemini-robotics-er-1.5-preview",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
-        },
-        {
-          "id": "gemma-2-27b-it-token",
-          "model": "gemma-2-27b-it",
-          "billing_type": "per_token",
-          "context_window": 8192,
+          "context_window": 262144,
           "modalities": [
             "text"
           ],
-          "release_date": "2024-07-13",
+          "release_date": "2025-09-04",
           "prices": {
-            "input": 0.65,
-            "output": 0.65,
+            "input": 0.6,
+            "output": 2.5,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
           "notes": null
         },
         {
-          "id": "gemma-3-12b-it-token",
-          "model": "gemma-3-12b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-13",
-          "prices": {
-            "input": 0.05,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 5.5, \"coding_index\": 5.8, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-27b-it-token",
-          "model": "gemma-3-27b-it",
+          "id": "kimi-k2-thinking-token",
+          "model": "kimi-k2-thinking",
           "billing_type": "per_token",
           "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-12",
-          "prices": {
-            "input": 0.08,
-            "output": 0.45,
-            "cached_input": 0.04,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 7.4, \"coding_index\": 10.1, \"agentic_index\": 0.3}}"
-        },
-        {
-          "id": "gemma-3-4b-it-token",
-          "model": "gemma-3-4b-it",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-03-13",
-          "prices": {
-            "input": 0.05,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 2.7, \"agentic_index\": null}}"
-        },
-        {
-          "id": "gemma-3n-e4b-it-token",
-          "model": "gemma-3n-e4b-it",
-          "billing_type": "per_token",
-          "context_window": 32768,
           "modalities": [
             "text"
           ],
-          "release_date": "2025-05-20",
+          "release_date": "2025-11-06",
           "prices": {
-            "input": 0.06,
-            "output": 0.12,
+            "input": 0.6,
+            "output": 2.5,
+            "cached_input": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": null, \"coding_index\": 3.2, \"agentic_index\": null}}"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 17.3, \"coding_index\": 21, \"agentic_index\": 1.8}}"
         },
         {
-          "id": "gemma-4-26b-a4b-it-token",
-          "model": "gemma-4-26b-a4b-it",
+          "id": "kimi-k2-thinking-turbo-token",
+          "model": "kimi-k2-thinking-turbo",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.15,
+            "output": 8.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "kimi-k2-token",
+          "model": "kimi-k2",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-07-11",
+          "prices": {
+            "input": 0.57,
+            "output": 2.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "kimi-k2-turbo-preview-token",
+          "model": "kimi-k2-turbo-preview",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.15,
+            "output": 8.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "kimi-k2.5-token",
+          "model": "kimi-k2.5",
           "billing_type": "per_token",
           "context_window": 262144,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": "2026-04-03",
+          "release_date": "2026-01-27",
           "prices": {
-            "input": 0.12,
-            "output": 0.35,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 25.7, \"coding_index\": 39.3, \"agentic_index\": 11}}"
-        },
-        {
-          "id": "gemma-4-31b-it-token",
-          "model": "gemma-4-31b-it",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-02",
-          "prices": {
-            "input": 0.1,
-            "output": 0.35,
+            "input": 0.6,
+            "output": 3.0,
             "cached_input": 0.1,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 29.4, \"coding_index\": 43.4, \"agentic_index\": 14.4}}"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 35.4, \"coding_index\": 46.8, \"agentic_index\": 21.7}}"
         },
         {
-          "id": "xai/grok-4.1-fast-non-reasoning-token",
-          "model": "xai/grok-4.1-fast-non-reasoning",
+          "id": "kimi-k2.6-token",
+          "model": "kimi-k2.6",
           "billing_type": "per_token",
-          "context_window": 2000000,
+          "context_window": 262144,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-04-20",
           "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
+            "input": 0.95,
+            "output": 4.0,
+            "cached_input": 0.16,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.2, \"coding_index\": 61.8, \"agentic_index\": 30.3}}"
         },
         {
-          "id": "xai/grok-4.1-fast-reasoning-token",
-          "model": "xai/grok-4.1-fast-reasoning",
+          "id": "kimi-k2.7-code-token",
+          "model": "kimi-k2.7-code",
           "billing_type": "per_token",
-          "context_window": 2000000,
+          "context_window": 262144,
           "modalities": [
             "text",
             "vision"
           ],
-          "release_date": null,
+          "release_date": "2026-06-12",
           "prices": {
-            "input": 0.2,
-            "output": 0.5,
-            "cached_input": 0.05,
+            "input": 0.71,
+            "output": 3.49,
+            "cached_input": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
-          "notes": null
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 41.9, \"coding_index\": 60.8, \"agentic_index\": 29.6}}"
         },
         {
-          "id": "xai/grok-4.20-non-reasoning-token",
-          "model": "xai/grok-4.20-non-reasoning",
+          "id": "kimi-k3-token",
+          "model": "kimi-k3",
           "billing_type": "per_token",
-          "context_window": 2000000,
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-07-16",
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 57.1, \"coding_index\": 76.2, \"agentic_index\": 50.1}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"max\", \"high\", \"low\"], \"default_effort\": \"max\"}}"
+        },
+        {
+          "id": "kimi-latest-128k-token",
+          "model": "kimi-latest-128k",
+          "billing_type": "per_token",
+          "context_window": 131072,
           "modalities": [
             "text",
             "vision"
@@ -6562,19 +6562,135 @@
           "release_date": null,
           "prices": {
             "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
+            "output": 5.0,
+            "cached_input": 0.15,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
           "notes": null
         },
         {
-          "id": "xai/grok-4.20-reasoning-token",
-          "model": "xai/grok-4.20-reasoning",
+          "id": "kimi-latest-32k-token",
+          "model": "kimi-latest-32k",
           "billing_type": "per_token",
-          "context_window": 2000000,
+          "context_window": 32768,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.0,
+            "output": 3.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "kimi-latest-8k-token",
+          "model": "kimi-latest-8k",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 2.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "kimi-latest-token",
+          "model": "kimi-latest",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-27",
+          "prices": {
+            "input": 2.0,
+            "output": 5.0,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"max\", \"high\", \"low\"], \"default_effort\": \"max\"}}"
+        },
+        {
+          "id": "kimi-thinking-preview-token",
+          "model": "kimi-thinking-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.6,
+            "output": 2.5,
+            "cached_input": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-128k-0430-token",
+          "model": "moonshot-v1-128k-0430",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 5.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-128k-token",
+          "model": "moonshot-v1-128k",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 5.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-128k-vision-preview-token",
+          "model": "moonshot-v1-128k-vision-preview",
+          "billing_type": "per_token",
+          "context_window": 131072,
           "modalities": [
             "text",
             "vision"
@@ -6582,106 +6698,329 @@
           "release_date": null,
           "prices": {
             "input": 2.0,
-            "output": 6.0,
-            "cached_input": 0.2,
+            "output": 5.0,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://ai.google.dev/pricing",
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
           "notes": null
         },
         {
-          "id": "gemini-free",
-          "model": "Gemini Free",
-          "billing_type": "subscription",
-          "context_window": null,
+          "id": "moonshot-v1-32k-0430-token",
+          "model": "moonshot-v1-32k-0430",
+          "billing_type": "per_token",
+          "context_window": 32768,
           "modalities": [
-            "text",
-            "vision"
+            "text"
           ],
+          "release_date": null,
           "prices": {
-            "monthly_price": 0,
+            "input": 1.0,
+            "output": 3.0,
             "currency": "USD",
-            "features": [
-              "有限的 Gemini 访问",
-              "基础模型",
-              "Google AI Studio 有限访问"
-            ]
+            "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://one.google.com/about/ai-premium"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
         },
         {
-          "id": "gemini-ai-plus",
-          "model": "Google AI Plus",
-          "billing_type": "subscription",
-          "context_window": 1000000,
+          "id": "moonshot-v1-32k-token",
+          "model": "moonshot-v1-32k",
+          "billing_type": "per_token",
+          "context_window": 32768,
           "modalities": [
-            "text",
-            "vision"
+            "text"
           ],
+          "release_date": null,
           "prices": {
-            "monthly_price": 4.99,
+            "input": 1.0,
+            "output": 3.0,
             "currency": "USD",
-            "features": [
-              "400 GB 存储",
-              "2x 使用限额",
-              "Gemini Omni",
-              "NotebookLM",
-              "Deep Research",
-              "Google Flow（200 credits/月）"
-            ]
+            "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://one.google.com/about/ai-premium"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
         },
         {
-          "id": "gemini-ai-pro",
-          "model": "Google AI Pro",
-          "billing_type": "subscription",
-          "context_window": 1000000,
+          "id": "moonshot-v1-32k-vision-preview-token",
+          "model": "moonshot-v1-32k-vision-preview",
+          "billing_type": "per_token",
+          "context_window": 32768,
           "modalities": [
             "text",
             "vision"
           ],
+          "release_date": null,
           "prices": {
-            "monthly_price": 19.99,
+            "input": 1.0,
+            "output": 3.0,
             "currency": "USD",
-            "features": [
-              "5 TB 存储",
-              "4x 使用限额",
-              "YouTube Premium Lite",
-              "Google Developer Programme（$10/月 Cloud 赠金）",
-              "Deep Search",
-              "Google Flow（1,000 credits/月）"
-            ]
+            "unit": "per_1m_tokens"
           },
-          "purchase_url": "https://one.google.com/about/ai-premium"
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
         },
         {
-          "id": "gemini-ai-ultra-5x",
-          "model": "Google AI Ultra 5x",
-          "billing_type": "subscription",
-          "context_window": 1000000,
+          "id": "moonshot-v1-8k-0430-token",
+          "model": "moonshot-v1-8k-0430",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 2.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-8k-vision-preview-token",
+          "model": "moonshot-v1-8k-vision-preview",
+          "billing_type": "per_token",
+          "context_window": 8192,
           "modalities": [
             "text",
             "vision"
           ],
+          "release_date": null,
           "prices": {
-            "monthly_price": 249.99,
+            "input": 0.2,
+            "output": 2.0,
             "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-auto-token",
+          "model": "moonshot-v1-auto",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 5.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
+          "notes": null
+        },
+        {
+          "id": "moonshot-v1-8k-token",
+          "model": "Moonshot-v1-8k",
+          "billing_type": "per_token",
+          "context_window": 8000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 12.0,
+            "output": 12.0,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "kimi-k3-cn-token",
+          "model": "Kimi K3",
+          "billing_type": "per_token",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "image"
+          ],
+          "prices": {
+            "input": 20,
+            "output": 100,
+            "cached_input": 2,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "kimi-k2.7-code-cn-token",
+          "model": "Kimi K2.7 Code",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "image"
+          ],
+          "prices": {
+            "input": 6.5,
+            "output": 27,
+            "cached_input": 1.3,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "kimi-k2.6-cn-token",
+          "model": "Kimi K2.6",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "image"
+          ],
+          "prices": {
+            "input": 6.5,
+            "output": 27,
+            "cached_input": 1.1,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "kimi-k2.5-cn-token",
+          "model": "Kimi K2.5",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "image"
+          ],
+          "prices": {
+            "input": 4,
+            "output": 21,
+            "cached_input": 0.7,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "moonshot-v1-32k-cn-token",
+          "model": "Moonshot-v1-32k",
+          "billing_type": "per_token",
+          "context_window": 32768,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 5,
+            "output": 20,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "moonshot-v1-128k-cn-token",
+          "model": "Moonshot-v1-128k",
+          "billing_type": "per_token",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 10,
+            "output": 30,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.moonshot.cn/pricing"
+        },
+        {
+          "id": "kimi-member-andante",
+          "model": "Kimi 会员 Andante",
+          "billing_type": "coding_plan",
+          "context_window": 32768,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 1,
+            "quota_unit": "base",
             "features": [
-              "20 TB 存储",
-              "5x Pro 限额",
-              "YouTube Premium 个人版",
-              "Gemini Spark",
-              "Deep Think 推理模式",
-              "Project Genie",
-              "Google Developer Programme（$40/月 Cloud 赠金）",
-              "Google Flow（10,000 credits/月）"
+              "入门档，更多 Agent 额度",
+              "32K 上下文",
+              "1 个 Agent 并行"
             ]
           },
-          "purchase_url": "https://one.google.com/about/ai-premium"
+          "purchase_url": "https://www.kimi.com/code"
+        },
+        {
+          "id": "kimi-member-moderato",
+          "model": "Kimi 会员 Moderato",
+          "billing_type": "coding_plan",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 2,
+            "quota_unit": "base",
+            "features": [
+              "主力档，2 倍免费额度",
+              "128K 上下文",
+              "2 个 Agent 并行"
+            ]
+          },
+          "purchase_url": "https://www.kimi.com/code"
+        },
+        {
+          "id": "kimi-member-allegretto",
+          "model": "Kimi 会员 Allegretto",
+          "billing_type": "coding_plan",
+          "context_window": 131072,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 199,
+            "currency": "CNY",
+            "included_quota": 4,
+            "quota_unit": "base",
+            "features": [
+              "专业档，4 倍免费额度",
+              "Kimi Code 20 倍系数",
+              "128K+ 上下文，2 个 Agent 并行"
+            ]
+          },
+          "purchase_url": "https://www.kimi.com/code"
+        },
+        {
+          "id": "kimi-member-allegro",
+          "model": "Kimi 会员 Allegro",
+          "billing_type": "coding_plan",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 699,
+            "currency": "CNY",
+            "included_quota": 10,
+            "quota_unit": "base",
+            "features": [
+              "尊享档，10 倍免费额度",
+              "最高倍率，全量上下文",
+              "4 个 Agent 并行"
+            ]
+          },
+          "purchase_url": "https://www.kimi.com/code"
         }
-      ]
+      ],
+      "pricing_url_overseas": "https://platform.moonshot.ai/docs/pricing"
     },
     {
       "id": "qwen",
@@ -8129,697 +8468,6 @@
       "pricing_url_overseas": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio"
     },
     {
-      "id": "moonshot",
-      "name": "Kimi",
-      "name_en": "Moonshot AI",
-      "region": "cn",
-      "website": "https://platform.moonshot.cn/",
-      "pricing_url": "https://platform.moonshot.cn/pricing",
-      "products": [
-        {
-          "id": "kimi-k2-0711-preview-token",
-          "model": "kimi-k2-0711-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-0905-preview-token",
-          "model": "kimi-k2-0905-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-0905-token",
-          "model": "kimi-k2-0905",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-09-04",
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-thinking-token",
-          "model": "kimi-k2-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-11-06",
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 17.3, \"coding_index\": 21, \"agentic_index\": 1.8}}"
-        },
-        {
-          "id": "kimi-k2-thinking-turbo-token",
-          "model": "kimi-k2-thinking-turbo",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.15,
-            "output": 8.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-token",
-          "model": "kimi-k2",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-07-11",
-          "prices": {
-            "input": 0.57,
-            "output": 2.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2-turbo-preview-token",
-          "model": "kimi-k2-turbo-preview",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.15,
-            "output": 8.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-k2.5-token",
-          "model": "kimi-k2.5",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-01-27",
-          "prices": {
-            "input": 0.6,
-            "output": 3.0,
-            "cached_input": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 35.4, \"coding_index\": 46.8, \"agentic_index\": 21.7}}"
-        },
-        {
-          "id": "kimi-k2.6-token",
-          "model": "kimi-k2.6",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-20",
-          "prices": {
-            "input": 0.95,
-            "output": 4.0,
-            "cached_input": 0.16,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.2, \"coding_index\": 61.8, \"agentic_index\": 30.3}}"
-        },
-        {
-          "id": "kimi-k2.7-code-token",
-          "model": "kimi-k2.7-code",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-06-12",
-          "prices": {
-            "input": 0.71,
-            "output": 3.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 41.9, \"coding_index\": 60.8, \"agentic_index\": 29.6}}"
-        },
-        {
-          "id": "kimi-k3-token",
-          "model": "kimi-k3",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-07-16",
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 57.1, \"coding_index\": 76.2, \"agentic_index\": 50.1}, \"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"max\", \"high\", \"low\"], \"default_effort\": \"max\"}}"
-        },
-        {
-          "id": "kimi-latest-128k-token",
-          "model": "kimi-latest-128k",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-32k-token",
-          "model": "kimi-latest-32k",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-8k-token",
-          "model": "kimi-latest-8k",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "kimi-latest-token",
-          "model": "kimi-latest",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-27",
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": "{\"reasoning\": {\"mandatory\": false, \"supported_efforts\": [\"max\", \"high\", \"low\"], \"default_effort\": \"max\"}}"
-        },
-        {
-          "id": "kimi-thinking-preview-token",
-          "model": "kimi-thinking-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "cached_input": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-0430-token",
-          "model": "moonshot-v1-128k-0430",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-token",
-          "model": "moonshot-v1-128k",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-128k-vision-preview-token",
-          "model": "moonshot-v1-128k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-0430-token",
-          "model": "moonshot-v1-32k-0430",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-token",
-          "model": "moonshot-v1-32k",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-32k-vision-preview-token",
-          "model": "moonshot-v1-32k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-8k-0430-token",
-          "model": "moonshot-v1-8k-0430",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-8k-vision-preview-token",
-          "model": "moonshot-v1-8k-vision-preview",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-auto-token",
-          "model": "moonshot-v1-auto",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 5.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.ai/docs/pricing",
-          "notes": null
-        },
-        {
-          "id": "moonshot-v1-8k-token",
-          "model": "Moonshot-v1-8k",
-          "billing_type": "per_token",
-          "context_window": 8000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 12.0,
-            "output": 12.0,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "kimi-k3-cn-token",
-          "model": "Kimi K3",
-          "billing_type": "per_token",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "image"
-          ],
-          "prices": {
-            "input": 20,
-            "output": 100,
-            "cached_input": 2,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "kimi-k2.7-code-cn-token",
-          "model": "Kimi K2.7 Code",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "image"
-          ],
-          "prices": {
-            "input": 6.5,
-            "output": 27,
-            "cached_input": 1.3,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "kimi-k2.6-cn-token",
-          "model": "Kimi K2.6",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "image"
-          ],
-          "prices": {
-            "input": 6.5,
-            "output": 27,
-            "cached_input": 1.1,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "kimi-k2.5-cn-token",
-          "model": "Kimi K2.5",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "image"
-          ],
-          "prices": {
-            "input": 4,
-            "output": 21,
-            "cached_input": 0.7,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "moonshot-v1-32k-cn-token",
-          "model": "Moonshot-v1-32k",
-          "billing_type": "per_token",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 5,
-            "output": 20,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "moonshot-v1-128k-cn-token",
-          "model": "Moonshot-v1-128k",
-          "billing_type": "per_token",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 10,
-            "output": 30,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.moonshot.cn/pricing"
-        },
-        {
-          "id": "kimi-member-andante",
-          "model": "Kimi 会员 Andante",
-          "billing_type": "coding_plan",
-          "context_window": 32768,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 49,
-            "currency": "CNY",
-            "included_quota": 1,
-            "quota_unit": "base",
-            "features": [
-              "入门档，更多 Agent 额度",
-              "32K 上下文",
-              "1 个 Agent 并行"
-            ]
-          },
-          "purchase_url": "https://www.kimi.com/code"
-        },
-        {
-          "id": "kimi-member-moderato",
-          "model": "Kimi 会员 Moderato",
-          "billing_type": "coding_plan",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 99,
-            "currency": "CNY",
-            "included_quota": 2,
-            "quota_unit": "base",
-            "features": [
-              "主力档，2 倍免费额度",
-              "128K 上下文",
-              "2 个 Agent 并行"
-            ]
-          },
-          "purchase_url": "https://www.kimi.com/code"
-        },
-        {
-          "id": "kimi-member-allegretto",
-          "model": "Kimi 会员 Allegretto",
-          "billing_type": "coding_plan",
-          "context_window": 131072,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 199,
-            "currency": "CNY",
-            "included_quota": 4,
-            "quota_unit": "base",
-            "features": [
-              "专业档，4 倍免费额度",
-              "Kimi Code 20 倍系数",
-              "128K+ 上下文，2 个 Agent 并行"
-            ]
-          },
-          "purchase_url": "https://www.kimi.com/code"
-        },
-        {
-          "id": "kimi-member-allegro",
-          "model": "Kimi 会员 Allegro",
-          "billing_type": "coding_plan",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 699,
-            "currency": "CNY",
-            "included_quota": 10,
-            "quota_unit": "base",
-            "features": [
-              "尊享档，10 倍免费额度",
-              "最高倍率，全量上下文",
-              "4 个 Agent 并行"
-            ]
-          },
-          "purchase_url": "https://www.kimi.com/code"
-        }
-      ],
-      "pricing_url_overseas": "https://platform.moonshot.ai/docs/pricing"
-    },
-    {
       "id": "xiaomi",
       "name": "小米",
       "name_en": "Xiaomi",
@@ -8984,6 +8632,358 @@
             ]
           },
           "purchase_url": "https://platform.xiaomimimo.com/"
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "name_en": "MiniMax",
+      "region": "cn",
+      "website": "https://platform.minimaxi.com/",
+      "pricing_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+      "products": [
+        {
+          "id": "minimax-01-token",
+          "model": "minimax-01",
+          "billing_type": "per_token",
+          "context_window": 1000192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-01-15",
+          "prices": {
+            "input": 0.2,
+            "output": 1.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m1-token",
+          "model": "minimax-m1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 0.55,
+            "output": 2.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2-her-token",
+          "model": "minimax-m2-her",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-01-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.1-lightning-token",
+          "model": "MiniMax-M2.1-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.1-token",
+          "model": "MiniMax-M2.1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-12-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.5-lightning-token",
+          "model": "MiniMax-M2.5-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.7-token",
+          "model": "minimax-m2.7",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-03-18",
+          "prices": {
+            "input": 0.25,
+            "output": 1.0,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
+        },
+        {
+          "id": "minimax-m3-token",
+          "model": "MiniMax-M3",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-31",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.06,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
+        },
+        {
+          "id": "minimax-m3-512k-token",
+          "model": "MiniMax-M3 (≤512K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "cached_input": 0.42,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m3-1m-token",
+          "model": "MiniMax-M3 (>512K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "input": 4.2,
+            "output": 16.8,
+            "cached_input": 0.84,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m2.5-token",
+          "model": "MiniMax-M2.5",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m2-token",
+          "model": "MiniMax-M2",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-32k",
+          "model": "MiniMax-M1 (0-32K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.8,
+            "output": 8,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-128k",
+          "model": "MiniMax-M1 (32K-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1.2,
+            "output": 16,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-1m",
+          "model": "MiniMax-M1 (128K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.4,
+            "output": 24,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-token-plan-plus",
+          "model": "MiniMax Token Plan Plus",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 12000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 12,000 次/月（按 50K Token/次估算）",
+              "3-4 个 Agent 并发",
+              "1 条视频生成/日",
+              "1M 上下文",
+              "仅支持编程 + 图像理解"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-max",
+          "model": "MiniMax Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 119,
+            "currency": "CNY",
+            "included_quota": 36000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 36,000 次/月（热门档）",
+              "4-5 个 Agent 并发",
+              "3 条视频生成/日",
+              "1M 上下文",
+              "全模态：编程 + 生图 + 语音 + 视频"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-ultra",
+          "model": "MiniMax Token Plan Ultra",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 469,
+            "currency": "CNY",
+            "included_quota": 140000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 140,000 次/月",
+              "6-7 个 Agent 并发",
+              "5 条视频生成/日",
+              "1M 上下文",
+              "全模态重度使用"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
         }
       ]
     },
@@ -10073,7 +10073,7 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:02+08:00",
+      "last_success_at": "2026-07-24T17:00:02+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10087,7 +10087,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:03+08:00",
+      "last_success_at": "2026-07-24T17:00:03+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10101,7 +10101,7 @@
     {
       "provider_id": "deepseek",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10113,9 +10113,9 @@
       ]
     },
     {
-      "provider_id": "minimax",
+      "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10128,7 +10128,7 @@
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10138,9 +10138,9 @@
       ]
     },
     {
-      "provider_id": "google",
+      "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10153,49 +10153,7 @@
     {
       "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [
-        {
-          "product_id": "qwen3-coder-token",
-          "field": "prices.input",
-          "old_value": 0.3,
-          "new_value": 0.38,
-          "volatility_pct": 26.67
-        },
-        {
-          "product_id": "qwen3-coder-token",
-          "field": "prices.output",
-          "old_value": 1.0,
-          "new_value": 1.55,
-          "volatility_pct": 55.0
-        },
-        {
-          "product_id": "qwen3.6-27b-token",
-          "field": "prices.input",
-          "old_value": 0.6,
-          "new_value": 0.288,
-          "volatility_pct": 52.0
-        },
-        {
-          "product_id": "qwen3.6-27b-token",
-          "field": "prices.output",
-          "old_value": 3.6,
-          "new_value": 2.4,
-          "volatility_pct": 33.33
-        }
-      ],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "moonshot",
-      "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10208,7 +10166,7 @@
     {
       "provider_id": "xiaomi",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10218,9 +10176,22 @@
       ]
     },
     {
+      "provider_id": "minimax",
+      "status": "ok",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
       "provider_id": "cursor",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10231,7 +10202,7 @@
     {
       "provider_id": "githubcopilot",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10242,7 +10213,7 @@
     {
       "provider_id": "kiro",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10253,7 +10224,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10264,7 +10235,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10275,7 +10246,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-07-24T11:00:04+08:00",
+      "last_success_at": "2026-07-24T17:00:05+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
