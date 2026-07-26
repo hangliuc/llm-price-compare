@@ -1,19 +1,15 @@
 <!-- scripts/adapters/tests/fixtures/openai_pricing.html -->
+<!-- 与 OpenAIAdapter._parse_tables 解析逻辑匹配：
+     - 必须是 <table>（不是 div）
+     - 表头行含 'Model' 和 'Input' 关键字
+     - 模型名小写化后必须在 _MODEL_CONTEXT 中（gpt-4o / gpt-4o-mini）
+     - 列顺序：Model | Input | Cached input | Output -->
 <html>
 <body>
-<div class="pricing-table">
-  <div class="model-row" data-model="gpt-4o">
-    <span class="name">GPT-4o</span>
-    <span class="input">$2.50</span>
-    <span class="output">$10.00</span>
-    <span class="cached">$1.25</span>
-  </div>
-  <div class="model-row" data-model="gpt-4o-mini">
-    <span class="name">GPT-4o mini</span>
-    <span class="input">$0.15</span>
-    <span class="output">$0.60</span>
-    <span class="cached">$0.075</span>
-  </div>
-</div>
+<table>
+  <tr><th>Model</th><th>Input</th><th>Cached input</th><th>Output</th></tr>
+  <tr><td>gpt-4o</td><td>$2.50</td><td>$1.25</td><td>$10.00</td></tr>
+  <tr><td>gpt-4o-mini</td><td>$0.15</td><td>$0.075</td><td>$0.60</td></tr>
+</table>
 </body>
 </html>

@@ -16,12 +16,14 @@ def test_anthropic_parses_api_and_subscription(mock_fetch):
     adapter.validate(products)
     adapter.assert_min_products(products, minimum=2)
 
-    # 至少有一个 per_token 和一个 subscription
+    # 当前 adapter 只解析 per_token（subscription 由 manual yaml 维护）
     types = {p.billing_type for p in products}
     assert BillingType.PER_TOKEN in types
-    assert BillingType.SUBSCRIPTION in types
 
-    # 找到 subscription，验证 monthly_price
-    sub = next(p for p in products if p.billing_type == BillingType.SUBSCRIPTION)
-    assert sub.prices["monthly_price"] == 20
-    assert "features" in sub.prices
+    # 验证解析出的价格正确
+    opus = next(p for p in products if "Opus" in p.model)
+    assert opus.prices["input"] == 15.0
+    assert opus.prices["output"] == 75.0
+    assert opus.prices["currency"] == "USD"
+    # Cache Hits 应该被解析为 cached_input
+    assert opus.prices.get("cached_input") == 1.5

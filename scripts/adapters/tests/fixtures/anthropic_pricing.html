@@ -1,11 +1,15 @@
 <!-- scripts/adapters/tests/fixtures/anthropic_pricing.html -->
+<!-- 与 AnthropicAdapter.fetch 解析逻辑匹配：
+     - 第一个 table 6 列：Model | Base Input | 5m Cache Writes | 1h Cache Writes | Cache Hits | Output
+     - 模型名能被 _CONTEXT_WINDOW 匹配（Claude Opus 4.5 / Claude Sonnet 4.5）
+     - 价格格式 '$X / MTok' -->
 <html>
 <body>
 <h2>API Pricing</h2>
-<table class="api-pricing">
-  <tr><th>Model</th><th>Input</th><th>Output</th></tr>
-  <tr><td>Claude 3.5 Sonnet</td><td>$3.00</td><td>$15.00</td></tr>
-  <tr><td>Claude 3 Opus</td><td>$15.00</td><td>$75.00</td></tr>
+<table>
+  <tr><th>Model</th><th>Base Input</th><th>5m Cache Writes</th><th>1h Cache Writes</th><th>Cache Hits</th><th>Output</th></tr>
+  <tr><td>Claude Opus 4.5</td><td>$15 / MTok</td><td>$18.75 / MTok</td><td>$30 / MTok</td><td>$1.50 / MTok</td><td>$75 / MTok</td></tr>
+  <tr><td>Claude Sonnet 4.5</td><td>$3 / MTok</td><td>$3.75 / MTok</td><td>$6 / MTok</td><td>$0.30 / MTok</td><td>$15 / MTok</td></tr>
 </table>
 <h2>Subscription</h2>
 <div class="subscription">

@@ -46,6 +46,7 @@ def test_run_daily_empty_adapters(mock_git, mock_write, mock_manual):
 @patch("scripts.run_daily.git_commit_push")
 def test_run_daily_adapter_failure_does_not_block(mock_git, mock_write, mock_alert, mock_manual):
     """单适配器失败不影响其他。"""
+    mock_manual.return_value = []  # 避免返回 MagicMock 导致 json.dumps 失败
     bad_adapter = _make_adapter("bad", raises=RuntimeError("boom"))
     good_adapter = _make_adapter("good", products=[
         Product(id="p1", billing_type=BillingType.PER_TOKEN,
@@ -53,7 +54,9 @@ def test_run_daily_adapter_failure_does_not_block(mock_git, mock_write, mock_ale
                 purchase_url="https://example.com")
     ])
 
-    with patch("scripts.run_daily.ADAPTERS", [bad_adapter, good_adapter]):
+    with patch("scripts.run_daily.ADAPTERS", [bad_adapter, good_adapter]), \
+         patch("scripts.run_daily.load_prices_json", return_value={"providers": [], "provider_status": []}), \
+         patch("scripts.run_daily.has_changed", return_value=True):
         from scripts.run_daily import main
         rc = main()
 

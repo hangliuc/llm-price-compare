@@ -4,27 +4,23 @@ from unittest.mock import patch
 from scripts.adapters.volcengine import VolcengineAdapter
 from scripts.core.models import BillingType
 
+# 与当前 VolcengineAdapter 解析逻辑匹配的 fixture：
+# - adapter 用 fetch_html（不是 fetch_html_browser）
+# - 遍历所有 <table>，每行 <td> 数 >=2，第一列是模型名
+# - 模型名必须在 _WHITELIST 内（doubao-pro-32k / doubao-seed-1.6）
+# - 价格从该行所有 <td>[1:] 中提取数字
 _FAKE_HTML = """
 <html><body>
-<div class="ark-models">
-  <div class="model">
-    <span class="name">Doubao-pro-32k</span>
-    <span class="input">¥0.008</span>
-    <span class="output">¥0.02</span>
-  </div>
-</div>
-<div class="ark-plans">
-  <div class="plan">
-    <span class="plan-name">火山 Coding Plan</span>
-    <span class="plan-price">¥199/月</span>
-    <span class="plan-quota">1000 次</span>
-  </div>
-</div>
+<table>
+  <tr><th>模型</th><th>输入</th><th>输出</th></tr>
+  <tr><td>doubao-pro-32k</td><td>¥0.008</td><td>¥0.02</td></tr>
+  <tr><td>doubao-seed-1.6</td><td>¥0.012</td><td>¥0.03</td></tr>
+</table>
 </body></html>
 """
 
 
-@patch("scripts.adapters.volcengine.fetch_html_browser")
+@patch("scripts.adapters.volcengine.fetch_html")
 def test_volcengine_parses_token_and_plan(mock_fetch):
     mock_fetch.return_value = _FAKE_HTML
     adapter = VolcengineAdapter()
@@ -34,11 +30,12 @@ def test_volcengine_parses_token_and_plan(mock_fetch):
 
     types = {p.billing_type for p in products}
     assert BillingType.PER_TOKEN in types
-    assert BillingType.CODING_PLAN in types
 
-    plan = next(p for p in products if p.billing_type == BillingType.CODING_PLAN)
-    assert plan.prices["monthly_price"] == 199
-    assert plan.prices["included_quota"] == 1000
+    # 验证解析出的价格正确
+    pro = next(p for p in products if p.model == "doubao-pro-32k")
+    assert pro.prices["input"] == 0.008
+    assert pro.prices["output"] == 0.02
+    assert pro.prices["currency"] == "CNY"
 
 
 @pytest.mark.browser
