@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T05:00:03+08:00",
+  "generated_at": "2026-07-31T11:00:04+08:00",
   "providers": [
     {
       "id": "openai",
@@ -1706,7 +1706,7 @@
           "id": "gpt-5.4-mini-2026-03-17-token",
           "model": "gpt-5.4-mini-2026-03-17",
           "billing_type": "per_token",
-          "context_window": 1050000,
+          "context_window": 272000,
           "modalities": [
             "text",
             "vision"
@@ -1726,7 +1726,7 @@
           "id": "gpt-5.4-mini-token",
           "model": "gpt-5.4-mini",
           "billing_type": "per_token",
-          "context_window": 1050000,
+          "context_window": 272000,
           "modalities": [
             "file",
             "text",
@@ -1768,7 +1768,7 @@
           "id": "gpt-5.4-nano-2026-03-17-token",
           "model": "gpt-5.4-nano-2026-03-17",
           "billing_type": "per_token",
-          "context_window": 1050000,
+          "context_window": 272000,
           "modalities": [
             "text",
             "vision"
@@ -1788,7 +1788,7 @@
           "id": "gpt-5.4-nano-token",
           "model": "gpt-5.4-nano",
           "billing_type": "per_token",
-          "context_window": 1050000,
+          "context_window": 272000,
           "modalities": [
             "file",
             "text",
@@ -4010,6 +4010,174 @@
       "pricing_url_overseas": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
+      "id": "xiaomi",
+      "name": "小米",
+      "name_en": "Xiaomi",
+      "region": "cn",
+      "website": "https://platform.xiaomimimo.com/",
+      "pricing_url": "https://platform.xiaomimimo.com/",
+      "products": [
+        {
+          "id": "mimo-v2.5-pro-token",
+          "model": "mimo-v2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.435,
+            "output": 0.87,
+            "cached_input": 0.0036,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
+        },
+        {
+          "id": "mimo-v2.5-token",
+          "model": "mimo-v2.5",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.14,
+            "output": 0.28,
+            "cached_input": 0.0028,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
+        },
+        {
+          "id": "mimo-v2.5-pro-cn-token",
+          "model": "MiMo-V2.5-Pro",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 3,
+            "output": 6,
+            "cached_input": 0.025,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-v2.5-cn-token",
+          "model": "MiMo-V2.5",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1,
+            "output": 2,
+            "cached_input": 0.02,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-lite",
+          "model": "MiMo Token Plan Lite",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 39,
+            "currency": "CNY",
+            "included_quota": 41,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "41 亿 Credits",
+              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-standard",
+          "model": "MiMo Token Plan Standard",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 110,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "110 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-pro",
+          "model": "MiMo Token Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 329,
+            "currency": "CNY",
+            "included_quota": 380,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "380 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-max",
+          "model": "MiMo Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 659,
+            "currency": "CNY",
+            "included_quota": 820,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "820 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        }
+      ]
+    },
+    {
       "id": "moonshot",
       "name": "Kimi",
       "name_en": "Moonshot AI",
@@ -4701,6 +4869,1545 @@
       "pricing_url_overseas": "https://platform.moonshot.ai/docs/pricing"
     },
     {
+      "id": "aws",
+      "name": "AWS",
+      "name_en": "Amazon Web Services",
+      "region": "us",
+      "website": "https://aws.amazon.com/",
+      "pricing_url": "https://aws.amazon.com/bedrock/pricing/",
+      "products": [
+        {
+          "id": "ai21.j2-mid-v1-token",
+          "model": "ai21.j2-mid-v1",
+          "billing_type": "per_token",
+          "context_window": 8191,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 12.5,
+            "output": 12.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "ai21.j2-ultra-v1-token",
+          "model": "ai21.j2-ultra-v1",
+          "billing_type": "per_token",
+          "context_window": 8191,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 18.8,
+            "output": 18.8,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "ai21.jamba-1-5-large-v1:0-token",
+          "model": "ai21.jamba-1-5-large-v1:0",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 8.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "ai21.jamba-1-5-mini-v1:0-token",
+          "model": "ai21.jamba-1-5-mini-v1:0",
+          "billing_type": "per_token",
+          "context_window": 256000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.2,
+            "output": 0.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "ai21.jamba-instruct-v1:0-token",
+          "model": "ai21.jamba-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 70000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.5,
+            "output": 0.7,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "amazon.titan-text-express-v1-token",
+          "model": "amazon.titan-text-express-v1",
+          "billing_type": "per_token",
+          "context_window": 42000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.3,
+            "output": 1.7,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "amazon.titan-text-lite-v1-token",
+          "model": "amazon.titan-text-lite-v1",
+          "billing_type": "per_token",
+          "context_window": 42000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 0.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "amazon.titan-text-premier-v1:0-token",
+          "model": "amazon.titan-text-premier-v1:0",
+          "billing_type": "per_token",
+          "context_window": 42000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.5,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-5-haiku-20241022-v1:0-token",
+          "model": "anthropic.claude-3-5-haiku-20241022-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 4.0,
+            "cached_input": 0.08,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-5-sonnet-20240620-v1:0-token",
+          "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-5-sonnet-20241022-v2:0-token",
+          "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-7-sonnet-20240620-v1:0-token",
+          "model": "anthropic.claude-3-7-sonnet-20240620-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.6,
+            "output": 18.0,
+            "cached_input": 0.36,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-haiku-20240307-v1:0-token",
+          "model": "anthropic.claude-3-haiku-20240307-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.25,
+            "output": 1.25,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-opus-20240229-v1:0-token",
+          "model": "anthropic.claude-3-opus-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 15.0,
+            "output": 75.0,
+            "cached_input": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-3-sonnet-20240229-v1:0-token",
+          "model": "anthropic.claude-3-sonnet-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-instant-v1-token",
+          "model": "anthropic.claude-instant-v1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 2.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-v1-token",
+          "model": "anthropic.claude-v1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "anthropic.claude-v2:1-token",
+          "model": "anthropic.claude-v2:1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "apac.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
+          "model": "apac.anthropic.claude-3-5-sonnet-20240620-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "apac.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
+          "model": "apac.anthropic.claude-3-5-sonnet-20241022-v2:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "apac.anthropic.claude-3-haiku-20240307-v1:0-token",
+          "model": "apac.anthropic.claude-3-haiku-20240307-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.25,
+            "output": 1.25,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "apac.anthropic.claude-3-sonnet-20240229-v1:0-token",
+          "model": "apac.anthropic.claude-3-sonnet-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "claude-sonnet-4-5-20250929-v1:0-token",
+          "model": "claude-sonnet-4-5-20250929-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "cohere.command-light-text-v14-token",
+          "model": "cohere.command-light-text-v14",
+          "billing_type": "per_token",
+          "context_window": 4096,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 0.6,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "cohere.command-r-plus-v1:0-token",
+          "model": "cohere.command-r-plus-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "cohere.command-r-v1:0-token",
+          "model": "cohere.command-r-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.5,
+            "output": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "cohere.command-text-v14-token",
+          "model": "cohere.command-text-v14",
+          "billing_type": "per_token",
+          "context_window": 4096,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.5,
+            "output": 2.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-5-haiku-20241022-v1:0-token",
+          "model": "eu.anthropic.claude-3-5-haiku-20241022-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.25,
+            "output": 1.25,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
+          "model": "eu.anthropic.claude-3-5-sonnet-20240620-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
+          "model": "eu.anthropic.claude-3-5-sonnet-20241022-v2:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-7-sonnet-20250219-v1:0-token",
+          "model": "eu.anthropic.claude-3-7-sonnet-20250219-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-haiku-20240307-v1:0-token",
+          "model": "eu.anthropic.claude-3-haiku-20240307-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.25,
+            "output": 1.25,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-opus-20240229-v1:0-token",
+          "model": "eu.anthropic.claude-3-opus-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 15.0,
+            "output": 75.0,
+            "cached_input": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.anthropic.claude-3-sonnet-20240229-v1:0-token",
+          "model": "eu.anthropic.claude-3-sonnet-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.meta.llama3-2-1b-instruct-v1:0-token",
+          "model": "eu.meta.llama3-2-1b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.13,
+            "output": 0.13,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "eu.meta.llama3-2-3b-instruct-v1:0-token",
+          "model": "eu.meta.llama3-2-3b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.19,
+            "output": 0.19,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama2-13b-chat-v1-token",
+          "model": "meta.llama2-13b-chat-v1",
+          "billing_type": "per_token",
+          "context_window": 4096,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.75,
+            "output": 1.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama2-70b-chat-v1-token",
+          "model": "meta.llama2-70b-chat-v1",
+          "billing_type": "per_token",
+          "context_window": 4096,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.95,
+            "output": 2.56,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-1-405b-instruct-v1:0-token",
+          "model": "meta.llama3-1-405b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 5.32,
+            "output": 16.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-1-70b-instruct-v1:0-token",
+          "model": "meta.llama3-1-70b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.99,
+            "output": 0.99,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-1-8b-instruct-v1:0-token",
+          "model": "meta.llama3-1-8b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.22,
+            "output": 0.22,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-2-11b-instruct-v1:0-token",
+          "model": "meta.llama3-2-11b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 0.35,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-2-1b-instruct-v1:0-token",
+          "model": "meta.llama3-2-1b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-2-3b-instruct-v1:0-token",
+          "model": "meta.llama3-2-3b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-2-90b-instruct-v1:0-token",
+          "model": "meta.llama3-2-90b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 2.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-70b-instruct-v1:0-token",
+          "model": "meta.llama3-70b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.65,
+            "output": 3.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "meta.llama3-8b-instruct-v1:0-token",
+          "model": "meta.llama3-8b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 0.6,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "mistral.mistral-7b-instruct-v0:2-token",
+          "model": "mistral.mistral-7b-instruct-v0:2",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "mistral.mistral-large-2402-v1:0-token",
+          "model": "mistral.mistral-large-2402-v1:0",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "mistral.mistral-large-2407-v1:0-token",
+          "model": "mistral.mistral-large-2407-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 9.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "mistral.mistral-small-2402-v1:0-token",
+          "model": "mistral.mistral-small-2402-v1:0",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.0,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "mistral.mixtral-8x7b-instruct-v0:1-token",
+          "model": "mistral.mixtral-8x7b-instruct-v0:1",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.45,
+            "output": 0.7,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "moonshotai.kimi-k2-thinking-token",
+          "model": "moonshotai.kimi-k2-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.73,
+            "output": 3.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "moonshotai.kimi-k2.5-token",
+          "model": "moonshotai.kimi-k2.5",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.6,
+            "output": 3.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/anthropic.claude-instant-v1-token",
+          "model": "us-east-1/anthropic.claude-instant-v1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 2.4,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/anthropic.claude-v1-token",
+          "model": "us-east-1/anthropic.claude-v1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/anthropic.claude-v2:1-token",
+          "model": "us-east-1/anthropic.claude-v2:1",
+          "billing_type": "per_token",
+          "context_window": 100000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/deepseek.v3.2-token",
+          "model": "us-east-1/deepseek.v3.2",
+          "billing_type": "per_token",
+          "context_window": 163840,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.62,
+            "output": 1.85,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/meta.llama3-70b-instruct-v1:0-token",
+          "model": "us-east-1/meta.llama3-70b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.65,
+            "output": 3.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/meta.llama3-8b-instruct-v1:0-token",
+          "model": "us-east-1/meta.llama3-8b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 8192,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 0.6,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/minimax.minimax-m2.1-token",
+          "model": "us-east-1/minimax.minimax-m2.1",
+          "billing_type": "per_token",
+          "context_window": 196000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/minimax.minimax-m2.5-token",
+          "model": "us-east-1/minimax.minimax-m2.5",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/mistral.mistral-7b-instruct-v0:2-token",
+          "model": "us-east-1/mistral.mistral-7b-instruct-v0:2",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/mistral.mistral-large-2402-v1:0-token",
+          "model": "us-east-1/mistral.mistral-large-2402-v1:0",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 8.0,
+            "output": 24.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/mistral.mixtral-8x7b-instruct-v0:1-token",
+          "model": "us-east-1/mistral.mixtral-8x7b-instruct-v0:1",
+          "billing_type": "per_token",
+          "context_window": 32000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.45,
+            "output": 0.7,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/moonshotai.kimi-k2-thinking-token",
+          "model": "us-east-1/moonshotai.kimi-k2-thinking",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.6,
+            "output": 2.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/moonshotai.kimi-k2.5-token",
+          "model": "us-east-1/moonshotai.kimi-k2.5",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.6,
+            "output": 3.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/qwen.qwen3-coder-next-token",
+          "model": "us-east-1/qwen.qwen3-coder-next",
+          "billing_type": "per_token",
+          "context_window": 262144,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.5,
+            "output": 1.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us-east-1/zai.glm-5-token",
+          "model": "us-east-1/zai.glm-5",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 1.0,
+            "output": 3.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-5-haiku-20241022-v1:0-token",
+          "model": "us.anthropic.claude-3-5-haiku-20241022-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.8,
+            "output": 4.0,
+            "cached_input": 0.08,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
+          "model": "us.anthropic.claude-3-5-sonnet-20240620-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
+          "model": "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-haiku-20240307-v1:0-token",
+          "model": "us.anthropic.claude-3-haiku-20240307-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.25,
+            "output": 1.25,
+            "cached_input": 0.025,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-opus-20240229-v1:0-token",
+          "model": "us.anthropic.claude-3-opus-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 15.0,
+            "output": 75.0,
+            "cached_input": 1.5,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.anthropic.claude-3-sonnet-20240229-v1:0-token",
+          "model": "us.anthropic.claude-3-sonnet-20240229-v1:0",
+          "billing_type": "per_token",
+          "context_window": 200000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 3.0,
+            "output": 15.0,
+            "cached_input": 0.3,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-1-405b-instruct-v1:0-token",
+          "model": "us.meta.llama3-1-405b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 5.32,
+            "output": 16.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-1-70b-instruct-v1:0-token",
+          "model": "us.meta.llama3-1-70b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.99,
+            "output": 0.99,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-1-8b-instruct-v1:0-token",
+          "model": "us.meta.llama3-1-8b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.22,
+            "output": 0.22,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-2-11b-instruct-v1:0-token",
+          "model": "us.meta.llama3-2-11b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.35,
+            "output": 0.35,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-2-1b-instruct-v1:0-token",
+          "model": "us.meta.llama3-2-1b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.1,
+            "output": 0.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-2-3b-instruct-v1:0-token",
+          "model": "us.meta.llama3-2-3b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.15,
+            "output": 0.15,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        },
+        {
+          "id": "us.meta.llama3-2-90b-instruct-v1:0-token",
+          "model": "us.meta.llama3-2-90b-instruct-v1:0",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 2.0,
+            "output": 2.0,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
+          "notes": "us-east-1 区域价格，其他区域可能不同"
+        }
+      ]
+    },
+    {
       "id": "qwen",
       "name": "阿里通义",
       "name_en": "Alibaba Qwen",
@@ -5045,8 +6752,8 @@
           ],
           "release_date": "2025-07-25",
           "prices": {
-            "input": 0.3,
-            "output": 3.0,
+            "input": 0.23,
+            "output": 2.3,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
@@ -7524,1713 +9231,6 @@
       ]
     },
     {
-      "id": "xiaomi",
-      "name": "小米",
-      "name_en": "Xiaomi",
-      "region": "cn",
-      "website": "https://platform.xiaomimimo.com/",
-      "pricing_url": "https://platform.xiaomimimo.com/",
-      "products": [
-        {
-          "id": "mimo-v2.5-pro-token",
-          "model": "mimo-v2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.435,
-            "output": 0.87,
-            "cached_input": 0.0036,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
-        },
-        {
-          "id": "mimo-v2.5-token",
-          "model": "mimo-v2.5",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.14,
-            "output": 0.28,
-            "cached_input": 0.0028,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
-        },
-        {
-          "id": "mimo-v2.5-pro-cn-token",
-          "model": "MiMo-V2.5-Pro",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 3,
-            "output": 6,
-            "cached_input": 0.025,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-v2.5-cn-token",
-          "model": "MiMo-V2.5",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1,
-            "output": 2,
-            "cached_input": 0.02,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-lite",
-          "model": "MiMo Token Plan Lite",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 39,
-            "currency": "CNY",
-            "included_quota": 41,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "41 亿 Credits",
-              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-standard",
-          "model": "MiMo Token Plan Standard",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 99,
-            "currency": "CNY",
-            "included_quota": 110,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "110 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-pro",
-          "model": "MiMo Token Plan Pro",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 329,
-            "currency": "CNY",
-            "included_quota": 380,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "380 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-max",
-          "model": "MiMo Token Plan Max",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 659,
-            "currency": "CNY",
-            "included_quota": 820,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "820 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        }
-      ]
-    },
-    {
-      "id": "aws",
-      "name": "AWS",
-      "name_en": "Amazon Web Services",
-      "region": "us",
-      "website": "https://aws.amazon.com/",
-      "pricing_url": "https://aws.amazon.com/bedrock/pricing/",
-      "products": [
-        {
-          "id": "ai21.j2-mid-v1-token",
-          "model": "ai21.j2-mid-v1",
-          "billing_type": "per_token",
-          "context_window": 8191,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 12.5,
-            "output": 12.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "ai21.j2-ultra-v1-token",
-          "model": "ai21.j2-ultra-v1",
-          "billing_type": "per_token",
-          "context_window": 8191,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 18.8,
-            "output": 18.8,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "ai21.jamba-1-5-large-v1:0-token",
-          "model": "ai21.jamba-1-5-large-v1:0",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 8.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "ai21.jamba-1-5-mini-v1:0-token",
-          "model": "ai21.jamba-1-5-mini-v1:0",
-          "billing_type": "per_token",
-          "context_window": 256000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.2,
-            "output": 0.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "ai21.jamba-instruct-v1:0-token",
-          "model": "ai21.jamba-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 70000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 0.7,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "amazon.titan-text-express-v1-token",
-          "model": "amazon.titan-text-express-v1",
-          "billing_type": "per_token",
-          "context_window": 42000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.3,
-            "output": 1.7,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "amazon.titan-text-lite-v1-token",
-          "model": "amazon.titan-text-lite-v1",
-          "billing_type": "per_token",
-          "context_window": 42000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 0.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "amazon.titan-text-premier-v1:0-token",
-          "model": "amazon.titan-text-premier-v1:0",
-          "billing_type": "per_token",
-          "context_window": 42000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-5-haiku-20241022-v1:0-token",
-          "model": "anthropic.claude-3-5-haiku-20241022-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 4.0,
-            "cached_input": 0.08,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-5-sonnet-20240620-v1:0-token",
-          "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-5-sonnet-20241022-v2:0-token",
-          "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-7-sonnet-20240620-v1:0-token",
-          "model": "anthropic.claude-3-7-sonnet-20240620-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.6,
-            "output": 18.0,
-            "cached_input": 0.36,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-haiku-20240307-v1:0-token",
-          "model": "anthropic.claude-3-haiku-20240307-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.25,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-opus-20240229-v1:0-token",
-          "model": "anthropic.claude-3-opus-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 15.0,
-            "output": 75.0,
-            "cached_input": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-3-sonnet-20240229-v1:0-token",
-          "model": "anthropic.claude-3-sonnet-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-instant-v1-token",
-          "model": "anthropic.claude-instant-v1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 2.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-v1-token",
-          "model": "anthropic.claude-v1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "anthropic.claude-v2:1-token",
-          "model": "anthropic.claude-v2:1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "apac.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
-          "model": "apac.anthropic.claude-3-5-sonnet-20240620-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "apac.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
-          "model": "apac.anthropic.claude-3-5-sonnet-20241022-v2:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "apac.anthropic.claude-3-haiku-20240307-v1:0-token",
-          "model": "apac.anthropic.claude-3-haiku-20240307-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.25,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "apac.anthropic.claude-3-sonnet-20240229-v1:0-token",
-          "model": "apac.anthropic.claude-3-sonnet-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "claude-sonnet-4-5-20250929-v1:0-token",
-          "model": "claude-sonnet-4-5-20250929-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "cohere.command-light-text-v14-token",
-          "model": "cohere.command-light-text-v14",
-          "billing_type": "per_token",
-          "context_window": 4096,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 0.6,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "cohere.command-r-plus-v1:0-token",
-          "model": "cohere.command-r-plus-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "cohere.command-r-v1:0-token",
-          "model": "cohere.command-r-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "cohere.command-text-v14-token",
-          "model": "cohere.command-text-v14",
-          "billing_type": "per_token",
-          "context_window": 4096,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.5,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-5-haiku-20241022-v1:0-token",
-          "model": "eu.anthropic.claude-3-5-haiku-20241022-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.25,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
-          "model": "eu.anthropic.claude-3-5-sonnet-20240620-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
-          "model": "eu.anthropic.claude-3-5-sonnet-20241022-v2:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-7-sonnet-20250219-v1:0-token",
-          "model": "eu.anthropic.claude-3-7-sonnet-20250219-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-haiku-20240307-v1:0-token",
-          "model": "eu.anthropic.claude-3-haiku-20240307-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.25,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-opus-20240229-v1:0-token",
-          "model": "eu.anthropic.claude-3-opus-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 15.0,
-            "output": 75.0,
-            "cached_input": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.anthropic.claude-3-sonnet-20240229-v1:0-token",
-          "model": "eu.anthropic.claude-3-sonnet-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.meta.llama3-2-1b-instruct-v1:0-token",
-          "model": "eu.meta.llama3-2-1b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.13,
-            "output": 0.13,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "eu.meta.llama3-2-3b-instruct-v1:0-token",
-          "model": "eu.meta.llama3-2-3b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.19,
-            "output": 0.19,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama2-13b-chat-v1-token",
-          "model": "meta.llama2-13b-chat-v1",
-          "billing_type": "per_token",
-          "context_window": 4096,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.75,
-            "output": 1.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama2-70b-chat-v1-token",
-          "model": "meta.llama2-70b-chat-v1",
-          "billing_type": "per_token",
-          "context_window": 4096,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.95,
-            "output": 2.56,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-1-405b-instruct-v1:0-token",
-          "model": "meta.llama3-1-405b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 5.32,
-            "output": 16.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-1-70b-instruct-v1:0-token",
-          "model": "meta.llama3-1-70b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.99,
-            "output": 0.99,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-1-8b-instruct-v1:0-token",
-          "model": "meta.llama3-1-8b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.22,
-            "output": 0.22,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-2-11b-instruct-v1:0-token",
-          "model": "meta.llama3-2-11b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 0.35,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-2-1b-instruct-v1:0-token",
-          "model": "meta.llama3-2-1b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-2-3b-instruct-v1:0-token",
-          "model": "meta.llama3-2-3b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-2-90b-instruct-v1:0-token",
-          "model": "meta.llama3-2-90b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-70b-instruct-v1:0-token",
-          "model": "meta.llama3-70b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.65,
-            "output": 3.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "meta.llama3-8b-instruct-v1:0-token",
-          "model": "meta.llama3-8b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 0.6,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "mistral.mistral-7b-instruct-v0:2-token",
-          "model": "mistral.mistral-7b-instruct-v0:2",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "mistral.mistral-large-2402-v1:0-token",
-          "model": "mistral.mistral-large-2402-v1:0",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "mistral.mistral-large-2407-v1:0-token",
-          "model": "mistral.mistral-large-2407-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 9.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "mistral.mistral-small-2402-v1:0-token",
-          "model": "mistral.mistral-small-2402-v1:0",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "mistral.mixtral-8x7b-instruct-v0:1-token",
-          "model": "mistral.mixtral-8x7b-instruct-v0:1",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.45,
-            "output": 0.7,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "moonshotai.kimi-k2-thinking-token",
-          "model": "moonshotai.kimi-k2-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.73,
-            "output": 3.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "moonshotai.kimi-k2.5-token",
-          "model": "moonshotai.kimi-k2.5",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 3.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/anthropic.claude-instant-v1-token",
-          "model": "us-east-1/anthropic.claude-instant-v1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 2.4,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/anthropic.claude-v1-token",
-          "model": "us-east-1/anthropic.claude-v1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/anthropic.claude-v2:1-token",
-          "model": "us-east-1/anthropic.claude-v2:1",
-          "billing_type": "per_token",
-          "context_window": 100000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/deepseek.v3.2-token",
-          "model": "us-east-1/deepseek.v3.2",
-          "billing_type": "per_token",
-          "context_window": 163840,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.62,
-            "output": 1.85,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/meta.llama3-70b-instruct-v1:0-token",
-          "model": "us-east-1/meta.llama3-70b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.65,
-            "output": 3.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/meta.llama3-8b-instruct-v1:0-token",
-          "model": "us-east-1/meta.llama3-8b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 8192,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 0.6,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/minimax.minimax-m2.1-token",
-          "model": "us-east-1/minimax.minimax-m2.1",
-          "billing_type": "per_token",
-          "context_window": 196000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/minimax.minimax-m2.5-token",
-          "model": "us-east-1/minimax.minimax-m2.5",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/mistral.mistral-7b-instruct-v0:2-token",
-          "model": "us-east-1/mistral.mistral-7b-instruct-v0:2",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/mistral.mistral-large-2402-v1:0-token",
-          "model": "us-east-1/mistral.mistral-large-2402-v1:0",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 8.0,
-            "output": 24.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/mistral.mixtral-8x7b-instruct-v0:1-token",
-          "model": "us-east-1/mistral.mixtral-8x7b-instruct-v0:1",
-          "billing_type": "per_token",
-          "context_window": 32000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.45,
-            "output": 0.7,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/moonshotai.kimi-k2-thinking-token",
-          "model": "us-east-1/moonshotai.kimi-k2-thinking",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 2.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/moonshotai.kimi-k2.5-token",
-          "model": "us-east-1/moonshotai.kimi-k2.5",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.6,
-            "output": 3.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/qwen.qwen3-coder-next-token",
-          "model": "us-east-1/qwen.qwen3-coder-next",
-          "billing_type": "per_token",
-          "context_window": 262144,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.5,
-            "output": 1.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us-east-1/zai.glm-5-token",
-          "model": "us-east-1/zai.glm-5",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 1.0,
-            "output": 3.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-5-haiku-20241022-v1:0-token",
-          "model": "us.anthropic.claude-3-5-haiku-20241022-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.8,
-            "output": 4.0,
-            "cached_input": 0.08,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-5-sonnet-20240620-v1:0-token",
-          "model": "us.anthropic.claude-3-5-sonnet-20240620-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-5-sonnet-20241022-v2:0-token",
-          "model": "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-haiku-20240307-v1:0-token",
-          "model": "us.anthropic.claude-3-haiku-20240307-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.25,
-            "output": 1.25,
-            "cached_input": 0.025,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-opus-20240229-v1:0-token",
-          "model": "us.anthropic.claude-3-opus-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 15.0,
-            "output": 75.0,
-            "cached_input": 1.5,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.anthropic.claude-3-sonnet-20240229-v1:0-token",
-          "model": "us.anthropic.claude-3-sonnet-20240229-v1:0",
-          "billing_type": "per_token",
-          "context_window": 200000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 3.0,
-            "output": 15.0,
-            "cached_input": 0.3,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-1-405b-instruct-v1:0-token",
-          "model": "us.meta.llama3-1-405b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 5.32,
-            "output": 16.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-1-70b-instruct-v1:0-token",
-          "model": "us.meta.llama3-1-70b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.99,
-            "output": 0.99,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-1-8b-instruct-v1:0-token",
-          "model": "us.meta.llama3-1-8b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.22,
-            "output": 0.22,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-2-11b-instruct-v1:0-token",
-          "model": "us.meta.llama3-2-11b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.35,
-            "output": 0.35,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-2-1b-instruct-v1:0-token",
-          "model": "us.meta.llama3-2-1b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.1,
-            "output": 0.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-2-3b-instruct-v1:0-token",
-          "model": "us.meta.llama3-2-3b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.15,
-            "output": 0.15,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        },
-        {
-          "id": "us.meta.llama3-2-90b-instruct-v1:0-token",
-          "model": "us.meta.llama3-2-90b-instruct-v1:0",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 2.0,
-            "output": 2.0,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://aws.amazon.com/bedrock/pricing/",
-          "notes": "us-east-1 区域价格，其他区域可能不同"
-        }
-      ]
-    },
-    {
       "id": "minimax",
       "name": "MiniMax",
       "name_en": "MiniMax",
@@ -10688,32 +10688,10 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:02+08:00",
+      "last_success_at": "2026-07-31T11:00:03+08:00",
       "error": null,
       "stale": false,
-      "warnings": [
-        {
-          "product_id": "gpt-5.6-luna-pro-token",
-          "field": "prices.input",
-          "old_value": 0.5,
-          "new_value": 0.1,
-          "volatility_pct": 80.0
-        },
-        {
-          "product_id": "gpt-5.6-luna-pro-token",
-          "field": "prices.output",
-          "old_value": 3.0,
-          "new_value": 0.6,
-          "volatility_pct": 80.0
-        },
-        {
-          "product_id": "gpt-5.6-luna-pro-token",
-          "field": "prices.cached_input",
-          "old_value": 0.05,
-          "new_value": 0.01,
-          "volatility_pct": 80.0
-        }
-      ],
+      "warnings": [],
       "confidence": "low",
       "sources": [
         "litellm",
@@ -10724,7 +10702,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10738,7 +10716,7 @@
     {
       "provider_id": "deepseek",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10750,60 +10728,34 @@
       ]
     },
     {
-      "provider_id": "moonshot",
-      "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "qwen",
-      "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "google",
-      "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
       "provider_id": "xiaomi",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
       "confidence": "low",
       "sources": [
+        "openrouter"
+      ]
+    },
+    {
+      "provider_id": "moonshot",
+      "status": "ok",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
         "openrouter"
       ]
     },
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10813,9 +10765,50 @@
       ]
     },
     {
+      "provider_id": "qwen",
+      "status": "ok",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [
+        {
+          "product_id": "qwen3-235b-a22b-thinking-2507-token",
+          "field": "prices.input",
+          "old_value": 0.3,
+          "new_value": 0.23,
+          "volatility_pct": 23.33
+        },
+        {
+          "product_id": "qwen3-235b-a22b-thinking-2507-token",
+          "field": "prices.output",
+          "old_value": 3.0,
+          "new_value": 2.3,
+          "volatility_pct": 23.33
+        }
+      ],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
+      "provider_id": "google",
+      "status": "ok",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
       "provider_id": "minimax",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10828,7 +10821,7 @@
     {
       "provider_id": "cursor",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10839,7 +10832,7 @@
     {
       "provider_id": "githubcopilot",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10850,7 +10843,7 @@
     {
       "provider_id": "kiro",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10861,7 +10854,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10872,7 +10865,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10883,7 +10876,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-07-31T05:00:03+08:00",
+      "last_success_at": "2026-07-31T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
