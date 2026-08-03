@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T05:00:05+08:00",
+  "generated_at": "2026-08-03T11:00:04+08:00",
   "providers": [
     {
       "id": "openai",
@@ -3630,526 +3630,6 @@
       "pricing_url_overseas": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "id": "xiaomi",
-      "name": "小米",
-      "name_en": "Xiaomi",
-      "region": "cn",
-      "website": "https://platform.xiaomimimo.com/",
-      "pricing_url": "https://platform.xiaomimimo.com/",
-      "products": [
-        {
-          "id": "mimo-v2.5-pro-token",
-          "model": "mimo-v2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.435,
-            "output": 0.87,
-            "cached_input": 0.0036,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
-        },
-        {
-          "id": "mimo-v2.5-token",
-          "model": "mimo-v2.5",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.14,
-            "output": 0.28,
-            "cached_input": 0.0028,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
-        },
-        {
-          "id": "mimo-v2.5-pro-cn-token",
-          "model": "MiMo-V2.5-Pro",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 3,
-            "output": 6,
-            "cached_input": 0.025,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-v2.5-cn-token",
-          "model": "MiMo-V2.5",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1,
-            "output": 2,
-            "cached_input": 0.02,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-lite",
-          "model": "MiMo Token Plan Lite",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 39,
-            "currency": "CNY",
-            "included_quota": 41,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "41 亿 Credits",
-              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-standard",
-          "model": "MiMo Token Plan Standard",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 99,
-            "currency": "CNY",
-            "included_quota": 110,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "110 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-pro",
-          "model": "MiMo Token Plan Pro",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 329,
-            "currency": "CNY",
-            "included_quota": 380,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "380 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-max",
-          "model": "MiMo Token Plan Max",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 659,
-            "currency": "CNY",
-            "included_quota": 820,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "820 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        }
-      ]
-    },
-    {
-      "id": "minimax",
-      "name": "MiniMax",
-      "name_en": "MiniMax",
-      "region": "cn",
-      "website": "https://platform.minimaxi.com/",
-      "pricing_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-      "products": [
-        {
-          "id": "minimax-01-token",
-          "model": "minimax-01",
-          "billing_type": "per_token",
-          "context_window": 1000192,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2025-01-15",
-          "prices": {
-            "input": 0.2,
-            "output": 1.1,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m1-token",
-          "model": "minimax-m1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-06-17",
-          "prices": {
-            "input": 0.55,
-            "output": 2.2,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2-her-token",
-          "model": "minimax-m2-her",
-          "billing_type": "per_token",
-          "context_window": 65536,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-01-23",
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.1-lightning-token",
-          "model": "MiniMax-M2.1-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.1-token",
-          "model": "MiniMax-M2.1",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2025-12-23",
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.5-lightning-token",
-          "model": "MiniMax-M2.5-lightning",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": null,
-          "prices": {
-            "input": 0.3,
-            "output": 2.4,
-            "cached_input": 0.03,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": null
-        },
-        {
-          "id": "minimax-m2.7-token",
-          "model": "minimax-m2.7",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-03-18",
-          "prices": {
-            "input": 0.25,
-            "output": 1.0,
-            "cached_input": 0.05,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
-        },
-        {
-          "id": "minimax-m3-token",
-          "model": "MiniMax-M3",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-05-31",
-          "prices": {
-            "input": 0.3,
-            "output": 1.2,
-            "cached_input": 0.06,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
-        },
-        {
-          "id": "minimax-m3-512k-token",
-          "model": "MiniMax-M3 (≤512K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "cached_input": 0.42,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m3-1m-token",
-          "model": "MiniMax-M3 (>512K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "input": 4.2,
-            "output": 16.8,
-            "cached_input": 0.84,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m2.5-token",
-          "model": "MiniMax-M2.5",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m2-token",
-          "model": "MiniMax-M2",
-          "billing_type": "per_token",
-          "context_window": 204800,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.1,
-            "output": 8.4,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-32k",
-          "model": "MiniMax-M1 (0-32K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 0.8,
-            "output": 8,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-128k",
-          "model": "MiniMax-M1 (32K-128K)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1.2,
-            "output": 16,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-m1-1m",
-          "model": "MiniMax-M1 (128K-1M)",
-          "billing_type": "per_token",
-          "context_window": 1000000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 2.4,
-            "output": 24,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
-        },
-        {
-          "id": "minimax-token-plan-plus",
-          "model": "MiniMax Token Plan Plus",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision"
-          ],
-          "prices": {
-            "monthly_price": 49,
-            "currency": "CNY",
-            "included_quota": 12000,
-            "quota_unit": "calls_per_month",
-            "features": [
-              "约 12,000 次/月（按 50K Token/次估算）",
-              "3-4 个 Agent 并发",
-              "1 条视频生成/日",
-              "1M 上下文",
-              "仅支持编程 + 图像理解"
-            ]
-          },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
-        },
-        {
-          "id": "minimax-token-plan-max",
-          "model": "MiniMax Token Plan Max",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision",
-            "audio"
-          ],
-          "prices": {
-            "monthly_price": 119,
-            "currency": "CNY",
-            "included_quota": 36000,
-            "quota_unit": "calls_per_month",
-            "features": [
-              "约 36,000 次/月（热门档）",
-              "4-5 个 Agent 并发",
-              "3 条视频生成/日",
-              "1M 上下文",
-              "全模态：编程 + 生图 + 语音 + 视频"
-            ]
-          },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
-        },
-        {
-          "id": "minimax-token-plan-ultra",
-          "model": "MiniMax Token Plan Ultra",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text",
-            "vision",
-            "audio"
-          ],
-          "prices": {
-            "monthly_price": 469,
-            "currency": "CNY",
-            "included_quota": 140000,
-            "quota_unit": "calls_per_month",
-            "features": [
-              "约 140,000 次/月",
-              "6-7 个 Agent 并发",
-              "5 条视频生成/日",
-              "1M 上下文",
-              "全模态重度使用"
-            ]
-          },
-          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
-        }
-      ]
-    },
-    {
       "id": "qwen",
       "name": "阿里通义",
       "name_en": "Alibaba Qwen",
@@ -4476,8 +3956,8 @@
           ],
           "release_date": "2025-07-21",
           "prices": {
-            "input": 0.09,
-            "output": 0.55,
+            "input": 0.1495,
+            "output": 0.598,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
@@ -4942,8 +4422,8 @@
           ],
           "release_date": "2026-02-25",
           "prices": {
-            "input": 0.26,
-            "output": 2.08,
+            "input": 0.4,
+            "output": 3.2,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
@@ -6773,6 +6253,358 @@
             ]
           },
           "purchase_url": "https://one.google.com/about/ai-premium"
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "name_en": "MiniMax",
+      "region": "cn",
+      "website": "https://platform.minimaxi.com/",
+      "pricing_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+      "products": [
+        {
+          "id": "minimax-01-token",
+          "model": "minimax-01",
+          "billing_type": "per_token",
+          "context_window": 1000192,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2025-01-15",
+          "prices": {
+            "input": 0.2,
+            "output": 1.1,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m1-token",
+          "model": "minimax-m1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-06-17",
+          "prices": {
+            "input": 0.55,
+            "output": 2.2,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2-her-token",
+          "model": "minimax-m2-her",
+          "billing_type": "per_token",
+          "context_window": 65536,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-01-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.1-lightning-token",
+          "model": "MiniMax-M2.1-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.1-token",
+          "model": "MiniMax-M2.1",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2025-12-23",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.5-lightning-token",
+          "model": "MiniMax-M2.5-lightning",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": null,
+          "prices": {
+            "input": 0.3,
+            "output": 2.4,
+            "cached_input": 0.03,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": null
+        },
+        {
+          "id": "minimax-m2.7-token",
+          "model": "minimax-m2.7",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-03-18",
+          "prices": {
+            "input": 0.25,
+            "output": 1.0,
+            "cached_input": 0.05,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 38.1, \"coding_index\": 52.6, \"agentic_index\": 25.6}}"
+        },
+        {
+          "id": "minimax-m3-token",
+          "model": "MiniMax-M3",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-05-31",
+          "prices": {
+            "input": 0.3,
+            "output": 1.2,
+            "cached_input": 0.06,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 44.4, \"coding_index\": 58.6, \"agentic_index\": 35.4}}"
+        },
+        {
+          "id": "minimax-m3-512k-token",
+          "model": "MiniMax-M3 (≤512K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "cached_input": 0.42,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m3-1m-token",
+          "model": "MiniMax-M3 (>512K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "input": 4.2,
+            "output": 16.8,
+            "cached_input": 0.84,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m2.5-token",
+          "model": "MiniMax-M2.5",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m2-token",
+          "model": "MiniMax-M2",
+          "billing_type": "per_token",
+          "context_window": 204800,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.1,
+            "output": 8.4,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-32k",
+          "model": "MiniMax-M1 (0-32K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 0.8,
+            "output": 8,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-128k",
+          "model": "MiniMax-M1 (32K-128K)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1.2,
+            "output": 16,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-m1-1m",
+          "model": "MiniMax-M1 (128K-1M)",
+          "billing_type": "per_token",
+          "context_window": 1000000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 2.4,
+            "output": 24,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.minimaxi.com/docs/guides/pricing-paygo"
+        },
+        {
+          "id": "minimax-token-plan-plus",
+          "model": "MiniMax Token Plan Plus",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision"
+          ],
+          "prices": {
+            "monthly_price": 49,
+            "currency": "CNY",
+            "included_quota": 12000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 12,000 次/月（按 50K Token/次估算）",
+              "3-4 个 Agent 并发",
+              "1 条视频生成/日",
+              "1M 上下文",
+              "仅支持编程 + 图像理解"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-max",
+          "model": "MiniMax Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 119,
+            "currency": "CNY",
+            "included_quota": 36000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 36,000 次/月（热门档）",
+              "4-5 个 Agent 并发",
+              "3 条视频生成/日",
+              "1M 上下文",
+              "全模态：编程 + 生图 + 语音 + 视频"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        },
+        {
+          "id": "minimax-token-plan-ultra",
+          "model": "MiniMax Token Plan Ultra",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text",
+            "vision",
+            "audio"
+          ],
+          "prices": {
+            "monthly_price": 469,
+            "currency": "CNY",
+            "included_quota": 140000,
+            "quota_unit": "calls_per_month",
+            "features": [
+              "约 140,000 次/月",
+              "6-7 个 Agent 并发",
+              "5 条视频生成/日",
+              "1M 上下文",
+              "全模态重度使用"
+            ]
+          },
+          "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
         }
       ]
     },
@@ -9007,6 +8839,174 @@
       ]
     },
     {
+      "id": "xiaomi",
+      "name": "小米",
+      "name_en": "Xiaomi",
+      "region": "cn",
+      "website": "https://platform.xiaomimimo.com/",
+      "pricing_url": "https://platform.xiaomimimo.com/",
+      "products": [
+        {
+          "id": "mimo-v2.5-pro-token",
+          "model": "mimo-v2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.435,
+            "output": 0.87,
+            "cached_input": 0.0036,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.2, \"coding_index\": 60.2, \"agentic_index\": 29.1}}"
+        },
+        {
+          "id": "mimo-v2.5-token",
+          "model": "mimo-v2.5",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.14,
+            "output": 0.28,
+            "cached_input": 0.0028,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 37.2, \"coding_index\": 56.8, \"agentic_index\": 23.7}}"
+        },
+        {
+          "id": "mimo-v2.5-pro-cn-token",
+          "model": "MiMo-V2.5-Pro",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 3,
+            "output": 6,
+            "cached_input": 0.025,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-v2.5-cn-token",
+          "model": "MiMo-V2.5",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1,
+            "output": 2,
+            "cached_input": 0.02,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-lite",
+          "model": "MiMo Token Plan Lite",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 39,
+            "currency": "CNY",
+            "included_quota": 41,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "41 亿 Credits",
+              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-standard",
+          "model": "MiMo Token Plan Standard",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 110,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "110 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-pro",
+          "model": "MiMo Token Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 329,
+            "currency": "CNY",
+            "included_quota": 380,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "380 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-max",
+          "model": "MiMo Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 659,
+            "currency": "CNY",
+            "included_quota": 820,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "820 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        }
+      ]
+    },
+    {
       "id": "cursor",
       "name": "Cursor",
       "name_en": "Cursor",
@@ -10092,7 +10092,7 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:04+08:00",
+      "last_success_at": "2026-08-03T11:00:02+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10106,7 +10106,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:04+08:00",
+      "last_success_at": "2026-08-03T11:00:03+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10120,7 +10120,7 @@
     {
       "provider_id": "deepseek",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10132,37 +10132,34 @@
       ]
     },
     {
-      "provider_id": "xiaomi",
-      "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "minimax",
-      "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "litellm",
-        "openrouter"
-      ]
-    },
-    {
       "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "error": null,
       "stale": false,
-      "warnings": [],
+      "warnings": [
+        {
+          "product_id": "qwen3-235b-a22b-2507-token",
+          "field": "prices.input",
+          "old_value": 0.09,
+          "new_value": 0.1495,
+          "volatility_pct": 66.11
+        },
+        {
+          "product_id": "qwen3.5-122b-a10b-token",
+          "field": "prices.input",
+          "old_value": 0.26,
+          "new_value": 0.4,
+          "volatility_pct": 53.85
+        },
+        {
+          "product_id": "qwen3.5-122b-a10b-token",
+          "field": "prices.output",
+          "old_value": 2.08,
+          "new_value": 3.2,
+          "volatility_pct": 53.85
+        }
+      ],
       "confidence": "low",
       "sources": [
         "litellm",
@@ -10172,7 +10169,20 @@
     {
       "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "litellm",
+        "openrouter"
+      ]
+    },
+    {
+      "provider_id": "minimax",
+      "status": "ok",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10185,7 +10195,7 @@
     {
       "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10198,7 +10208,7 @@
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -10208,9 +10218,21 @@
       ]
     },
     {
+      "provider_id": "xiaomi",
+      "status": "ok",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "openrouter"
+      ]
+    },
+    {
       "provider_id": "cursor",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10221,7 +10243,7 @@
     {
       "provider_id": "githubcopilot",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10232,7 +10254,7 @@
     {
       "provider_id": "kiro",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10243,7 +10265,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10254,7 +10276,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -10265,7 +10287,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-08-03T05:00:05+08:00",
+      "last_success_at": "2026-08-03T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
