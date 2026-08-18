@@ -4,6 +4,10 @@ on:
   push:
     branches: [master]
 
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,13 +18,41 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 60m
           script: |
+            set -eu
             cd /root
             if [ ! -d llm-price-compare ]; then
               git clone git@github.com:hangliuc/llm-price-compare.git
             fi
             cd llm-price-compare
-            git pull origin master
-            docker compose build pipeline
-            docker compose up -d --build web
+
+            # 兼容旧架构曾直接写入被 Git 跟踪的 data/prices.json。
+            # 新架构发布到 runtime/public，后续代码仓库会保持干净。
+            git restore data/prices.json 2>/dev/null || true
+            git pull --ff-only origin master
+
+            mkdir -p runtime/public
+            if [ ! -s runtime/public/prices.json ]; then
+              cp data/prices.json runtime/public/prices.json
+            fi
+
+            docker compose config --quiet
+            docker compose --profile pipeline build pipeline
+            docker compose up -d --build --remove-orphans web
+
+            # 调度属于服务器运行环境；每次部署幂等同步 unit 文件。
+            install -m 0644 ops/systemd/ppk-data-pipeline.service /etc/systemd/system/ppk-data-pipeline.service
+            install -m 0644 ops/systemd/ppk-data-pipeline.timer /etc/systemd/system/ppk-data-pipeline.timer
+            systemctl daemon-reload
+            systemctl enable --now ppk-data-pipeline.timer
+            systemctl restart ppk-data-pipeline.timer
+
+            # 首次迁移后异步刷新数据，不阻塞代码部署。
+            systemctl start --no-block ppk-data-pipeline.service
+
+            docker compose ps
+            systemctl is-active ppk-data-pipeline.timer
+            curl --fail --silent --show-error http://127.0.0.1:8001/ui/ >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/data/prices.json >/dev/null
             echo "Deployed at $(date)"

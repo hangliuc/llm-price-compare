@@ -111,7 +111,7 @@ SQLite 文件默认位于 `/var/lib/ppk/prices.db`（本地默认 `runtime/price
 - 发布版本及完整 JSON payload（Last Known Good）；
 - 被接受版本的产品快照和价格变化。
 
-SQLite 是审计与历史的权威存储；`data/prices.json` 是实际服务边界，也是 SQLite 发布元数据异常时的 LKG 恢复来源。它不再承担完整历史存储职责。
+SQLite 是审计与历史的权威存储；生产环境的 `runtime/public/prices.json` 是实际服务边界，也是 SQLite 发布元数据异常时的 LKG 恢复来源。仓库内 `data/prices.json` 仅作为首次部署和静态预览的种子快照，不再由生产 Pipeline 改写。
 
 ## 7. 校验、错误处理与降级
 
@@ -126,7 +126,7 @@ SQLite 是审计与历史的权威存储；`data/prices.json` 是实际服务边
 
 ## 8. 原子发布
 
-Pipeline 在目标目录创建临时文件，完整写入 JSON，执行 flush/fsync，再用同文件系统上的 `os.replace` 原子替换 `data/prices.json`。Nginx 始终读取旧完整文件或新完整文件，不会读取半写内容。
+Pipeline 在目标目录创建临时文件，完整写入 JSON，执行 flush/fsync，再用同文件系统上的 `os.replace` 原子替换 `runtime/public/prices.json`。Nginx 始终读取旧完整文件或新完整文件，不会读取半写内容。
 
 发布不执行 Git，不重启 Nginx，也不重建容器。Compose 中 Pipeline 与 Web 共享宿主机 `./data`；新文件替换后下一次 HTTP 请求立即读取新数据。
 
@@ -180,7 +180,7 @@ journalctl -u ppk-data-pipeline.service -n 200 --no-pager
 | 某 Provider stale | `python3 -m scripts.pipeline.cli status` |
 | 数据未发布 | 查看 run 的 validation/publish error；旧 JSON 应保持不变 |
 | 历史缺失 | 确认 `./runtime:/var/lib/ppk` volume 存在且可写 |
-| Web 数据未更新 | 对比 `data/prices.json` mtime 与 Nginx `/data/prices.json` 响应 |
+| Web 数据未更新 | 对比 `runtime/public/prices.json` mtime 与 Nginx `/data/prices.json` 响应 |
 | 原始来源异常 | `python3 scripts/query_history.py raw <provider> --source <source>` |
 
 ## 12. 新旧模块迁移映射

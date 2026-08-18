@@ -3,10 +3,10 @@
 ## 架构
 
 - `web`：常驻 Nginx，读取只读挂载的 `./ui` 和 `./data`。
-- `pipeline`：一次性任务，读取 `./data/manual`，写 `./data/prices.json` 与 `./runtime/prices.db`。
+- `pipeline`：一次性任务，只读 `./data/manual`，写 `./runtime/public/prices.json` 与 `./runtime/prices.db`。
 - `systemd timer`：服务器调度器；业务容器内部没有 cron。
 
-数据发布不依赖 Git、CI/CD 或 Web 重建。Pipeline 用同目录临时文件和 `os.replace` 原子更新 `prices.json`，Nginx 下一次请求即可读取新版本。
+数据发布不依赖 Git、CI/CD 或 Web 重建。Pipeline 用同目录临时文件和 `os.replace` 原子更新 `runtime/public/prices.json`，Nginx 下一次请求即可读取新版本。实时发布目录不受 Git 跟踪，因此不会阻塞后续代码部署。
 
 GitHub Pages 只保留代码发布时的静态预览快照，不承担实时数据更新；生产实时数据由服务器 Nginx 的共享 volume 提供。
 
@@ -16,6 +16,8 @@ GitHub Pages 只保留代码发布时的静态预览快照，不承担实时数�
 git clone git@github.com:hangliuc/llm-price-compare.git /root/llm-price-compare
 cd /root/llm-price-compare
 mkdir -p data runtime
+mkdir -p runtime/public
+cp data/prices.json runtime/public/prices.json
 docker compose up -d --build web
 docker compose --profile pipeline build pipeline
 ```
@@ -74,7 +76,7 @@ journalctl -u ppk-data-pipeline.service -n 200 --no-pager
 journalctl -u ppk-data-pipeline.service -f
 ```
 
-结构化任务、Source、Provider、Release 和 Change 状态位于 `runtime/prices.db`；便捷状态快照位于 `data/run_status.json`。前端发布物仍是 `data/prices.json`。
+结构化任务、Source、Provider、Release 和 Change 状态位于 `runtime/prices.db`；便捷状态快照位于 `runtime/public/run_status.json`。前端仍通过 `/data/prices.json` 消费数据，宿主机发布物位于 `runtime/public/prices.json`。
 
 ## 代码发布
 
@@ -83,7 +85,7 @@ journalctl -u ppk-data-pipeline.service -f
 ```bash
 git pull origin master
 docker compose --profile pipeline build pipeline
-docker compose up -d --build web
+docker compose up -d --build --remove-orphans web
 ```
 
 ## 回滚与故障处理
@@ -92,6 +94,6 @@ docker compose up -d --build web
 - 单 Provider 异常：候选回退该 Provider 的 Last Known Good，并标记 stale。
 - 发布后历史/告警记录失败：已发布 JSON 不回滚，状态记录 warning。
 - 误发布：从 SQLite 最近的 `pipeline_releases.payload_json` 导出审核后的版本，再通过原子写方式恢复；不要直接编辑正在服务的 JSON。
-- Web 未看到新数据：比较宿主机 `data/prices.json` 与 `/data/prices.json` HTTP 响应，并检查 Compose volume。
+- Web 未看到新数据：比较宿主机 `runtime/public/prices.json` 与 `/data/prices.json` HTTP 响应，并检查 Compose volume。
 
 更完整的架构与排障说明见 [docs/data-pipeline.md](docs/data-pipeline.md)。

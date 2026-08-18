@@ -20,7 +20,7 @@ python3 -m pytest -q
 
 ## 数据 Pipeline
 
-数据更新由短生命周期 Pipeline 完成：采集 Source / Adapter，归一化，多源仲裁，合并人工 Override，校验与异常保护，记录历史，最后原子替换 `data/prices.json`。前端 URL 和 JSON 主结构保持兼容。
+数据更新由短生命周期 Pipeline 完成：采集 Source / Adapter，归一化，多源仲裁，合并人工 Override，校验与异常保护，记录历史，最后原子替换生产环境的 `runtime/public/prices.json`。前端 URL 和 JSON 主结构保持兼容。
 
 ```bash
 python3 -m scripts.pipeline.cli run
@@ -57,7 +57,8 @@ docs/data-pipeline.md      数据链路设计与运维文档
 
 ## 数据持久化
 
-- `data/prices.json`：Nginx 直接提供给前端的原子发布文件。
+- `runtime/public/prices.json`：生产 Nginx 直接提供给前端的原子发布文件（不受 Git 跟踪）。
+- `data/prices.json`：首次部署与 GitHub Pages 使用的静态种子快照。
 - `runtime/prices.db`：运行状态、Source/Provider 结果、原始采集、发布版本和变更历史。
 - `data/manual/*.yaml`：版本控制内的人工来源与 Override。
 
