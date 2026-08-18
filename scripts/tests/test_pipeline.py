@@ -1,4 +1,5 @@
 import json
+import stat
 
 import pytest
 
@@ -121,6 +122,12 @@ def test_atomic_publish_preserves_existing_file_on_serialization_error(tmp_path)
         atomic_write_json(target, {"invalid": object()})
     assert json.loads(target.read_text(encoding="utf-8"))["version"] == "old"
     assert [path for path in tmp_path.iterdir() if path != target] == []
+
+
+def test_atomic_publish_creates_web_readable_file(tmp_path):
+    target = tmp_path / "prices.json"
+    atomic_write_json(target, {"version": "published"})
+    assert stat.S_IMODE(target.stat().st_mode) == 0o644
 
 
 def test_change_detection_records_price_field_changes():

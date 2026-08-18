@@ -36,6 +36,8 @@ jobs:
             if [ ! -s runtime/public/prices.json ]; then
               cp data/prices.json runtime/public/prices.json
             fi
+            chmod 0755 runtime runtime/public
+            find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
 
             docker compose config --quiet
             docker compose --profile pipeline build pipeline

@@ -41,6 +41,9 @@ def atomic_write_json(path: Path, data: dict) -> None:
             handle.write("\n")
             handle.flush()
             os.fsync(handle.fileno())
+        # mkstemp creates 0600 files. The published artifact is read by the
+        # unprivileged Nginx worker through a read-only bind mount.
+        os.chmod(tmp_name, 0o644)
         os.replace(tmp_name, path)
         try:
             dir_fd = os.open(str(path.parent), os.O_DIRECTORY)
@@ -65,4 +68,3 @@ def load_json(path: Path) -> Optional[dict]:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return None
-
