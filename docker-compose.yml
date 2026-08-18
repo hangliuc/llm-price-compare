@@ -1,16 +1,17 @@
 services:
-  scraper:
+  pipeline:
     build: .
-    container_name: llm-price-scraper
-    restart: unless-stopped
+    profiles: ["pipeline"]
     environment:
       - TZ=Asia/Shanghai
       - FEISHU_WEBHOOK_URL=${FEISHU_WEBHOOK_URL:-}
-      - GIT_USER_NAME=${GIT_USER_NAME:-llm-price-bot}
-      - GIT_USER_EMAIL=${GIT_USER_EMAIL:-bot@llm-price-compare}
-      - GIT_REMOTE_URL=${GIT_REMOTE_URL:-}
+      - PPK_OUTPUT_PATH=/app/data/prices.json
+      - PPK_STATUS_PATH=/app/data/run_status.json
+      - PPK_MANUAL_DIR=/app/data/manual
+      - PPK_RUNTIME_DIR=/var/lib/ppk
     volumes:
-      - ./logs:/var/log/llm-price
+      - ./data:/app/data
+      - ./runtime:/var/lib/ppk
 
   web:
     image: nginx:alpine

@@ -268,6 +268,8 @@ products:
   - id: bailian-coding-plan-pro
     model: 百炼 Coding Plan Pro
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -287,6 +289,8 @@ products:
   - id: bailian-token-plan-team
     model: 百炼 Token Plan 团队版
     billing_type: subscription
+    plan_category: developer_api
+    featured_on_home: false
     context_window: null
     modalities: [text, vision]
     prices:

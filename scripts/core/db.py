@@ -17,7 +17,7 @@ _SCHEMA_PATH = Path(__file__).parent / "schema.sql"
 def get_connection(db_path: Optional[Path] = None) -> sqlite3.Connection:
     """获取 SQLite 连接，自动初始化 schema。
 
-    使用 check_same_thread=False 支持 cron 脚本多线程场景。
+    使用 check_same_thread=False，便于测试或采集器内部受控并发场景复用连接。
     """
     path = db_path or _DB_PATH
     path.parent.mkdir(parents=True, exist_ok=True)

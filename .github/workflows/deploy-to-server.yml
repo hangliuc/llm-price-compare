@@ -21,6 +21,6 @@ jobs:
             fi
             cd llm-price-compare
             git pull origin master
-            docker compose down
-            docker compose up -d --build
+            docker compose build pipeline
+            docker compose up -d --build web
             echo "Deployed at $(date)"

@@ -11,4 +11,5 @@ note/
 !requirements.txt
 data/run_status.json
 logs/
+runtime/
 .env

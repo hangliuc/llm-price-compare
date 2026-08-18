@@ -12,6 +12,8 @@ products:
   - id: chatgpt-free
     model: ChatGPT Free
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: false
     context_window: null
     modalities: [text, vision]
     prices:
@@ -26,6 +28,8 @@ products:
   - id: chatgpt-plus
     model: ChatGPT Plus
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: true
     context_window: null
     modalities: [text, vision]
     prices:
@@ -40,6 +44,8 @@ products:
   - id: chatgpt-pro
     model: ChatGPT Pro
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: false
     context_window: null
     modalities: [text, vision]
     prices:
@@ -54,6 +60,8 @@ products:
   - id: chatgpt-business
     model: ChatGPT Business
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: false
     context_window: null
     modalities: [text, vision]
     prices:

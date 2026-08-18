@@ -50,6 +50,7 @@ def test_validate_product_coding_plan_missing_quota():
         billing_type=BillingType.CODING_PLAN,
         prices={"monthly_price": 99, "currency": "CNY"},
         purchase_url="https://example.com",
+        plan_category="coding_tool",
     )
     with pytest.raises(ValidationError, match="included_quota"):
         validate_product(p)
@@ -61,8 +62,20 @@ def test_validate_product_subscription_ok():
         billing_type=BillingType.SUBSCRIPTION,
         prices={"monthly_price": 20, "currency": "USD"},
         purchase_url="https://example.com",
+        plan_category="general_ai",
     )
     validate_product(p)
+
+
+def test_validate_product_plan_category_required():
+    p = Product(
+        id="plus",
+        billing_type=BillingType.SUBSCRIPTION,
+        prices={"monthly_price": 20, "currency": "USD"},
+        purchase_url="https://example.com",
+    )
+    with pytest.raises(ValidationError, match="plan_category"):
+        validate_product(p)
 
 
 # 追加到 scripts/tests/test_validate.py

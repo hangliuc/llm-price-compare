@@ -9,8 +9,10 @@ website: https://opencode.ai/
 pricing_url: https://opencode.ai/zh/go
 products:
   - id: go-plan
-    model: null
+    model: OpenCode Go
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:

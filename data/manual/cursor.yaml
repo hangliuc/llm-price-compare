@@ -12,6 +12,8 @@ products:
   - id: cursor-hobby
     model: Cursor Hobby
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -25,6 +27,8 @@ products:
   - id: cursor-pro
     model: Cursor Pro
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: true
     context_window: null
     modalities: [text]
     prices:
@@ -41,6 +45,8 @@ products:
   - id: cursor-pro-plus
     model: Cursor Pro+
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -56,6 +62,8 @@ products:
   - id: cursor-ultra
     model: Cursor Ultra
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -72,6 +80,8 @@ products:
   - id: cursor-teams
     model: Cursor Teams
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:

@@ -10,5 +10,7 @@ data/prices.db-wal
 data/prices.db-shm
 /var/log/llm-price/
 logs/
+runtime/
 playwright.cfg
 .env
+.DS_Store

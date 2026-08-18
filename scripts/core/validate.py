@@ -1,5 +1,5 @@
 # scripts/core/validate.py
-from scripts.core.models import Product, Provider, BillingType
+from scripts.core.models import Product, Provider, BillingType, PLAN_CATEGORIES
 
 
 class ValidationError(Exception):
@@ -42,6 +42,16 @@ def validate_product(p: Product) -> None:
         for f in _CODING_PLAN_REQUIRED:
             _require(f in prices, f"coding_plan product missing prices.{f} (product={p.id})")
         _check_non_negative(prices, ["monthly_price"])
+
+    if p.billing_type in (BillingType.SUBSCRIPTION, BillingType.CODING_PLAN):
+        _require(
+            p.plan_category in PLAN_CATEGORIES,
+            f"plan product missing or invalid plan_category (product={p.id})",
+        )
+        _require(
+            isinstance(p.featured_on_home, bool),
+            f"featured_on_home must be boolean (product={p.id})",
+        )
 
 
 def validate_provider(p: Provider) -> None:

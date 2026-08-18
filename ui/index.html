@@ -6,15 +6,15 @@
   <title>PPK · Price Per Token · 主流大模型厂商价格聚合</title>
   <meta name="description" content="PPK (Price Per Token) 聚合 OpenAI、Anthropic、Google、DeepSeek、智谱、火山引擎等主流大模型厂商的 Token 价格、订阅制与 Coding Plan">
   <base href="/ui/">
-  <link rel="icon" type="image/svg+xml" href="icons/ppx.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/ppx.svg?v=2">
   <link rel="apple-touch-icon" href="icons/ppx.svg">
   <meta property="og:image" content="icons/ppx.svg">
   <meta property="og:title" content="PPK · Price Per Token">
   <meta property="og:description" content="主流大模型厂商价格聚合">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=34">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=57">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -31,8 +31,16 @@
         <nav class="nav-menu">
           <a href="#/" :class="{active: routeName === 'home'}">首页</a>
           <a href="#/billing/per_token" :class="{active: routeName === 'billing' && billingRoute === 'per_token'}">按需计费</a>
-          <a href="#/billing/coding_plan" :class="{active: routeName === 'billing' && billingRoute === 'coding_plan'}">Coding Plan</a>
-          <a href="#/billing/subscription" :class="{active: routeName === 'billing' && billingRoute === 'subscription'}">订阅制</a>
+          <div class="nav-plans" :class="{active: plansMenuActive, open: plansMenuOpen}" @mouseenter="openPlansMenuOnHover" @mouseleave="closePlansMenuOnHover" @focusout="closePlansMenuOnFocusOut" @click.stop @keydown.esc.stop.prevent="closePlansMenu(true)">
+            <button type="button" class="nav-plans-trigger" aria-haspopup="menu" :aria-expanded="plansMenuOpen" aria-controls="nav-plans-menu" @click="togglePlansMenu" @keydown.down.prevent="openPlansMenuAndFocus">
+              <span>套餐</span><i aria-hidden="true">⌄</i>
+            </button>
+            <div v-if="plansMenuOpen" id="nav-plans-menu" class="nav-plans-menu" role="menu" aria-label="套餐">
+              <a href="#/billing/subscription" role="menuitem" :class="{active: billingRoute === 'subscription'}">订阅制</a>
+              <a href="#/billing/coding_plan" role="menuitem" :class="{active: billingRoute === 'coding_plan'}">Coding Plan</a>
+            </div>
+          </div>
+          <a href="#/providers" :class="{active: routeName === 'providers' || routeName === 'provider'}">厂商</a>
           <a href="#/about" :class="{active: routeName === 'about'}">关于</a>
         </nav>
         <div class="header-actions">
@@ -85,8 +93,10 @@
 
     <!-- ============ 首页 ============ -->
     <template v-if="data && routeName === 'home'">
-      <!-- 不对称 Hero -->
-      <section class="hero">
+      <!-- Hero Area：主叙事 + AI Coding 生态延伸 -->
+      <div class="home-hero-area">
+        <!-- 不对称 Hero Main -->
+        <section class="hero">
         <div class="hero-left">
           <h1 class="hero-title">选大模型<br><em>从定价开始</em></h1>
           <p class="hero-sub">聚合 OpenAI、Anthropic、Google、AWS、DeepSeek、智谱等主流厂商的 Token 计费、订阅制与 Coding Plan，帮助开发者快速对比与选型</p>
@@ -113,141 +123,180 @@
             </div>
           </div>
         </div>
-      </section>
+        </section>
 
-      <!-- PPK 网站特征 -->
-      <div class="billing-cards feature-cards">
-        <div class="billing-card feature-card">
-          <div class="billing-card-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
+        <!-- Hero 内的 AI Coding 工具带 -->
+        <section class="home-ide-section" aria-labelledby="home-ide-title">
+          <div class="home-ide-head">
+            <h2 id="home-ide-title">AI Coding 工具</h2>
+            <span class="home-ide-meta">{{ codingIDEs.length }} tools</span>
           </div>
-          <div class="billing-card-body">
-            <div class="billing-card-title">大模型价格一目了然</div>
-            <div class="billing-card-desc">直观展示各家厂商 Token 定价，输入输出与缓存价格清晰可比</div>
-          </div>
-        </div>
-        <div class="billing-card feature-card">
-          <div class="billing-card-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M2 12h20"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-          </div>
-          <div class="billing-card-body">
-            <div class="billing-card-title">聚合热门厂商</div>
-            <div class="billing-card-desc">覆盖 OpenAI、Anthropic、Google、DeepSeek、智谱等国内外主流大模型厂商</div>
+        <div class="home-ide-flow-stack">
+          <div v-for="(row, rowIndex) in codingIDERows" :key="rowIndex" class="home-ide-rail" :class="rowIndex === 1 ? 'home-ide-rail--reverse' : 'home-ide-rail--forward'" :aria-label="'AI Coding 工具流，第 ' + (rowIndex + 1) + ' 行'">
+            <div class="home-ide-track">
+              <div v-for="group in 2" :key="group" class="home-ide-group" :aria-hidden="group === 2 ? 'true' : null">
+                <a v-for="ide in row" :key="group + '-' + ide.id" :href="ide.url" target="_blank" rel="noopener noreferrer" class="home-ide-item" :tabindex="group === 2 ? -1 : null">
+                  <span class="home-ide-logo"><img :src="ide.logo" :alt="ide.name"></span>
+                  <span class="home-ide-copy"><b>{{ ide.name }}</b></span>
+                  <i class="home-ide-arrow" aria-hidden="true">↗</i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="billing-card feature-card">
-          <div class="billing-card-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-              <path d="M3 3v5h5"/>
-            </svg>
-          </div>
-          <div class="billing-card-body">
-            <div class="billing-card-title">每日定时更新</div>
-            <div class="billing-card-desc">每日自动同步官方最新定价，数据公开透明，支持 GitHub 订阅追踪</div>
-          </div>
-        </div>
+        </section>
       </div>
 
-      <!-- 计费方式 · 编辑杂志式三列专栏 -->
-      <section class="section billing-showcase">
-        <div class="section-head">
+      <!-- Pricing Overview -->
+      <section class="section home-billing-section">
+        <div class="section-head home-section-head">
           <div>
-            <h2 class="section-title">三种<span class="title-normal">计费</span>方式</h2>
-            <p class="section-sub">按需计费、订阅制、Coding Plan，总有一款适合你的使用场景</p>
+            <div class="section-eyebrow">2 PRICING TYPES</div>
+            <h2 class="section-title">两种方式，<em>看懂 AI 定价</em></h2>
+            <p class="section-sub">AI 产品的价格大致分为两类：按实际使用量付费，或按固定周期购买套餐。</p>
           </div>
         </div>
+        <div class="home-billing-types">
+          <article v-for="slide in billingSlides" :key="slide.index" class="home-billing-type">
+            <div class="home-billing-type-head">
+              <span class="home-billing-copy"><small>{{ slide.label }}</small><b>{{ slide.name }}</b></span>
+            </div>
+            <div class="home-billing-visual"><img :src="slide.image" :alt="slide.name + ' 示意图'" loading="lazy"></div>
+            <div class="home-billing-body">
+              <h3>{{ slide.value }}</h3>
+              <p><span class="home-billing-note-label">计费规则</span>{{ slide.desc }}</p>
+              <p class="home-billing-examples"><span class="home-billing-note-label">{{ slide.exampleLabel }}</span>{{ slide.examples.join(' · ') }}</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-        <div class="billing-columns">
-          <a
-            v-for="(slide, i) in billingSlides"
-            :key="i"
-            :href="slide.href"
-            class="billing-column"
-          >
-            <div class="billing-col-head">
-              <span class="billing-col-index">{{ slide.index }}</span>
-              <span class="billing-col-label">{{ slide.label }}</span>
+      <!-- 真实价格预览 -->
+      <section class="section home-pricing-section home-surface home-surface--pricing">
+        <div class="section-head home-section-head">
+          <div>
+            <div class="section-eyebrow">LIVE PRICING · CNY</div>
+            <h2 class="section-title">先看价格，<em>再做选择</em></h2>
+            <p class="section-sub">浏览近期代表模型的输入、输出与缓存价格，所有数据来自当前价格库并统一折算为人民币。</p>
+          </div>
+          <a href="#/billing/per_token" class="section-link home-pricing-cta">查看全部价格 →</a>
+        </div>
+        <div class="home-price-table">
+          <div class="home-price-row home-price-head" aria-hidden="true">
+            <span>Model</span><span><b>Input</b><small>¥ / 1M tokens</small></span><span><b>Output</b><small>¥ / 1M tokens</small></span><span><b>Cache</b><small>¥ / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
+          </div>
+          <div v-for="row in homePreviewRows" :key="row.id" class="home-price-row">
+            <a :href="'#/provider/' + row.providerId" class="home-price-model" :aria-label="'查看 ' + row.providerName + ' 的 ' + row.model + ' 详细价格'">
+              <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
+              <span><b>{{ row.model }}</b><small>{{ row.providerName }}</small></span>
+            </a>
+            <span class="home-price-value"><small>Input · ¥/1M</small>{{ formatPriceAmount(row, 'input') }}</span>
+            <span class="home-price-value"><small>Output · ¥/1M</small>{{ formatPriceAmount(row, 'output') }}</span>
+            <span class="home-price-value"><small>Cache · ¥/1M</small>{{ formatPriceAmount(row, 'cached_input') }}</span>
+            <span class="home-price-context">
+              <small>Context</small><span>{{ formatContext(row.context_window) }}</span>
+              <button type="button" class="home-price-compare-action" :aria-label="'将 ' + row.model + ' 加入模型比较'" title="加入下方模型比较" @click="addHomePreviewToCompare(row)">→</button>
+            </span>
+          </div>
+        </div>
+        <a href="#/billing/per_token" class="section-link home-pricing-cta-mobile">查看全部价格 →</a>
+      </section>
+
+      <!-- 真实模型对比 -->
+      <section id="home-model-compare" class="section home-why-section home-surface home-surface--compare">
+        <div class="home-why-intro">
+          <div class="section-eyebrow">MODEL COMPARE · CNY</div>
+          <h2 class="section-title">同一视角，<br><em>看清模型差异</em></h2>
+          <p class="section-sub">选择三个候选模型，直接比较输入、输出、缓存和上下文。</p>
+          <a href="#/compare" class="section-link home-compare-link">进入完整对比 →</a>
+        </div>
+        <div class="home-compare-preview" aria-label="代表模型价格对比">
+          <div class="home-compare-row home-compare-models">
+            <span>模型</span>
+            <div v-for="(row, columnIndex) in homeCompareRows" :key="columnIndex" class="home-model-picker-wrap" @click.stop>
+              <button type="button" class="home-model-trigger" :data-home-model-trigger="columnIndex" :title="row.model" :aria-label="'更换模型：' + row.model + '，' + row.providerName" :aria-expanded="homeModelPickerIndex === columnIndex" aria-haspopup="listbox" :aria-controls="'home-model-options-' + columnIndex" @click="openHomeModelPicker(columnIndex)">
+                <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
+                <span class="home-model-trigger-copy"><b>{{ row.model }}</b><small>{{ row.providerName }}</small></span>
+                <i aria-hidden="true">⌄</i>
+              </button>
+              <div v-if="homeModelPickerIndex === columnIndex" class="home-model-picker" :data-home-picker="columnIndex" @keydown="handleHomeModelPickerKeydown">
+                <label class="home-model-search">
+                  <span class="sr-only">搜索模型或厂商</span>
+                  <input v-model="homeModelPickerQuery" type="search" placeholder="搜索模型或厂商…" autocomplete="off" role="combobox" aria-autocomplete="list" :aria-controls="'home-model-options-' + columnIndex" :aria-expanded="true">
+                </label>
+                <div :id="'home-model-options-' + columnIndex" class="home-model-options" role="listbox" :aria-label="'为第 ' + (columnIndex + 1) + ' 列选择模型'">
+                  <button v-for="option in homeModelPickerRows(columnIndex)" :key="option.id" type="button" class="home-model-option" role="option" :aria-selected="option.id === row.id" @click="selectHomeCompareModel(columnIndex, option)">
+                    <span class="provider-icon"><img :src="iconUrl(option.providerId)" :alt="option.providerName" @error="onIconError($event, option.providerId)"></span>
+                    <span><b>{{ option.model }}</b><small>{{ option.providerName }}</small></span>
+                    <i v-if="option.id === row.id" aria-hidden="true">✓</i>
+                  </button>
+                  <p v-if="!homeModelPickerRows(columnIndex).length" class="home-model-empty">没有匹配的模型</p>
+                </div>
+              </div>
             </div>
-            <h3 class="billing-col-name">{{ slide.name }}</h3>
-            <div class="billing-col-image">
-              <img :src="slide.image" :alt="slide.name + ' 预览'" loading="lazy">
+          </div>
+          <div class="home-compare-row"><span>输入 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-input'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'input') }]">{{ formatPriceAmount(row, 'input') }}</b></div>
+          <div class="home-compare-row"><span>输出 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-output'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'output') }]">{{ formatPriceAmount(row, 'output') }}</b></div>
+          <div class="home-compare-row"><span>缓存 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-cache'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'cached_input') }]">{{ formatPriceAmount(row, 'cached_input') }}</b></div>
+          <div class="home-compare-row"><span>上下文</span><b v-for="row in homeCompareRows" :key="row.id + '-context'" class="home-compare-value">{{ formatContext(row.context_window) }}</b></div>
+        </div>
+      </section>
+
+      <!-- 套餐预览 -->
+      <section class="section home-plans-section">
+        <div class="section-head home-section-head">
+          <div>
+            <div class="section-eyebrow">PLANS</div>
+            <h2 class="section-title">不只 Token，<em>也看套餐</em></h2>
+            <p class="section-sub">从通用 AI 订阅到 Coding Plan 与开发者套餐，一处查看月费与权益。</p>
+          </div>
+          <div class="home-plans-entry" :class="{open: homePlansMenuOpen}" @focusout="closeHomePlansMenuOnFocusOut" @keydown.esc.stop.prevent="closeHomePlansMenu(true)">
+            <button type="button" class="section-link home-plans-trigger" aria-haspopup="menu" :aria-expanded="homePlansMenuOpen" aria-controls="home-plans-menu" @click="toggleHomePlansMenu" @keydown.down.prevent="openHomePlansMenuAndFocus">查看全部套餐 <span aria-hidden="true">⌄</span></button>
+            <div v-if="homePlansMenuOpen" id="home-plans-menu" class="home-plans-menu" role="menu" aria-label="查看套餐">
+              <a href="#/billing/subscription" role="menuitem">订阅制</a>
+              <a href="#/billing/coding_plan" role="menuitem">Coding Plan</a>
             </div>
-            <p class="billing-col-desc">{{ slide.desc }}</p>
-            <div class="billing-col-stat">
-              <span class="stat-num">{{ slide.count }}</span>
-              <span class="stat-unit">款产品</span>
+          </div>
+        </div>
+        <div class="home-plan-grid">
+          <a v-for="plan in homePlanRows" :key="plan.id" :href="plan.billing_type === 'coding_plan' ? '#/billing/coding_plan' : '#/billing/subscription'" class="home-plan-item">
+            <div class="home-plan-top">
+              <span class="home-price-model"><span class="provider-icon"><img :src="iconUrl(plan.providerId)" :alt="plan.providerName" @error="onIconError($event, plan.providerId)"></span><b>{{ plan.providerName }}</b></span>
+              <small>{{ billingLabel(plan.billing_type) }}</small>
             </div>
-            <span class="billing-col-cta">{{ slide.cta }} <span class="arrow">→</span></span>
+            <h3>{{ plan.model }}</h3>
+            <div class="home-plan-price"><span>{{ currencySymbol(plan) }}</span><b>{{ formatMonthlyValue(plan) }}</b><small>/月</small></div>
+            <p>{{ formatQuota(plan) }}</p>
           </a>
         </div>
       </section>
 
-      <!-- 主流大模型厂商 -->
-      <section class="section providers-section">
-        <div class="section-head">
-          <div>
-            <div class="section-eyebrow">PARTNERS · {{ providerList.length }} 家</div>
-            <h2 class="section-title">主流大模型<em>厂商</em></h2>
-            <p class="section-sub">覆盖国内外 {{ providerList.length }} 家主流大模型厂商，点击卡片查看完整产品线与定价</p>
-          </div>
+      <!-- 数据可信度 -->
+      <section class="section home-trust-section home-surface home-surface--trust">
+        <div class="home-trust-copy">
+          <div class="section-eyebrow">OPEN DATA · TRACEABLE</div>
+          <h2 class="section-title">价格数据，<em>有迹可循</em></h2>
+          <p>LiteLLM、OpenRouter 与厂商官网三源交叉验证；抓取失败时保留上次成功数据并明确标注状态。</p>
         </div>
-
-        <div class="providers-home-grid">
-          <div v-for="(p, i) in providerList" :key="p.id"
-               class="pv-card"
-               :style="{ animationDelay: (i * 0.04) + 's' }"
-               @click="goHash('#/provider/' + p.id)">
-            <div class="pv-card-top">
-              <span class="pv-card-icon">
-                <img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)">
-              </span>
-              <a :href="p.website" target="_blank" @click.stop class="pv-card-site">官网 ↗</a>
-            </div>
-            <div class="pv-card-name">{{ p.name }}</div>
-            <div class="pv-card-stats">
-              <span class="pv-card-num">{{ p.productCount }}</span>
-              <span class="pv-card-unit">款产品</span>
-            </div>
-          </div>
-
-          <!-- 最后一张：厂商总览入口 -->
-          <a href="#/providers" class="pv-card pv-card-more"
-             :style="{ animationDelay: (providerList.length * 0.04) + 's' }">
-            <div class="pv-card-more-inner">
-              <span class="pv-card-more-mark">
-                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M5 12h14"/>
-                  <path d="m13 5 7 7-7 7"/>
-                </svg>
-              </span>
-              <div class="pv-card-name">厂商总览</div>
-              <div class="pv-card-more-sub">浏览全部厂商</div>
-            </div>
-          </a>
+        <div class="home-trust-facts">
+          <div><strong>{{ successCount }}/{{ providerList.length }}</strong><span>数据源状态正常</span></div>
+          <div><strong>{{ freshnessText }}</strong><span>最近一次数据更新</span></div>
+          <a href="https://github.com/hangliuc/llm-price-compare" target="_blank"><strong>Open Source ↗</strong><span>查看代码与数据来源</span></a>
         </div>
       </section>
 
       <!-- FAQ + 社群 -->
-      <section class="section faq-community" style="padding-top: 0;">
+      <section class="section faq-community">
         <div class="faq-community-grid">
           <!-- FAQ -->
           <div class="faq-block">
             <h2 class="section-title">常见问题</h2>
             <div class="faq-list">
               <details class="faq-item">
-                <summary>什么是按需计费、订阅制、Coding Plan？</summary>
+                <summary>按需计费和套餐有什么区别？</summary>
                 <div class="faq-answer">
                   <p><b>按需计费（Per Token）</b>：按实际使用的 Token 数量计费，输入和输出分别定价，通过 API 调用，适合低频或弹性场景。</p>
-                  <p><b>订阅制（Subscription）</b>：面向终端用户的产品订阅，固定月费换取额度内不限量使用，直接在厂商产品（如 ChatGPT Plus、Claude Pro、Cursor Pro）内消费，无需 API 接入。</p>
-                  <p><b>Coding Plan</b>：面向开发者的 API 额度套餐，月付固定费用换取 Token 额度池，通过 API 接入编程工具（如 Claude Code、GLM Coding、方舟 Coding Plan）按调用扣减，适合日常编程。</p>
+                  <p><b>套餐（Plans）</b>：固定周期或固定额度的产品方案。当前可分别从<b>订阅制</b>与 <b>Coding Plan</b> 两个入口查看；原有页面和数据口径保持不变。</p>
                 </div>
               </details>
               <details class="faq-item">
@@ -290,6 +339,7 @@
           </div>
         </div>
       </section>
+
     </template>
 
     <!-- ============ 厂商总览 ============ -->
@@ -761,9 +811,9 @@
             PPK（Price Per Token）是一个非商业的大模型价格聚合工具，
             帮助开发者快速对比各主流厂商的 <strong>Token 计费</strong>、
             <strong>订阅制</strong> 与 <strong>Coding Plan</strong>。
-            数据通过 Python 爬虫定时抓取厂商公开定价页面，
-            经多源交叉校验后生成静态 JSON，由前端实时渲染。
-            单个厂商抓取失败不影响其他厂商数据展示。
+            数据由独立 Pipeline 定时采集公开数据源与厂商定价页面，
+            经归一化、多源仲裁与质量校验后原子发布为 JSON，由前端实时读取。
+            单个数据源或厂商抓取失败时会保留上一次成功数据，不影响其他厂商展示。
           </p>
 
           <!-- 数据来源（动态） -->
@@ -811,20 +861,20 @@
               </div>
             </li>
           </ol>
-          <p class="about-note">仲裁层（reconcile）会对比三源数据，标记置信度（high / medium / low / manual），价格波动超过 20% 触发警告，超过 50% 阻断更新以防止异常数据。</p>
+          <p class="about-note">Pipeline 会对多源数据进行仲裁并标记置信度（high / medium / low / manual）；价格异常、字段缺失或产品数量大幅减少时会阻断候选数据，并回退到 Last Known Good。</p>
 
           <!-- 历史数据 -->
           <h2>历史<em>追溯</em></h2>
-          <p>所有快照同步写入 SQLite 数据库（每日 500+ 条记录），支持按厂商、产品、日期查询历史价格变动，便于追溯调价轨迹。原始抓取数据完整留痕，便于回溯仲裁决策。</p>
+          <p>每次任务的 Source、Provider、候选版本、发布版本与字段级价格变化都会写入持久化 SQLite，支持按运行、厂商和产品追踪。数据通过原子替换发布，失败任务不会覆盖线上版本。</p>
 
           <!-- 技术栈 -->
           <h2>技术<em>栈</em></h2>
           <ul>
             <li><strong>数据采集</strong>：Python + Playwright + 多源仲裁</li>
-            <li><strong>数据存储</strong>：SQLite（历史快照）+ JSON（前端数据契约）</li>
+            <li><strong>数据存储</strong>：SQLite（运行、历史与发布审计）+ JSON（前端数据契约）</li>
             <li><strong>前端</strong>：Vue 3 CDN（无构建步骤）+ Instrument Serif / Geist / Geist Mono 三层字体系统</li>
-            <li><strong>部署</strong>：Docker Compose + Cron（自有服务器调度）+ GitHub Pages（静态站点）</li>
-            <li><strong>告警</strong>：飞书 Webhook 实时推送抓取失败与价格异常</li>
+            <li><strong>调度与部署</strong>：systemd timer + Docker Compose；数据更新无需 Git push 或重建 Web</li>
+            <li><strong>告警</strong>：飞书 Webhook 汇总推送抓取失败、数据阻断与价格异常</li>
           </ul>
 
           <!-- 反馈 -->
@@ -856,6 +906,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=29"></script>
+  <script src="app.js?v=47"></script>
 </body>
 </html>

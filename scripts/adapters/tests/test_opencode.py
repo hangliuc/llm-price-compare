@@ -18,6 +18,7 @@ def test_opencode_parses_coding_plan(mock_fetch):
 
     p = products[0]
     assert p.billing_type == BillingType.CODING_PLAN
+    assert p.plan_category == "coding_tool"
     assert p.prices["monthly_price"] == 99
     assert p.prices["currency"] == "CNY"
     assert p.prices["included_quota"] == 500

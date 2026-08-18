@@ -37,6 +37,8 @@ products:
   - id: mimo-token-plan-lite
     model: MiMo Token Plan Lite
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text]
     prices:
@@ -52,6 +54,8 @@ products:
   - id: mimo-token-plan-standard
     model: MiMo Token Plan Standard
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text]
     prices:
@@ -67,6 +71,8 @@ products:
   - id: mimo-token-plan-pro
     model: MiMo Token Plan Pro
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text]
     prices:
@@ -82,6 +88,8 @@ products:
   - id: mimo-token-plan-max
     model: MiMo Token Plan Max
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text]
     prices:

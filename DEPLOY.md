@@ -1,214 +1,97 @@
-# 部署指南
+# 部署与运维
 
-## 架构概览
+## 架构
 
-```
-本地/GitHub  ──push──>  GitHub 仓库 (master)
-                         │
-            ┌────────────┼────────────┐
-            ▼            ▼            ▼
-      GitHub Pages   CI Tests   Deploy-to-Server
-      (静态前端)    (pytest)    (SSH + Docker)
-                                   │
-                                   ▼
-                          服务器 129.226.94.179
-                          Docker 容器 (cron 抓取)
-                                   │
-                          每日 11:00 抓取 → git push
-                                   │
-                                   ▼
-                          GitHub Pages 自动更新
-```
+- `web`：常驻 Nginx，读取只读挂载的 `./ui` 和 `./data`。
+- `pipeline`：一次性任务，读取 `./data/manual`，写 `./data/prices.json` 与 `./runtime/prices.db`。
+- `systemd timer`：服务器调度器；业务容器内部没有 cron。
 
----
+数据发布不依赖 Git、CI/CD 或 Web 重建。Pipeline 用同目录临时文件和 `os.replace` 原子更新 `prices.json`，Nginx 下一次请求即可读取新版本。
 
-## 一、本地验证（不用推到服务器）
+GitHub Pages 只保留代码发布时的静态预览快照，不承担实时数据更新；生产实时数据由服务器 Nginx 的共享 volume 提供。
 
-### 1. 运行测试
+## 首次部署
 
 ```bash
-cd llm-price-compare
-pip install -r requirements.txt
-pytest scripts/ -v -m "not browser"
+git clone git@github.com:hangliuc/llm-price-compare.git /root/llm-price-compare
+cd /root/llm-price-compare
+mkdir -p data runtime
+docker compose up -d --build web
+docker compose --profile pipeline build pipeline
 ```
 
-### 2. 验证前端
+如实际目录不是 `/root/llm-price-compare`，同步修改 `ops/systemd/ppk-data-pipeline.service` 的 `WorkingDirectory`。
+
+安装外部调度：
 
 ```bash
-cd llm-price-compare
-python3 -m http.server 8000
+sudo cp ops/systemd/ppk-data-pipeline.service /etc/systemd/system/
+sudo cp ops/systemd/ppk-data-pipeline.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now ppk-data-pipeline.timer
+systemctl list-timers ppk-data-pipeline.timer
 ```
 
-浏览器打开 `http://localhost:8000/ui/`，可看到前端页面。
-数据来自 `data/prices.json`，修改后刷新即可看效果。
+默认每天北京时间 05:00、11:00、17:00、23:00 运行，并带最多 120 秒随机延迟。修改频率只需编辑 timer 并执行 `daemon-reload` 与 `restart`，无需修改采集代码。
 
-### 3. 手动跑抓取脚本
+## 配置
 
-```bash
-cd llm-price-compare
-python3 scripts/run_daily.py
-cat data/prices.json | python3 -m json.tool | head -30
-cat data/run_status.json
+可选环境变量写入服务器 `.env`：
+
+```dotenv
+FEISHU_WEBHOOK_URL=
+PPK_PROVIDER_MIN_RATIO=0.50
+PPK_DATASET_MIN_RATIO=0.70
+PPK_MIN_PROVIDERS=3
+PPK_MIN_PRODUCTS=20
 ```
 
-注意：真实厂商抓取可能因页面改版失败，属正常现象。manual 厂商数据一定会加载。
+路径变量已在 Compose 中映射到共享持久化目录。不要为 Pipeline 配置 Git Token。
 
-### 4. Docker 本地验证
-
-```bash
-cd llm-price-compare
-cp .env.example .env
-# 编辑 .env 填入配置
-
-# 构建并启动
-docker compose up -d --build
-
-# 手动触发一次抓取
-docker compose run scraper run
-
-# 查看日志
-docker compose logs -f
-
-# 停止
-docker compose down
-```
-
----
-
-## 二、服务器部署（Docker）
-
-### 1. 首次部署
-
-在服务器上：
-
-```bash
-ssh user@129.226.94.179
-
-# 克隆仓库
-cd /root
-git clone git@github.com:hangliuc/llm-price-compare.git
-cd llm-price-compare
-
-# 配置环境变量
-cp .env.example .env
-vi .env
-```
-
-`.env` 内容：
-
-```env
-FEISHU_WEBHOOK_URL=https://open.feishu.cn/openapis/bot/v2/hook/xxx
-GIT_REMOTE_URL=https://<token>@github.com/hangliuc/llm-price-compare.git
-GIT_USER_NAME=llm-price-bot
-GIT_USER_EMAIL=bot@llm-price-compare
-```
-
-> **GIT_REMOTE_URL** 中的 `<token>` 是 GitHub Personal Access Token：
-> GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token，勾选 `repo` 权限。
-
-### 2. 启动容器
+## 手工执行
 
 ```bash
 cd /root/llm-price-compare
-docker compose up -d --build
+docker compose --profile pipeline run --rm pipeline run
+docker compose --profile pipeline run --rm pipeline status
 ```
 
-容器会：
-- 每日 11:00 北京时间自动执行 `scripts/run_daily.py`
-- 抓取后将 `prices.json` git push 回 GitHub
-- 失败时发飞书告警
-
-### 3. 手动触发抓取
+本地也可直接运行：
 
 ```bash
-docker compose run scraper run
+python3 -m scripts.pipeline.cli run
+python3 -m scripts.pipeline.cli status
 ```
 
-### 4. 查看日志
+Pipeline 使用非阻塞文件锁；已有任务运行时，第二次执行不会并发覆盖数据。
+
+## 日志与状态
 
 ```bash
-# 容器日志
-docker compose logs -f
-
-# cron 日志
-docker exec llm-price-scraper cat /var/log/llm-price/cron.log
+systemctl status ppk-data-pipeline.timer
+systemctl status ppk-data-pipeline.service
+journalctl -u ppk-data-pipeline.service -n 200 --no-pager
+journalctl -u ppk-data-pipeline.service -f
 ```
 
-### 5. 后续更新
+结构化任务、Source、Provider、Release 和 Change 状态位于 `runtime/prices.db`；便捷状态快照位于 `data/run_status.json`。前端发布物仍是 `data/prices.json`。
 
-master 分支 push 后，GitHub Actions 会自动 SSH 到服务器执行：
+## 代码发布
+
+代码变更仍可通过 GitHub Actions/SSH 部署。部署流程只更新代码、构建 Pipeline 镜像并启动/更新 Web；价格数据变更本身不会触发 Workflow。
+
 ```bash
 git pull origin master
-docker compose down
-docker compose up -d --build
+docker compose --profile pipeline build pipeline
+docker compose up -d --build web
 ```
 
-无需手动登录服务器。
+## 回滚与故障处理
 
----
+- 采集失败或校验失败：旧 `prices.json` 保持不变。
+- 单 Provider 异常：候选回退该 Provider 的 Last Known Good，并标记 stale。
+- 发布后历史/告警记录失败：已发布 JSON 不回滚，状态记录 warning。
+- 误发布：从 SQLite 最近的 `pipeline_releases.payload_json` 导出审核后的版本，再通过原子写方式恢复；不要直接编辑正在服务的 JSON。
+- Web 未看到新数据：比较宿主机 `data/prices.json` 与 `/data/prices.json` HTTP 响应，并检查 Compose volume。
 
-## 三、SSH 密钥配置（GitHub Actions 自动部署）
-
-### 1. 生成密钥对
-
-在本地执行：
-
-```bash
-ssh-keygen -t ed25519 -f ~/.ssh/llm-price-deploy -C "github-actions-deploy" -N ""
-```
-
-生成两个文件：
-- `~/.ssh/llm-price-deploy` — 私钥（给 GitHub）
-- `~/.ssh/llm-price-deploy.pub` — 公钥（给服务器）
-
-### 2. 服务器安装公钥
-
-```bash
-ssh user@129.226.94.179
-
-# 追加公钥到 authorized_keys
-echo "ssh-ed25519 AAAA...（粘贴公钥内容）" >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-```
-
-或用一条命令完成（在本地执行）：
-
-```bash
-ssh-copy-id -i ~/.ssh/llm-price-deploy.pub user@129.226.94.179
-```
-
-### 3. GitHub 配置 Secrets
-
-打开 `https://github.com/hangliuc/llm-price-compare/settings/secrets/actions`，添加 3 个 Secret：
-
-| Secret 名称 | 值 |
-|---|---|
-| `SERVER_HOST` | `129.226.94.179` |
-| `SERVER_USER` | 你的服务器用户名（如 `root` 或 `ubuntu`） |
-| `SERVER_SSH_KEY` | 私钥全文（`cat ~/.ssh/llm-price-deploy` 的输出） |
-
-### 4. 验证
-
-push 到 master 后，在 GitHub Actions 页面查看 `Deploy to Server` workflow 是否成功。
-
----
-
-## 四、GitHub Pages 配置
-
-1. 打开仓库 `Settings → Pages`
-2. Source 选择 `GitHub Actions`
-3. master 分有 `data/prices.json` 或 `ui/` 变更时，`deploy.yml` 自动部署
-4. 访问地址：`https://hangliuc.github.io/llm-price-compare/`
-
----
-
-## 五、故障排查
-
-| 问题 | 排查方式 |
-|---|---|
-| 抓取失败 | `docker compose logs` 或 `docker exec llm-price-scraper cat /var/log/llm-price/cron.log` |
-| 数据未更新 | 检查 `data/run_status.json` 的 `last_push_at` 和 `consecutive_failures` |
-| git push 失败 | 检查 `.env` 中 `GIT_REMOTE_URL` 的 token 是否有效 |
-| 飞书告警未收到 | 检查 `.env` 中 `FEISHU_WEBHOOK_URL` |
-| 自动部署失败 | GitHub Actions 页面查看 `Deploy to Server` 日志 |
-| SSH 连接失败 | 检查 `SERVER_SSH_KEY` 私钥格式、`SERVER_HOST`、`SERVER_USER` |
+更完整的架构与排障说明见 [docs/data-pipeline.md](docs/data-pipeline.md)。

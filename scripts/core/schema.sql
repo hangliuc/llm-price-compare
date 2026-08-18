@@ -79,5 +79,89 @@ CREATE TABLE IF NOT EXISTS price_changes (
 CREATE INDEX IF NOT EXISTS idx_changes_date ON price_changes(change_date);              -- 按日期查询（如"今天所有变动"）
 CREATE INDEX IF NOT EXISTS idx_changes_provider ON price_changes(provider_id, product_id); -- 按产品查询变动历史
 
--- ========== 扩展预留 ==========
--- 后续新增表（如用户 token 资产 user_token_assets、告警记录 alert_logs）在此追加
+-- ========== 4. Pipeline 运行与发布审计 ==========
+CREATE TABLE IF NOT EXISTS pipeline_runs (
+  run_id TEXT PRIMARY KEY,
+  started_at TEXT NOT NULL,
+  finished_at TEXT,
+  status TEXT NOT NULL,
+  published_at TEXT,
+  error TEXT,
+  summary_json TEXT NOT NULL DEFAULT '{}'
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_source_runs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id TEXT NOT NULL,
+  source_id TEXT NOT NULL,
+  status TEXT NOT NULL,
+  product_count INTEGER NOT NULL DEFAULT 0,
+  duration_ms INTEGER NOT NULL DEFAULT 0,
+  error TEXT,
+  UNIQUE(run_id, source_id),
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_provider_runs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id TEXT NOT NULL,
+  provider_id TEXT NOT NULL,
+  status TEXT NOT NULL,
+  product_count INTEGER NOT NULL DEFAULT 0,
+  stale INTEGER NOT NULL DEFAULT 0,
+  error TEXT,
+  warnings_json TEXT NOT NULL DEFAULT '[]',
+  UNIQUE(run_id, provider_id),
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_raw_fetches (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id TEXT NOT NULL,
+  source_id TEXT NOT NULL,
+  provider_id TEXT NOT NULL,
+  payload_json TEXT NOT NULL,
+  product_count INTEGER NOT NULL,
+  fetched_at TEXT NOT NULL,
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_releases (
+  run_id TEXT PRIMARY KEY,
+  status TEXT NOT NULL,
+  checksum TEXT NOT NULL,
+  payload_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  published_at TEXT,
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_changes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id TEXT NOT NULL,
+  provider_id TEXT NOT NULL,
+  product_id TEXT NOT NULL,
+  billing_type TEXT,
+  field TEXT NOT NULL,
+  old_value REAL,
+  new_value REAL,
+  change_pct REAL,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_alerts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  run_id TEXT NOT NULL,
+  channel TEXT NOT NULL,
+  status TEXT NOT NULL,
+  alert_count INTEGER NOT NULL DEFAULT 0,
+  error TEXT,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY(run_id) REFERENCES pipeline_runs(run_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pipeline_runs_started ON pipeline_runs(started_at);
+CREATE INDEX IF NOT EXISTS idx_pipeline_raw_run ON pipeline_raw_fetches(run_id, source_id, provider_id);
+CREATE INDEX IF NOT EXISTS idx_pipeline_release_published ON pipeline_releases(published_at);
+CREATE INDEX IF NOT EXISTS idx_pipeline_alerts_run ON pipeline_alerts(run_id);

@@ -10,6 +10,9 @@ class BillingType(str, Enum):
     CODING_PLAN = "coding_plan"
 
 
+PLAN_CATEGORIES = {"general_ai", "coding_tool", "developer_api"}
+
+
 @dataclass
 class Product:
     id: str
@@ -21,6 +24,8 @@ class Product:
     modalities: list = field(default_factory=list)
     release_date: Optional[str] = None
     notes: Optional[str] = None
+    plan_category: Optional[str] = None
+    featured_on_home: bool = False
 
 
 @dataclass
@@ -45,7 +50,7 @@ class ProviderStatus:
 
 
 def product_to_dict(p: Product) -> dict:
-    return {
+    result = {
         "id": p.id,
         "model": p.model,
         "billing_type": p.billing_type.value,
@@ -56,6 +61,10 @@ def product_to_dict(p: Product) -> dict:
         "purchase_url": p.purchase_url,
         "notes": p.notes,
     }
+    if p.billing_type in (BillingType.SUBSCRIPTION, BillingType.CODING_PLAN):
+        result["plan_category"] = p.plan_category
+        result["featured_on_home"] = p.featured_on_home
+    return result
 
 
 def provider_to_dict(p: Provider) -> dict:

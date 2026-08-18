@@ -98,6 +98,8 @@ products:
   - id: minimax-token-plan-plus
     model: MiniMax Token Plan Plus
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text, vision]
     prices:
@@ -115,6 +117,8 @@ products:
   - id: minimax-token-plan-max
     model: MiniMax Token Plan Max
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text, vision, audio]
     prices:
@@ -132,6 +136,8 @@ products:
   - id: minimax-token-plan-ultra
     model: MiniMax Token Plan Ultra
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: 1048576
     modalities: [text, vision, audio]
     prices:

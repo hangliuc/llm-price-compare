@@ -18,7 +18,7 @@
     - 2 源都有，价差 <5%: 采信 L1，confidence=medium
     - 2 源都有，价差 >20%: 采信 Scraper（官网最权威），confidence=medium，warning
     - 1 源: 采信该源，confidence=low
-    - 0 源: 跳过（由 run_daily 回退旧数据）
+    - 0 源: 跳过（由 Pipeline Runner 回退 Last Known Good）
 
 特殊规则：
     - LiteLLM 价格 = 0：源层已过滤（视为缺失）

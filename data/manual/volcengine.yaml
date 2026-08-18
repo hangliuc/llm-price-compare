@@ -169,6 +169,8 @@ products:
   - id: ark-coding-plan-lite
     model: 方舟 Coding Plan Lite
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -185,6 +187,8 @@ products:
   - id: ark-coding-plan-pro
     model: 方舟 Coding Plan Pro
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -204,6 +208,8 @@ products:
   - id: ark-agent-plan-small
     model: 方舟 Agent Plan Small
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -222,6 +228,8 @@ products:
   - id: ark-agent-plan-medium
     model: 方舟 Agent Plan Medium
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -240,6 +248,8 @@ products:
   - id: ark-agent-plan-large
     model: 方舟 Agent Plan Large
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -257,6 +267,8 @@ products:
   - id: ark-agent-plan-max
     model: 方舟 Agent Plan Max
     billing_type: coding_plan
+    plan_category: developer_api
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:

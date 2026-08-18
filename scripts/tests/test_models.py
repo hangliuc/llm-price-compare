@@ -34,10 +34,14 @@ def test_product_coding_plan_to_dict():
             "features": ["GLM-4.5"]
         },
         purchase_url="https://open.bigmodel.cn/pricing",
+        plan_category="coding_tool",
+        featured_on_home=True,
     )
     d = product_to_dict(p)
     assert d["model"] is None
     assert d["billing_type"] == "coding_plan"
+    assert d["plan_category"] == "coding_tool"
+    assert d["featured_on_home"] is True
     assert d["prices"]["monthly_price"] == 99
 
 def test_provider_to_dict():

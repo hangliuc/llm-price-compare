@@ -11,6 +11,8 @@ products:
   - id: claude-pro
     model: Claude Pro
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: true
     context_window: 200000
     modalities: [text, vision]
     prices:
@@ -25,6 +27,8 @@ products:
   - id: claude-max-5x
     model: Claude Max 5x
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: false
     context_window: 200000
     modalities: [text, vision]
     prices:
@@ -39,6 +43,8 @@ products:
   - id: claude-max-20x
     model: Claude Max 20x
     billing_type: subscription
+    plan_category: general_ai
+    featured_on_home: false
     context_window: 200000
     modalities: [text, vision]
     prices:

@@ -1,4 +1,4 @@
-const { createApp, ref, computed, onMounted, watch } = Vue;
+const { createApp, ref, computed, onMounted, onBeforeUnmount, nextTick, watch } = Vue;
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
@@ -62,6 +62,24 @@ const PROVIDER_META = {
   kiro: { name: 'Kiro', name_en: 'Kiro', region: 'us' },
 };
 
+// Hero 轨道只展示模型 / 云 / API 厂商。开发工具由首页 AI Coding IDE 专区承载。
+const CODING_TOOL_PROVIDER_IDS = new Set(['cursor', 'kiro', 'githubcopilot', 'opencode']);
+
+// AI Coding IDE 生态：独立于价格库，便于后续增删产品而不改模板。
+const CODING_IDES = [
+  { id: 'cursor', name: 'Cursor', logo: 'icons/cursor.svg', url: 'https://www.cursor.com/', category: 'AI 原生 IDE', description: '面向 AI 编程工作流的代码编辑器' },
+  { id: 'trae', name: 'Trae', logo: 'icons/trae.png', url: 'https://www.trae.ai/', category: 'AI 原生 IDE', description: '以 Agent 为核心的开发环境' },
+  { id: 'windsurf', name: 'Windsurf', logo: 'icons/windsurf.png', url: 'https://windsurf.com/', category: 'Agentic IDE', description: '编辑器与编码 Agent 协同工作' },
+  { id: 'qoder', name: 'Qoder', logo: 'icons/qoder.png', url: 'https://qoder.com/', category: 'Agentic IDE', description: '面向真实软件任务的智能开发平台' },
+  { id: 'kiro', name: 'Kiro', logo: 'icons/kiro.svg', url: 'https://kiro.dev/', category: 'Agentic IDE', description: '从规格到交付的 Agentic 开发环境' },
+  { id: 'zed', name: 'Zed', logo: 'icons/zed.png', url: 'https://zed.dev/ai', category: 'AI 增强编辑器', description: '原生集成 Agent 的高性能编辑器' },
+  { id: 'antigravity', name: 'Antigravity', logo: 'icons/antigravity.png', url: 'https://antigravity.google/', category: 'Agentic IDE', description: 'Google 的 Agent-first 开发平台' },
+  { id: 'replit', name: 'Replit', logo: 'icons/replit.png', url: 'https://replit.com/', category: '云端 AI IDE', description: '从想法到部署的一体化云开发环境' },
+  { id: 'vscode', name: 'VS Code', logo: 'icons/vscode.png', url: 'https://code.visualstudio.com/docs/agents/overview', category: 'AI 增强编辑器', description: '内置多种编码 Agent 工作流' },
+  { id: 'jetbrains', name: 'JetBrains + Junie', logo: 'icons/jetbrains.svg', url: 'https://www.jetbrains.com/junie/', category: 'AI 增强 IDE', description: 'JetBrains IDE 内的自主编码 Agent' },
+];
+const CODING_IDE_ROWS = [CODING_IDES.slice(0, 5), CODING_IDES.slice(5)];
+
 createApp({
   setup() {
     const data = ref(null);
@@ -70,6 +88,8 @@ createApp({
     // 全局导航搜索（首页/比较页共用）：输入厂商中英文名/ID 模糊匹配，下拉建议跳转
     const globalSearch = ref("");
     const searchFocused = ref(false);
+    const plansMenuOpen = ref(false);
+    const homePlansMenuOpen = ref(false);
     // 视图模式：coding_plan/subscription 默认卡片，其它默认表格
     // _viewOverride 记录用户手动切换后的值，避免路由变化时覆盖
     const _viewOverride = ref(null);
@@ -121,6 +141,53 @@ createApp({
     const billingRoute = computed(() => {
       if (routeName.value !== "billing") return null;
       return route.value.replace("#/billing/", "");
+    });
+    const plansMenuActive = computed(() =>
+      routeName.value === 'billing' && (billingRoute.value === 'subscription' || billingRoute.value === 'coding_plan')
+    );
+    function togglePlansMenu() {
+      // Fine-pointer devices may have opened the menu on mouseenter immediately
+      // before click; keep it open instead of toggling it closed again.
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        plansMenuOpen.value = true;
+        return;
+      }
+      plansMenuOpen.value = !plansMenuOpen.value;
+    }
+    function openPlansMenuOnHover() {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) plansMenuOpen.value = true;
+    }
+    function closePlansMenuOnHover() {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) plansMenuOpen.value = false;
+    }
+    function openPlansMenuAndFocus() {
+      plansMenuOpen.value = true;
+      nextTick(() => document.querySelector('#nav-plans-menu [role="menuitem"]')?.focus());
+    }
+    function closePlansMenu(restoreFocus = false) {
+      plansMenuOpen.value = false;
+      if (restoreFocus) nextTick(() => document.querySelector('.nav-plans-trigger')?.focus());
+    }
+    function closePlansMenuOnFocusOut(event) {
+      if (!event.currentTarget.contains(event.relatedTarget)) closePlansMenu();
+    }
+    function toggleHomePlansMenu() {
+      homePlansMenuOpen.value = !homePlansMenuOpen.value;
+    }
+    function openHomePlansMenuAndFocus() {
+      homePlansMenuOpen.value = true;
+      nextTick(() => document.querySelector('#home-plans-menu [role="menuitem"]')?.focus());
+    }
+    function closeHomePlansMenu(restoreFocus = false) {
+      homePlansMenuOpen.value = false;
+      if (restoreFocus) nextTick(() => document.querySelector('.home-plans-trigger')?.focus());
+    }
+    function closeHomePlansMenuOnFocusOut(event) {
+      if (!event.currentTarget.contains(event.relatedTarget)) closeHomePlansMenu();
+    }
+    watch(route, () => {
+      closePlansMenu();
+      closeHomePlansMenu();
     });
 
     // 厂商详情路由：#/provider/{id}，仅显示该厂商产品
@@ -290,6 +357,21 @@ createApp({
         };
       });
     });
+
+    // 首页厂商目录仅展示模型 / API / 云服务商；开发工具保留在 AI Coding Ecosystem。
+    // 模型数来自各厂商真实 per_token 产品中的唯一 model 字段，不影响全站厂商数据。
+    const homeProviderList = computed(() =>
+      providerList.value
+        .filter(p => !CODING_TOOL_PROVIDER_IDS.has(p.id))
+        .map(p => ({
+          ...p,
+          modelCount: new Set(
+            (p.products || [])
+              .filter(product => product.billing_type === 'per_token' && product.model)
+              .map(product => product.model)
+          ).size,
+        }))
+    );
 
     // 简短计费方式标签（用于厂商卡片 chips）
     function billingLabelShort(b) {
@@ -461,7 +543,7 @@ createApp({
       const result = [];
       // 先加 providers 数组里的
       for (const p of data.value.providers) {
-        if (!seen.has(p.id)) {
+        if (!seen.has(p.id) && !CODING_TOOL_PROVIDER_IDS.has(p.id)) {
           seen.add(p.id);
           result.push(p);
         }
@@ -469,7 +551,7 @@ createApp({
       // 再加 provider_status 里有但 providers 里没有的（抓取失败的厂商）
       for (const s of (data.value.provider_status || [])) {
         const pid = s.provider_id;
-        if (!seen.has(pid)) {
+        if (!seen.has(pid) && !CODING_TOOL_PROVIDER_IDS.has(pid)) {
           seen.add(pid);
           const meta = PROVIDER_META[pid] || { name: pid, name_en: pid, region: 'cn' };
           result.push({ id: pid, ...meta });
@@ -477,7 +559,7 @@ createApp({
       }
       // 最后加 PROVIDER_META 中定义但尚未出现在数据中的厂商（新增厂商，尚无适配器）
       for (const [pid, meta] of Object.entries(PROVIDER_META)) {
-        if (!seen.has(pid)) {
+        if (!seen.has(pid) && !CODING_TOOL_PROVIDER_IDS.has(pid)) {
           seen.add(pid);
           result.push({ id: pid, ...meta });
         }
@@ -527,7 +609,7 @@ createApp({
       if (!data.value) return 0;
       return (data.value.provider_status || []).filter(s => !s.stale).length;
     });
-    // 三种计费方式的产品数量
+    // 首页 Pricing Taxonomy：按需计费，以及由 Subscription + Coding Plan 组成的 Plans。
     const perTokenCount = computed(() =>
       allRows.value.filter(r => r.billing_type === 'per_token' && !r.stale).length
     );
@@ -537,40 +619,58 @@ createApp({
     const codingPlanCount = computed(() =>
       allRows.value.filter(r => r.billing_type === 'coding_plan' && !r.stale).length
     );
+    const plansCount = computed(() => subscriptionCount.value + codingPlanCount.value);
 
-    // 首页「三种计费方式」编辑杂志式轮播
-    const billingSlides = computed(() => [
-      {
+    // 首页只展示两个顶层价格入口；示例名称从当前真实数据中派生。
+    const billingSlides = computed(() => {
+      const perTokenRows = allRows.value.filter(row => row.billing_type === 'per_token' && !row.stale);
+      const providerExamples = ['openai', 'anthropic', 'google']
+        .map(providerId => perTokenRows.find(row => row.providerId === providerId)?.providerName)
+        .filter(Boolean)
+        .map(name => `${name} API`);
+      if (providerExamples.length < 3) {
+        for (const row of perTokenRows) {
+          const label = `${row.providerName} API`;
+          if (!providerExamples.includes(label)) providerExamples.push(label);
+          if (providerExamples.length === 3) break;
+        }
+      }
+      const planRows = allRows.value.filter(row =>
+        (row.billing_type === 'subscription' || row.billing_type === 'coding_plan') && !row.stale && row.model
+      );
+      const preferredPlans = ['ChatGPT Plus', 'Cursor Pro', 'GLM Coding Plan Pro'];
+      const planExamples = preferredPlans
+        .map(name => planRows.find(row => row.model === name)?.model)
+        .filter(Boolean);
+      if (planExamples.length < 3) {
+        for (const row of planRows) {
+          if (!planExamples.includes(row.model)) planExamples.push(row.model);
+          if (planExamples.length === 3) break;
+        }
+      }
+      return [
+        {
         index: '01',
-        label: 'Per Token',
+        label: 'Pay As You Go',
         name: '按需计费',
-        desc: '按实际 Token 用量计费，输入输出分别定价，适合低频或弹性调用',
-        count: perTokenCount.value,
-        href: '#/billing/per_token',
+        value: '用多少，付多少',
+        desc: '输入、输出与缓存 Token 分别计价，调用后按实际用量结算。',
+        examples: providerExamples,
+        exampleLabel: '常见服务',
         image: 'image/Pay as you go.png',
-        cta: '查看价格',
       },
       {
         index: '02',
-        label: 'Subscription',
-        name: '订阅制',
-        desc: '面向终端用户的产品订阅，固定月费换不限量使用，代表 ChatGPT Plus、Claude Pro',
-        count: subscriptionCount.value,
-        href: '#/billing/subscription',
+        label: 'Plans',
+        name: '套餐',
+        value: '固定费用，获得套餐权益',
+        desc: '按月付费或预先购买固定额度，在有效期内使用对应权益。',
+        examples: planExamples,
+        exampleLabel: '常见套餐',
         image: 'image/Subscribe.png',
-        cta: '查看套餐',
       },
-      {
-        index: '03',
-        label: 'Coding Plan',
-        name: '编程套餐',
-        desc: '面向开发者的 API 额度套餐，月付换 Token 池，代表 GLM Coding、方舟 Coding Plan',
-        count: codingPlanCount.value,
-        href: '#/billing/coding_plan',
-        image: 'image/coding plan.png',
-        cta: '查看套餐',
-      },
-    ]);
+      ];
+    });
     const billingSlideIndex = ref(0);
     const billingSlideDir = ref('next');
     function goBillingSlide(i) {
@@ -582,36 +682,158 @@ createApp({
       billingSlideIndex.value = i;
     }
 
-    // 首页「最新价格一览」预览：按模型发布时间倒序，仅 per_token，去重，取 8 条
+    // 首页价格预览：按发布时间倒序，并优先保证厂商多样性。
+    // 返回 8 条后由 CSS 根据视口显示桌面 8 / 平板 6 / 移动端 4 条。
     const homePreviewRows = computed(() => {
       const rows = allRows.value.filter(r =>
-        r.billing_type === 'per_token' && !r.stale && r.prices && r.prices.input != null
+        r.billing_type === 'per_token' && !r.stale && r.prices &&
+        r.prices.input != null && r.prices.output != null
       );
-      // 同一 model 取最新 release_date 的一条
-      const byModel = new Map();
-      for (const r of rows) {
-        const key = r.model || r.id;
-        const prev = byModel.get(key);
-        if (!prev) {
-          byModel.set(key, r);
-        } else {
-          const a = prev.release_date || '';
-          const b = r.release_date || '';
-          if (b > a) byModel.set(key, r);
-        }
-      }
-      const deduped = [...byModel.values()];
-      // 按 release_date 倒序（null 排到最后）
-      deduped.sort((a, b) => {
-        const da = a.release_date || '';
-        const db = b.release_date || '';
-        if (!da && !db) return 0;
-        if (!da) return 1;
-        if (!db) return -1;
-        return db.localeCompare(da);
+      rows.sort((a, b) => {
+        const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
+        if (dateCompare) return dateCompare;
+        return a.providerName.localeCompare(b.providerName, 'zh');
       });
-      return deduped.slice(0, 8);
+      const seenProviders = new Set();
+      const selected = [];
+      for (const row of rows) {
+        if (seenProviders.has(row.providerId)) continue;
+        seenProviders.add(row.providerId);
+        selected.push(row);
+        if (selected.length === 8) break;
+      }
+      selected.sort((a, b) => {
+        const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
+        if (dateCompare) return dateCompare;
+        return a.providerName.localeCompare(b.providerName, 'zh');
+      });
+      return selected;
     });
+
+    // 首页真实模型对比：默认仍复用价格预览中发布时间最新、厂商不重复的前三项。
+    const homeCompareDefaults = computed(() => homePreviewRows.value.slice(0, 3));
+    const homeCompareSelectedIds = ref([]);
+    const homeModelPickerIndex = ref(-1);
+    const homeModelPickerQuery = ref('');
+    const homeCompareCandidates = computed(() =>
+      allRows.value
+        .filter(row => row.billing_type === 'per_token' && !row.stale && row.model && row.prices)
+        .sort((a, b) => {
+          const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
+          if (dateCompare) return dateCompare;
+          const providerCompare = a.providerName.localeCompare(b.providerName, 'zh');
+          return providerCompare || a.model.localeCompare(b.model, 'zh');
+        })
+    );
+    watch(homeCompareDefaults, defaults => {
+      const validIds = new Set(homeCompareCandidates.value.map(row => row.id));
+      const next = homeCompareSelectedIds.value.filter(id => validIds.has(id)).slice(0, 3);
+      for (const row of defaults) {
+        if (!next.includes(row.id)) next.push(row.id);
+        if (next.length === 3) break;
+      }
+      homeCompareSelectedIds.value = next;
+    }, { immediate: true });
+    const homeCompareRows = computed(() =>
+      homeCompareSelectedIds.value
+        .map(id => homeCompareCandidates.value.find(row => row.id === id))
+        .filter(Boolean)
+    );
+    function homeCompareCnyPrice(row, field) {
+      const raw = row.prices?.[field];
+      if (raw == null || !Number.isFinite(Number(raw))) return null;
+      const value = Number(raw);
+      return row.prices.currency === 'USD' ? value * USD_TO_CNY : value;
+    }
+    const homeCompareLowestPrices = computed(() => {
+      const result = {};
+      for (const field of ['input', 'output', 'cached_input']) {
+        const values = homeCompareRows.value
+          .map(row => homeCompareCnyPrice(row, field))
+          .filter(value => value != null);
+        result[field] = values.length ? Math.min(...values) : null;
+      }
+      return result;
+    });
+    function isHomeCompareLowest(row, field) {
+      const value = homeCompareCnyPrice(row, field);
+      const lowest = homeCompareLowestPrices.value[field];
+      return value != null && lowest != null && Math.abs(value - lowest) < 1e-9;
+    }
+    function homeModelPickerRows(columnIndex) {
+      const query = homeModelPickerQuery.value.trim().toLowerCase();
+      const selectedElsewhere = new Set(
+        homeCompareSelectedIds.value.filter((id, index) => index !== columnIndex)
+      );
+      return homeCompareCandidates.value
+        .filter(row => !selectedElsewhere.has(row.id))
+        .filter(row => !query || row.model.toLowerCase().includes(query) || row.providerName.toLowerCase().includes(query))
+        .slice(0, 40);
+    }
+    function openHomeModelPicker(index) {
+      if (homeModelPickerIndex.value === index) {
+        homeModelPickerIndex.value = -1;
+        return;
+      }
+      homeModelPickerIndex.value = index;
+      homeModelPickerQuery.value = '';
+      nextTick(() => document.querySelector(`[data-home-picker="${index}"] input`)?.focus());
+    }
+    function selectHomeCompareModel(index, row) {
+      if (homeCompareSelectedIds.value.some((id, selectedIndex) => selectedIndex !== index && id === row.id)) return;
+      const next = [...homeCompareSelectedIds.value];
+      next[index] = row.id;
+      homeCompareSelectedIds.value = next;
+      homeModelPickerIndex.value = -1;
+      homeModelPickerQuery.value = '';
+      nextTick(() => document.querySelector(`[data-home-model-trigger="${index}"]`)?.focus());
+    }
+    function addHomePreviewToCompare(row) {
+      if (!row?.id || !homeCompareCandidates.value.some(candidate => candidate.id === row.id)) return;
+      if (!homeCompareSelectedIds.value.includes(row.id)) {
+        const next = [...homeCompareSelectedIds.value];
+        if (next.length < 3) next.push(row.id);
+        else next[2] = row.id;
+        homeCompareSelectedIds.value = next;
+      }
+      homeModelPickerIndex.value = -1;
+      homeModelPickerQuery.value = '';
+      nextTick(() => {
+        const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        document.querySelector('#home-model-compare')?.scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    }
+    function closeHomeModelPicker() {
+      homeModelPickerIndex.value = -1;
+    }
+    function handleHomeModelPickerKeydown(event) {
+      if (event.key === 'Escape') {
+        const index = homeModelPickerIndex.value;
+        closeHomeModelPicker();
+        nextTick(() => document.querySelector(`[data-home-model-trigger="${index}"]`)?.focus());
+        return;
+      }
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      event.preventDefault();
+      const options = [...event.currentTarget.querySelectorAll('.home-model-option:not(:disabled)')];
+      if (!options.length) return;
+      const current = options.indexOf(document.activeElement);
+      const offset = event.key === 'ArrowDown' ? 1 : -1;
+      const nextIndex = current === -1 ? (event.key === 'ArrowDown' ? 0 : options.length - 1) : (current + offset + options.length) % options.length;
+      options[nextIndex].focus();
+    }
+
+    // 首页套餐预览由数据层显式策展，不再跨币种比较月费或按最低价自动选品。
+    const homePlanRows = computed(() =>
+      allRows.value.filter(r =>
+        (r.billing_type === 'coding_plan' || r.billing_type === 'subscription') &&
+        r.featured_on_home === true &&
+        r.prices?.monthly_price != null
+      )
+    );
 
     // Hero ticker: 最低价卡片 + 随机展示 2 张
     const perTokenRows = computed(() =>
@@ -734,6 +956,12 @@ createApp({
       return `${sym}${val} /1M`;
     }
 
+    // 首页迷你价格预览在表头统一展示 /1M 单位，单元格仅保留金额。
+    function formatPriceAmount(row, field) {
+      const formatted = formatPrice(row, field);
+      return formatted === '—' ? formatted : formatted.replace(' /1M', '');
+    }
+
     // 上下文窗口格式化：128000 → 128K，2000000 → 2M
     function formatContext(ctx) {
       if (ctx == null) return '—';
@@ -780,7 +1008,8 @@ createApp({
     function formatQuota(row) {
       const p = row.prices;
       if (!p) return "—";
-      if (p.included_quota == null) return "不限量";
+      // 缺少结构化额度字段不代表无限使用；避免对套餐权益作无依据推断。
+      if (p.included_quota == null) return "额度以官方说明为准";
       const q = p.included_quota;
       const unitText = {
         prompts_per_5h: "次/5小时",
@@ -837,22 +1066,35 @@ createApp({
       }
     }
 
-    onMounted(loadData);
+    onMounted(() => {
+      loadData();
+      document.addEventListener('click', closeHomeModelPicker);
+      document.addEventListener('click', closePlansMenu);
+    });
+    onBeforeUnmount(() => {
+      document.removeEventListener('click', closeHomeModelPicker);
+      document.removeEventListener('click', closePlansMenu);
+    });
 
     return {
       data, error, searchQuery, globalSearch, searchFocused, searchMatches, searchSuggestions, goProvider, searchSubmit, view, displayCurrency, expanded,
+      plansMenuOpen, plansMenuActive, togglePlansMenu, openPlansMenuOnHover, closePlansMenuOnHover, openPlansMenuAndFocus, closePlansMenu, closePlansMenuOnFocusOut,
+      homePlansMenuOpen, toggleHomePlansMenu, openHomePlansMenuAndFocus, closeHomePlansMenu, closeHomePlansMenuOnFocusOut,
       sortKey, sortAsc, filters, regions, billingTypes, modalities,
       route, routeName, billingRoute, providerRouteId, currentProvider,
-      filteredRows, homePreviewRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
-      perTokenCount, subscriptionCount, codingPlanCount,
+      filteredRows, homePreviewRows, homeCompareRows, homeCompareCandidates, homeModelPickerIndex, homeModelPickerQuery, homeModelPickerRows, isHomeCompareLowest,
+      openHomeModelPicker, selectHomeCompareModel, addHomePreviewToCompare, closeHomeModelPicker, handleHomeModelPickerKeydown,
+      homePlanRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
+      perTokenCount, subscriptionCount, codingPlanCount, plansCount,
+      codingIDEs: CODING_IDES, codingIDERows: CODING_IDE_ROWS,
       billingSlides, billingSlideIndex, billingSlideDir, goBillingSlide,
       tickerFeatured, tickerCards,
-      providerList, providerFilterList, providerSearch, providerListByRegion, groupedRows, billingFlatProducts, allProvidersForOrbit, orbitStyle,
+      providerList, homeProviderList, providerFilterList, providerSearch, providerListByRegion, groupedRows, billingFlatProducts, allProvidersForOrbit, orbitStyle,
       providerPerTokenRows, providerPlanGroups,
       providerBillingTabs, providerBillingTab, providerCurrentRows,
       displayRows, billingCardGroups, billingCurrencyTab, billingCnyCount, billingUsdCount,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
-      formatPrice, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
+      formatPrice, formatPriceAmount, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
     };
   },
 }).mount("#app");

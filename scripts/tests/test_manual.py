@@ -42,3 +42,27 @@ def test_load_manual_providers_empty_dir():
     with tempfile.TemporaryDirectory() as d:
         providers = load_manual_providers(d)
         assert providers == []
+
+
+def test_all_manual_plans_have_compatibility_metadata():
+    providers = load_manual_providers("data/manual")
+    plans = [
+        product
+        for provider in providers
+        for product in provider.get("products", [])
+        if product.get("billing_type") in ("subscription", "coding_plan")
+    ]
+
+    assert len(plans) == 49
+    assert all(
+        product.get("plan_category") in {"general_ai", "coding_tool", "developer_api"}
+        for product in plans
+    )
+    assert all(isinstance(product.get("featured_on_home"), bool) for product in plans)
+
+    featured = [product for product in plans if product["featured_on_home"]]
+    assert len(featured) == 4
+    assert all(product.get("model") for product in featured)
+    assert all(product.get("prices", {}).get("monthly_price") is not None for product in featured)
+    assert all(product.get("prices", {}).get("currency") for product in featured)
+    assert all(product.get("purchase_url") for product in featured)

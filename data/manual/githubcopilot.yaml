@@ -13,6 +13,8 @@ products:
   - id: copilot-free
     model: Copilot Free
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -27,6 +29,8 @@ products:
   - id: copilot-pro
     model: Copilot Pro
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -42,6 +46,8 @@ products:
   - id: copilot-pro-plus
     model: Copilot Pro+
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -57,6 +63,8 @@ products:
   - id: copilot-max
     model: Copilot Max
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -72,6 +80,8 @@ products:
   - id: copilot-business
     model: Copilot Business
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:
@@ -87,6 +97,8 @@ products:
   - id: copilot-enterprise
     model: Copilot Enterprise
     billing_type: subscription
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: [text]
     prices:

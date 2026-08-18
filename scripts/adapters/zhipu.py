@@ -66,6 +66,7 @@ class ZhipuAdapter(BaseAdapter):
                 id=f"{name_el.get_text(strip=True).lower().replace(' ', '-')}-plan",
                 model=None,
                 billing_type=BillingType.CODING_PLAN,
+                plan_category="coding_tool",
                 prices={
                     "monthly_price": _parse_cny(price_el.get_text()),
                     "currency": "CNY",

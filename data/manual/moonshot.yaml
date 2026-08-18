@@ -101,6 +101,8 @@ products:
   - id: kimi-member-andante
     model: Kimi 会员 Andante
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: 32768
     modalities: [text]
     prices:
@@ -116,6 +118,8 @@ products:
   - id: kimi-member-moderato
     model: Kimi 会员 Moderato
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: 131072
     modalities: [text]
     prices:
@@ -131,6 +135,8 @@ products:
   - id: kimi-member-allegretto
     model: Kimi 会员 Allegretto
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: 131072
     modalities: [text]
     prices:
@@ -146,6 +152,8 @@ products:
   - id: kimi-member-allegro
     model: Kimi 会员 Allegro
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: 256000
     modalities: [text]
     prices:

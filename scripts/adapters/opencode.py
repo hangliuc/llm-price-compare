@@ -54,8 +54,9 @@ class OpenCodeAdapter(BaseAdapter):
 
             products.append(Product(
                 id=f"{name_el.get_text(strip=True).lower().replace(' ', '-')}-plan",
-                model=None,
+                model=name_el.get_text(strip=True),
                 billing_type=BillingType.CODING_PLAN,
+                plan_category="coding_tool",
                 prices={
                     "monthly_price": _parse_cny(price_el.get_text()),
                     "currency": "CNY",

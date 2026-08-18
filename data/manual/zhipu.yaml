@@ -208,6 +208,8 @@ products:
   - id: glm-coding-plan-lite
     model: GLM Coding Plan Lite
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:
@@ -223,6 +225,8 @@ products:
   - id: glm-coding-plan-pro
     model: GLM Coding Plan Pro
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: true
     context_window: null
     modalities: []
     prices:
@@ -238,6 +242,8 @@ products:
   - id: glm-coding-plan-max
     model: GLM Coding Plan Max
     billing_type: coding_plan
+    plan_category: coding_tool
+    featured_on_home: false
     context_window: null
     modalities: []
     prices:

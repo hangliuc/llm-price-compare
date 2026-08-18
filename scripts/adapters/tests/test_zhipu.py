@@ -37,6 +37,7 @@ def test_zhipu_parses_token_and_plan(mock_fetch):
     assert BillingType.CODING_PLAN in types
 
     plan = next(p for p in products if p.billing_type == BillingType.CODING_PLAN)
+    assert plan.plan_category == "coding_tool"
     assert plan.prices["currency"] == "CNY"
     assert plan.prices["included_quota"] == 500
 

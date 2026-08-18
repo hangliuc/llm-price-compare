@@ -1,7 +1,7 @@
 # scripts/core/history.py
 """历史数据 DAO：写入快照、原始数据、检测价格变动。
 
-所有 SQL 集中在此文件，run_daily.py 只调用高层接口。
+保留旧历史查询接口；新 Pipeline 仅在原子发布成功后写入兼容快照。
 后续迁移 MySQL/Postgres 只需改本文件的 SQL 语法（? → %s 等）。
 """
 import json
