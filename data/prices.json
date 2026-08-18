@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T05:00:05+08:00",
+  "generated_at": "2026-08-18T11:00:04+08:00",
   "providers": [
     {
       "id": "openai",
@@ -4579,174 +4579,6 @@
         }
       ],
       "pricing_url_overseas": "https://api-docs.deepseek.com/quick_start/pricing"
-    },
-    {
-      "id": "xiaomi",
-      "name": "小米",
-      "name_en": "Xiaomi",
-      "region": "cn",
-      "website": "https://platform.xiaomimimo.com/",
-      "pricing_url": "https://platform.xiaomimimo.com/",
-      "products": [
-        {
-          "id": "mimo-v2.5-pro-token",
-          "model": "mimo-v2.5-pro",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "text"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.435,
-            "output": 0.87,
-            "cached_input": 0.0036,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.9, \"coding_index\": 60.2, \"agentic_index\": 29.5}}"
-        },
-        {
-          "id": "mimo-v2.5-token",
-          "model": "mimo-v2.5",
-          "billing_type": "per_token",
-          "context_window": 1050000,
-          "modalities": [
-            "audio",
-            "text",
-            "vision"
-          ],
-          "release_date": "2026-04-22",
-          "prices": {
-            "input": 0.14,
-            "output": 0.28,
-            "cached_input": 0.0028,
-            "currency": "USD",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/",
-          "notes": "{\"benchmarks\": {\"intelligence_index\": 38, \"coding_index\": 56.8, \"agentic_index\": 24.4}}"
-        },
-        {
-          "id": "mimo-v2.5-pro-cn-token",
-          "model": "MiMo-V2.5-Pro",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 3,
-            "output": 6,
-            "cached_input": 0.025,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-v2.5-cn-token",
-          "model": "MiMo-V2.5",
-          "billing_type": "per_token",
-          "context_window": 128000,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "input": 1,
-            "output": 2,
-            "cached_input": 0.02,
-            "currency": "CNY",
-            "unit": "per_1m_tokens"
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-lite",
-          "model": "MiMo Token Plan Lite",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 39,
-            "currency": "CNY",
-            "included_quota": 41,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "41 亿 Credits",
-              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-standard",
-          "model": "MiMo Token Plan Standard",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 99,
-            "currency": "CNY",
-            "included_quota": 110,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "110 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-pro",
-          "model": "MiMo Token Plan Pro",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 329,
-            "currency": "CNY",
-            "included_quota": 380,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "380 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        },
-        {
-          "id": "mimo-token-plan-max",
-          "model": "MiMo Token Plan Max",
-          "billing_type": "coding_plan",
-          "context_window": 1048576,
-          "modalities": [
-            "text"
-          ],
-          "prices": {
-            "monthly_price": 659,
-            "currency": "CNY",
-            "included_quota": 820,
-            "quota_unit": "credits_in_billions",
-            "features": [
-              "820 亿 Credits",
-              "支持 V2.5 全系列模型",
-              "1M 超长上下文"
-            ]
-          },
-          "purchase_url": "https://platform.xiaomimimo.com/"
-        }
-      ]
     },
     {
       "id": "google",
@@ -9366,8 +9198,8 @@
           ],
           "release_date": "2026-02-25",
           "prices": {
-            "input": 0.29,
-            "output": 2.4,
+            "input": 0.26,
+            "output": 2.08,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
@@ -9519,8 +9351,9 @@
           ],
           "release_date": "2026-04-27",
           "prices": {
-            "input": 0.289,
-            "output": 2.4,
+            "input": 0.6,
+            "output": 3.6,
+            "cached_input": 0.12,
             "currency": "USD",
             "unit": "per_1m_tokens"
           },
@@ -9660,7 +9493,7 @@
             "unit": "per_1m_tokens"
           },
           "purchase_url": "https://www.alibabacloud.com/help/en/model-studio/billing-for-model-studio",
-          "notes": "{\"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"xhigh\", \"medium\", \"low\"], \"default_effort\": \"xhigh\"}}"
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 57.7, \"coding_index\": 71.9, \"agentic_index\": 57.1}, \"reasoning\": {\"mandatory\": true, \"supported_efforts\": [\"xhigh\", \"medium\", \"low\"], \"default_effort\": \"xhigh\"}}"
         },
         {
           "id": "qwen3.8-27b-token",
@@ -10470,6 +10303,174 @@
             ]
           },
           "purchase_url": "https://platform.minimaxi.com/subscribe/token-plan"
+        }
+      ]
+    },
+    {
+      "id": "xiaomi",
+      "name": "小米",
+      "name_en": "Xiaomi",
+      "region": "cn",
+      "website": "https://platform.xiaomimimo.com/",
+      "pricing_url": "https://platform.xiaomimimo.com/",
+      "products": [
+        {
+          "id": "mimo-v2.5-pro-token",
+          "model": "mimo-v2.5-pro",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "text"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.435,
+            "output": 0.87,
+            "cached_input": 0.0036,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 42.9, \"coding_index\": 60.2, \"agentic_index\": 29.5}}"
+        },
+        {
+          "id": "mimo-v2.5-token",
+          "model": "mimo-v2.5",
+          "billing_type": "per_token",
+          "context_window": 1050000,
+          "modalities": [
+            "audio",
+            "text",
+            "vision"
+          ],
+          "release_date": "2026-04-22",
+          "prices": {
+            "input": 0.14,
+            "output": 0.28,
+            "cached_input": 0.0028,
+            "currency": "USD",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/",
+          "notes": "{\"benchmarks\": {\"intelligence_index\": 38, \"coding_index\": 56.8, \"agentic_index\": 24.4}}"
+        },
+        {
+          "id": "mimo-v2.5-pro-cn-token",
+          "model": "MiMo-V2.5-Pro",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 3,
+            "output": 6,
+            "cached_input": 0.025,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-v2.5-cn-token",
+          "model": "MiMo-V2.5",
+          "billing_type": "per_token",
+          "context_window": 128000,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "input": 1,
+            "output": 2,
+            "cached_input": 0.02,
+            "currency": "CNY",
+            "unit": "per_1m_tokens"
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-lite",
+          "model": "MiMo Token Plan Lite",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 39,
+            "currency": "CNY",
+            "included_quota": 41,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "41 亿 Credits",
+              "支持 V2.5 全系列模型（文本旗舰 / 全模态 / 语音）",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-standard",
+          "model": "MiMo Token Plan Standard",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 99,
+            "currency": "CNY",
+            "included_quota": 110,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "110 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-pro",
+          "model": "MiMo Token Plan Pro",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 329,
+            "currency": "CNY",
+            "included_quota": 380,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "380 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
+        },
+        {
+          "id": "mimo-token-plan-max",
+          "model": "MiMo Token Plan Max",
+          "billing_type": "coding_plan",
+          "context_window": 1048576,
+          "modalities": [
+            "text"
+          ],
+          "prices": {
+            "monthly_price": 659,
+            "currency": "CNY",
+            "included_quota": 820,
+            "quota_unit": "credits_in_billions",
+            "features": [
+              "820 亿 Credits",
+              "支持 V2.5 全系列模型",
+              "1M 超长上下文"
+            ]
+          },
+          "purchase_url": "https://platform.xiaomimimo.com/"
         }
       ]
     },
@@ -11559,95 +11560,10 @@
     {
       "provider_id": "openai",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:02+08:00",
+      "last_success_at": "2026-08-18T11:00:03+08:00",
       "error": null,
       "stale": false,
-      "warnings": [
-        {
-          "product_id": "gpt-5.6-sol-pro-token",
-          "field": "prices.input",
-          "old_value": 5.0,
-          "new_value": 2.5,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol-pro-token",
-          "field": "prices.output",
-          "old_value": 30.0,
-          "new_value": 15.0,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol-pro-token",
-          "field": "prices.cached_input",
-          "old_value": 0.5,
-          "new_value": 0.25,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol-pro:batch-token",
-          "field": "prices.input",
-          "old_value": 2.5,
-          "new_value": 1.25,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol-pro:batch-token",
-          "field": "prices.output",
-          "old_value": 15.0,
-          "new_value": 7.5,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol-pro:batch-token",
-          "field": "prices.cached_input",
-          "old_value": 0.25,
-          "new_value": 0.125,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol:batch-token",
-          "field": "prices.input",
-          "old_value": 2.5,
-          "new_value": 1.25,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol:batch-token",
-          "field": "prices.output",
-          "old_value": 15.0,
-          "new_value": 7.5,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-5.6-sol:batch-token",
-          "field": "prices.cached_input",
-          "old_value": 0.25,
-          "new_value": 0.125,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-latest-token",
-          "field": "prices.input",
-          "old_value": 5.0,
-          "new_value": 2.5,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-latest-token",
-          "field": "prices.output",
-          "old_value": 30.0,
-          "new_value": 15.0,
-          "volatility_pct": 50.0
-        },
-        {
-          "product_id": "gpt-latest-token",
-          "field": "prices.cached_input",
-          "old_value": 0.5,
-          "new_value": 0.25,
-          "volatility_pct": 50.0
-        }
-      ],
+      "warnings": [],
       "confidence": "low",
       "sources": [
         "litellm",
@@ -11658,7 +11574,7 @@
     {
       "provider_id": "anthropic",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:04+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -11673,107 +11589,17 @@
       "provider_id": "deepseek",
       "status": "failed",
       "last_success_at": "2026-08-16T23:00:04+08:00",
-      "error": "volatility blocked: 506.8965517241379%",
+      "error": "volatility blocked: 1113.7931034482756%",
       "stale": true,
       "warnings": []
     },
     {
-      "provider_id": "xiaomi",
+      "provider_id": "google",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
-      "confidence": "low",
-      "sources": [
-        "openrouter"
-      ]
-    },
-    {
-      "provider_id": "google",
-      "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
-      "error": null,
-      "stale": false,
-      "warnings": [
-        {
-          "product_id": "gemini-3.6-flash-token",
-          "field": "prices.input",
-          "old_value": 0.75,
-          "new_value": 1.5,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-3.6-flash-token",
-          "field": "prices.output",
-          "old_value": 3.75,
-          "new_value": 7.5,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-3.6-flash-token",
-          "field": "prices.cached_input",
-          "old_value": 0.075,
-          "new_value": 0.15,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-3.7-flash-token",
-          "field": "prices.input",
-          "old_value": 0.375,
-          "new_value": 0.75,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-3.7-flash-token",
-          "field": "prices.output",
-          "old_value": 1.875,
-          "new_value": 3.75,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-3.7-flash-token",
-          "field": "prices.cached_input",
-          "old_value": 0.0375,
-          "new_value": 0.075,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-flash-latest-token",
-          "field": "prices.input",
-          "old_value": 0.375,
-          "new_value": 0.3,
-          "volatility_pct": 20.0
-        },
-        {
-          "product_id": "gemini-flash-latest-token",
-          "field": "prices.output",
-          "old_value": 1.875,
-          "new_value": 2.5,
-          "volatility_pct": 33.33
-        },
-        {
-          "product_id": "gemini-flash-latest-token",
-          "field": "prices.cached_input",
-          "old_value": 0.0375,
-          "new_value": 0.075,
-          "volatility_pct": 100.0
-        },
-        {
-          "product_id": "gemini-pro-latest-token",
-          "field": "prices.input",
-          "old_value": 2.0,
-          "new_value": 1.25,
-          "volatility_pct": 37.5
-        },
-        {
-          "product_id": "gemini-pro-latest-token",
-          "field": "prices.cached_input",
-          "old_value": 0.2,
-          "new_value": 0.125,
-          "volatility_pct": 37.5
-        }
-      ],
       "confidence": "low",
       "sources": [
         "litellm",
@@ -11783,7 +11609,7 @@
     {
       "provider_id": "moonshot",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -11796,7 +11622,7 @@
     {
       "provider_id": "aws",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -11808,51 +11634,23 @@
     {
       "provider_id": "qwen",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [
         {
-          "product_id": "qwen-plus-token",
+          "product_id": "qwen3.6-27b-token",
           "field": "prices.input",
-          "old_value": 0.26,
-          "new_value": 0.4,
-          "volatility_pct": 53.85
+          "old_value": 0.289,
+          "new_value": 0.6,
+          "volatility_pct": 107.61
         },
         {
-          "product_id": "qwen-plus-token",
+          "product_id": "qwen3.6-27b-token",
           "field": "prices.output",
-          "old_value": 0.78,
-          "new_value": 1.2,
-          "volatility_pct": 53.85
-        },
-        {
-          "product_id": "qwen3-next-80b-a3b-instruct-token",
-          "field": "prices.input",
-          "old_value": 0.1,
-          "new_value": 0.15,
+          "old_value": 2.4,
+          "new_value": 3.6,
           "volatility_pct": 50.0
-        },
-        {
-          "product_id": "qwen3-vl-235b-a22b-instruct-token",
-          "field": "prices.input",
-          "old_value": 0.21,
-          "new_value": 0.4,
-          "volatility_pct": 90.48
-        },
-        {
-          "product_id": "qwen3-vl-32b-instruct-token",
-          "field": "prices.input",
-          "old_value": 0.104,
-          "new_value": 0.16,
-          "volatility_pct": 53.85
-        },
-        {
-          "product_id": "qwen3-vl-32b-instruct-token",
-          "field": "prices.output",
-          "old_value": 0.416,
-          "new_value": 0.64,
-          "volatility_pct": 53.85
         }
       ],
       "confidence": "low",
@@ -11864,7 +11662,7 @@
     {
       "provider_id": "minimax",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "error": null,
       "stale": false,
       "warnings": [],
@@ -11875,9 +11673,21 @@
       ]
     },
     {
+      "provider_id": "xiaomi",
+      "status": "ok",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
+      "error": null,
+      "stale": false,
+      "warnings": [],
+      "confidence": "low",
+      "sources": [
+        "openrouter"
+      ]
+    },
+    {
       "provider_id": "cursor",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -11888,7 +11698,7 @@
     {
       "provider_id": "githubcopilot",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -11899,7 +11709,7 @@
     {
       "provider_id": "kiro",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -11910,7 +11720,7 @@
     {
       "provider_id": "opencode",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -11921,7 +11731,7 @@
     {
       "provider_id": "volcengine",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
@@ -11932,7 +11742,7 @@
     {
       "provider_id": "zhipu",
       "status": "ok",
-      "last_success_at": "2026-08-18T05:00:05+08:00",
+      "last_success_at": "2026-08-18T11:00:04+08:00",
       "stale": false,
       "warnings": [],
       "confidence": "manual",
