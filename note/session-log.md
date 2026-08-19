@@ -1,5 +1,7 @@
 # 会话记录
 
+> **历史记录说明：** 本文件记录项目早期讨论与实施过程，其中的容器 cron、Git push 和旧 `prices.json` 属于 V1，不是当前执行方案。V2 数据架构请以 [docs/data-pipeline.md](../docs/data-pipeline.md) 为准。
+
 ## 2026-07-12: 项目从 0 到 MVP
 
 ### 关键决策

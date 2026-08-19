@@ -1,5 +1,11 @@
 # 数据获取与存储方式
 
+> **历史文档（V1，已废弃）**
+>
+> 本文仅用于追溯早期实现，不再作为开发、部署或运维依据。文中的容器 cron、`run_daily.py`、三源数值投票、`data/prices.json`、Git commit/push 发布等方案均不属于 V2。
+>
+> 当前唯一有效的数据架构说明：[docs/data-pipeline.md](../docs/data-pipeline.md)。V2 使用全新 SQLite、全新 Catalog Schema 和 `/data/v2/catalog.json`，不迁移或兼容 V1 数据。
+
 > 本文档描述 PPK (Price Per Token) 站点从外部数据源采集到大模型价格、到最终在前端展示的完整数据链路：**采集源 → 仲裁 → 校验 → 落盘 → 推送 → 静态站点**。
 >
 > 所有采集/合并/校验逻辑都集中在 `scripts/`，最终数据契约是 `data/prices.json`，前端只读这一份 JSON。

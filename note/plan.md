@@ -1,5 +1,11 @@
 # LLM 价格比价网站 Implementation Plan
 
+> **历史实施计划（V1，禁止继续执行）**
+>
+> 本计划中的任务清单用于记录 MVP 建设过程，不应继续照此执行，尤其不要恢复容器 cron、`run_daily.py`、Git 数据提交或旧 `prices.json` 发布链路。
+>
+> V2 的架构、实施阶段、测试和部署计划统一见 [docs/data-pipeline.md](../docs/data-pipeline.md)。V2 按新系统建设，不迁移或兼容 V1 数据。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 实现一个每日自动抓取 10 家 LLM 厂商定价、静态部署到 GitHub Pages 的比价网站。
