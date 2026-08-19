@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=57">
+  <link rel="stylesheet" href="style.css?v=63">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -409,8 +409,577 @@
       </section>
     </template>
 
-    <!-- ============ 价格对比 / 计费类型页 ============ -->
-    <template v-if="data && (routeName === 'compare' || routeName === 'billing')">
+    <!-- ============ 模型价格对比工具 ============ -->
+    <template v-if="data && routeName === 'compare'">
+      <section class="section section-page compare-page" :class="{'has-compare-bar': compareSelectedRows.length && !compareWorkspaceOpen}">
+        <div class="section-head compare-page-head">
+          <div>
+            <div class="section-eyebrow">Token API Models</div>
+            <h1 class="section-title">价格对比</h1>
+            <p class="section-sub">筛选模型并加入对比，从输入、输出、缓存与上下文等维度查看价格差异。</p>
+          </div>
+        </div>
+
+        <div v-show="!compareWorkspaceOpen" class="compare-browser">
+        <div class="compare-toolbar" aria-label="模型筛选工具栏">
+          <label class="compare-search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input v-model="compareSearchQuery" type="search" placeholder="搜索模型或厂商..." aria-label="搜索模型或厂商">
+          </label>
+
+          <div class="compare-filter-actions">
+            <details class="compare-menu">
+              <summary>厂商 <span v-if="compareProviderFilters.length">{{ compareProviderFilters.length }}</span></summary>
+              <div class="compare-menu-panel compare-menu-panel--wide">
+                <label v-for="p in compareProviderFilterList" :key="p.id" class="compare-check-option">
+                  <input type="checkbox" :checked="compareProviderFilters.includes(p.id)" @change="toggleCompareProvider(p.id)">
+                  <span class="provider-icon provider-icon--xs"><img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)"></span>
+                  <span>{{ p.name }}</span>
+                </label>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>模态 <span v-if="compareModalityFilters.length">{{ compareModalityFilters.length }}</span></summary>
+              <div class="compare-menu-panel">
+                <label v-for="m in compareModalities" :key="m" class="compare-check-option">
+                  <input type="checkbox" :checked="compareModalityFilters.includes(m)" @change="toggleCompareModality(m)">
+                  <span>{{ m }}</span>
+                </label>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>上下文</summary>
+              <div class="compare-menu-panel">
+                <button type="button" :class="{active: compareContextFilter === ''}" @click="compareContextFilter = ''">全部</button>
+                <button type="button" :class="{active: compareContextFilter === 'gte1000k'}" @click="compareContextFilter = 'gte1000k'">≥ 1M</button>
+                <button type="button" :class="{active: compareContextFilter === 'gte200k'}" @click="compareContextFilter = 'gte200k'">≥ 200K</button>
+                <button type="button" :class="{active: compareContextFilter === 'gte128k'}" @click="compareContextFilter = 'gte128k'">≥ 128K</button>
+                <button type="button" :class="{active: compareContextFilter === 'lt128k'}" @click="compareContextFilter = 'lt128k'">&lt; 128K</button>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>价格范围</summary>
+              <div class="compare-menu-panel">
+                <p class="compare-menu-hint">按输入价格（CNY / 1M）</p>
+                <button type="button" :class="{active: comparePriceFilter === ''}" @click="comparePriceFilter = ''">全部</button>
+                <button type="button" :class="{active: comparePriceFilter === 'lt10'}" @click="comparePriceFilter = 'lt10'">&lt; ¥10</button>
+                <button type="button" :class="{active: comparePriceFilter === '10to50'}" @click="comparePriceFilter = '10to50'">¥10–50</button>
+                <button type="button" :class="{active: comparePriceFilter === '50to200'}" @click="comparePriceFilter = '50to200'">¥50–200</button>
+                <button type="button" :class="{active: comparePriceFilter === 'gte200'}" @click="comparePriceFilter = 'gte200'">≥ ¥200</button>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>更多筛选 <span v-if="compareRegionFilter">1</span></summary>
+              <div class="compare-menu-panel">
+                <p class="compare-menu-label">区域</p>
+                <button type="button" :class="{active: compareRegionFilter === ''}" @click="compareRegionFilter = ''">全部</button>
+                <button type="button" :class="{active: compareRegionFilter === 'cn'}" @click="compareRegionFilter = 'cn'">中国</button>
+                <button type="button" :class="{active: compareRegionFilter === 'us'}" @click="compareRegionFilter = 'us'">美国</button>
+                <button type="button" :class="{active: compareRegionFilter === 'eu'}" @click="compareRegionFilter = 'eu'">欧洲</button>
+              </div>
+            </details>
+          </div>
+
+          <div class="compare-toolbar-end">
+            <label class="compare-select-wrap">
+              <span class="sr-only">排序</span>
+              <select v-model="compareSortOption" aria-label="模型排序">
+                <option value="release_date:desc">最新发布</option>
+                <option value="inputPrice:asc">输入价从低到高</option>
+                <option value="outputPrice:asc">输出价从低到高</option>
+                <option value="contextWindow:desc">上下文从大到小</option>
+                <option value="model:asc">模型名称</option>
+              </select>
+            </label>
+            <details class="compare-menu compare-columns-menu">
+              <summary>显示字段</summary>
+              <div class="compare-menu-panel compare-menu-panel--right">
+                <label v-for="field in compareFieldOptions" :key="field.key" class="compare-check-option">
+                  <input type="checkbox" :checked="compareVisibleFields.includes(field.key)" @change="toggleCompareField(field.key)">
+                  <span>{{ field.label }}</span>
+                </label>
+              </div>
+            </details>
+            <div class="currency-toggle compare-currency-toggle">
+              <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
+              <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="compareActiveFilterCount || compareSearchQuery" class="compare-active-filters" aria-label="已选筛选条件">
+          <span v-if="compareSearchQuery" class="compare-filter-token">“{{ compareSearchQuery }}” <button type="button" aria-label="清除搜索" @click="compareSearchQuery = ''">×</button></span>
+          <span v-for="id in compareProviderFilters" :key="'provider-' + id" class="compare-filter-token">{{ compareProviderFilterList.find(p => p.id === id)?.name || id }} <button type="button" @click="toggleCompareProvider(id)">×</button></span>
+          <span v-for="m in compareModalityFilters" :key="'modality-' + m" class="compare-filter-token">{{ m }} <button type="button" @click="toggleCompareModality(m)">×</button></span>
+          <span v-if="compareContextFilter" class="compare-filter-token">Context {{ {gte1000k:'≥ 1M',gte200k:'≥ 200K',gte128k:'≥ 128K',lt128k:'< 128K'}[compareContextFilter] }} <button type="button" @click="compareContextFilter = ''">×</button></span>
+          <span v-if="comparePriceFilter" class="compare-filter-token">输入价 {{ {lt10:'< ¥10', '10to50':'¥10–50', '50to200':'¥50–200', gte200:'≥ ¥200'}[comparePriceFilter] }} <button type="button" @click="comparePriceFilter = ''">×</button></span>
+          <span v-if="compareRegionFilter" class="compare-filter-token">{{ {cn:'中国',us:'美国',eu:'欧洲'}[compareRegionFilter] }} <button type="button" @click="compareRegionFilter = ''">×</button></span>
+          <button type="button" class="compare-clear-filters" @click="clearCompareFilters">清除全部</button>
+        </div>
+
+        <div class="compare-results-meta">
+          <span><b>{{ compareRows.length }}</b> 个按需计费模型</span>
+          <span>最近更新 {{ freshnessText }}</span>
+          <span v-if="compareSelectionNotice" class="compare-limit-note" role="status">{{ compareSelectionNotice }}</span>
+        </div>
+
+        <div class="table-wrap compare-table-wrap">
+          <table class="price-table compare-browse-table">
+            <thead>
+              <tr>
+                <th class="compare-select-column"><span class="sr-only">选择</span></th>
+                <th>厂商 / 模型</th>
+                <th v-if="compareVisibleFields.includes('input')" class="num">Input <span class="th-unit">/ 1M</span></th>
+                <th v-if="compareVisibleFields.includes('output')" class="num">Output <span class="th-unit">/ 1M</span></th>
+                <th v-if="compareVisibleFields.includes('cached_input')" class="num">Cache <span class="th-unit">/ 1M</span></th>
+                <th v-if="compareVisibleFields.includes('context_window')" class="num">Context</th>
+                <th v-if="compareVisibleFields.includes('modalities')">模态</th>
+                <th v-if="compareVisibleFields.includes('release_date')">发布日期</th>
+                <th class="compare-source-column"><span class="sr-only">价格来源</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in compareRows" :key="row.id" :class="{stale: row.stale, selected: isCompareSelected(row)}">
+                <td class="compare-select-column">
+                  <label class="compare-row-checkbox" :title="isCompareSelected(row) ? '移出对比' : '加入对比'">
+                    <input type="checkbox" :checked="isCompareSelected(row)" :aria-label="(isCompareSelected(row) ? '移出 ' : '加入 ') + row.model + ' 对比'" @change="toggleCompareSelection(row)">
+                    <span></span>
+                  </label>
+                </td>
+                <td>
+                  <div class="compare-model-cell">
+                    <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
+                    <span><strong :title="row.model">{{ row.model || '—' }}</strong><small>{{ row.providerName }}</small></span>
+                  </div>
+                </td>
+                <td v-if="compareVisibleFields.includes('input')" class="num">{{ formatPriceAmount(row, 'input') }}</td>
+                <td v-if="compareVisibleFields.includes('output')" class="num">{{ formatPriceAmount(row, 'output') }}</td>
+                <td v-if="compareVisibleFields.includes('cached_input')" class="num">{{ formatPriceAmount(row, 'cached_input') }}</td>
+                <td v-if="compareVisibleFields.includes('context_window')" class="num">{{ formatContext(row.context_window) }}</td>
+                <td v-if="compareVisibleFields.includes('modalities')" class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
+                <td v-if="compareVisibleFields.includes('release_date')" class="mono">{{ row.release_date || '—' }}</td>
+                <td class="compare-source-column"><a :href="row.purchase_url" target="_blank" rel="noopener" :aria-label="'查看 ' + row.model + ' 官方定价'">↗</a></td>
+              </tr>
+              <tr v-if="!compareRows.length"><td :colspan="compareVisibleFields.length + 3" class="compare-empty">没有符合当前筛选条件的模型</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+        <section v-if="compareWorkspaceOpen && compareSelectedRows.length >= 2" id="compare-workspace" class="compare-workspace" aria-labelledby="compare-workspace-title">
+          <div class="compare-workspace-head">
+            <div>
+              <span class="section-eyebrow">Model Comparison</span>
+              <h2 id="compare-workspace-title">模型对比工作台</h2>
+              <p>当前价格统一换算为 {{ displayCurrency }}，绿色表示该指标中的最低价格。</p>
+            </div>
+            <button type="button" class="compare-workspace-close" @click="closeCompareWorkspace">返回模型列表</button>
+          </div>
+          <div class="compare-matrix-scroll">
+            <div class="compare-matrix" :style="{'--compare-columns': compareSelectedRows.length}">
+              <div class="compare-matrix-label compare-matrix-corner">指标</div>
+              <div v-for="(row, index) in compareSelectedRows" :key="row.id + '-head'" class="compare-model-head">
+                <button type="button" class="compare-model-trigger" :data-compare-picker-trigger="index" :title="row.model" :aria-expanded="comparePickerIndex === index" @click="openComparePicker(index)" @keydown.esc="closeComparePicker(true)">
+                  <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
+                  <span class="compare-model-trigger-copy"><strong>{{ row.model }}</strong><small>{{ row.providerName }}</small></span>
+                  <span aria-hidden="true">⌄</span>
+                </button>
+                <button type="button" class="compare-model-remove" :aria-label="'移除 ' + row.model" @click="removeCompareSelection(row.id)">×</button>
+                <div v-if="comparePickerIndex === index" :id="'compare-picker-' + index" class="compare-model-picker" @keydown.esc="closeComparePicker(true)">
+                  <input v-model="comparePickerQuery" type="search" placeholder="搜索模型或厂商..." aria-label="搜索替换模型">
+                  <div class="compare-model-options" role="listbox">
+                    <button v-for="candidate in comparePickerRows" :key="candidate.id" type="button" role="option" @click="selectCompareReplacement(candidate)">
+                      <span class="provider-icon provider-icon--xs"><img :src="iconUrl(candidate.providerId)" :alt="candidate.providerName" @error="onIconError($event, candidate.providerId)"></span>
+                      <span><strong>{{ candidate.model }}</strong><small>{{ candidate.providerName }}</small></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="compare-matrix-label">Provider</div><div v-for="row in compareSelectedRows" :key="row.id + '-provider'" class="compare-matrix-value compare-matrix-text">{{ row.providerName }}</div>
+              <div class="compare-matrix-label">Input / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-input'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'input')}]">{{ formatPriceAmount(row, 'input') }}</div>
+              <div class="compare-matrix-label">Output / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-output'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'output')}]">{{ formatPriceAmount(row, 'output') }}</div>
+              <div class="compare-matrix-label">Cache / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-cache'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'cached_input')}]">{{ formatPriceAmount(row, 'cached_input') }}</div>
+              <div class="compare-matrix-label">Context</div><div v-for="row in compareSelectedRows" :key="row.id + '-context'" class="compare-matrix-value">{{ formatContext(row.context_window) }}</div>
+              <div class="compare-matrix-label">模态</div><div v-for="row in compareSelectedRows" :key="row.id + '-modalities'" class="compare-matrix-value compare-matrix-text">{{ (row.modalities || []).join(' · ') || '—' }}</div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div v-if="compareSelectedRows.length && !compareWorkspaceOpen" class="compare-sticky-bar" role="region" aria-label="已选模型对比栏">
+        <div class="compare-sticky-inner">
+          <strong>已选择 {{ compareSelectedRows.length }} / 4</strong>
+          <div class="compare-selected-models">
+            <span v-for="row in compareSelectedRows" :key="row.id">{{ row.model }} <button type="button" :aria-label="'移除 ' + row.model" @click="removeCompareSelection(row.id)">×</button></span>
+          </div>
+          <span v-if="compareSelectionNotice" class="compare-limit-note" role="status">{{ compareSelectionNotice }}</span>
+          <button type="button" class="compare-bar-clear" @click="clearCompareSelection">清空</button>
+          <button type="button" class="compare-bar-start" :disabled="compareSelectedRows.length < 2" @click="startCompareWorkspace">开始对比</button>
+        </div>
+      </div>
+    </template>
+
+    <!-- ============ 按需计费模型目录 ============ -->
+    <template v-if="data && routeName === 'billing' && billingRoute === 'per_token'">
+      <section class="section section-page catalog-page" :class="{'has-compare-bar': compareSelectedRows.length}">
+        <header class="catalog-page-head">
+          <div>
+            <div class="section-eyebrow">Pay as you go model catalog</div>
+            <h1>按需计费</h1>
+          </div>
+          <div class="catalog-head-meta">
+            <strong>{{ catalogTotalModels }} 个模型 · {{ catalogProviderCount }} 个厂商</strong>
+            <span>按 Token / API 实际使用量计费</span>
+            <span>价格统一按 / 1M Tokens 展示</span>
+          </div>
+        </header>
+
+        <div class="catalog-quick-filters" aria-label="快捷筛选">
+          <button type="button" :class="{active: catalogQuickFilter === ''}" @click="catalogQuickFilter = ''">全部</button>
+          <button type="button" :class="{active: catalogQuickFilter === 'under10'}" @click="catalogQuickFilter = 'under10'">输入价 &lt; ¥10</button>
+          <button type="button" :class="{active: catalogQuickFilter === 'longContext'}" @click="catalogQuickFilter = 'longContext'">Context ≥ 200K</button>
+          <button type="button" :class="{active: catalogQuickFilter === 'vision'}" @click="catalogQuickFilter = 'vision'">Vision</button>
+        </div>
+
+        <div class="compare-toolbar catalog-toolbar" aria-label="模型目录筛选工具栏">
+          <label class="compare-search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input v-model="catalogSearchQuery" type="search" placeholder="搜索模型或厂商..." aria-label="搜索模型或厂商">
+          </label>
+
+          <div class="compare-filter-actions">
+            <details class="compare-menu">
+              <summary>厂商 <span v-if="catalogProviderFilters.length">{{ catalogProviderFilters.length }}</span></summary>
+              <div class="compare-menu-panel compare-menu-panel--wide">
+                <label v-for="p in providerFilterList" :key="p.id" class="compare-check-option">
+                  <input type="checkbox" :checked="catalogProviderFilters.includes(p.id)" @change="toggleCatalogProvider(p.id)">
+                  <span class="provider-icon provider-icon--xs"><img :src="iconUrl(p.id)" :alt="p.name" @error="onIconError($event, p.id)"></span>
+                  <span>{{ p.name }} <small>{{ p.count }}</small></span>
+                </label>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>模态 <span v-if="catalogModalityFilters.length">{{ catalogModalityFilters.length }}</span></summary>
+              <div class="compare-menu-panel">
+                <label v-for="m in compareModalities" :key="m" class="compare-check-option">
+                  <input type="checkbox" :checked="catalogModalityFilters.includes(m)" @change="toggleCatalogModality(m)">
+                  <span>{{ m }}</span>
+                </label>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>上下文</summary>
+              <div class="compare-menu-panel">
+                <button type="button" :class="{active: catalogContextFilter === ''}" @click="catalogContextFilter = ''">全部</button>
+                <button type="button" :class="{active: catalogContextFilter === 'gte1000k'}" @click="catalogContextFilter = 'gte1000k'">≥ 1M</button>
+                <button type="button" :class="{active: catalogContextFilter === 'gte200k'}" @click="catalogContextFilter = 'gte200k'">≥ 200K</button>
+                <button type="button" :class="{active: catalogContextFilter === 'gte128k'}" @click="catalogContextFilter = 'gte128k'">≥ 128K</button>
+                <button type="button" :class="{active: catalogContextFilter === 'lt128k'}" @click="catalogContextFilter = 'lt128k'">&lt; 128K</button>
+              </div>
+            </details>
+
+            <details class="compare-menu">
+              <summary>更多筛选 <span v-if="catalogRegionFilter">1</span></summary>
+              <div class="compare-menu-panel">
+                <p class="compare-menu-label">厂商区域</p>
+                <button type="button" :class="{active: catalogRegionFilter === ''}" @click="catalogRegionFilter = ''">全部</button>
+                <button type="button" :class="{active: catalogRegionFilter === 'cn'}" @click="catalogRegionFilter = 'cn'">中国</button>
+                <button type="button" :class="{active: catalogRegionFilter === 'us'}" @click="catalogRegionFilter = 'us'">美国</button>
+                <button type="button" :class="{active: catalogRegionFilter === 'eu'}" @click="catalogRegionFilter = 'eu'">欧洲</button>
+              </div>
+            </details>
+          </div>
+
+          <div class="compare-toolbar-end">
+            <label class="compare-select-wrap">
+              <span class="sr-only">排序</span>
+              <select v-model="catalogSortOption" aria-label="模型排序">
+                <option value="release_date:desc">最新发布</option>
+                <option value="inputPrice:asc">输入价从低到高</option>
+                <option value="inputPrice:desc">输入价从高到低</option>
+                <option value="outputPrice:asc">输出价从低到高</option>
+                <option value="cachedInput:asc">缓存价从低到高</option>
+                <option value="contextWindow:desc">上下文从大到小</option>
+                <option value="model:asc">模型名称</option>
+              </select>
+            </label>
+            <details class="compare-menu compare-columns-menu">
+              <summary>显示字段</summary>
+              <div class="compare-menu-panel compare-menu-panel--right">
+                <label v-for="field in catalogFieldOptions" :key="field.key" class="compare-check-option">
+                  <input type="checkbox" :checked="catalogVisibleFields.includes(field.key)" @change="toggleCatalogField(field.key)">
+                  <span>{{ field.label }}</span>
+                </label>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div v-if="catalogActiveFilterCount || catalogSearchQuery" class="compare-active-filters" aria-label="已选筛选条件">
+          <span v-if="catalogSearchQuery" class="compare-filter-token">“{{ catalogSearchQuery }}” <button type="button" aria-label="清除搜索" @click="catalogSearchQuery = ''">×</button></span>
+          <span v-for="id in catalogProviderFilters" :key="'catalog-provider-' + id" class="compare-filter-token">{{ providerFilterList.find(p => p.id === id)?.name || id }} <button type="button" @click="toggleCatalogProvider(id)">×</button></span>
+          <span v-for="m in catalogModalityFilters" :key="'catalog-modality-' + m" class="compare-filter-token">{{ m }} <button type="button" @click="toggleCatalogModality(m)">×</button></span>
+          <span v-if="catalogContextFilter" class="compare-filter-token">Context {{ {gte1000k:'≥ 1M',gte200k:'≥ 200K',gte128k:'≥ 128K',lt128k:'< 128K'}[catalogContextFilter] }} <button type="button" @click="catalogContextFilter = ''">×</button></span>
+          <span v-if="catalogRegionFilter" class="compare-filter-token">{{ {cn:'中国',us:'美国',eu:'欧洲'}[catalogRegionFilter] }} <button type="button" @click="catalogRegionFilter = ''">×</button></span>
+          <span v-if="catalogQuickFilter" class="compare-filter-token">{{ {under10:'输入价 < ¥10',longContext:'Context ≥ 200K',vision:'Vision'}[catalogQuickFilter] }} <button type="button" @click="catalogQuickFilter = ''">×</button></span>
+          <button type="button" class="compare-clear-filters" @click="clearCatalogFilters">清除全部</button>
+        </div>
+
+        <div class="catalog-result-bar">
+          <div>
+            <strong v-if="catalogActiveFilterCount || catalogSearchQuery">找到 {{ catalogRows.length }} 个模型</strong>
+            <strong v-else>{{ catalogRows.length }} 个模型</strong>
+            <span>排序：{{ catalogSortLabel }}</span>
+          </div>
+          <div class="catalog-currency-control" aria-label="显示货币">
+            <span>显示货币</span>
+            <div class="currency-toggle">
+              <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">CNY</button>
+              <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">USD</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap catalog-table-wrap">
+          <table class="price-table catalog-table">
+            <thead>
+              <tr>
+                <th>厂商 / 模型</th>
+                <th v-if="catalogVisibleFields.includes('modalities')">类型</th>
+                <th v-if="catalogVisibleFields.includes('input')" class="num catalog-sortable" @click="sortCatalogBy('inputPrice')">Input / 1M {{ catalogSortIndicator('inputPrice') }}</th>
+                <th v-if="catalogVisibleFields.includes('output')" class="num catalog-sortable" @click="sortCatalogBy('outputPrice')">Output / 1M {{ catalogSortIndicator('outputPrice') }}</th>
+                <th v-if="catalogVisibleFields.includes('cached_input')" class="num catalog-sortable" @click="sortCatalogBy('cachedInput')">Cache / 1M {{ catalogSortIndicator('cachedInput') }}</th>
+                <th v-if="catalogVisibleFields.includes('context_window')" class="num catalog-sortable" @click="sortCatalogBy('contextWindow')">Context {{ catalogSortIndicator('contextWindow') }}</th>
+                <th v-if="catalogVisibleFields.includes('release_date')" class="catalog-sortable" @click="sortCatalogBy('release_date')">发布日期 {{ catalogSortIndicator('release_date') }}</th>
+                <th class="catalog-actions-head">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in catalogPageRows" :key="row.id" :class="{selected: isCompareSelected(row), stale: row.stale}">
+                <td>
+                  <div class="catalog-model-cell">
+                    <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
+                    <span><small>{{ row.providerName }}</small><strong :title="row.model">{{ row.model || '—' }}</strong></span>
+                  </div>
+                </td>
+                <td v-if="catalogVisibleFields.includes('modalities')" class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
+                <td v-if="catalogVisibleFields.includes('input')" class="num">{{ formatPriceAmount(row, 'input') }}</td>
+                <td v-if="catalogVisibleFields.includes('output')" class="num">{{ formatPriceAmount(row, 'output') }}</td>
+                <td v-if="catalogVisibleFields.includes('cached_input')" class="num">{{ formatPriceAmount(row, 'cached_input') }}</td>
+                <td v-if="catalogVisibleFields.includes('context_window')" class="num">{{ formatContext(row.context_window) }}</td>
+                <td v-if="catalogVisibleFields.includes('release_date')" class="mono">{{ row.release_date || '—' }}</td>
+                <td class="catalog-row-actions">
+                  <button type="button" :class="{selected: isCompareSelected(row)}" @click="toggleCompareSelection(row)">{{ isCompareSelected(row) ? '已选择' : '＋ 对比' }}</button>
+                  <a :href="row.purchase_url" target="_blank" rel="noopener">查看定价</a>
+                </td>
+              </tr>
+              <tr v-if="!catalogPageRows.length"><td :colspan="catalogVisibleFields.length + 2" class="compare-empty">没有符合当前筛选条件的模型</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <nav v-if="catalogTotalPages > 1" class="catalog-pagination" aria-label="模型目录分页">
+          <button type="button" :disabled="catalogPage <= 1" @click="catalogPage--">上一页</button>
+          <button v-for="page in catalogPageNumbers" :key="page" type="button" :class="{active: catalogPage === page}" :aria-current="catalogPage === page ? 'page' : null" @click="catalogPage = page">{{ page }}</button>
+          <button type="button" :disabled="catalogPage >= catalogTotalPages" @click="catalogPage++">下一页</button>
+          <label>每页
+            <select v-model.number="catalogPageSize">
+              <option :value="50">50</option>
+              <option :value="100">100</option>
+            </select>
+          </label>
+        </nav>
+      </section>
+
+      <div v-if="compareSelectedRows.length" class="compare-sticky-bar" role="region" aria-label="已选模型对比栏">
+        <div class="compare-sticky-inner">
+          <strong>已选择 {{ compareSelectedRows.length }} / 4</strong>
+          <div class="compare-selected-models">
+            <span v-for="row in compareSelectedRows" :key="row.id">{{ row.model }} <button type="button" :aria-label="'移除 ' + row.model" @click="removeCompareSelection(row.id)">×</button></span>
+          </div>
+          <span v-if="compareSelectionNotice" class="compare-limit-note" role="status">{{ compareSelectionNotice }}</span>
+          <button type="button" class="compare-bar-clear" @click="clearCompareSelection">清空</button>
+          <button type="button" class="compare-bar-start" :disabled="compareSelectedRows.length < 2" @click="goToCompareWorkspace">去对比</button>
+        </div>
+      </div>
+    </template>
+
+    <!-- ============ Plans Explorer ============ -->
+    <template v-if="data && routeName === 'billing' && (billingRoute === 'subscription' || billingRoute === 'coding_plan')">
+      <section class="section section-page plans-explorer-page" :class="{'has-compare-bar': currentPlanSelectedRows.length && !plansCompareOpen}">
+        <header class="plans-explorer-head">
+          <div>
+            <div class="section-eyebrow">{{ billingRoute === 'subscription' ? 'Subscription Plans' : 'Coding & Developer Plans' }}</div>
+            <h1>{{ billingRoute === 'subscription' ? '订阅制' : 'Coding Plan' }}</h1>
+          </div>
+          <div class="plans-head-meta">
+            <strong>{{ plansBaseRows.length }} 个套餐 · {{ plansProviderCount }} 个厂商</strong>
+            <span>{{ billingRoute === 'subscription' ? '固定周期购买的 AI 产品订阅方案' : '面向 Coding 与开发者场景的固定周期 / 固定额度套餐' }}</span>
+          </div>
+        </header>
+
+        <div v-show="!plansCompareOpen" class="plans-browser">
+          <div class="plans-toolbar">
+            <label class="compare-search">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input v-model="plansSearchQuery" type="search" placeholder="搜索套餐或厂商..." aria-label="搜索套餐或厂商">
+            </label>
+            <div class="compare-filter-actions">
+              <details class="compare-menu">
+                <summary>厂商 <span v-if="plansProviderFilters.length">{{ plansProviderFilters.length }}</span></summary>
+                <div class="compare-menu-panel">
+                  <label v-for="provider in plansProviderOptions" :key="provider.id" class="compare-check-option">
+                    <input type="checkbox" :checked="plansProviderFilters.includes(provider.id)" @change="togglePlansProvider(provider.id)">
+                    <span class="provider-icon provider-icon--xs"><img :src="iconUrl(provider.id)" :alt="provider.name" @error="onIconError($event, provider.id)"></span>
+                    <span>{{ provider.name }} <small>{{ provider.count }}</small></span>
+                  </label>
+                </div>
+              </details>
+              <details class="compare-menu">
+                <summary>Free / Paid</summary>
+                <div class="compare-menu-panel">
+                  <button type="button" :class="{active: plansPriceKindFilter === ''}" @click="plansPriceKindFilter = ''">全部</button>
+                  <button type="button" :class="{active: plansPriceKindFilter === 'free'}" @click="plansPriceKindFilter = 'free'">免费</button>
+                  <button type="button" :class="{active: plansPriceKindFilter === 'paid'}" @click="plansPriceKindFilter = 'paid'">付费</button>
+                </div>
+              </details>
+              <details class="compare-menu">
+                <summary>月费范围</summary>
+                <div class="compare-menu-panel">
+                  <p class="compare-menu-hint">统一按 CNY 判断</p>
+                  <button type="button" :class="{active: plansPriceRangeFilter === ''}" @click="plansPriceRangeFilter = ''">全部</button>
+                  <button type="button" :class="{active: plansPriceRangeFilter === 'lt50'}" @click="plansPriceRangeFilter = 'lt50'">&lt; ¥50</button>
+                  <button type="button" :class="{active: plansPriceRangeFilter === '50to150'}" @click="plansPriceRangeFilter = '50to150'">¥50–150</button>
+                  <button type="button" :class="{active: plansPriceRangeFilter === '150to500'}" @click="plansPriceRangeFilter = '150to500'">¥150–500</button>
+                  <button type="button" :class="{active: plansPriceRangeFilter === 'gte500'}" @click="plansPriceRangeFilter = 'gte500'">≥ ¥500</button>
+                </div>
+              </details>
+              <details v-if="billingRoute === 'coding_plan'" class="compare-menu">
+                <summary>额度类型</summary>
+                <div class="compare-menu-panel">
+                  <button type="button" :class="{active: plansQuotaTypeFilter === ''}" @click="plansQuotaTypeFilter = ''">全部</button>
+                  <button v-for="type in plansQuotaTypeOptions" :key="type.key" type="button" :class="{active: plansQuotaTypeFilter === type.key}" @click="plansQuotaTypeFilter = type.key">{{ type.label }}</button>
+                </div>
+              </details>
+            </div>
+            <div class="compare-toolbar-end">
+              <details class="compare-menu compare-menu--toolbar">
+                <summary aria-label="套餐排序">{{ plansSortOption === 'monthlyPrice:desc' ? '价格从高到低' : '价格从低到高' }}</summary>
+                <div class="compare-menu-panel compare-menu-panel--right">
+                  <button type="button" :class="{active: plansSortOption === 'monthlyPrice:asc'}" @click="setPlansSortOption('monthlyPrice:asc', $event)">价格从低到高</button>
+                  <button type="button" :class="{active: plansSortOption === 'monthlyPrice:desc'}" @click="setPlansSortOption('monthlyPrice:desc', $event)">价格从高到低</button>
+                </div>
+              </details>
+              <details class="compare-menu compare-menu--toolbar">
+                <summary aria-label="套餐分组方式">{{ plansGroupMode === 'provider' ? '按厂商分组' : '不分组' }}</summary>
+                <div class="compare-menu-panel compare-menu-panel--right">
+                  <button type="button" :class="{active: plansGroupMode === 'provider'}" @click="setPlansGroupMode('provider', $event)">按厂商分组</button>
+                  <button type="button" :class="{active: plansGroupMode === 'none'}" @click="setPlansGroupMode('none', $event)">不分组</button>
+                </div>
+              </details>
+              <details class="compare-menu">
+                <summary>显示字段</summary>
+                <div class="compare-menu-panel compare-menu-panel--right">
+                  <template v-if="billingRoute === 'subscription'">
+                    <label v-for="field in [{key:'monthly',label:'月费'},{key:'status',label:'Free / Paid'},{key:'features',label:'主要权益'}]" :key="field.key" class="compare-check-option"><input type="checkbox" :checked="currentPlansVisibleFields.includes(field.key)" @change="togglePlansField(field.key)"><span>{{ field.label }}</span></label>
+                  </template>
+                  <template v-else>
+                    <label v-for="field in [{key:'monthly',label:'月费'},{key:'first_month',label:'首月价'},{key:'quota',label:'包含额度'},{key:'features',label:'主要权益'}]" :key="field.key" class="compare-check-option"><input type="checkbox" :checked="currentPlansVisibleFields.includes(field.key)" @change="togglePlansField(field.key)"><span>{{ field.label }}</span></label>
+                  </template>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div v-if="plansActiveFilterCount || plansSearchQuery" class="compare-active-filters">
+            <span v-if="plansSearchQuery" class="compare-filter-token">“{{ plansSearchQuery }}” <button type="button" @click="plansSearchQuery = ''">×</button></span>
+            <span v-for="id in plansProviderFilters" :key="id" class="compare-filter-token">{{ plansProviderOptions.find(p => p.id === id)?.name || id }} <button type="button" @click="togglePlansProvider(id)">×</button></span>
+            <span v-if="plansPriceKindFilter" class="compare-filter-token">{{ plansPriceKindFilter === 'free' ? '免费' : '付费' }} <button type="button" @click="plansPriceKindFilter = ''">×</button></span>
+            <span v-if="plansPriceRangeFilter" class="compare-filter-token">{{ {lt50:'< ¥50','50to150':'¥50–150','150to500':'¥150–500',gte500:'≥ ¥500'}[plansPriceRangeFilter] }} <button type="button" @click="plansPriceRangeFilter = ''">×</button></span>
+            <span v-if="plansQuotaTypeFilter" class="compare-filter-token">{{ plansQuotaTypeOptions.find(t => t.key === plansQuotaTypeFilter)?.label }} <button type="button" @click="plansQuotaTypeFilter = ''">×</button></span>
+            <button type="button" class="compare-clear-filters" @click="clearPlansFilters">清除全部</button>
+          </div>
+
+          <div class="plans-result-bar">
+            <div><strong>{{ plansRows.length }} 个套餐</strong><span>{{ plansSortLabel }}</span></div>
+            <div class="catalog-currency-control"><span>显示货币</span><div class="currency-toggle"><button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">CNY</button><button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">USD</button></div></div>
+          </div>
+
+          <div class="plans-groups plans-desktop-list">
+            <section v-for="group in plansGroups" :key="group.id" class="plans-provider-group">
+              <header v-if="plansGroupMode === 'provider'" class="plans-provider-head">
+                <span class="provider-icon"><img :src="iconUrl(group.id)" :alt="group.name" @error="onIconError($event, group.id)"></span>
+                <strong>{{ group.name }}</strong><span>{{ group.rows.length }} 个套餐</span>
+              </header>
+              <div class="table-wrap plans-table-wrap">
+                <table class="price-table plans-table">
+                  <thead><tr>
+                    <th class="plans-select-col"><span class="sr-only">选择</span></th>
+                    <th v-if="plansGroupMode === 'none'">厂商</th><th>套餐</th>
+                    <th v-if="currentPlansVisibleFields.includes('monthly')" class="num">月费</th>
+                    <th v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('first_month')" class="num">首月价</th>
+                    <th v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')">类型</th>
+                    <th v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('quota')">包含额度</th>
+                    <th v-if="currentPlansVisibleFields.includes('features')">主要权益</th><th class="plans-action-col">操作</th>
+                  </tr></thead>
+                  <tbody>
+                    <template v-for="row in group.rows" :key="row.id">
+                      <tr :class="{selected: isPlanSelected(row)}">
+                        <td class="plans-select-col"><label class="compare-row-checkbox"><input type="checkbox" :checked="isPlanSelected(row)" :aria-label="(isPlanSelected(row) ? '移出 ' : '加入 ') + row.model + ' 对比'" @change="togglePlanSelection(row)"><span></span></label></td>
+                        <td v-if="plansGroupMode === 'none'"><div class="provider-cell"><span class="provider-icon provider-icon--xs"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>{{ row.providerName }}</div></td>
+                        <td class="plans-name"><strong>{{ row.model || '—' }}</strong></td>
+                        <td v-if="currentPlansVisibleFields.includes('monthly')" class="num plans-price"><strong>{{ formatPlanPrice(row) }}</strong><small v-if="row.prices.monthly_price !== 0">/ 月</small></td>
+                        <td v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('first_month')" class="num plans-first-month"><span v-if="row.prices.first_month_price != null && row.prices.first_month_price < row.prices.monthly_price">首月 {{ formatPlanPrice(row, 'first_month_price') }}</span><span v-else>—</span></td>
+                        <td v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')"><span class="plans-status">{{ row.prices.monthly_price === 0 ? 'FREE' : 'PAID' }}</span></td>
+                        <td v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('quota')" class="plans-quota">{{ formatPlanQuota(row) }}</td>
+                        <td v-if="currentPlansVisibleFields.includes('features')" class="plans-features"><span>{{ (row.prices.features || []).slice(0, 2).join(' · ') || '—' }}</span><button v-if="(row.prices.features || []).length > 2" type="button" @click="togglePlanExpanded(row.id)">{{ plansExpandedIds.includes(row.id) ? '收起' : '+' + (row.prices.features.length - 2) + ' 更多' }}</button></td>
+                        <td class="plans-row-action"><a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a></td>
+                      </tr>
+                      <tr v-if="plansExpandedIds.includes(row.id)" class="plans-feature-detail"><td :colspan="currentPlansVisibleFields.length + (plansGroupMode === 'none' ? 4 : 3)"><ul><li v-for="(feature, index) in row.prices.features" :key="index">{{ feature }}</li></ul></td></tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <div class="plans-mobile-list">
+            <article v-for="row in plansRows" :key="row.id" :class="['plans-mobile-item',{selected:isPlanSelected(row)}]">
+              <header><label class="compare-row-checkbox"><input type="checkbox" :checked="isPlanSelected(row)" @change="togglePlanSelection(row)"><span></span></label><span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span><div><small>{{ row.providerName }}</small><strong>{{ row.model }}</strong></div></header>
+              <div class="plans-mobile-data"><p><span>月费</span><strong>{{ formatPlanPrice(row) }}<small v-if="row.prices.monthly_price !== 0"> / 月</small></strong></p><p v-if="billingRoute === 'coding_plan'"><span>额度</span><strong>{{ formatPlanQuota(row) }}</strong></p></div>
+              <p class="plans-mobile-feature">{{ (row.prices.features || [])[0] || '—' }}</p>
+              <a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a>
+            </article>
+          </div>
+        </div>
+
+        <section v-if="plansCompareOpen && currentPlanSelectedRows.length >= 2" class="plans-compare-workspace">
+          <div class="compare-workspace-head"><div><span class="section-eyebrow">Plan Comparison</span><h2>套餐对比</h2><p>额度保持原始单位并排展示，不进行跨单位换算。</p></div><button type="button" class="compare-workspace-close" @click="closePlansCompare">返回套餐列表</button></div>
+          <div class="compare-matrix-scroll"><div class="compare-matrix plans-compare-matrix" :style="{'--compare-columns': currentPlanSelectedRows.length}">
+            <div class="compare-matrix-label compare-matrix-corner">指标</div>
+            <div v-for="row in currentPlanSelectedRows" :key="row.id + '-head'" class="plans-compare-head"><span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span><strong>{{ row.model }}</strong><small>{{ row.providerName }}</small><button type="button" :aria-label="'移除 ' + row.model" @click="removePlanSelection(row.id)">×</button></div>
+            <div class="compare-matrix-label">Provider</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-provider'" class="compare-matrix-value compare-matrix-text">{{ row.providerName }}</div>
+            <div class="compare-matrix-label">Monthly Price</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-monthly'" class="compare-matrix-value">{{ formatPlanPrice(row) }}</div>
+            <template v-if="billingRoute === 'coding_plan'"><div class="compare-matrix-label">First Month</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-first'" class="compare-matrix-value">{{ row.prices.first_month_price != null ? formatPlanPrice(row, 'first_month_price') : '—' }}</div><div class="compare-matrix-label">Allowance</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-quota'" class="compare-matrix-value compare-matrix-text">{{ formatPlanQuota(row) }}</div></template>
+            <template v-else><div class="compare-matrix-label">Type</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-type'" class="compare-matrix-value compare-matrix-text">{{ row.prices.monthly_price === 0 ? 'Free' : 'Paid' }}</div></template>
+            <div class="compare-matrix-label">Features</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-features'" class="compare-matrix-value compare-matrix-text plans-compare-features">{{ (row.prices.features || []).slice(0,3).join(' · ') || '—' }}</div>
+            <div class="compare-matrix-label">Purchase</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-buy'" class="compare-matrix-value"><a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a></div>
+          </div></div>
+        </section>
+      </section>
+
+      <div v-if="currentPlanSelectedRows.length && !plansCompareOpen" class="compare-sticky-bar" role="region" aria-label="已选套餐对比栏"><div class="compare-sticky-inner"><strong>已选择 {{ currentPlanSelectedRows.length }} / 4</strong><div class="compare-selected-models"><span v-for="row in currentPlanSelectedRows" :key="row.id">{{ row.model }} <button type="button" @click="removePlanSelection(row.id)">×</button></span></div><span v-if="plansSelectionNotice" class="compare-limit-note" role="status">{{ plansSelectionNotice }}</span><button type="button" class="compare-bar-clear" @click="clearPlanSelection">清空</button><button type="button" class="compare-bar-start" :disabled="currentPlanSelectedRows.length < 2" @click="openPlansCompare">对比套餐</button></div></div>
+    </template>
+
+    <!-- ============ 旧套餐视图（保留代码，不再挂载） ============ -->
+    <template v-if="false">
       <section class="section section-page">
         <div class="section-head">
           <div>
@@ -906,6 +1475,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=47"></script>
+  <script src="app.js?v=53"></script>
 </body>
 </html>

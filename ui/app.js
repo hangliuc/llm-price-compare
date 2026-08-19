@@ -117,6 +117,64 @@ createApp({
       modality: [],
       provider: [],
     });
+    // Compare 页面独立交互状态：只面向按需计费模型，不影响计费类型页面。
+    const compareContextFilter = ref('');
+    const compareSearchQuery = ref('');
+    const comparePriceFilter = ref('');
+    const compareRegionFilter = ref('');
+    const compareProviderFilters = ref([]);
+    const compareModalityFilters = ref([]);
+    const compareSortOption = ref('release_date:desc');
+    const compareVisibleFields = ref(['input', 'output', 'cached_input', 'context_window']);
+    let storedCompareIds = [];
+    try {
+      const parsed = JSON.parse(sessionStorage.getItem('ppk.compare.selected') || '[]');
+      if (Array.isArray(parsed)) storedCompareIds = parsed.filter(id => typeof id === 'string').slice(0, 4);
+    } catch (_) {
+      storedCompareIds = [];
+    }
+    const compareSelectedIds = ref(storedCompareIds);
+    const compareWorkspaceOpen = ref(false);
+    const comparePickerIndex = ref(null);
+    const comparePickerQuery = ref('');
+    const compareSelectionNotice = ref('');
+    let compareBrowseScrollY = 0;
+    // 按需计费目录状态。筛选数组复用现有 filters，选择状态复用 Compare。
+    const catalogContextFilter = ref('');
+    const catalogSearchQuery = ref('');
+    const catalogRegionFilter = ref('');
+    const catalogQuickFilter = ref('');
+    const catalogProviderFilters = ref([]);
+    const catalogModalityFilters = ref([]);
+    const catalogSortOption = ref('release_date:desc');
+    const catalogVisibleFields = ref(['modalities', 'input', 'output', 'cached_input', 'context_window']);
+    const catalogPage = ref(1);
+    const catalogPageSize = ref(50);
+    // Subscription / Coding Plan 共用的 Plans Explorer 状态。
+    const plansSearchQuery = ref('');
+    const plansProviderFilters = ref([]);
+    const plansPriceKindFilter = ref('');
+    const plansPriceRangeFilter = ref('');
+    const plansQuotaTypeFilter = ref('');
+    const plansSortOption = ref('monthlyPrice:asc');
+    const plansGroupMode = ref('provider');
+    const plansExpandedIds = ref([]);
+    const plansCompareOpen = ref(false);
+    const plansVisibleFields = ref({
+      subscription: ['monthly', 'status', 'features'],
+      coding_plan: ['monthly', 'first_month', 'quota', 'features'],
+    });
+    let storedPlanSelections = { subscription: [], coding_plan: [] };
+    try {
+      const parsed = JSON.parse(sessionStorage.getItem('ppk.plans.selected') || '{}');
+      for (const type of ['subscription', 'coding_plan']) {
+        if (Array.isArray(parsed[type])) storedPlanSelections[type] = parsed[type].filter(id => typeof id === 'string').slice(0, 4);
+      }
+    } catch (_) {
+      storedPlanSelections = { subscription: [], coding_plan: [] };
+    }
+    const plansSelectedMap = ref(storedPlanSelections);
+    const plansSelectionNotice = ref('');
 
     // 监听 hash 变化
     window.addEventListener("hashchange", () => {
@@ -189,6 +247,20 @@ createApp({
       closePlansMenu();
       closeHomePlansMenu();
     });
+    watch(compareSelectedIds, ids => {
+      try {
+        sessionStorage.setItem('ppk.compare.selected', JSON.stringify(ids.slice(0, 4)));
+      } catch (_) {
+        // Storage 不可用时仍保留当前 SPA 会话内状态。
+      }
+    }, { deep: true });
+    watch(plansSelectedMap, selections => {
+      try {
+        sessionStorage.setItem('ppk.plans.selected', JSON.stringify(selections));
+      } catch (_) {
+        // Storage 不可用时保留当前 SPA 会话状态。
+      }
+    }, { deep: true });
 
     // 厂商详情路由：#/provider/{id}，仅显示该厂商产品
     const providerRouteId = computed(() => {
@@ -251,6 +323,14 @@ createApp({
     const regions = ["cn", "us", "eu"];
     const billingTypes = ["per_token", "subscription", "coding_plan"];
     const modalities = ["text", "vision", "audio", "file"];
+    const compareFieldOptions = [
+      { key: 'input', label: 'Input / 1M' },
+      { key: 'output', label: 'Output / 1M' },
+      { key: 'cached_input', label: 'Cache / 1M' },
+      { key: 'context_window', label: 'Context' },
+      { key: 'modalities', label: '模态' },
+      { key: 'release_date', label: '发布日期' },
+    ];
 
     const providerStatusMap = computed(() => {
       const m = {};
@@ -333,6 +413,614 @@ createApp({
       });
       return rows;
     });
+
+    // 统一换算后的数值仅用于 Compare 页筛选与最低价判断；展示仍复用 formatPrice。
+    function comparePriceValue(row, field, currency = displayCurrency.value) {
+      const raw = row.prices?.[field];
+      if (raw == null) return null;
+      const source = row.prices?.currency || 'CNY';
+      if (source === currency) return Number(raw);
+      if (source === 'USD' && currency === 'CNY') return Number(raw) * USD_TO_CNY;
+      if (source === 'CNY' && currency === 'USD') return Number(raw) / USD_TO_CNY;
+      return Number(raw);
+    }
+
+    const compareProviderFilterList = computed(() => {
+      if (!data.value) return [];
+      return data.value.providers
+        .map(provider => ({
+          id: provider.id,
+          name: provider.name,
+          count: (provider.products || []).filter(product => product.billing_type === 'per_token').length,
+        }))
+        .filter(provider => provider.count > 0)
+        .sort((a, b) => b.count - a.count);
+    });
+
+    const compareModalities = computed(() => [...new Set(
+      allRows.value
+        .filter(row => row.billing_type === 'per_token')
+        .flatMap(row => row.modalities || [])
+    )].sort());
+
+    const compareRows = computed(() => {
+      let rows = allRows.value.filter(row => row.billing_type === 'per_token');
+      const q = compareSearchQuery.value.trim().toLowerCase();
+      if (q) {
+        rows = rows.filter(row =>
+          (row.model || '').toLowerCase().includes(q) ||
+          row.providerName.toLowerCase().includes(q)
+        );
+      }
+      if (compareProviderFilters.value.length) {
+        rows = rows.filter(row => compareProviderFilters.value.includes(row.providerId));
+      }
+      if (compareModalityFilters.value.length) {
+        rows = rows.filter(row => (row.modalities || []).some(item => compareModalityFilters.value.includes(item)));
+      }
+      if (compareRegionFilter.value) {
+        rows = rows.filter(row => row.region === compareRegionFilter.value);
+      }
+      if (compareContextFilter.value) {
+        rows = rows.filter(row => {
+          const value = row.context_window;
+          if (value == null) return false;
+          if (compareContextFilter.value === 'gte1000k') return value >= 1000000;
+          if (compareContextFilter.value === 'gte200k') return value >= 200000;
+          if (compareContextFilter.value === 'gte128k') return value >= 128000;
+          if (compareContextFilter.value === 'lt128k') return value < 128000;
+          return true;
+        });
+      }
+      if (comparePriceFilter.value) {
+        rows = rows.filter(row => {
+          const value = comparePriceValue(row, 'input', 'CNY');
+          if (value == null) return false;
+          if (comparePriceFilter.value === 'lt10') return value < 10;
+          if (comparePriceFilter.value === '10to50') return value >= 10 && value < 50;
+          if (comparePriceFilter.value === '50to200') return value >= 50 && value < 200;
+          if (comparePriceFilter.value === 'gte200') return value >= 200;
+          return true;
+        });
+      }
+      const [key, direction] = compareSortOption.value.split(':');
+      const multiplier = direction === 'asc' ? 1 : -1;
+      return [...rows].sort((a, b) => {
+        let av;
+        let bv;
+        if (key === 'inputPrice') {
+          av = comparePriceValue(a, 'input');
+          bv = comparePriceValue(b, 'input');
+        } else if (key === 'outputPrice') {
+          av = comparePriceValue(a, 'output');
+          bv = comparePriceValue(b, 'output');
+        } else if (key === 'contextWindow') {
+          av = a.context_window;
+          bv = b.context_window;
+        } else if (key === 'model') {
+          return multiplier * (a.model || '').localeCompare(b.model || '');
+        } else {
+          av = a.release_date ? Date.parse(a.release_date) : null;
+          bv = b.release_date ? Date.parse(b.release_date) : null;
+        }
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return (av - bv) * multiplier;
+      });
+    });
+
+    const catalogFieldOptions = [
+      { key: 'modalities', label: '类型' },
+      { key: 'input', label: 'Input / 1M' },
+      { key: 'output', label: 'Output / 1M' },
+      { key: 'cached_input', label: 'Cache / 1M' },
+      { key: 'context_window', label: 'Context' },
+      { key: 'release_date', label: '发布日期' },
+    ];
+
+    const catalogRows = computed(() => {
+      let rows = allRows.value.filter(row => row.billing_type === 'per_token');
+      const q = catalogSearchQuery.value.trim().toLowerCase();
+      if (q) {
+        rows = rows.filter(row =>
+          (row.model || '').toLowerCase().includes(q) ||
+          row.providerName.toLowerCase().includes(q)
+        );
+      }
+      if (catalogProviderFilters.value.length) rows = rows.filter(row => catalogProviderFilters.value.includes(row.providerId));
+      if (catalogModalityFilters.value.length) rows = rows.filter(row => (row.modalities || []).some(item => catalogModalityFilters.value.includes(item)));
+      if (catalogRegionFilter.value) rows = rows.filter(row => row.region === catalogRegionFilter.value);
+      if (catalogContextFilter.value) {
+        rows = rows.filter(row => {
+          const value = row.context_window;
+          if (value == null) return false;
+          if (catalogContextFilter.value === 'gte1000k') return value >= 1000000;
+          if (catalogContextFilter.value === 'gte200k') return value >= 200000;
+          if (catalogContextFilter.value === 'gte128k') return value >= 128000;
+          if (catalogContextFilter.value === 'lt128k') return value < 128000;
+          return true;
+        });
+      }
+      if (catalogQuickFilter.value === 'under10') {
+        rows = rows.filter(row => {
+          const value = comparePriceValue(row, 'input', 'CNY');
+          return value != null && value < 10;
+        });
+      } else if (catalogQuickFilter.value === 'longContext') {
+        rows = rows.filter(row => row.context_window != null && row.context_window >= 200000);
+      } else if (catalogQuickFilter.value === 'vision') {
+        rows = rows.filter(row => (row.modalities || []).includes('vision'));
+      }
+
+      const [key, direction] = catalogSortOption.value.split(':');
+      const multiplier = direction === 'asc' ? 1 : -1;
+      return [...rows].sort((a, b) => {
+        let av;
+        let bv;
+        if (key === 'inputPrice') {
+          av = comparePriceValue(a, 'input');
+          bv = comparePriceValue(b, 'input');
+        } else if (key === 'outputPrice') {
+          av = comparePriceValue(a, 'output');
+          bv = comparePriceValue(b, 'output');
+        } else if (key === 'cachedInput') {
+          av = comparePriceValue(a, 'cached_input');
+          bv = comparePriceValue(b, 'cached_input');
+        } else if (key === 'contextWindow') {
+          av = a.context_window;
+          bv = b.context_window;
+        } else if (key === 'model') {
+          return multiplier * (a.model || '').localeCompare(b.model || '');
+        } else {
+          av = a.release_date ? Date.parse(a.release_date) : null;
+          bv = b.release_date ? Date.parse(b.release_date) : null;
+        }
+        // 缺失值始终放在末尾，绝不按 0 参与价格排序。
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return (av - bv) * multiplier;
+      });
+    });
+
+    const catalogTotalModels = computed(() => allRows.value.filter(row => row.billing_type === 'per_token').length);
+    const catalogProviderCount = computed(() => new Set(
+      allRows.value.filter(row => row.billing_type === 'per_token').map(row => row.providerId)
+    ).size);
+    const catalogTotalPages = computed(() => Math.max(1, Math.ceil(catalogRows.value.length / catalogPageSize.value)));
+    const catalogPageRows = computed(() => {
+      const safePage = Math.min(catalogPage.value, catalogTotalPages.value);
+      const start = (safePage - 1) * catalogPageSize.value;
+      return catalogRows.value.slice(start, start + catalogPageSize.value);
+    });
+    const catalogPageNumbers = computed(() => Array.from({ length: catalogTotalPages.value }, (_, index) => index + 1));
+    const catalogActiveFilterCount = computed(() =>
+      catalogProviderFilters.value.length + catalogModalityFilters.value.length +
+      Number(Boolean(catalogContextFilter.value)) + Number(Boolean(catalogRegionFilter.value)) +
+      Number(Boolean(catalogQuickFilter.value))
+    );
+    const catalogSortLabel = computed(() => ({
+      'release_date:desc': '最新发布',
+      'inputPrice:asc': 'Input Price ↑',
+      'inputPrice:desc': 'Input Price ↓',
+      'outputPrice:asc': 'Output Price ↑',
+      'outputPrice:desc': 'Output Price ↓',
+      'cachedInput:asc': 'Cache Price ↑',
+      'cachedInput:desc': 'Cache Price ↓',
+      'contextWindow:asc': 'Context ↑',
+      'contextWindow:desc': 'Context ↓',
+      'model:asc': '模型名称',
+    })[catalogSortOption.value] || '最新发布');
+
+    watch(() => [
+      catalogSearchQuery.value,
+      catalogProviderFilters.value.join(','),
+      catalogModalityFilters.value.join(','),
+      catalogContextFilter.value,
+      catalogRegionFilter.value,
+      catalogQuickFilter.value,
+      catalogPageSize.value,
+    ], () => { catalogPage.value = 1; });
+
+    function clearCatalogFilters() {
+      catalogSearchQuery.value = '';
+      catalogProviderFilters.value = [];
+      catalogModalityFilters.value = [];
+      catalogContextFilter.value = '';
+      catalogRegionFilter.value = '';
+      catalogQuickFilter.value = '';
+    }
+
+    function toggleCatalogProvider(id) {
+      const index = catalogProviderFilters.value.indexOf(id);
+      if (index >= 0) catalogProviderFilters.value.splice(index, 1);
+      else catalogProviderFilters.value.push(id);
+    }
+
+    function toggleCatalogModality(modality) {
+      const index = catalogModalityFilters.value.indexOf(modality);
+      if (index >= 0) catalogModalityFilters.value.splice(index, 1);
+      else catalogModalityFilters.value.push(modality);
+    }
+
+    function toggleCatalogField(key) {
+      const index = catalogVisibleFields.value.indexOf(key);
+      if (index >= 0) {
+        if (catalogVisibleFields.value.length > 1) catalogVisibleFields.value.splice(index, 1);
+      } else {
+        catalogVisibleFields.value.push(key);
+      }
+    }
+
+    function sortCatalogBy(key) {
+      const [currentKey, direction] = catalogSortOption.value.split(':');
+      const nextDirection = currentKey === key && direction === 'asc' ? 'desc' : 'asc';
+      catalogSortOption.value = `${key}:${nextDirection}`;
+      catalogPage.value = 1;
+    }
+
+    function catalogSortIndicator(key) {
+      const [currentKey, direction] = catalogSortOption.value.split(':');
+      if (currentKey !== key) return '';
+      return direction === 'asc' ? '↑' : '↓';
+    }
+
+    function goToCompareWorkspace() {
+      if (compareSelectedIds.value.length < 2) {
+        compareSelectionNotice.value = '请至少选择 2 个模型';
+        return;
+      }
+      compareBrowseScrollY = 0;
+      compareWorkspaceOpen.value = true;
+      compareSelectionNotice.value = '';
+      window.location.hash = '#/compare';
+    }
+
+    function planPriceValue(row, field = 'monthly_price', currency = displayCurrency.value) {
+      const raw = row.prices?.[field];
+      if (raw == null) return null;
+      const source = row.prices?.currency || 'CNY';
+      if (source === currency) return Number(raw);
+      if (source === 'USD' && currency === 'CNY') return Number(raw) * USD_TO_CNY;
+      if (source === 'CNY' && currency === 'USD') return Number(raw) / USD_TO_CNY;
+      return Number(raw);
+    }
+
+    function formatPlanPrice(row, field = 'monthly_price') {
+      const value = planPriceValue(row, field);
+      if (value == null) return '—';
+      if (field === 'monthly_price' && Number(row.prices?.monthly_price) === 0) return '免费';
+      const symbol = displayCurrency.value === 'CNY' ? '¥' : '$';
+      const rounded = Math.abs(value) >= 100 ? value.toFixed(value % 1 ? 1 : 0) : value.toFixed(value % 1 ? 2 : 0);
+      return `${symbol}${rounded}`;
+    }
+
+    function planQuotaType(row) {
+      const unit = row.prices?.quota_unit;
+      return ({
+        credits_in_billions: 'credits',
+        calls_per_month: 'calls',
+        prompts_per_5h: 'prompts',
+        prompts_per_month: 'prompts',
+        afp_per_month: 'afp',
+        USD: 'monetary',
+        base: 'base',
+      })[unit] || 'other';
+    }
+
+    function formatPlanQuota(row) {
+      const price = row.prices || {};
+      const quota = price.included_quota;
+      const unit = price.quota_unit;
+      if (quota == null || unit == null) return '—';
+      const number = Number(quota).toLocaleString('zh-CN');
+      if (unit === 'credits_in_billions') return `${number}B Credits`;
+      if (unit === 'calls_per_month') return `${number} 次 / 月`;
+      if (unit === 'prompts_per_5h') return `${number} 次 / 5 小时`;
+      if (unit === 'prompts_per_month') return `${number} 次 / 月`;
+      if (unit === 'afp_per_month') return `${number} AFP / 月`;
+      if (unit === 'USD') return `$${number} Credits`;
+      if (unit === 'base') return `${number}× 基础额度`;
+      return `${number} ${unit}`;
+    }
+
+    const plansBaseRows = computed(() => {
+      if (billingRoute.value !== 'subscription' && billingRoute.value !== 'coding_plan') return [];
+      return allRows.value.filter(row => row.billing_type === billingRoute.value);
+    });
+    const plansProviderCount = computed(() => new Set(plansBaseRows.value.map(row => row.providerId)).size);
+    const plansProviderOptions = computed(() => {
+      const counts = new Map();
+      for (const row of plansBaseRows.value) {
+        if (!counts.has(row.providerId)) counts.set(row.providerId, { id: row.providerId, name: row.providerName, count: 0 });
+        counts.get(row.providerId).count += 1;
+      }
+      return [...counts.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    });
+    const plansQuotaTypeOptions = computed(() => {
+      if (billingRoute.value !== 'coding_plan') return [];
+      const labels = { credits: 'Credits', calls: '调用次数', prompts: 'Prompts', afp: 'AFP', monetary: '金额 Credits', base: '基础额度倍数', other: '其他' };
+      const types = new Set(plansBaseRows.value.map(planQuotaType));
+      return [...types].map(key => ({ key, label: labels[key] || key }));
+    });
+
+    const plansRows = computed(() => {
+      let rows = [...plansBaseRows.value];
+      const q = plansSearchQuery.value.trim().toLowerCase();
+      if (q) rows = rows.filter(row => (row.model || '').toLowerCase().includes(q) || row.providerName.toLowerCase().includes(q));
+      if (plansProviderFilters.value.length) rows = rows.filter(row => plansProviderFilters.value.includes(row.providerId));
+      if (plansPriceKindFilter.value === 'free') rows = rows.filter(row => Number(row.prices?.monthly_price) === 0);
+      if (plansPriceKindFilter.value === 'paid') rows = rows.filter(row => Number(row.prices?.monthly_price) > 0);
+      if (plansPriceRangeFilter.value) {
+        rows = rows.filter(row => {
+          const value = planPriceValue(row, 'monthly_price', 'CNY');
+          if (value == null) return false;
+          if (plansPriceRangeFilter.value === 'lt50') return value < 50;
+          if (plansPriceRangeFilter.value === '50to150') return value >= 50 && value < 150;
+          if (plansPriceRangeFilter.value === '150to500') return value >= 150 && value < 500;
+          if (plansPriceRangeFilter.value === 'gte500') return value >= 500;
+          return true;
+        });
+      }
+      if (plansQuotaTypeFilter.value) rows = rows.filter(row => planQuotaType(row) === plansQuotaTypeFilter.value);
+      const direction = plansSortOption.value.endsWith(':desc') ? -1 : 1;
+      return rows.sort((a, b) => {
+        const av = planPriceValue(a, 'monthly_price');
+        const bv = planPriceValue(b, 'monthly_price');
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return (av - bv) * direction || (a.model || '').localeCompare(b.model || '');
+      });
+    });
+
+    const plansGroups = computed(() => {
+      if (plansGroupMode.value === 'none') return [{ id: 'all', name: '', rows: plansRows.value }];
+      const groups = new Map();
+      for (const row of plansRows.value) {
+        if (!groups.has(row.providerId)) groups.set(row.providerId, { id: row.providerId, name: row.providerName, rows: [] });
+        groups.get(row.providerId).rows.push(row);
+      }
+      return [...groups.values()];
+    });
+
+    const currentPlansVisibleFields = computed(() => plansVisibleFields.value[billingRoute.value] || []);
+    const currentPlanSelectedIds = computed(() => plansSelectedMap.value[billingRoute.value] || []);
+    const currentPlanSelectedRows = computed(() => currentPlanSelectedIds.value
+      .map(id => plansBaseRows.value.find(row => row.id === id))
+      .filter(Boolean));
+    const plansActiveFilterCount = computed(() => plansProviderFilters.value.length +
+      Number(Boolean(plansPriceKindFilter.value)) + Number(Boolean(plansPriceRangeFilter.value)) + Number(Boolean(plansQuotaTypeFilter.value)));
+    const plansSortLabel = computed(() => plansSortOption.value.endsWith(':desc') ? '月费从高到低' : '月费从低到高');
+
+    function togglePlansProvider(id) {
+      const index = plansProviderFilters.value.indexOf(id);
+      if (index >= 0) plansProviderFilters.value.splice(index, 1);
+      else plansProviderFilters.value.push(id);
+    }
+    function clearPlansFilters() {
+      plansSearchQuery.value = '';
+      plansProviderFilters.value = [];
+      plansPriceKindFilter.value = '';
+      plansPriceRangeFilter.value = '';
+      plansQuotaTypeFilter.value = '';
+    }
+    function togglePlansField(key) {
+      const fields = currentPlansVisibleFields.value;
+      const index = fields.indexOf(key);
+      if (index >= 0) {
+        if (fields.length > 1) fields.splice(index, 1);
+      } else fields.push(key);
+    }
+    function closePlansToolbarMenu(event) {
+      event?.currentTarget?.closest('details')?.removeAttribute('open');
+    }
+    function setPlansSortOption(value, event) {
+      plansSortOption.value = value;
+      closePlansToolbarMenu(event);
+    }
+    function setPlansGroupMode(value, event) {
+      plansGroupMode.value = value;
+      closePlansToolbarMenu(event);
+    }
+    function togglePlanExpanded(id) {
+      const index = plansExpandedIds.value.indexOf(id);
+      if (index >= 0) plansExpandedIds.value.splice(index, 1);
+      else plansExpandedIds.value.push(id);
+    }
+    function isPlanSelected(row) { return currentPlanSelectedIds.value.includes(row.id); }
+    function togglePlanSelection(row) {
+      const ids = plansSelectedMap.value[billingRoute.value];
+      const index = ids.indexOf(row.id);
+      plansSelectionNotice.value = '';
+      if (index >= 0) ids.splice(index, 1);
+      else if (ids.length < 4) ids.push(row.id);
+      else plansSelectionNotice.value = '最多同时选择 4 个套餐';
+      if (ids.length < 2) plansCompareOpen.value = false;
+    }
+    function removePlanSelection(id) {
+      const ids = plansSelectedMap.value[billingRoute.value];
+      const index = ids.indexOf(id);
+      if (index >= 0) ids.splice(index, 1);
+      plansSelectionNotice.value = '';
+      if (ids.length < 2) plansCompareOpen.value = false;
+    }
+    function clearPlanSelection() {
+      plansSelectedMap.value[billingRoute.value] = [];
+      plansCompareOpen.value = false;
+      plansSelectionNotice.value = '';
+    }
+    function openPlansCompare() {
+      if (currentPlanSelectedRows.value.length < 2) {
+        plansSelectionNotice.value = '请至少选择 2 个套餐';
+        return;
+      }
+      plansCompareOpen.value = true;
+      plansSelectionNotice.value = '';
+      nextTick(() => window.scrollTo({ top: Math.max(document.querySelector('.plans-explorer-page')?.offsetTop - 72 || 0, 0), behavior: 'smooth' }));
+    }
+    function closePlansCompare() { plansCompareOpen.value = false; }
+    watch(billingRoute, (next, previous) => {
+      if (next === previous) return;
+      if ((next === 'subscription' || next === 'coding_plan') && (previous === 'subscription' || previous === 'coding_plan')) {
+        clearPlansFilters();
+        plansExpandedIds.value = [];
+        plansCompareOpen.value = false;
+      }
+    });
+    watch(allRows, rows => {
+      if (!rows.length) return;
+      for (const type of ['subscription', 'coding_plan']) {
+        const valid = new Set(rows.filter(row => row.billing_type === type).map(row => row.id));
+        plansSelectedMap.value[type] = (plansSelectedMap.value[type] || []).filter(id => valid.has(id)).slice(0, 4);
+      }
+    }, { immediate: true });
+
+    const compareSelectedRows = computed(() =>
+      compareSelectedIds.value
+        .map(id => allRows.value.find(row => row.id === id && row.billing_type === 'per_token'))
+        .filter(Boolean)
+    );
+    watch(allRows, rows => {
+      if (!rows.length) return;
+      const validIds = new Set(rows.filter(row => row.billing_type === 'per_token').map(row => row.id));
+      compareSelectedIds.value = compareSelectedIds.value.filter(id => validIds.has(id)).slice(0, 4);
+    }, { immediate: true });
+
+    const comparePickerRows = computed(() => {
+      const q = comparePickerQuery.value.trim().toLowerCase();
+      const currentId = comparePickerIndex.value == null ? null : compareSelectedIds.value[comparePickerIndex.value];
+      const selectedElsewhere = new Set(compareSelectedIds.value.filter(id => id !== currentId));
+      return allRows.value
+        .filter(row => row.billing_type === 'per_token' && !selectedElsewhere.has(row.id))
+        .filter(row => !q || (row.model || '').toLowerCase().includes(q) || row.providerName.toLowerCase().includes(q))
+        .slice(0, 60);
+    });
+
+    const compareActiveFilterCount = computed(() =>
+      compareProviderFilters.value.length + compareModalityFilters.value.length +
+      Number(Boolean(compareContextFilter.value)) + Number(Boolean(comparePriceFilter.value)) +
+      Number(Boolean(compareRegionFilter.value))
+    );
+
+    function isCompareSelected(row) {
+      return compareSelectedIds.value.includes(row.id);
+    }
+
+    function toggleCompareSelection(row) {
+      const index = compareSelectedIds.value.indexOf(row.id);
+      compareSelectionNotice.value = '';
+      if (index >= 0) {
+        compareSelectedIds.value.splice(index, 1);
+        if (compareSelectedIds.value.length < 2) compareWorkspaceOpen.value = false;
+        return;
+      }
+      if (compareSelectedIds.value.length >= 4) {
+        compareSelectionNotice.value = '最多同时选择 4 个模型';
+        return;
+      }
+      compareSelectedIds.value.push(row.id);
+    }
+
+    function removeCompareSelection(id) {
+      const index = compareSelectedIds.value.indexOf(id);
+      if (index >= 0) compareSelectedIds.value.splice(index, 1);
+      comparePickerIndex.value = null;
+      comparePickerQuery.value = '';
+      compareSelectionNotice.value = '';
+      if (compareSelectedIds.value.length < 2 && compareWorkspaceOpen.value) closeCompareWorkspace();
+    }
+
+    function clearCompareSelection() {
+      compareSelectedIds.value = [];
+      compareWorkspaceOpen.value = false;
+      comparePickerIndex.value = null;
+      compareSelectionNotice.value = '';
+    }
+
+    function startCompareWorkspace() {
+      if (compareSelectedIds.value.length < 2) {
+        compareSelectionNotice.value = '请至少选择 2 个模型';
+        return;
+      }
+      compareBrowseScrollY = window.scrollY;
+      compareWorkspaceOpen.value = true;
+      compareSelectionNotice.value = '';
+      nextTick(() => {
+        const page = document.querySelector('.compare-page');
+        if (!page) return;
+        window.scrollTo({ top: Math.max(page.offsetTop - 72, 0), behavior: 'smooth' });
+      });
+    }
+
+    function closeCompareWorkspace() {
+      compareWorkspaceOpen.value = false;
+      comparePickerIndex.value = null;
+      comparePickerQuery.value = '';
+      nextTick(() => window.scrollTo({ top: compareBrowseScrollY, behavior: 'smooth' }));
+    }
+
+    function openComparePicker(index) {
+      comparePickerIndex.value = comparePickerIndex.value === index ? null : index;
+      comparePickerQuery.value = '';
+      if (comparePickerIndex.value != null) {
+        nextTick(() => document.querySelector(`#compare-picker-${index} input`)?.focus());
+      }
+    }
+
+    function selectCompareReplacement(row) {
+      if (comparePickerIndex.value == null) return;
+      compareSelectedIds.value.splice(comparePickerIndex.value, 1, row.id);
+      comparePickerIndex.value = null;
+      comparePickerQuery.value = '';
+    }
+
+    function closeComparePicker(restoreFocus = false) {
+      const index = comparePickerIndex.value;
+      comparePickerIndex.value = null;
+      comparePickerQuery.value = '';
+      if (restoreFocus && index != null) nextTick(() => document.querySelector(`[data-compare-picker-trigger="${index}"]`)?.focus());
+    }
+
+    function clearCompareFilters() {
+      compareSearchQuery.value = '';
+      compareProviderFilters.value = [];
+      compareModalityFilters.value = [];
+      compareContextFilter.value = '';
+      comparePriceFilter.value = '';
+      compareRegionFilter.value = '';
+    }
+
+    function toggleCompareProvider(id) {
+      const index = compareProviderFilters.value.indexOf(id);
+      if (index >= 0) compareProviderFilters.value.splice(index, 1);
+      else compareProviderFilters.value.push(id);
+    }
+
+    function toggleCompareModality(modality) {
+      const index = compareModalityFilters.value.indexOf(modality);
+      if (index >= 0) compareModalityFilters.value.splice(index, 1);
+      else compareModalityFilters.value.push(modality);
+    }
+
+    function toggleCompareField(key) {
+      const index = compareVisibleFields.value.indexOf(key);
+      if (index >= 0) {
+        if (compareVisibleFields.value.length > 1) compareVisibleFields.value.splice(index, 1);
+      } else {
+        compareVisibleFields.value.push(key);
+      }
+    }
+
+    function isCompareLowest(row, field) {
+      const values = compareSelectedRows.value
+        .map(item => comparePriceValue(item, field))
+        .filter(value => value != null && Number.isFinite(value));
+      if (values.length < 2) return false;
+      const value = comparePriceValue(row, field);
+      return value != null && value === Math.min(...values);
+    }
 
     // 厂商总览列表（含产品数和状态）
     const providerList = computed(() => {
@@ -863,20 +1551,21 @@ createApp({
     });
 
     // Hero 右侧：厂商图标环形呼吸布局
-    // 分 3 层环：内环 3 个、中环 3 个、外环 3 个（共 9 个）
+    // 11 个代表厂商按 2 / 4 / 5 分布在三层轨道，减少内圈拥挤并平衡上下视觉重心。
     const orbitStyle = (index, total) => {
-      let layer, layerCount, layerIndex;
-      if (index < 3) {
-        layer = 0; layerCount = 3; layerIndex = index;
-      } else if (index < 6) {
-        layer = 1; layerCount = 3; layerIndex = index - 3;
-      } else {
-        layer = 2; layerCount = total - 6; layerIndex = index - 6;
-      }
+      const innerCount = Math.min(2, total);
+      const middleCount = Math.min(4, Math.max(total - innerCount, 0));
+      const outerCount = Math.max(total - innerCount - middleCount, 0);
+      const layerCounts = [innerCount, middleCount, outerCount];
+      const layerStarts = [0, innerCount, innerCount + middleCount];
+      const layer = index < layerStarts[1] ? 0 : index < layerStarts[2] ? 1 : 2;
+      const layerCount = layerCounts[layer];
+      const layerIndex = index - layerStarts[layer];
       const radii = [95, 150, 205];
       const radius = radii[layer];
-      // 每层错开角度，避免图标径向对齐
-      const angle = (layerIndex / layerCount) * Math.PI * 2 + (layer * 0.5);
+      // 每层使用不同起始角：保持等角间距，同时避免三层图标径向堆叠。
+      const angleOffsets = [-Math.PI / 5, Math.PI / 10, -Math.PI / 2];
+      const angle = (layerIndex / layerCount) * Math.PI * 2 + angleOffsets[layer];
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
       const delay = (index * 0.22) + 's';
@@ -1082,6 +1771,32 @@ createApp({
       homePlansMenuOpen, toggleHomePlansMenu, openHomePlansMenuAndFocus, closeHomePlansMenu, closeHomePlansMenuOnFocusOut,
       sortKey, sortAsc, filters, regions, billingTypes, modalities,
       route, routeName, billingRoute, providerRouteId, currentProvider,
+      compareRows, compareSelectedRows, comparePickerRows, compareSelectedIds,
+      compareProviderFilterList, compareModalities,
+      compareContextFilter, comparePriceFilter, compareRegionFilter, compareSortOption,
+      compareSearchQuery,
+      compareProviderFilters, compareModalityFilters, toggleCompareProvider, toggleCompareModality,
+      compareVisibleFields, compareFieldOptions, compareWorkspaceOpen, comparePickerIndex,
+      comparePickerQuery, compareSelectionNotice, compareActiveFilterCount,
+      isCompareSelected, toggleCompareSelection, removeCompareSelection, clearCompareSelection,
+      startCompareWorkspace, openComparePicker, selectCompareReplacement, closeComparePicker,
+      closeCompareWorkspace,
+      clearCompareFilters, toggleCompareField, isCompareLowest,
+      catalogRows, catalogPageRows, catalogTotalModels, catalogProviderCount, catalogTotalPages,
+      catalogPageNumbers, catalogPage, catalogPageSize, catalogActiveFilterCount, catalogSortLabel,
+      catalogContextFilter, catalogRegionFilter, catalogQuickFilter, catalogSortOption,
+      catalogSearchQuery,
+      catalogProviderFilters, catalogModalityFilters, toggleCatalogProvider, toggleCatalogModality,
+      catalogVisibleFields, catalogFieldOptions, clearCatalogFilters, toggleCatalogField,
+      sortCatalogBy, catalogSortIndicator, goToCompareWorkspace,
+      plansSearchQuery, plansProviderFilters, plansPriceKindFilter, plansPriceRangeFilter,
+      plansQuotaTypeFilter, plansSortOption, plansGroupMode, plansExpandedIds, plansCompareOpen,
+      plansSelectionNotice, plansBaseRows, plansProviderCount, plansProviderOptions,
+      plansQuotaTypeOptions, plansRows, plansGroups, currentPlansVisibleFields,
+      currentPlanSelectedRows, plansActiveFilterCount, plansSortLabel,
+      togglePlansProvider, clearPlansFilters, togglePlansField, setPlansSortOption, setPlansGroupMode, togglePlanExpanded,
+      isPlanSelected, togglePlanSelection, removePlanSelection, clearPlanSelection,
+      openPlansCompare, closePlansCompare, formatPlanPrice, formatPlanQuota,
       filteredRows, homePreviewRows, homeCompareRows, homeCompareCandidates, homeModelPickerIndex, homeModelPickerQuery, homeModelPickerRows, isHomeCompareLowest,
       openHomeModelPicker, selectHomeCompareModel, addHomePreviewToCompare, closeHomeModelPicker, handleHomeModelPickerKeydown,
       homePlanRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
