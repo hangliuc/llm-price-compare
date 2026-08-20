@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from time import monotonic
 
 from scripts.pipeline_v3.sources.plans.base import OfficialPlanAdapter
+from scripts.pipeline_v3.sources.official_offers.base import OfficialModelOfferAdapter
 
 
 def _now_iso() -> str:
@@ -59,5 +60,53 @@ def probe_plan_adapters(adapters: list[OfficialPlanAdapter]) -> dict:
         "healthy_sources": healthy,
         "total_sources": len(results),
         "plan_count": sum(item["plan_count"] for item in results),
+        "sources": results,
+    }
+
+
+def probe_official_offer_adapters(adapters: list[OfficialModelOfferAdapter]) -> dict:
+    """Check market-price adapters without changing the published catalog."""
+
+    results: list[dict] = []
+    for adapter in adapters:
+        started = monotonic()
+        fetched = None
+        try:
+            fetched = adapter.fetch()
+            offers = adapter.normalize(fetched.raw, _now_iso())
+            if len(offers) < adapter.minimum_offer_count:
+                raise ValueError(
+                    f"offer count {len(offers)} is below adapter minimum {adapter.minimum_offer_count}"
+                )
+            results.append({
+                "source": adapter.source,
+                "source_url": fetched.source_url,
+                "status": "healthy",
+                "http_status": fetched.http_status,
+                "offer_count": len(offers),
+                "markets": sorted({item.market for item in offers}),
+                "currencies": sorted({item.currency for item in offers}),
+                "duration_ms": round((monotonic() - started) * 1000),
+            })
+        except Exception as exc:
+            results.append({
+                "source": adapter.source,
+                "source_url": adapter.source_url,
+                "status": "failed",
+                "http_status": fetched.http_status if fetched else None,
+                "offer_count": 0,
+                "markets": [],
+                "currencies": [],
+                "duration_ms": round((monotonic() - started) * 1000),
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+            })
+    healthy = sum(item["status"] == "healthy" for item in results)
+    return {
+        "checked_at": _now_iso(),
+        "status": "healthy" if healthy == len(results) else "degraded",
+        "healthy_sources": healthy,
+        "total_sources": len(results),
+        "offer_count": sum(item["offer_count"] for item in results),
         "sources": results,
     }

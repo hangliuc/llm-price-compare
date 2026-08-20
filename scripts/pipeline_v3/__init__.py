@@ -1,4 +1,3 @@
 """PPK V3 deterministic data pipeline."""
 
-SCHEMA_VERSION = "3.0"
-
+SCHEMA_VERSION = "3.1"

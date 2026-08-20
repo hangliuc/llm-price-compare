@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from scripts.pipeline_v3 import SCHEMA_VERSION
 from scripts.pipeline_v3.models import ModelOffer, Plan
 
@@ -21,7 +23,8 @@ PROVIDER_METADATA = {
 
 
 def build_catalog(release_id: str, published_at: str,
-                  offers: list[ModelOffer], plans: list[Plan]) -> dict:
+                  offers: list[ModelOffer], plans: list[Plan],
+                  fx_snapshot: dict | None = None) -> dict:
     provider_ids = sorted({x.provider_id for x in [*offers, *plans]})
     providers = []
     for provider_id in provider_ids:
@@ -40,11 +43,15 @@ def build_catalog(release_id: str, published_at: str,
         "providers": providers,
         "model_offers": [item.to_dict() for item in offers],
         "plans": [item.to_dict() for item in plans],
+        "comparison": {
+            "currency": "CNY",
+            "fx_snapshot": fx_snapshot,
+            "disclaimer": "参考人民币价格仅用于排序与比较；最终以官方原币和结算页面为准。",
+        },
         "summary": {
             "provider_count": len(providers),
             "model_offer_count": len(offers),
             "plan_count": len(plans),
-            "automatic_sources": 1 + len({x.source_url for x in plans}),
+            "automatic_sources": len({x.source_id for x in offers}) + len({x.source_url for x in plans}),
         },
     }
-

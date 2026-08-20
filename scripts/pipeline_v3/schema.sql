@@ -67,6 +67,17 @@ CREATE TABLE IF NOT EXISTS model_offers (
   source_updated_at TEXT,
   fetched_at TEXT NOT NULL,
   raw_json TEXT NOT NULL,
+  market TEXT NOT NULL DEFAULT 'global',
+  access_channel TEXT NOT NULL DEFAULT 'unspecified_endpoint',
+  pricing_condition TEXT NOT NULL DEFAULT 'standard',
+  source_id TEXT NOT NULL DEFAULT 'models_dev',
+  comparison_currency TEXT NOT NULL DEFAULT 'CNY',
+  comparison_fx_rate REAL,
+  comparison_fx_date TEXT,
+  comparison_input_per_1m REAL,
+  comparison_output_per_1m REAL,
+  comparison_cache_read_per_1m REAL,
+  comparison_cache_write_per_1m REAL,
   PRIMARY KEY (snapshot_id, offer_id)
 );
 
@@ -97,7 +108,27 @@ CREATE TABLE IF NOT EXISTS plans (
   content_checksum TEXT NOT NULL,
   raw_json TEXT NOT NULL,
   featured_on_home INTEGER NOT NULL DEFAULT 0,
+  market TEXT NOT NULL DEFAULT 'global',
+  seat_type TEXT,
+  minimum_seats INTEGER,
+  price_status TEXT NOT NULL DEFAULT 'priced',
+  price_scope TEXT NOT NULL DEFAULT 'per_account',
+  comparison_currency TEXT,
+  comparison_fx_rate REAL,
+  comparison_fx_date TEXT,
+  comparison_monthly_amount REAL,
   PRIMARY KEY (snapshot_id, plan_id)
+);
+
+CREATE TABLE IF NOT EXISTS fx_snapshots (
+  fx_snapshot_id TEXT PRIMARY KEY,
+  run_id TEXT NOT NULL REFERENCES pipeline_runs(run_id),
+  base_currency TEXT NOT NULL,
+  rates_json TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  published_date TEXT NOT NULL,
+  fetched_at TEXT NOT NULL,
+  checksum TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS releases (
@@ -114,4 +145,4 @@ CREATE TABLE IF NOT EXISTS releases (
 CREATE INDEX IF NOT EXISTS idx_runs_started_at ON pipeline_runs(started_at DESC);
 CREATE INDEX IF NOT EXISTS idx_offers_provider ON model_offers(snapshot_id, provider_id);
 CREATE INDEX IF NOT EXISTS idx_plans_provider ON plans(snapshot_id, provider_id);
-
+CREATE INDEX IF NOT EXISTS idx_offers_market ON model_offers(snapshot_id, market);

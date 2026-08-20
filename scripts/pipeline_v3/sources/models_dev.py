@@ -76,11 +76,19 @@ class ModelsDevSource:
                 output_modalities = modalities.get("output") or []
                 all_modalities = tuple(dict.fromkeys([*input_modalities, *output_modalities]))
                 service_tier = _service_tier(source_model_id, model)
+                # Models.dev is the global directory source. A provider being
+                # Chinese does not turn its Models.dev record into a mainland
+                # commercial offer; official regional adapters publish those
+                # separately under their own market IDs.
+                market = "global"
+                access_channel = "unspecified_endpoint"
                 offer_id = "/".join((
                     source_provider_id,
                     str(source_model_id).strip("/"),
-                    mapping.region if mapping.region == "cn" else "global",
+                    market,
+                    access_channel,
                     service_tier,
+                    "standard",
                 ))
                 offers.append(ModelOffer(
                     offer_id=offer_id,
@@ -89,7 +97,7 @@ class ModelsDevSource:
                     provider_name=mapping.provider_name,
                     model_id=str(model.get("id") or source_model_id),
                     model_name=str(model.get("name") or source_model_id),
-                    region=mapping.region if mapping.region == "cn" else "global",
+                    region=mapping.region,
                     service_tier=service_tier,
                     input_per_1m=input_price,
                     output_per_1m=output_price,
@@ -103,6 +111,10 @@ class ModelsDevSource:
                     source_url=provider.get("doc") or self.url,
                     source_updated_at=model.get("last_updated"),
                     fetched_at=fetched_at,
+                    market=market,
+                    access_channel=access_channel,
+                    pricing_condition="standard",
+                    source_id=self.source_id,
                     raw=model,
                 ))
         return offers

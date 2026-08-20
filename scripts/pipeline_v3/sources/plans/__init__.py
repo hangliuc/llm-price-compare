@@ -6,6 +6,7 @@ from scripts.pipeline_v3.sources.plans.google import GooglePlanAdapter
 from scripts.pipeline_v3.sources.plans.minimax import MiniMaxPlanAdapter
 from scripts.pipeline_v3.sources.plans.moonshot import MoonshotPlanAdapter
 from scripts.pipeline_v3.sources.plans.openai import OpenAIPlanAdapter
+from scripts.pipeline_v3.sources.plans.openai_commercial import OpenAIBusinessPlanAdapter, OpenAIProPlanAdapter
 from scripts.pipeline_v3.sources.plans.opencode import OpenCodePlanAdapter
 from scripts.pipeline_v3.sources.plans.qwen import QwenTokenPlanAdapter
 from scripts.pipeline_v3.sources.plans.xiaomi import XiaomiPlanAdapter
@@ -33,6 +34,12 @@ def verified_plan_adapters(timeout_seconds: int = 45):
 def experimental_plan_adapters(timeout_seconds: int = 45):
     """Official sources still blocked by login, WAF, or missing public prices."""
     return [
+        # OpenAI's Help Center currently returns 403/WAF to unattended
+        # requests in validation. Keep these parsers available for probing,
+        # but do not make them release-blocking until their official source is
+        # reliably accessible from the deployment environment.
+        OpenAIProPlanAdapter(timeout_seconds=timeout_seconds),
+        OpenAIBusinessPlanAdapter(timeout_seconds=timeout_seconds),
         CursorHobbyPlanAdapter(timeout_seconds=timeout_seconds),
         MoonshotPlanAdapter(timeout_seconds=timeout_seconds),
         XiaomiPlanAdapter(timeout_seconds=timeout_seconds),
@@ -58,6 +65,8 @@ __all__ = [
     "MiniMaxPlanAdapter",
     "MoonshotPlanAdapter",
     "OpenAIPlanAdapter",
+    "OpenAIProPlanAdapter",
+    "OpenAIBusinessPlanAdapter",
     "OpenCodePlanAdapter",
     "QwenTokenPlanAdapter",
     "XiaomiPlanAdapter",

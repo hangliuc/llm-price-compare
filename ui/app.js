@@ -1,7 +1,5 @@
 const { createApp, ref, computed, onMounted, onBeforeUnmount, nextTick, watch } = Vue;
 
-const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
-
 // 首页价格预览只展示模型原厂的旗舰系列。规则按优先级排列：同一厂商
 // 命中多个系列时先选更旗舰的系列，再在该系列中选择发布时间最新的模型。
 const HOME_FLAGSHIP_PROVIDER_RULES = [
@@ -25,7 +23,7 @@ if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
 // V3 separates model offers and plans. Existing views consume provider-grouped
 // rows, so adapt once at the network boundary.
 function catalogV3ToViewData(catalog) {
-  if (!catalog || catalog.schema_version !== '3.0') return catalog;
+  if (!catalog || !['3.0', '3.1'].includes(catalog.schema_version)) return catalog;
   const providerMap = new Map((catalog.providers || []).map(provider => [provider.id, {
     ...provider,
     products: [],
@@ -54,7 +52,17 @@ function catalogV3ToViewData(catalog) {
         cached_input: item.cache_read_per_1m,
         cache_write: item.cache_write_per_1m,
         currency: item.currency,
+        comparison_currency: item.comparison_currency || null,
+        comparison_fx_date: item.comparison_fx_date || null,
+        comparison_input: item.comparison_input_per_1m ?? null,
+        comparison_output: item.comparison_output_per_1m ?? null,
+        comparison_cached_input: item.comparison_cache_read_per_1m ?? null,
+        comparison_cache_write: item.comparison_cache_write_per_1m ?? null,
       },
+      market: item.market || 'global',
+      access_channel: item.access_channel || 'unspecified_endpoint',
+      pricing_condition: item.pricing_condition || 'standard',
+      source_id: item.source_id || 'models_dev',
       purchase_url: item.source_url || '',
       notes: null,
       plan_category: null,
@@ -80,7 +88,15 @@ function catalogV3ToViewData(catalog) {
         quota_period: item.quota_period,
         features: item.features || [],
         currency: item.currency,
+        comparison_currency: item.comparison_currency || null,
+        comparison_fx_date: item.comparison_fx_date || null,
+        comparison_monthly_price: item.comparison_monthly_amount ?? null,
       },
+      market: item.market || 'global',
+      price_status: item.price_status || 'priced',
+      price_scope: item.price_scope || 'per_account',
+      seat_type: item.seat_type || null,
+      minimum_seats: item.minimum_seats ?? null,
       purchase_url: item.purchase_url || item.source_url || '',
       notes: null,
       plan_category: item.plan_category || null,
@@ -100,6 +116,7 @@ function catalogV3ToViewData(catalog) {
       stale: false,
       last_success_at: catalog.published_at,
     })),
+    comparison: catalog.comparison || null,
   };
 }
 
@@ -202,7 +219,6 @@ createApp({
       },
       set(v) { _viewOverride.value = v; },
     });
-    const displayCurrency = ref("CNY");
     // 厂商详情页：当前选中的计费方式 tab（per_token / subscription / coding_plan）
     const providerBillingTab = ref(null);
     const expanded = ref(null);
@@ -391,13 +407,6 @@ createApp({
         .map(bt => ({ key: bt, label: billingLabel(bt), count: counts[bt] }));
     });
 
-    // 进入厂商详情页时：根据厂商 region 自动切换货币
-    watch(currentProvider, (p) => {
-      if (!p) return;
-      // 国内厂商默认 CNY，国外厂商默认 USD
-      displayCurrency.value = p.region === 'cn' ? 'CNY' : 'USD';
-    });
-
     // 当可用 tab 列表变化时，如果当前选中的 tab 不在其中，则自动选第一个
     watch(providerBillingTabs, (tabs) => {
       if (!tabs.length) {
@@ -512,15 +521,16 @@ createApp({
       return rows;
     });
 
-    // 统一换算后的数值仅用于 Compare 页筛选与最低价判断；展示仍复用 formatPrice。
-    function comparePriceValue(row, field, currency = displayCurrency.value) {
-      const raw = row.prices?.[field];
-      if (raw == null) return null;
-      const source = row.prices?.currency || 'CNY';
-      if (source === currency) return Number(raw);
-      if (source === 'USD' && currency === 'CNY') return Number(raw) * USD_TO_CNY;
-      if (source === 'CNY' && currency === 'USD') return Number(raw) / USD_TO_CNY;
-      return Number(raw);
+    // V3.1 comparison values are published with the catalog's daily FX
+    // snapshot. Never calculate them in the browser with a hardcoded rate.
+    function comparePriceValue(row, field) {
+      const comparisonField = `comparison_${field}`;
+      const value = row.prices?.[comparisonField];
+      if (value != null) return Number(value);
+      // V3.0 compatibility: a CNY official price can compare to itself, while
+      // other currencies wait for a V3.1 release rather than using a fake rate.
+      if (row.prices?.currency === 'CNY') return Number(row.prices?.[field]);
+      return null;
     }
 
     const compareProviderFilterList = computed(() => {
@@ -540,6 +550,28 @@ createApp({
         .filter(row => row.billing_type === 'per_token')
         .flatMap(row => row.modalities || [])
     )].sort());
+    const marketLabels = {
+      global: '全球目录', cn_mainland: '中国大陆官方', cn_beijing: '中国北京官方',
+      sg_international: '新加坡 International', us_virginia: '美国（弗吉尼亚）官方',
+      de_frankfurt: '德国（法兰克福）官方', jp_tokyo: '日本（东京）官方',
+      aws_bedrock: 'AWS Bedrock',
+    };
+    const marketLabel = (market) => marketLabels[market] || market || '未标注市场';
+    const accessChannelLabel = (channel) => ({
+      official_api: '官方 API',
+      official_anthropic_api: '官方 Anthropic API',
+      aws_bedrock: 'AWS Bedrock',
+    }[channel] || '');
+    const pricingConditionLabel = (condition) => {
+      if (!condition || condition === 'standard') return '';
+      if (condition === 'off_peak') return '空闲时段';
+      if (condition === 'peak') return '高峰时段';
+      const match = /^input_lte_(.+)$/i.exec(condition);
+      return match ? `输入 ≤ ${match[1].toUpperCase()}` : condition;
+    };
+    const marketOptions = computed(() => [...new Set(
+      allRows.value.filter(row => row.billing_type === 'per_token').map(row => row.market || 'global')
+    )].sort().map(id => ({ id, label: marketLabel(id) })));
 
     const compareRows = computed(() => {
       let rows = allRows.value.filter(row => row.billing_type === 'per_token');
@@ -557,7 +589,7 @@ createApp({
         rows = rows.filter(row => (row.modalities || []).some(item => compareModalityFilters.value.includes(item)));
       }
       if (compareRegionFilter.value) {
-        rows = rows.filter(row => row.region === compareRegionFilter.value);
+        rows = rows.filter(row => (row.market || 'global') === compareRegionFilter.value);
       }
       if (compareContextFilter.value) {
         rows = rows.filter(row => {
@@ -572,7 +604,7 @@ createApp({
       }
       if (comparePriceFilter.value) {
         rows = rows.filter(row => {
-          const value = comparePriceValue(row, 'input', 'CNY');
+          const value = comparePriceValue(row, 'input');
           if (value == null) return false;
           if (comparePriceFilter.value === 'lt10') return value < 10;
           if (comparePriceFilter.value === '10to50') return value >= 10 && value < 50;
@@ -628,7 +660,7 @@ createApp({
       }
       if (catalogProviderFilters.value.length) rows = rows.filter(row => catalogProviderFilters.value.includes(row.providerId));
       if (catalogModalityFilters.value.length) rows = rows.filter(row => (row.modalities || []).some(item => catalogModalityFilters.value.includes(item)));
-      if (catalogRegionFilter.value) rows = rows.filter(row => row.region === catalogRegionFilter.value);
+      if (catalogRegionFilter.value) rows = rows.filter(row => (row.market || 'global') === catalogRegionFilter.value);
       if (catalogContextFilter.value) {
         rows = rows.filter(row => {
           const value = row.context_window;
@@ -642,7 +674,7 @@ createApp({
       }
       if (catalogQuickFilter.value === 'under10') {
         rows = rows.filter(row => {
-          const value = comparePriceValue(row, 'input', 'CNY');
+          const value = comparePriceValue(row, 'input');
           return value != null && value < 10;
         });
       } else if (catalogQuickFilter.value === 'longContext') {
@@ -775,21 +807,19 @@ createApp({
       window.location.hash = '#/compare';
     }
 
-    function planPriceValue(row, field = 'monthly_price', currency = displayCurrency.value) {
-      const raw = row.prices?.[field];
-      if (raw == null) return null;
-      const source = row.prices?.currency || 'CNY';
-      if (source === currency) return Number(raw);
-      if (source === 'USD' && currency === 'CNY') return Number(raw) * USD_TO_CNY;
-      if (source === 'CNY' && currency === 'USD') return Number(raw) / USD_TO_CNY;
-      return Number(raw);
+    function planPriceValue(row, field = 'monthly_price') {
+      if (field !== 'monthly_price') return row.prices?.[field] == null ? null : Number(row.prices[field]);
+      const value = row.prices?.comparison_monthly_price;
+      if (value != null) return Number(value);
+      if (row.prices?.currency === 'CNY') return Number(row.prices?.monthly_price);
+      return null;
     }
 
     function formatPlanPrice(row, field = 'monthly_price') {
-      const value = planPriceValue(row, field);
+      const value = row.prices?.[field];
       if (value == null) return '—';
       if (field === 'monthly_price' && Number(row.prices?.monthly_price) === 0) return '免费';
-      const currency = rowDisplayCurrency(row);
+      const currency = row.prices?.currency || 'CNY';
       const symbol = currencySymbols[currency] || `${currency} `;
       const rounded = Math.abs(value) >= 100 ? value.toFixed(value % 1 ? 1 : 0) : value.toFixed(value % 1 ? 2 : 0);
       return `${symbol}${rounded}`;
@@ -853,7 +883,7 @@ createApp({
       if (plansPriceKindFilter.value === 'paid') rows = rows.filter(row => Number(row.prices?.monthly_price) > 0);
       if (plansPriceRangeFilter.value) {
         rows = rows.filter(row => {
-          const value = planPriceValue(row, 'monthly_price', 'CNY');
+          const value = planPriceValue(row, 'monthly_price');
           if (value == null) return false;
           if (plansPriceRangeFilter.value === 'lt50') return value < 50;
           if (plansPriceRangeFilter.value === '50to150') return value >= 50 && value < 150;
@@ -1471,7 +1501,8 @@ createApp({
       billingSlideIndex.value = i;
     }
 
-    // 首页价格预览：每个模型原厂只取旗舰系列的最新一款，并按人民币输入价格降序排列。
+    // 首页价格预览：每个模型原厂只取旗舰系列的最新一款，并按发布时
+    // 生成的人民币参考价排序，绝不使用浏览器内硬编码汇率。
     // 返回 8 条后由 CSS 根据视口显示桌面 8 / 平板 6 / 移动端 4 条。
     const homePreviewRows = computed(() => {
       const rows = allRows.value.filter(r =>
@@ -1490,14 +1521,9 @@ createApp({
         }
         return [];
       });
-      const priceInCny = (row, field) => {
-        const value = Number(row.prices?.[field]);
-        if (!Number.isFinite(value)) return -Infinity;
-        return row.prices.currency === 'USD' ? value * USD_TO_CNY : value;
-      };
       selected.sort((a, b) =>
-        priceInCny(b, 'input') - priceInCny(a, 'input') ||
-        priceInCny(b, 'output') - priceInCny(a, 'output') ||
+        (comparePriceValue(b, 'input') ?? -Infinity) - (comparePriceValue(a, 'input') ?? -Infinity) ||
+        (comparePriceValue(b, 'output') ?? -Infinity) - (comparePriceValue(a, 'output') ?? -Infinity) ||
         (b.release_date || '').localeCompare(a.release_date || '') ||
         a.providerName.localeCompare(b.providerName, 'zh')
       );
@@ -1534,10 +1560,7 @@ createApp({
         .filter(Boolean)
     );
     function homeCompareCnyPrice(row, field) {
-      const raw = row.prices?.[field];
-      if (raw == null || !Number.isFinite(Number(raw))) return null;
-      const value = Number(raw);
-      return row.prices.currency === 'USD' ? value * USD_TO_CNY : value;
+      return comparePriceValue(row, field);
     }
     const homeCompareLowestPrices = computed(() => {
       const result = {};
@@ -1722,14 +1745,11 @@ createApp({
       return { per_token: "Token", subscription: "订阅", coding_plan: "Coding Plan" }[b] || b;
     }
 
-    const convertibleCurrencies = new Set(['CNY', 'USD']);
     const currencySymbols = { CNY: '¥', USD: '$', SGD: 'S$', EUR: '€', GBP: '£', JPY: '¥', INR: '₹' };
 
-    // billing 路由下使用本币不换算；暂未配置汇率的币种在任何页面保持原币展示。
+    // Official original currency is always the primary display currency.
     function rowDisplayCurrency(row) {
-      const originalCurrency = row.prices?.currency || 'CNY';
-      if (routeName.value === 'billing' || !convertibleCurrencies.has(originalCurrency)) return originalCurrency;
-      return displayCurrency.value;
+      return row.prices?.currency || 'CNY';
     }
 
     function currencySymbol(row) {
@@ -1740,19 +1760,13 @@ createApp({
     function formatPrice(row, field) {
       const v = row.prices?.[field];
       if (v == null) return "—";
-      const origCur = row.prices.currency;
       const dispCur = rowDisplayCurrency(row);
-      let val = v;
-      if (origCur !== dispCur) {
-        if (origCur === "USD" && dispCur === "CNY") val = (v * USD_TO_CNY).toFixed(2);
-        else if (origCur === "CNY" && dispCur === "USD") val = (v / USD_TO_CNY).toFixed(2);
-      }
       const sym = currencySymbols[dispCur] || `${dispCur} `;
       // monthly_price 等非 token 计价字段不加 /1M
       if (field === 'monthly_price' || field === 'first_month_price') {
-        return `${sym}${val}`;
+        return `${sym}${v}`;
       }
-      return `${sym}${val} /1M`;
+      return `${sym}${v} /1M`;
     }
 
     // 首页迷你价格预览在表头统一展示 /1M 单位，单元格仅保留金额。
@@ -1778,29 +1792,29 @@ createApp({
     function formatMonthly(row) {
       const p = row.prices;
       if (!p || p.monthly_price == null) return "—";
-      const origCur = p.currency;
-      const dispCur = rowDisplayCurrency(row);
-      let val = p.monthly_price;
-      if (origCur !== dispCur) {
-        if (origCur === "USD" && dispCur === "CNY") val = (val * USD_TO_CNY).toFixed(0);
-        else if (origCur === "CNY" && dispCur === "USD") val = (val / USD_TO_CNY).toFixed(2);
-      }
-      const sym = currencySymbols[dispCur] || `${dispCur} `;
-      return `${sym}${val}`;
+      const sym = currencySymbols[rowDisplayCurrency(row)] || `${rowDisplayCurrency(row)} `;
+      return `${sym}${p.monthly_price}`;
     }
 
     // 月费数字部分（符号由模板渲染，便于大字号排版）
     function formatMonthlyValue(row) {
       const p = row.prices;
       if (!p || p.monthly_price == null) return "—";
-      const origCur = p.currency;
-      const dispCur = rowDisplayCurrency(row);
-      let val = p.monthly_price;
-      if (origCur !== dispCur) {
-        if (origCur === "USD" && dispCur === "CNY") val = (val * USD_TO_CNY).toFixed(0);
-        else if (origCur === "CNY" && dispCur === "USD") val = (val / USD_TO_CNY).toFixed(2);
-      }
-      return Number.isInteger(Number(val)) ? String(val) : String(val);
+      return String(p.monthly_price);
+    }
+
+    function formatReferenceCny(row, field) {
+      const value = field === 'monthly_price'
+        ? row.prices?.comparison_monthly_price
+        : row.prices?.[`comparison_${field}`];
+      if (value == null) return '—';
+      const amount = Number(value);
+      const rounded = amount >= 100 ? amount.toFixed(amount % 1 ? 1 : 0) : amount.toFixed(amount % 1 ? 2 : 0);
+      return `≈ ¥${rounded}`;
+    }
+
+    function comparisonReferenceDate() {
+      return data.value?.comparison?.fx_snapshot?.published_date || null;
     }
 
     // 额度格式化（coding_plan / subscription）
@@ -1882,13 +1896,13 @@ createApp({
     });
 
     return {
-      data, error, searchQuery, globalSearch, searchFocused, searchMatches, searchSuggestions, goProvider, searchSubmit, view, displayCurrency, expanded,
+      data, error, searchQuery, globalSearch, searchFocused, searchMatches, searchSuggestions, goProvider, searchSubmit, view, expanded,
       plansMenuOpen, plansMenuActive, togglePlansMenu, openPlansMenuOnHover, closePlansMenuOnHover, openPlansMenuAndFocus, closePlansMenu, closePlansMenuOnFocusOut,
       homePlansMenuOpen, toggleHomePlansMenu, openHomePlansMenuAndFocus, closeHomePlansMenu, closeHomePlansMenuOnFocusOut,
       sortKey, sortAsc, filters, regions, billingTypes, modalities,
       route, routeName, billingRoute, providerRouteId, currentProvider,
       compareRows, compareSelectedRows, comparePickerRows, compareSelectedIds,
-      compareProviderFilterList, compareModalities,
+      compareProviderFilterList, compareModalities, marketOptions, marketLabel, accessChannelLabel, pricingConditionLabel,
       compareContextFilter, comparePriceFilter, compareRegionFilter, compareSortOption,
       compareSearchQuery,
       compareProviderFilters, compareModalityFilters, toggleCompareProvider, toggleCompareModality,
@@ -1925,7 +1939,7 @@ createApp({
       providerBillingTabs, providerBillingTab, providerCurrentRows,
       displayRows, billingCardGroups, billingCurrencyTab, billingCnyCount, billingUsdCount,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
-      formatPrice, formatPriceAmount, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
+      formatPrice, formatPriceAmount, formatReferenceCny, comparisonReferenceDate, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
     };
   },
 }).mount("#app");

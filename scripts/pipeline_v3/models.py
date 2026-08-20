@@ -28,6 +28,21 @@ class ModelOffer:
     source_url: str = "https://models.dev/api.json"
     source_updated_at: Optional[str] = None
     fetched_at: str = ""
+    # V3.1: a market is an independent official commercial offer. It is not
+    # inferred from a provider's country or converted from another market.
+    market: str = "global"
+    access_channel: str = "unspecified_endpoint"
+    # Independent price brackets need their own identity. This is the exact
+    # official condition (for example input_lte_128k), never a derived tier.
+    pricing_condition: str = "standard"
+    source_id: str = "models_dev"
+    comparison_currency: str = "CNY"
+    comparison_fx_rate: Optional[float] = None
+    comparison_fx_date: Optional[str] = None
+    comparison_input_per_1m: Optional[float] = None
+    comparison_output_per_1m: Optional[float] = None
+    comparison_cache_read_per_1m: Optional[float] = None
+    comparison_cache_write_per_1m: Optional[float] = None
     raw: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -61,6 +76,17 @@ class Plan:
     purchase_url: str = ""
     source_updated_at: Optional[str] = None
     featured_on_home: bool = False
+    # V3.1 commercial-price semantics. Official display currency remains
+    # `currency`; comparison amounts are only used for CNY sorting/comparison.
+    market: str = "global"
+    seat_type: Optional[str] = None
+    minimum_seats: Optional[int] = None
+    price_status: str = "priced"
+    price_scope: str = "per_account"
+    comparison_currency: Optional[str] = "CNY"
+    comparison_fx_rate: Optional[float] = None
+    comparison_fx_date: Optional[str] = None
+    comparison_monthly_amount: Optional[float] = None
     raw: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

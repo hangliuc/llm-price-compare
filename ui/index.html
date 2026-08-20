@@ -175,24 +175,24 @@
       <section class="section home-pricing-section home-surface home-surface--pricing">
         <div class="section-head home-section-head">
           <div>
-            <div class="section-eyebrow">LIVE PRICING · CNY</div>
+            <div class="section-eyebrow">LIVE PRICING · OFFICIAL</div>
             <h2 class="section-title">先看价格，<em>再做选择</em></h2>
-            <p class="section-sub">浏览各厂商最新旗舰模型的输入、输出与缓存价格，所有数据来自当前价格库并统一折算为人民币。</p>
+            <p class="section-sub">浏览各厂商最新旗舰模型的输入、输出与缓存官方报价；人民币参考价仅用于跨币种排序与比较。</p>
           </div>
           <a href="#/billing/per_token" class="section-link home-pricing-cta">查看全部价格 →</a>
         </div>
         <div class="home-price-table">
           <div class="home-price-row home-price-head" aria-hidden="true">
-            <span>Model</span><span><b>Input</b><small>¥ / 1M tokens</small></span><span><b>Output</b><small>¥ / 1M tokens</small></span><span><b>Cache</b><small>¥ / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
+            <span>Model</span><span><b>Input</b><small>官方价 / 1M tokens</small></span><span><b>Output</b><small>官方价 / 1M tokens</small></span><span><b>Cache</b><small>官方价 / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
           </div>
           <div v-for="row in homePreviewRows" :key="row.id" class="home-price-row">
             <a :href="'#/provider/' + row.providerId" class="home-price-model" :aria-label="'查看 ' + row.providerName + ' 的 ' + row.model + ' 详细价格'">
               <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
               <span><b>{{ row.model }}</b><small>{{ row.providerName }}</small></span>
             </a>
-            <span class="home-price-value"><small>Input · ¥/1M</small>{{ formatPriceAmount(row, 'input') }}</span>
-            <span class="home-price-value"><small>Output · ¥/1M</small>{{ formatPriceAmount(row, 'output') }}</span>
-            <span class="home-price-value"><small>Cache · ¥/1M</small>{{ formatPriceAmount(row, 'cached_input') }}</span>
+            <span class="home-price-value"><small>Input · 官方价 / 1M</small>{{ formatPriceAmount(row, 'input') }}</span>
+            <span class="home-price-value"><small>Output · 官方价 / 1M</small>{{ formatPriceAmount(row, 'output') }}</span>
+            <span class="home-price-value"><small>Cache · 官方价 / 1M</small>{{ formatPriceAmount(row, 'cached_input') }}</span>
             <span class="home-price-context">
               <small>Context</small><span>{{ formatContext(row.context_window) }}</span>
               <button type="button" class="home-price-compare-action" :aria-label="'将 ' + row.model + ' 加入模型比较'" title="加入下方模型比较" @click="addHomePreviewToCompare(row)">→</button>
@@ -205,9 +205,9 @@
       <!-- 真实模型对比 -->
       <section id="home-model-compare" class="section home-why-section home-surface home-surface--compare">
         <div class="home-why-intro">
-          <div class="section-eyebrow">MODEL COMPARE · CNY</div>
+          <div class="section-eyebrow">MODEL COMPARE · OFFICIAL</div>
           <h2 class="section-title">同一视角，<br><em>看清模型差异</em></h2>
-          <p class="section-sub">选择三个候选模型，直接比较输入、输出、缓存和上下文。</p>
+          <p class="section-sub">选择三个候选模型，直接比较输入、输出、缓存和上下文；最低价按人民币参考价判断。</p>
           <a href="#/compare" class="section-link home-compare-link">进入完整对比 →</a>
         </div>
         <div class="home-compare-preview" aria-label="代表模型价格对比">
@@ -235,9 +235,9 @@
               </div>
             </div>
           </div>
-          <div class="home-compare-row"><span>输入 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-input'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'input') }]">{{ formatPriceAmount(row, 'input') }}</b></div>
-          <div class="home-compare-row"><span>输出 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-output'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'output') }]">{{ formatPriceAmount(row, 'output') }}</b></div>
-          <div class="home-compare-row"><span>缓存 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-cache'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'cached_input') }]">{{ formatPriceAmount(row, 'cached_input') }}</b></div>
+          <div class="home-compare-row"><span>输入 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-input'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'input') }]"><span>{{ formatPriceAmount(row, 'input') }}</span><small>{{ formatReferenceCny(row, 'input') }}</small></b></div>
+          <div class="home-compare-row"><span>输出 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-output'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'output') }]"><span>{{ formatPriceAmount(row, 'output') }}</span><small>{{ formatReferenceCny(row, 'output') }}</small></b></div>
+          <div class="home-compare-row"><span>缓存 / 1M</span><b v-for="row in homeCompareRows" :key="row.id + '-cache'" :class="['home-compare-value', { 'is-lowest': isHomeCompareLowest(row, 'cached_input') }]"><span>{{ formatPriceAmount(row, 'cached_input') }}</span><small>{{ formatReferenceCny(row, 'cached_input') }}</small></b></div>
           <div class="home-compare-row"><span>上下文</span><b v-for="row in homeCompareRows" :key="row.id + '-context'" class="home-compare-value">{{ formatContext(row.context_window) }}</b></div>
         </div>
       </section>
@@ -276,7 +276,7 @@
         <div class="home-trust-copy">
           <div class="section-eyebrow">OPEN DATA · TRACEABLE</div>
           <h2 class="section-title">价格数据，<em>有迹可循</em></h2>
-          <p>按需价格来自 Models.dev，套餐来自厂商官方页面；校验失败时继续使用最近一次成功发布的数据。</p>
+          <p>按需报价保留官方市场与原币；人民币参考价仅用于排序和比较。校验失败时继续使用最近一次成功发布的数据。</p>
         </div>
         <div class="home-trust-facts">
           <div><strong>{{ catalogTotalModels }}</strong><span>可比较模型报价</span></div>
@@ -295,7 +295,7 @@
               <details class="faq-item">
                 <summary>这里的价格可靠吗？多久更新一次？</summary>
                 <div class="faq-answer">
-                  <p>数据每天自动更新两次。按需价格来自 Models.dev，套餐来自厂商官方页面；抓取或校验失败时不会覆盖最近一次成功发布的数据。</p>
+                  <p>数据每天自动更新两次。按需目录来自 Models.dev 与已验证的官方市场 Adapter；套餐来自厂商官方页面。人民币参考价使用发布时保存的日度汇率快照，抓取或校验失败时不会覆盖最近一次成功发布的数据。</p>
                 </div>
               </details>
               <details class="faq-item">
@@ -469,13 +469,11 @@
             </details>
 
             <details class="compare-menu">
-              <summary>更多筛选 <span v-if="compareRegionFilter">1</span></summary>
+              <summary>市场 <span v-if="compareRegionFilter">1</span></summary>
               <div class="compare-menu-panel">
-                <p class="compare-menu-label">区域</p>
+                <p class="compare-menu-label">官方报价市场</p>
                 <button type="button" :class="{active: compareRegionFilter === ''}" @click="compareRegionFilter = ''">全部</button>
-                <button type="button" :class="{active: compareRegionFilter === 'cn'}" @click="compareRegionFilter = 'cn'">中国</button>
-                <button type="button" :class="{active: compareRegionFilter === 'us'}" @click="compareRegionFilter = 'us'">美国</button>
-                <button type="button" :class="{active: compareRegionFilter === 'eu'}" @click="compareRegionFilter = 'eu'">欧洲</button>
+                <button v-for="market in marketOptions" :key="market.id" type="button" :class="{active: compareRegionFilter === market.id}" @click="compareRegionFilter = market.id">{{ market.label }}</button>
               </div>
             </details>
           </div>
@@ -500,10 +498,7 @@
                 </label>
               </div>
             </details>
-            <div class="currency-toggle compare-currency-toggle">
-              <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
-              <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
-            </div>
+            <span class="compare-reference-note">官方原币展示 · 人民币参考排序</span>
           </div>
         </div>
 
@@ -513,7 +508,7 @@
           <span v-for="m in compareModalityFilters" :key="'modality-' + m" class="compare-filter-token">{{ m }} <button type="button" @click="toggleCompareModality(m)">×</button></span>
           <span v-if="compareContextFilter" class="compare-filter-token">Context {{ {gte1000k:'≥ 1M',gte200k:'≥ 200K',gte128k:'≥ 128K',lt128k:'< 128K'}[compareContextFilter] }} <button type="button" @click="compareContextFilter = ''">×</button></span>
           <span v-if="comparePriceFilter" class="compare-filter-token">输入价 {{ {lt10:'< ¥10', '10to50':'¥10–50', '50to200':'¥50–200', gte200:'≥ ¥200'}[comparePriceFilter] }} <button type="button" @click="comparePriceFilter = ''">×</button></span>
-          <span v-if="compareRegionFilter" class="compare-filter-token">{{ {cn:'中国',us:'美国',eu:'欧洲'}[compareRegionFilter] }} <button type="button" @click="compareRegionFilter = ''">×</button></span>
+          <span v-if="compareRegionFilter" class="compare-filter-token">{{ marketLabel(compareRegionFilter) }} <button type="button" @click="compareRegionFilter = ''">×</button></span>
           <button type="button" class="compare-clear-filters" @click="clearCompareFilters">清除全部</button>
         </div>
 
@@ -549,7 +544,7 @@
                 <td>
                   <div class="compare-model-cell">
                     <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
-                    <span><strong :title="row.model">{{ row.model || '—' }}</strong><small>{{ row.providerName }}</small></span>
+                    <span><strong :title="row.model">{{ row.model || '—' }}</strong><small>{{ row.providerName }} · {{ marketLabel(row.market) }}<template v-if="accessChannelLabel(row.access_channel)"> · {{ accessChannelLabel(row.access_channel) }}</template><template v-if="pricingConditionLabel(row.pricing_condition)"> · {{ pricingConditionLabel(row.pricing_condition) }}</template></small></span>
                   </div>
                 </td>
                 <td v-if="compareVisibleFields.includes('input')" class="num">{{ formatPriceAmount(row, 'input') }}</td>
@@ -571,7 +566,7 @@
             <div>
               <span class="section-eyebrow">Model Comparison</span>
               <h2 id="compare-workspace-title">模型对比工作台</h2>
-              <p>当前价格统一换算为 {{ displayCurrency }}，绿色表示该指标中的最低价格。</p>
+              <p>主价为官方原币；参考人民币用于排序和最低价判断<span v-if="comparisonReferenceDate()">（{{ comparisonReferenceDate() }} 汇率）</span>。</p>
             </div>
             <button type="button" class="compare-workspace-close" @click="closeCompareWorkspace">返回模型列表</button>
           </div>
@@ -597,9 +592,9 @@
               </div>
 
               <div class="compare-matrix-label">Provider</div><div v-for="row in compareSelectedRows" :key="row.id + '-provider'" class="compare-matrix-value compare-matrix-text">{{ row.providerName }}</div>
-              <div class="compare-matrix-label">Input / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-input'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'input')}]">{{ formatPriceAmount(row, 'input') }}</div>
-              <div class="compare-matrix-label">Output / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-output'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'output')}]">{{ formatPriceAmount(row, 'output') }}</div>
-              <div class="compare-matrix-label">Cache / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-cache'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'cached_input')}]">{{ formatPriceAmount(row, 'cached_input') }}</div>
+              <div class="compare-matrix-label">Input / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-input'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'input')}]"><strong>{{ formatPriceAmount(row, 'input') }}</strong><small>{{ formatReferenceCny(row, 'input') }}</small></div>
+              <div class="compare-matrix-label">Output / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-output'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'output')}]"><strong>{{ formatPriceAmount(row, 'output') }}</strong><small>{{ formatReferenceCny(row, 'output') }}</small></div>
+              <div class="compare-matrix-label">Cache / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-cache'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'cached_input')}]"><strong>{{ formatPriceAmount(row, 'cached_input') }}</strong><small>{{ formatReferenceCny(row, 'cached_input') }}</small></div>
               <div class="compare-matrix-label">Context</div><div v-for="row in compareSelectedRows" :key="row.id + '-context'" class="compare-matrix-value">{{ formatContext(row.context_window) }}</div>
               <div class="compare-matrix-label">模态</div><div v-for="row in compareSelectedRows" :key="row.id + '-modalities'" class="compare-matrix-value compare-matrix-text">{{ (row.modalities || []).join(' · ') || '—' }}</div>
             </div>
@@ -682,13 +677,11 @@
             </details>
 
             <details class="compare-menu">
-              <summary>更多筛选 <span v-if="catalogRegionFilter">1</span></summary>
+              <summary>市场 <span v-if="catalogRegionFilter">1</span></summary>
               <div class="compare-menu-panel">
-                <p class="compare-menu-label">厂商区域</p>
+                <p class="compare-menu-label">官方报价市场</p>
                 <button type="button" :class="{active: catalogRegionFilter === ''}" @click="catalogRegionFilter = ''">全部</button>
-                <button type="button" :class="{active: catalogRegionFilter === 'cn'}" @click="catalogRegionFilter = 'cn'">中国</button>
-                <button type="button" :class="{active: catalogRegionFilter === 'us'}" @click="catalogRegionFilter = 'us'">美国</button>
-                <button type="button" :class="{active: catalogRegionFilter === 'eu'}" @click="catalogRegionFilter = 'eu'">欧洲</button>
+                <button v-for="market in marketOptions" :key="market.id" type="button" :class="{active: catalogRegionFilter === market.id}" @click="catalogRegionFilter = market.id">{{ market.label }}</button>
               </div>
             </details>
           </div>
@@ -723,7 +716,7 @@
           <span v-for="id in catalogProviderFilters" :key="'catalog-provider-' + id" class="compare-filter-token">{{ providerFilterList.find(p => p.id === id)?.name || id }} <button type="button" @click="toggleCatalogProvider(id)">×</button></span>
           <span v-for="m in catalogModalityFilters" :key="'catalog-modality-' + m" class="compare-filter-token">{{ m }} <button type="button" @click="toggleCatalogModality(m)">×</button></span>
           <span v-if="catalogContextFilter" class="compare-filter-token">Context {{ {gte1000k:'≥ 1M',gte200k:'≥ 200K',gte128k:'≥ 128K',lt128k:'< 128K'}[catalogContextFilter] }} <button type="button" @click="catalogContextFilter = ''">×</button></span>
-          <span v-if="catalogRegionFilter" class="compare-filter-token">{{ {cn:'中国',us:'美国',eu:'欧洲'}[catalogRegionFilter] }} <button type="button" @click="catalogRegionFilter = ''">×</button></span>
+          <span v-if="catalogRegionFilter" class="compare-filter-token">{{ marketLabel(catalogRegionFilter) }} <button type="button" @click="catalogRegionFilter = ''">×</button></span>
           <span v-if="catalogQuickFilter" class="compare-filter-token">{{ {under10:'输入价 < ¥10',longContext:'Context ≥ 200K',vision:'Vision'}[catalogQuickFilter] }} <button type="button" @click="catalogQuickFilter = ''">×</button></span>
           <button type="button" class="compare-clear-filters" @click="clearCatalogFilters">清除全部</button>
         </div>
@@ -734,13 +727,7 @@
             <strong v-else>{{ catalogRows.length }} 个模型</strong>
             <span>排序：{{ catalogSortLabel }}</span>
           </div>
-          <div class="catalog-currency-control" aria-label="显示货币">
-            <span>显示货币</span>
-            <div class="currency-toggle">
-              <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">CNY</button>
-              <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">USD</button>
-            </div>
-          </div>
+          <span class="compare-reference-note">官方原币展示 · 人民币参考排序</span>
         </div>
 
         <div class="table-wrap catalog-table-wrap">
@@ -762,7 +749,7 @@
                 <td>
                   <div class="catalog-model-cell">
                     <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
-                    <span><small>{{ row.providerName }}</small><strong :title="row.model">{{ row.model || '—' }}</strong></span>
+                    <span><small>{{ row.providerName }} · {{ marketLabel(row.market) }}<template v-if="accessChannelLabel(row.access_channel)"> · {{ accessChannelLabel(row.access_channel) }}</template><template v-if="pricingConditionLabel(row.pricing_condition)"> · {{ pricingConditionLabel(row.pricing_condition) }}</template></small><strong :title="row.model">{{ row.model || '—' }}</strong></span>
                   </div>
                 </td>
                 <td v-if="catalogVisibleFields.includes('modalities')" class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
@@ -905,7 +892,7 @@
 
           <div class="plans-result-bar">
             <div><strong>{{ plansRows.length }} 个套餐</strong><span>{{ plansSortLabel }}</span></div>
-            <div class="catalog-currency-control"><span>显示货币</span><div class="currency-toggle"><button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">CNY</button><button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">USD</button></div></div>
+            <span class="compare-reference-note">官方原币展示 · 人民币参考排序</span>
           </div>
 
           <div class="plans-groups plans-desktop-list">
@@ -1026,10 +1013,7 @@
             <button :class="{active: view === 'table'}" @click="view = 'table'">表格</button>
             <button :class="{active: view === 'card'}" @click="view = 'card'">卡片</button>
           </div>
-          <div class="currency-toggle" v-if="routeName !== 'billing'">
-            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
-            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
-          </div>
+          <span v-if="routeName !== 'billing'" class="compare-reference-note">官方原币展示 · 人民币参考排序</span>
         </div>
 
         <!-- billing 路由：货币 Tab 切换 -->
@@ -1263,10 +1247,7 @@
           <div v-else class="provider-billing-tabs-single">
             {{ providerBillingTabs[0]?.label }} <span class="tab-count">{{ providerBillingTabs[0]?.count }}</span>
           </div>
-          <div class="currency-toggle">
-            <button :class="{active: displayCurrency === 'CNY'}" @click="displayCurrency = 'CNY'">¥ CNY</button>
-            <button :class="{active: displayCurrency === 'USD'}" @click="displayCurrency = 'USD'">$ USD</button>
-          </div>
+          <span class="compare-reference-note">官方原币展示 · 人民币参考排序</span>
         </div>
 
         <!-- 当前 tab：按需计费表格 -->
@@ -1376,7 +1357,7 @@
             PPK（Price Per Token）是一个非商业的大模型价格聚合工具，
             帮助开发者快速对比各主流厂商的 <strong>Token 计费</strong>、
             <strong>订阅制</strong> 与 <strong>Coding Plan</strong>。
-            数据由独立 Pipeline 定时采集 Models.dev 与厂商官方套餐页面，
+            数据由独立 Pipeline 定时采集 Models.dev、已验证的厂商官方市场页面与官方套餐页面，
             经确定性归一化和质量校验后原子发布为 JSON，由前端实时读取。
             任一必要来源抓取或校验失败时，本次不会发布，网站继续使用最近一次成功版本。
           </p>
@@ -1404,7 +1385,7 @@
             <li>
               <span class="about-flow-num">1</span>
               <div>
-                <strong>Models.dev</strong> — 自动获取模型名称、Input、Output、Cache、Context 与模态等按需计费数据。
+                <strong>Models.dev 与官方市场 Adapter</strong> — 自动获取模型名称、Input、Output、Cache、Context 与模态等按需计费数据；不同市场报价独立保留。
               </div>
             </li>
             <li>
@@ -1429,7 +1410,7 @@
           <!-- 技术栈 -->
           <h2>技术<em>栈</em></h2>
           <ul>
-            <li><strong>数据采集</strong>：Python + Requests + Playwright；Models.dev 与官方套餐 Adapter</li>
+            <li><strong>数据采集</strong>：Python + Requests + Playwright；Models.dev、官方市场与官方套餐 Adapter；日度汇率快照仅用于人民币比较。</li>
             <li><strong>数据存储</strong>：SQLite（运行、历史与发布审计）+ JSON（前端数据契约）</li>
             <li><strong>前端</strong>：Vue 3 CDN（无构建步骤）+ Instrument Serif / Geist / Geist Mono 三层字体系统</li>
             <li><strong>调度与部署</strong>：systemd timer + Docker Compose；数据更新无需 Git push 或重建 Web</li>

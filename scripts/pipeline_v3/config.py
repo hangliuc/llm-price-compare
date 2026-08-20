@@ -15,6 +15,7 @@ class V3Config:
     raw_dir: Path
     lock_path: Path
     models_dev_url: str
+    fx_url: str = "https://api.frankfurter.dev/v1/latest?base=EUR"
     timeout_seconds: int = 45
     minimum_offer_count: int = 250
     minimum_plan_count: int = 30
@@ -38,6 +39,10 @@ class V3Config:
                 "PPK_LOCK_PATH", runtime / "pipeline.lock")),
             models_dev_url=os.environ.get(
                 "PPK_MODELS_DEV_URL", "https://models.dev/api.json"),
+            # Frankfurter is a public, ECB-backed daily reference-rate API.
+            # This value is injectable for tests and operations.
+            fx_url=os.environ.get(
+                "PPK_FX_URL", "https://api.frankfurter.dev/v1/latest?base=EUR"),
             timeout_seconds=int(os.environ.get("PPK_HTTP_TIMEOUT", "45")),
             minimum_offer_count=int(os.environ.get(
                 "PPK_MINIMUM_OFFER_COUNT", "250")),

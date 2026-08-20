@@ -35,10 +35,15 @@ jobs:
             docker compose config --quiet
             docker compose --profile pipeline build pipeline
 
-            # Only bootstrap data on a fresh server. Normal code deployments do
-            # not fetch or publish data; the systemd timer owns that lifecycle.
+            # Bootstrap on a fresh server. During the one-time 3.0 -> 3.1
+            # migration, publish a V3.1 Catalog as well so the UI and its
+            # native-currency contract are upgraded together. Normal code
+            # deployments do not fetch data; the systemd timer owns that
+            # lifecycle.
             if [ ! -s runtime/public/catalog.json ] || [ ! -s runtime/public/status.json ]; then
-              docker compose --profile pipeline run --rm pipeline run
+              docker compose --profile pipeline run --rm pipeline run --official-markets
+            elif ! grep -q '"schema_version"[[:space:]]*:[[:space:]]*"3.1"' runtime/public/catalog.json; then
+              docker compose --profile pipeline run --rm pipeline run --official-markets
             fi
             find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
             docker compose up -d --build --remove-orphans web
