@@ -2226,13 +2226,13 @@ input { font-family: inherit; }
 }
 .faq-community-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
+  gap: clamp(48px, 6vw, 76px);
   align-items: start;
 }
 .faq-block .section-title,
 .community-block .section-title {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 .faq-list {
   display: flex;
@@ -2248,7 +2248,8 @@ input { font-family: inherit; }
 .faq-item summary {
   list-style: none;
   cursor: pointer;
-  padding: 18px 0;
+  min-height: 54px;
+  padding: 14px 0;
   font-size: 15px;
   font-weight: 500;
   color: var(--ink);
@@ -2275,9 +2276,10 @@ input { font-family: inherit; }
   color: var(--accent-dark);
 }
 .faq-answer {
-  padding: 0 0 18px 0;
-  font-size: 14px;
-  line-height: 1.7;
+  max-width: 620px;
+  padding: 0 32px 15px 0;
+  font-size: 13px;
+  line-height: 1.65;
   color: var(--ink-soft);
 }
 .faq-answer p {
@@ -2296,43 +2298,57 @@ input { font-family: inherit; }
   text-underline-offset: 2px;
 }
 
-.community-block {
-  padding-top: 4px;
+.community-block { padding-top: 0; }
+.community-block .section-sub {
+  margin: 0 0 18px;
+  color: var(--ink-faint);
+  font-size: 14px;
+  line-height: 1.6;
 }
 .community-card {
-  background: var(--bg-tint);
+  display: grid;
+  grid-template-columns: 144px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 28px 24px;
-  text-align: center;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+  padding: 18px;
+  transition: border-color 0.2s;
 }
 .community-card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
+  border-color: var(--border-strong);
 }
 .qr-img {
-  width: 180px;
-  height: 180px;
+  display: block;
+  width: 144px;
+  height: 144px;
   object-fit: contain;
-  border-radius: var(--radius-lg);
+  border-radius: 4px;
   background: white;
-  margin-bottom: 16px;
   border: 1px solid var(--border-light);
 }
 .community-info {
-  text-align: center;
+  min-width: 0;
+  text-align: left;
 }
 .community-name {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 650;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .community-desc {
   font-size: 13px;
   color: var(--ink-faint);
-  margin-bottom: 12px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.community-scan {
+  margin-bottom: 6px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
 }
 .community-link {
   display: inline-block;
@@ -2356,12 +2372,19 @@ input { font-family: inherit; }
 }
 .footer-inner {
   max-width: var(--max-w);
+  min-height: 168px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 36px 40px;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 24px;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  gap: 32px;
   align-items: center;
+}
+.footer-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 .footer-brand {
   display: flex;
@@ -2377,18 +2400,50 @@ input { font-family: inherit; }
 .footer-brand .brand-name {
   font-size: 16px;
 }
+.footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .footer-brand .brand-tag {
   font-size: 12px;
+  color: var(--ink-faint);
+  font-weight: 400;
 }
 .footer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.footer-meta-title {
+  color: var(--ink);
   font-size: 13px;
+  font-weight: 600;
+}
+.footer-open-source {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   color: var(--ink-faint);
 }
 .footer-meta a {
-  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
   transition: color 0.15s;
 }
 .footer-meta a:hover { color: var(--accent-dark); }
+.footer-disclaimer {
+  color: var(--ink-faint);
+  font-size: 11px;
+  line-height: 1.5;
+}
 
 /* ============ ANIMATIONS ============ */
 @keyframes heroLeft {
@@ -2629,9 +2684,9 @@ body {
 .billing-col-name { font-size: 31px; }
 .billing-col-desc { color: var(--ink-faint); }
 
-.faq-community-grid { gap: 72px; }
-.faq-item summary { padding: 20px 0; line-height: 1.5; }
-.community-card { background: linear-gradient(180deg, #fbfcfc, #f5f8f7); }
+.faq-community-grid { gap: clamp(48px, 6vw, 76px); }
+.faq-item summary { padding: 14px 0; line-height: 1.5; }
+.community-card { background: var(--bg); }
 .about-page { max-width: 800px; }
 .about-page p { line-height: 1.85; }
 .about-provider { padding: 12px; border-color: var(--border); background: #fff; }
@@ -2705,16 +2760,30 @@ body {
   .billing-column { padding: 18px; }
   .billing-col-desc { min-height: auto; }
   .faq-community-grid { gap: 52px; }
+  .community-block { max-width: 620px; }
+  .community-card {
+    grid-template-columns: 136px minmax(0, 1fr);
+    gap: 20px;
+    padding: 16px;
+  }
+  .qr-img { width: 136px; height: 136px; }
   .about-page p.lead { font-size: 16px; }
   .about-page ul li { align-items: flex-start; flex-wrap: wrap; }
   .about-providers { grid-template-columns: 1fr; }
-  .footer-inner { padding: 28px 16px; gap: 14px; }
+  .footer-inner { min-height: auto; padding: 32px 16px; gap: 28px; }
+  .footer-meta { align-items: flex-start; }
 }
 
 @media (max-width: 420px) {
   .providers-home-grid { grid-template-columns: 1fr; }
   .pv-card { min-height: 148px; }
   .search { width: calc(100vw - 158px); }
+  .community-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .qr-img { width: 136px; height: 136px; }
+  .community-desc { margin-bottom: 14px; }
 }
 
 /* ============ HOME PRODUCT EXPERIENCE ============ */
@@ -2914,7 +2983,7 @@ body {
 .home-trust-facts a strong { color: var(--accent-dark); }
 
 .faq-community { padding-block: var(--home-space-sm) var(--home-space-md); }
-#app:has(.home-ide-section) .footer { margin-top: 0; border-top: 0; background: var(--surface-neutral); }
+#app:has(.home-ide-section) .footer { margin-top: 0; border-top: 1px solid var(--border-light); background: var(--surface-neutral); }
 
 @media (max-width: 1024px) {
   .home-ide-section { padding-inline: 24px; }

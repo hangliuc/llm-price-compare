@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=63">
+  <link rel="stylesheet" href="style.css?v=66">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -293,32 +293,27 @@
             <h2 class="section-title">常见问题</h2>
             <div class="faq-list">
               <details class="faq-item">
+                <summary>这里的价格可靠吗？多久更新一次？</summary>
+                <div class="faq-answer">
+                  <p>价格每日更新，并通过 LiteLLM、OpenRouter 与厂商官网交叉核对。抓取失败或数据异常时会保留上次成功结果，并标注状态。</p>
+                </div>
+              </details>
+              <details class="faq-item">
                 <summary>按需计费和套餐有什么区别？</summary>
                 <div class="faq-answer">
-                  <p><b>按需计费（Per Token）</b>：按实际使用的 Token 数量计费，输入和输出分别定价，通过 API 调用，适合低频或弹性场景。</p>
-                  <p><b>套餐（Plans）</b>：固定周期或固定额度的产品方案。当前可分别从<b>订阅制</b>与 <b>Coding Plan</b> 两个入口查看；原有页面和数据口径保持不变。</p>
+                  <p><b>按需计费</b>按实际 Token 用量收费，适合 API 调用；<b>套餐</b>按周期或额度购买，适合用量相对固定的订阅和编程场景。</p>
                 </div>
               </details>
               <details class="faq-item">
-                <summary>这里的价格数据多久更新一次？准确吗？</summary>
+                <summary>Input、Output 和 Cache Read 是什么？</summary>
                 <div class="faq-answer">
-                  <p>数据每日北京时间 11:00 通过 Python 爬虫自动抓取各家厂商官网定价页，经三源交叉验证（LiteLLM JSON + OpenRouter API + 官网 Scraper）后落盘。</p>
-                  <p>每家厂商独立状态标记（正常 / 失败 / 过期），失败时回退至上次成功数据并标注「可能过期」。价格异常波动 &gt;20% 警告、&gt;50% 阻断，确保数据可信。</p>
+                  <p><b>Input</b> 是发送给模型的内容，<b>Output</b> 是模型生成的回复；<b>Cache Read</b> 是读取已缓存上下文的费用，通常低于普通输入价。</p>
                 </div>
               </details>
               <details class="faq-item">
-                <summary>什么是输入（Input）、输出（Output）与缓存读取（Cache Read）？</summary>
+                <summary>发现价格有误或缺少厂商怎么办？</summary>
                 <div class="faq-answer">
-                  <p><b>输入（Input）</b>：你发送给模型的 Prompt（含系统提示、上下文、问题）按 Token 计费。</p>
-                  <p><b>输出（Output）</b>：模型生成的回复按 Token 计费，通常比输入贵 3-4 倍。</p>
-                  <p><b>缓存读取（Cache Read）</b>：部分厂商（如 Anthropic、DeepSeek）支持 Prompt 缓存，重复使用的上下文以更低价格计费（通常为输入价的 10%-50%），可大幅降低长上下文场景成本。</p>
-                </div>
-              </details>
-              <details class="faq-item">
-                <summary>如果我发现价格有误，或者想新增其他厂商怎么办？</summary>
-                <div class="faq-answer">
-                  <p>欢迎通过 <a :href="feedbackUrl" target="_blank">GitHub Issues</a> 反馈，提供预填模板选择「价格异常报告」或「新增厂商建议」。</p>
-                  <p>也可以通过下方社群二维码加入我们的飞书群，直接与维护者沟通。</p>
+                  <p>欢迎通过 <a :href="feedbackUrl" target="_blank">GitHub Issues</a> 提交价格纠错或厂商建议，也可以加入飞书社群直接反馈。</p>
                 </div>
               </details>
             </div>
@@ -327,12 +322,13 @@
           <!-- 社群 -->
           <div class="community-block">
             <h2 class="section-title">加入社群</h2>
-            <p class="section-sub">与开发者交流大模型选型经验，第一时间获取价格变动通知</p>
+            <p class="section-sub">讨论模型选型与 AI 成本，也欢迎反馈价格数据。</p>
             <div class="community-card">
               <img src="image/feishu-qr.png" alt="飞书社群二维码" class="qr-img">
               <div class="community-info">
                 <div class="community-name">飞书用户交流群</div>
-                <div class="community-desc">扫码加入 · 实时价格提醒 · 选型讨论</div>
+                <div class="community-desc">模型选型 · 价格讨论 · 数据纠错</div>
+                <div class="community-scan">扫码加入</div>
                 <a href="https://app.feishu.cn/" target="_blank" class="community-link">没有飞书？下载 →</a>
               </div>
             </div>
@@ -1462,14 +1458,28 @@
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
       <div class="footer-inner">
-        <div class="footer-brand">
-          <img class="brand-mark" src="icons/ppx.svg" alt="PPK">
-          <span class="brand-name">PPK</span>
-          <span class="brand-tag">Price Per Token</span>
+        <div class="footer-primary">
+          <div class="footer-brand">
+            <img class="brand-mark" src="icons/ppx.svg" alt="PPK">
+            <div class="footer-brand-copy">
+              <span class="brand-name">PPK</span>
+              <span class="brand-tag">大模型价格聚合与比较工具</span>
+            </div>
+          </div>
+          <span class="footer-disclaimer">数据仅供参考，实际价格以厂商官方为准。</span>
         </div>
         <div class="footer-meta">
-          数据仅供参考 · 价格以厂商官方为准 ·
-          <a href="https://github.com/hangliuc/llm-price-compare" target="_blank">GitHub</a>
+          <span class="footer-meta-title">开源项目</span>
+          <div class="footer-open-source">
+            <a href="https://github.com/hangliuc/llm-price-compare" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                <path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <span aria-hidden="true">·</span>
+            <span>MIT License</span>
+          </div>
         </div>
       </div>
     </footer>
