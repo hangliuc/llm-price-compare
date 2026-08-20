@@ -2,6 +2,19 @@ const { createApp, ref, computed, onMounted, onBeforeUnmount, nextTick, watch } 
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
+// 首页价格预览只展示模型原厂的旗舰系列。规则按优先级排列：同一厂商
+// 命中多个系列时先选更旗舰的系列，再在该系列中选择发布时间最新的模型。
+const HOME_FLAGSHIP_PROVIDER_RULES = [
+  { providerId: 'openai', modelPatterns: [/^GPT-\d+(?:\.\d+)? Sol$/i, /^GPT-\d+(?:\.\d+)?$/i] },
+  { providerId: 'anthropic', modelPatterns: [/^Claude Opus\b/i] },
+  { providerId: 'google', modelPatterns: [/^Gemini\b.*\bPro\b/i] },
+  { providerId: 'qwen', modelPatterns: [/^Qwen.*\bMax\b/i] },
+  { providerId: 'deepseek', modelPatterns: [/^DeepSeek\b.*\bPro\b/i, /^DeepSeek(?!.*\bFlash\b)/i] },
+  { providerId: 'moonshot', modelPatterns: [/^Kimi K\d+(?:\.\d+)?$/i] },
+  { providerId: 'zhipu', modelPatterns: [/^GLM-\d+(?:\.\d+)?$/i] },
+  { providerId: 'minimax', modelPatterns: [/^MiniMax-M\d+(?:\.\d+)?$/i] },
+];
+
 // Production Nginx exposes the V3 catalog at /data/catalog.json. A repository-
 // root Python server can read the same artifact directly from runtime/.
 const DATA_PATHS = ["../data/catalog.json"];
@@ -1458,35 +1471,40 @@ createApp({
       billingSlideIndex.value = i;
     }
 
-    // 首页价格预览：按发布时间倒序，并优先保证厂商多样性。
+    // 首页价格预览：每个模型原厂只取旗舰系列的最新一款，并按人民币输入价格降序排列。
     // 返回 8 条后由 CSS 根据视口显示桌面 8 / 平板 6 / 移动端 4 条。
     const homePreviewRows = computed(() => {
       const rows = allRows.value.filter(r =>
         r.billing_type === 'per_token' && !r.stale && r.prices &&
         r.prices.input != null && r.prices.output != null
       );
-      rows.sort((a, b) => {
+      const newestFirst = (a, b) => {
         const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
-        if (dateCompare) return dateCompare;
-        return a.providerName.localeCompare(b.providerName, 'zh');
+        return dateCompare || a.model.localeCompare(b.model, 'zh');
+      };
+      const selected = HOME_FLAGSHIP_PROVIDER_RULES.flatMap(({ providerId, modelPatterns }) => {
+        const providerRows = rows.filter(row => row.providerId === providerId);
+        for (const pattern of modelPatterns) {
+          const latest = providerRows.filter(row => pattern.test(row.model)).sort(newestFirst)[0];
+          if (latest) return [latest];
+        }
+        return [];
       });
-      const seenProviders = new Set();
-      const selected = [];
-      for (const row of rows) {
-        if (seenProviders.has(row.providerId)) continue;
-        seenProviders.add(row.providerId);
-        selected.push(row);
-        if (selected.length === 8) break;
-      }
-      selected.sort((a, b) => {
-        const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
-        if (dateCompare) return dateCompare;
-        return a.providerName.localeCompare(b.providerName, 'zh');
-      });
+      const priceInCny = (row, field) => {
+        const value = Number(row.prices?.[field]);
+        if (!Number.isFinite(value)) return -Infinity;
+        return row.prices.currency === 'USD' ? value * USD_TO_CNY : value;
+      };
+      selected.sort((a, b) =>
+        priceInCny(b, 'input') - priceInCny(a, 'input') ||
+        priceInCny(b, 'output') - priceInCny(a, 'output') ||
+        (b.release_date || '').localeCompare(a.release_date || '') ||
+        a.providerName.localeCompare(b.providerName, 'zh')
+      );
       return selected;
     });
 
-    // 首页真实模型对比：默认仍复用价格预览中发布时间最新、厂商不重复的前三项。
+    // 首页真实模型对比：默认复用价格预览中价格最高、厂商不重复的前三项。
     const homeCompareDefaults = computed(() => homePreviewRows.value.slice(0, 3));
     const homeCompareSelectedIds = ref([]);
     const homeModelPickerIndex = ref(-1);
