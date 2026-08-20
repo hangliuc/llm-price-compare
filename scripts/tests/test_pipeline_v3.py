@@ -316,6 +316,18 @@ def test_minimax_adapter_reads_monthly_comparison_table():
     assert [item.price_amount for item in plans] == [49, 119, 469]
 
 
+def test_minimax_adapter_reads_official_embedded_faq_prices():
+    raw = b'''
+      <script id="__NEXT_DATA__">{"id":"available-plans","answer":"|
+      Plus | \xc2\xa549 / \xe6\x9c\x88 | 3-4 \xe4\xb8\xaa Agent |\n|
+      Max | \xc2\xa5119 / \xe6\x9c\x88 | 4-5 \xe4\xb8\xaa Agent |\n|
+      Ultra | \xc2\xa5469 / \xe6\x9c\x88 | 6-7 \xe4\xb8\xaa Agent |"}</script>
+    '''
+    plans = MiniMaxPlanAdapter().normalize(raw, "now")
+    assert [item.price_amount for item in plans] == [49, 119, 469]
+    assert all(item.source_kind == "static" for item in plans)
+
+
 def test_monthly_usd_understands_official_chinese_recurring_price():
     text = "OpenCode Go 首月 5 美元，之后 每月 10 美元"
     assert monthly_usd(text) == 10
