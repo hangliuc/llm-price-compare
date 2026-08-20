@@ -10,6 +10,15 @@ pricing_url: https://www.volcengine.com/docs/82379/1544106
 source_url: https://www.volcengine.com/docs/82379/1544106
 verified_at: "2026-08-20T00:00:00Z"
 expires_at: "2026-09-20T00:00:00Z"
+# These legacy entries were removed after verification against the current
+# Ark catalog. Explicit retirement prevents source-outage LKG protection from
+# treating their intentional removal as a failed scrape.
+retired_products:
+  - deepseek-r1-token
+  - deepseek-v3.1-token
+  - doubao-lite-32k-token
+  - doubao-pro-32k-token
+  - kimi-k2-token
 products:
   - id: doubao-1.5-pro-32k-token
     model: doubao-1.5-pro-32k
@@ -115,6 +124,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [price.first_month_price]
     modalities: []
     prices:
       monthly_price: 40
@@ -131,6 +141,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [price.first_month_price]
     modalities: []
     prices:
       monthly_price: 200
@@ -150,6 +161,7 @@ products:
     plan_category: developer_api
     featured_on_home: false
     context_window: null
+    clear_fields: [price.first_month_price]
     modalities: []
     prices:
       monthly_price: 40
@@ -169,6 +181,7 @@ products:
     plan_category: developer_api
     featured_on_home: false
     context_window: null
+    clear_fields: [price.first_month_price]
     modalities: []
     prices:
       monthly_price: 200

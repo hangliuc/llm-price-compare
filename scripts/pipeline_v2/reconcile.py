@@ -46,6 +46,16 @@ def choose_field(canonical_id: str, field: str, observations: list[Observation],
     return None
 
 
+def field_is_explicitly_cleared(field: str, observations: list[Observation]) -> bool:
+    clearers = [item for item in observations if field in item.clear_fields]
+    if not clearers:
+        return False
+    clear_priority = max(SOURCE_PRIORITY.get(item.source_kind, 0) for item in clearers)
+    value_priorities = [SOURCE_PRIORITY.get(item.source_kind, 0)
+                        for item in observations if _valid(item.fields.get(field))]
+    return clear_priority >= max(value_priorities, default=-1)
+
+
 def find_authoritative_conflicts(observations: list[Observation]) -> list[ReviewItem]:
     grouped: dict[tuple[str, str], list[Observation]] = defaultdict(list)
     for item in observations:
@@ -77,8 +87,11 @@ def reconcile(observations: list[Observation], lkg_catalog: Optional[dict] = Non
               blocked_fields: Optional[set[tuple[str, str]]] = None
               ) -> list[ProductCandidate]:
     blocked_fields = blocked_fields or set()
+    retired = {item.canonical_id for item in observations if item.retired}
     grouped: dict[str, list[Observation]] = defaultdict(list)
     for item in observations:
+        if item.retired or item.canonical_id in retired:
+            continue
         grouped[item.canonical_id].append(item)
     lkg_products = catalog_product_map(lkg_catalog)
     candidates = []
@@ -86,11 +99,17 @@ def reconcile(observations: list[Observation], lkg_catalog: Optional[dict] = Non
         old = lkg_products.get(canonical_id, {})
         old_fields = old.get("fields", {})
         old_observed_at = (old.get("freshness") or {}).get("latest_observed_at", "")
-        fields = sorted(set().union(*(item.fields.keys() for item in items), old_fields.keys()))
+        fields = sorted(set().union(
+            *(item.fields.keys() for item in items),
+            *(item.clear_fields for item in items),
+            old_fields.keys(),
+        ))
         decisions = []
         selected = {}
         stale = []
         for name in fields:
+            if field_is_explicitly_cleared(name, items):
+                continue
             if (canonical_id, name) in blocked_fields:
                 old_value = old_fields.get(name)
                 decision = (FieldDecision(
@@ -121,7 +140,7 @@ def reconcile(observations: list[Observation], lkg_catalog: Optional[dict] = Non
     # A source outage must not silently delete products that were present in
     # the last published V2 release.
     for canonical_id, old in sorted(lkg_products.items()):
-        if canonical_id in grouped:
+        if canonical_id in grouped or canonical_id in retired:
             continue
         provider_id, product_id = canonical_id.split("/", 1)
         fields = old["fields"]

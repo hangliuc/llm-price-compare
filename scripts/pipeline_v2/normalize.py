@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Iterable, Optional
 
@@ -65,6 +66,7 @@ def manual_dict_to_observations(provider: dict, observed_at: Optional[str] = Non
     # empty and is surfaced by the freshness review instead of being refreshed.
     timestamp = str(provider.get("verified_at") or observed_at or "")
     products = []
+    directives = {}
     for raw in provider.get("products", []):
         try:
             billing = BillingType(raw["billing_type"])
@@ -78,8 +80,25 @@ def manual_dict_to_observations(provider: dict, observed_at: Optional[str] = Non
             plan_category=raw.get("plan_category"),
             featured_on_home=bool(raw.get("featured_on_home", False)),
         ))
-    return products_to_observations(
+        directives[raw["id"]] = tuple(str(item) for item in raw.get("clear_fields", []))
+    observations = products_to_observations(
         "manual", "manual_override", provider["id"], products, timestamp,
         provider.get("source_url") or provider.get("pricing_url", ""),
         str(provider.get("expires_at") or ""),
     )
+    observations = [replace(item, clear_fields=directives.get(item.product_id, ()))
+                    for item in observations]
+    for entry in provider.get("retired_products", []):
+        product_id = entry if isinstance(entry, str) else entry.get("id")
+        if not product_id:
+            continue
+        product_kind_value = (entry.get("product_kind", "model")
+                              if isinstance(entry, dict) else "model")
+        observations.append(Observation(
+            source_id="manual", source_kind="manual_override",
+            provider_id=provider["id"], product_id=str(product_id),
+            product_kind=product_kind_value, observed_at=timestamp, fields={},
+            source_url=provider.get("source_url") or provider.get("pricing_url", ""),
+            expires_at=str(provider.get("expires_at") or ""), retired=True,
+        ))
+    return observations

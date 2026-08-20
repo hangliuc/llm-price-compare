@@ -110,6 +110,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [context_window]
     modalities: [text]
     prices:
       monthly_price: 49
@@ -127,6 +128,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [context_window]
     modalities: [text]
     prices:
       monthly_price: 99
@@ -143,6 +145,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [context_window]
     modalities: [text]
     prices:
       monthly_price: 199
@@ -160,6 +163,7 @@ products:
     plan_category: coding_tool
     featured_on_home: false
     context_window: null
+    clear_fields: [context_window]
     modalities: [text]
     prices:
       monthly_price: 699

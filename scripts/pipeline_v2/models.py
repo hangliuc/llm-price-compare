@@ -15,6 +15,11 @@ class Observation:
     source_url: str = ""
     source_product_id: str = ""
     expires_at: str = ""
+    # Manual sources can explicitly remove a field or retire a product. These
+    # directives are distinct from an empty scrape, which must still fall back
+    # to the last-known-good release.
+    clear_fields: tuple[str, ...] = ()
+    retired: bool = False
 
     @property
     def canonical_id(self) -> str:

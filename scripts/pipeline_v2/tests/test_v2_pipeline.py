@@ -69,6 +69,49 @@ def test_last_known_good_retains_missing_product():
     assert "price.input" in result[0].stale_fields
 
 
+def test_manual_clear_field_does_not_restore_lkg_value():
+    old = build_catalog("old", "2026-08-18T00:00:00Z", reconcile([
+        observation(input_price=3)
+    ]), {})
+    current = observation("manual", "manual_override", input_price=3)
+    current = type(current)(**{
+        **current.__dict__, "fields": {
+            key: value for key, value in current.fields.items() if key != "price.output"
+        }, "clear_fields": ("price.output",),
+    })
+    result = reconcile([current], old)
+    assert "price.output" not in result[0].fields
+    assert "price.output" not in result[0].stale_fields
+    assert result[0].status == "accepted"
+
+
+def test_manual_retirement_does_not_restore_missing_lkg_product():
+    old = build_catalog("old", "2026-08-18T00:00:00Z", reconcile([observation()]), {})
+    retired = Observation(
+        source_id="manual", source_kind="manual_override", provider_id="anthropic",
+        product_id="claude-token", product_kind="model",
+        observed_at="2026-08-20T00:00:00Z", fields={}, retired=True,
+    )
+    assert reconcile([retired], old) == []
+
+
+def test_manual_directives_are_normalized():
+    provider = {
+        "id": "fixture", "verified_at": "2026-08-20T00:00:00Z",
+        "products": [{
+            "id": "plan", "model": "Plan", "billing_type": "subscription",
+            "prices": {"monthly_price": 10, "currency": "USD"},
+            "clear_fields": ["price.first_month_price"],
+        }],
+        "retired_products": ["old-model"],
+    }
+    observations = manual_dict_to_observations(provider)
+    plan = next(item for item in observations if item.product_id == "plan")
+    retired = next(item for item in observations if item.product_id == "old-model")
+    assert plan.clear_fields == ("price.first_month_price",)
+    assert retired.retired is True
+
+
 def test_lkg_freshness_reports_age_instead_of_resetting_clock():
     old_candidates = reconcile([observation()])
     apply_freshness(old_candidates, [observation()], "2026-08-19T00:00:00Z")
