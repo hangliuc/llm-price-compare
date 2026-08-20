@@ -145,4 +145,3 @@ CREATE TABLE IF NOT EXISTS releases (
 CREATE INDEX IF NOT EXISTS idx_runs_started_at ON pipeline_runs(started_at DESC);
 CREATE INDEX IF NOT EXISTS idx_offers_provider ON model_offers(snapshot_id, provider_id);
 CREATE INDEX IF NOT EXISTS idx_plans_provider ON plans(snapshot_id, provider_id);
-CREATE INDEX IF NOT EXISTS idx_offers_market ON model_offers(snapshot_id, market);

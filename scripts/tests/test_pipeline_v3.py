@@ -1,6 +1,7 @@
 from dataclasses import replace
 import json
 from pathlib import Path
+import sqlite3
 
 import pytest
 
@@ -135,6 +136,26 @@ def test_catalog_contains_separate_business_entities():
     assert catalog["schema_version"] == "3.1"
     assert len(catalog["model_offers"]) == 1
     assert len(catalog["plans"]) == 1
+
+
+def test_store_upgrades_an_existing_v30_database_before_creating_market_index(tmp_path):
+    """A V3.0 database cannot create an index on a V3.1 column until after ALTER."""
+    db_path = tmp_path / "runtime" / "ppk.db"
+    db_path.parent.mkdir()
+    connection = sqlite3.connect(db_path)
+    connection.execute("CREATE TABLE model_offers (snapshot_id TEXT, provider_id TEXT)")
+    connection.execute("CREATE TABLE plans (snapshot_id TEXT, provider_id TEXT)")
+    connection.commit()
+    connection.close()
+
+    store = V3Store(db_path)
+    try:
+        fields = {row[1] for row in store.connection.execute("PRAGMA table_info(model_offers)")}
+        indexes = {row[1] for row in store.connection.execute("PRAGMA index_list(model_offers)")}
+        assert "market" in fields
+        assert "idx_offers_market" in indexes
+    finally:
+        store.close()
 
 
 def test_dry_run_persists_snapshot_without_publishing(tmp_path):

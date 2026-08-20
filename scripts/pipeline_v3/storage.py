@@ -52,6 +52,13 @@ class V3Store:
         schema = Path(__file__).with_name("schema.sql").read_text(encoding="utf-8")
         self.connection.executescript(schema)
         self._migrate_v31_columns()
+        # This index must be created after the additive migration: an existing
+        # V3.0 `model_offers` table has no `market` column when `CREATE TABLE
+        # IF NOT EXISTS` runs above.
+        self.connection.execute(
+            "CREATE INDEX IF NOT EXISTS idx_offers_market ON model_offers(snapshot_id, market)"
+        )
+        self.connection.commit()
 
     def _migrate_v31_columns(self):
         """Additive migration for V3 databases created before schema 3.1."""
