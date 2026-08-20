@@ -3,27 +3,28 @@ id: moonshot
 name: Kimi
 name_en: Moonshot AI
 region: cn
-website: https://platform.moonshot.cn/
-pricing_url: https://platform.moonshot.cn/pricing
-source_url: https://platform.moonshot.cn/pricing
-# 旧文件未记录人工核验日期；保持为空并进入 Review，禁止用任务时间伪装核验时间。
-verified_at: null
-expires_at: null
-pricing_url_overseas: https://platform.moonshot.ai/docs/pricing
+website: https://platform.kimi.com/
+pricing_url: https://platform.kimi.com/docs/pricing/chat
+source_url: https://platform.kimi.com/docs/pricing/chat
+# 2026-08-20 对照 Kimi 官方 AI-readable 定价文档及会员帮助中心逐项核验。
+# 人工数据波动较快，30 天后必须重新核验。
+verified_at: "2026-08-20T00:00:00Z"
+expires_at: "2026-09-20T00:00:00Z"
+pricing_url_overseas: https://platform.kimi.com/docs/pricing/chat
 products:
   - id: moonshot-v1-8k-token
     model: Moonshot-v1-8k
     billing_type: per_token
-    context_window: 8000
+    context_window: 8192
     modalities: [text]
     prices:
-      input: 12.0
-      output: 12.0
+      input: 2.0
+      output: 10.0
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-v1
   # ========== per_token 国内 CNY 定价 ==========
-  # 数据来源：https://platform.moonshot.cn/docs/pricing (2026.7 官方定价)
+  # 数据来源：https://platform.kimi.com/docs/pricing/ (2026-08-20 官方定价)
   - id: kimi-k3-cn-token
     model: Kimi K3
     billing_type: per_token
@@ -35,7 +36,7 @@ products:
       cached_input: 2
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-k3
 
   - id: kimi-k2.7-code-cn-token
     model: Kimi K2.7 Code
@@ -48,7 +49,7 @@ products:
       cached_input: 1.3
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-k27-code
 
   - id: kimi-k2.6-cn-token
     model: Kimi K2.6
@@ -61,7 +62,7 @@ products:
       cached_input: 1.1
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-k26
 
   - id: kimi-k2.5-cn-token
     model: Kimi K2.5
@@ -74,7 +75,7 @@ products:
       cached_input: 0.7
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-k25
 
   - id: moonshot-v1-32k-cn-token
     model: Moonshot-v1-32k
@@ -86,7 +87,7 @@ products:
       output: 20
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-v1
 
   - id: moonshot-v1-128k-cn-token
     model: Moonshot-v1-128k
@@ -98,75 +99,75 @@ products:
       output: 30
       currency: CNY
       unit: per_1m_tokens
-    purchase_url: https://platform.moonshot.cn/pricing
+    purchase_url: https://platform.kimi.com/docs/pricing/chat-v1
   # ========== Kimi 会员体系（统一 Token 池） ==========
-  # 数据来源：https://www.kimi.com/code (2026.7 官方会员体系)
-  # 2026.4 起 Coding Plan 合并为统一 Token 额度池，Kimi Code 按系数从总池扣减
+  # 数据来源：https://www.kimi.com/zh-cn/help/membership/membership-pricing
+  # （2026-08-20 官方会员帮助中心）
+  # 所有会员功能共享额度池；下列 Agent 用量是官网按典型 token 消耗给出的估算值。
   - id: kimi-member-andante
     model: Kimi 会员 Andante
     billing_type: coding_plan
     plan_category: coding_tool
     featured_on_home: false
-    context_window: 32768
+    context_window: null
     modalities: [text]
     prices:
       monthly_price: 49
       currency: CNY
-      included_quota: 1
-      quota_unit: base
+      included_quota: 30
+      quota_unit: agent_uses_estimate
       features:
-        - 入门档，更多 Agent 额度
-        - 32K 上下文
+        - Agent 用量约 30 个
+        - Kimi Code 1 倍额度
         - 1 个 Agent 并行
-    purchase_url: https://www.kimi.com/code
+    purchase_url: https://www.kimi.com/membership/pricing
   - id: kimi-member-moderato
     model: Kimi 会员 Moderato
     billing_type: coding_plan
     plan_category: coding_tool
     featured_on_home: false
-    context_window: 131072
+    context_window: null
     modalities: [text]
     prices:
       monthly_price: 99
       currency: CNY
-      included_quota: 2
-      quota_unit: base
+      included_quota: 60
+      quota_unit: agent_uses_estimate
       features:
-        - 主力档，2 倍免费额度
-        - 128K 上下文
+        - Agent 用量约 60 个
         - 2 个 Agent 并行
-    purchase_url: https://www.kimi.com/code
+    purchase_url: https://www.kimi.com/membership/pricing
   - id: kimi-member-allegretto
     model: Kimi 会员 Allegretto
     billing_type: coding_plan
     plan_category: coding_tool
     featured_on_home: false
-    context_window: 131072
+    context_window: null
     modalities: [text]
     prices:
       monthly_price: 199
       currency: CNY
-      included_quota: 4
-      quota_unit: base
+      included_quota: 150
+      quota_unit: agent_uses_estimate
       features:
-        - 专业档，4 倍免费额度
+        - Agent 用量约 150 个
         - Kimi Code 20 倍系数
-        - 128K+ 上下文，2 个 Agent 并行
-    purchase_url: https://www.kimi.com/code
+        - 2 个 Agent 并行
+    purchase_url: https://www.kimi.com/membership/pricing
   - id: kimi-member-allegro
     model: Kimi 会员 Allegro
     billing_type: coding_plan
     plan_category: coding_tool
     featured_on_home: false
-    context_window: 256000
+    context_window: null
     modalities: [text]
     prices:
       monthly_price: 699
       currency: CNY
-      included_quota: 10
-      quota_unit: base
+      included_quota: 360
+      quota_unit: agent_uses_estimate
       features:
-        - 尊享档，10 倍免费额度
-        - 最高倍率，全量上下文
+        - Agent 用量约 360 个
+        - Kimi Code 60 倍额度
         - 4 个 Agent 并行
-    purchase_url: https://www.kimi.com/code
+    purchase_url: https://www.kimi.com/membership/pricing
