@@ -27,34 +27,47 @@ jobs:
             fi
             cd llm-price-compare
 
-            # 兼容旧架构曾直接写入被 Git 跟踪的 data/prices.json。
-            # 新架构发布到 runtime/public，后续代码仓库会保持干净。
+            # One-time Phase 6 bridge: an old server may have modified the
+            # formerly tracked V1 snapshot. Restore it before pulling the
+            # commit that removes the file, otherwise fast-forward can fail.
             git restore data/prices.json 2>/dev/null || true
             git pull --ff-only origin master
 
-            mkdir -p runtime/public
-            if [ ! -s runtime/public/prices.json ]; then
-              cp data/prices.json runtime/public/prices.json
-            fi
-            chmod 0755 runtime runtime/public
-            find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
+            mkdir -p runtime/public/v2 runtime/v2/releases
+            chmod 0755 runtime runtime/public runtime/public/v2 runtime/v2 runtime/v2/releases
 
             docker compose config --quiet
-            docker compose --profile pipeline build pipeline
+            docker compose --profile pipeline build pipeline-v2
+
+            # Generate and validate the first V2 release before the web process
+            # starts reading /data/v2/catalog.json. Subsequent timer runs update
+            # the same bind-mounted path atomically without rebuilding Nginx.
+            docker compose --profile pipeline run --rm pipeline-v2 run --profile full-verify
+            find runtime/public/v2 -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
+            # Phase 6: the successful V2 release is now the only rollback base.
+            rm -f runtime/prices.db runtime/prices.db-shm runtime/prices.db-wal runtime/pipeline.lock
             docker compose up -d --build --remove-orphans web
 
-            # 调度属于服务器运行环境；每次部署幂等同步 unit 文件。
-            install -m 0644 ops/systemd/ppk-data-pipeline.service /etc/systemd/system/ppk-data-pipeline.service
-            install -m 0644 ops/systemd/ppk-data-pipeline.timer /etc/systemd/system/ppk-data-pipeline.timer
+            # V2 scheduling belongs to the host. Code deployment only syncs the
+            # units; data publication no longer triggers a code deployment.
+            install -m 0644 ops/systemd/ppk-v2-payg.service /etc/systemd/system/ppk-v2-payg.service
+            install -m 0644 ops/systemd/ppk-v2-payg.timer /etc/systemd/system/ppk-v2-payg.timer
+            install -m 0644 ops/systemd/ppk-v2-plans.service /etc/systemd/system/ppk-v2-plans.service
+            install -m 0644 ops/systemd/ppk-v2-plans.timer /etc/systemd/system/ppk-v2-plans.timer
+            install -m 0644 ops/systemd/ppk-v2-full-verify.service /etc/systemd/system/ppk-v2-full-verify.service
+            install -m 0644 ops/systemd/ppk-v2-full-verify.timer /etc/systemd/system/ppk-v2-full-verify.timer
             systemctl daemon-reload
-            systemctl enable --now ppk-data-pipeline.timer
-            systemctl restart ppk-data-pipeline.timer
-
-            # 首次迁移后异步刷新数据，不阻塞代码部署。
-            systemctl start --no-block ppk-data-pipeline.service
+            systemctl disable --now ppk-data-pipeline.timer 2>/dev/null || true
+            rm -f /etc/systemd/system/ppk-data-pipeline.timer /etc/systemd/system/ppk-data-pipeline.service
+            systemctl daemon-reload
+            systemctl enable --now ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer
+            systemctl restart ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer
 
             docker compose ps
-            systemctl is-active ppk-data-pipeline.timer
+            systemctl is-active ppk-v2-payg.timer
+            systemctl is-active ppk-v2-plans.timer
+            systemctl is-active ppk-v2-full-verify.timer
             curl --fail --silent --show-error http://127.0.0.1:8001/ui/ >/dev/null
-            curl --fail --silent --show-error http://127.0.0.1:8001/data/prices.json >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/data/v2/catalog.json >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/data/v2/status.json >/dev/null
             echo "Deployed at $(date)"

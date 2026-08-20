@@ -7,6 +7,9 @@ name_en: OpenCode
 region: us
 website: https://opencode.ai/
 pricing_url: https://opencode.ai/zh/go
+source_url: https://opencode.ai/docs/zh-cn/go/
+verified_at: "2026-07-10T00:00:00Z"
+expires_at: "2026-10-08T00:00:00Z"
 products:
   - id: go-plan
     model: OpenCode Go

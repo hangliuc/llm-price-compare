@@ -1,0 +1,30 @@
+version: 1
+
+# Only add an alias after checking that the records represent the same product.
+# Dates, preview/release channels, regions and pricing tiers must not be removed
+# merely because the display names look similar.
+aliases: []
+
+# These pairs share a display name but intentionally remain separate price
+# entries: the -cn record is the provider's mainland-CNY offer, while the other
+# record is an overseas or aggregator USD offer. They must not be merged merely
+# because their model names match.
+distinct:
+  - provider_id: deepseek
+    product_ids: [deepseek-v4-flash-cn-token, deepseek-v4-flash-token]
+    reason: mainland CNY and overseas USD offers
+  - provider_id: deepseek
+    product_ids: [deepseek-v4-pro-cn-token, deepseek-v4-pro-token]
+    reason: mainland CNY and overseas USD offers
+  - provider_id: moonshot
+    product_ids: [moonshot-v1-32k-cn-token, moonshot-v1-32k-token]
+    reason: mainland CNY and overseas USD offers
+  - provider_id: moonshot
+    product_ids: [moonshot-v1-128k-cn-token, moonshot-v1-128k-token]
+    reason: mainland CNY and overseas USD offers
+  - provider_id: xiaomi
+    product_ids: [mimo-v2.5-cn-token, mimo-v2.5-token]
+    reason: mainland CNY and overseas USD offers
+  - provider_id: xiaomi
+    product_ids: [mimo-v2.5-pro-cn-token, mimo-v2.5-pro-token]
+    reason: mainland CNY and overseas USD offers

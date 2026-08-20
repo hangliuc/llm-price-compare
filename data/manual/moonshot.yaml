@@ -5,6 +5,10 @@ name_en: Moonshot AI
 region: cn
 website: https://platform.moonshot.cn/
 pricing_url: https://platform.moonshot.cn/pricing
+source_url: https://platform.moonshot.cn/pricing
+# 旧文件未记录人工核验日期；保持为空并进入 Review，禁止用任务时间伪装核验时间。
+verified_at: null
+expires_at: null
 pricing_url_overseas: https://platform.moonshot.ai/docs/pricing
 products:
   - id: moonshot-v1-8k-token

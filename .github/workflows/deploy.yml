@@ -5,6 +5,10 @@ on:
     branches: [master]
     paths:
       - "ui/**"
+      - "data/**"
+      - "scripts/pipeline_v2/**"
+      - "scripts/sources/**"
+      - "scripts/adapters/**"
       - ".github/workflows/deploy.yml"
 
 permissions:
@@ -26,13 +30,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - name: Build V2 catalog
+        run: |
+          docker compose --profile pipeline build pipeline-v2
+          docker compose --profile pipeline run --rm pipeline-v2 run --profile full-verify
       - name: Build
         run: |
-          # ui/ 作为站点根目录，data/ 保留相对路径
+          # Keep the same /data/v2 contract as the production Nginx site.
           mkdir -p _site
           cp -r ui/* _site/
-          mkdir -p _site/data
-          cp data/prices.json _site/data/
+          mkdir -p _site/data/v2
+          cp runtime/public/v2/catalog.json runtime/public/v2/status.json _site/data/v2/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

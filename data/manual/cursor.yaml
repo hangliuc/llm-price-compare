@@ -7,6 +7,9 @@ name_en: Cursor
 region: us
 website: https://cursor.com/
 pricing_url: https://cursor.com/pricing
+source_url: https://cursor.com/pricing
+verified_at: "2026-07-31T23:59:59Z"
+expires_at: "2026-10-29T23:59:59Z"
 products:
   # ========== 个人版 ==========
   - id: cursor-hobby

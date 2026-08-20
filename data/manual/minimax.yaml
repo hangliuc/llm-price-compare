@@ -9,6 +9,9 @@ name_en: MiniMax
 region: cn
 website: https://platform.minimaxi.com/
 pricing_url: https://platform.minimaxi.com/docs/guides/pricing-paygo
+source_url: https://platform.minimaxi.com/docs/guides/pricing-paygo
+verified_at: "2026-07-31T23:59:59Z"
+expires_at: "2026-10-29T23:59:59Z"
 products:
   # ========== per_token 按需计费 ==========
   # MiniMax-M3 分段定价（≤512K / >512K），价格已应用永久五折

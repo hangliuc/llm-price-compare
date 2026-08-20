@@ -1,0 +1,11 @@
+[Unit]
+Description=Run PPK V2 complete verification weekly
+
+[Timer]
+OnCalendar=Sun *-*-* 08:00:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
+

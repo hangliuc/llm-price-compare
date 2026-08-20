@@ -2,9 +2,72 @@ const { createApp, ref, computed, onMounted, onBeforeUnmount, nextTick, watch } 
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
-// 加了 <base href="/ui/"> 后，所有相对路径基于 /ui/
-// 数据文件在 /data/，图标在 /ui/icons/，统一用相对路径
-const DATA_PATH = "../data/prices.json";
+// Production Nginx exposes /data/v2. A repository-root Python server does not
+// have that volume mapping, so localhost may read the same V2 artifact from
+// runtime/. This is a V2-only development fallback, not a V1 prices.json fallback.
+const DATA_PATHS = ["../data/v2/catalog.json"];
+if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+  DATA_PATHS.push("../runtime/v2/public/v2/catalog.json");
+}
+
+// V2 Catalog is the public data contract. The current Vue views still consume
+// provider-grouped rows, so adapt once at the network boundary instead of
+// coupling every component to pipeline storage details.
+function catalogV2ToViewData(catalog) {
+  if (!catalog || catalog.schema_version !== '2.0') return catalog;
+  const providerMap = new Map((catalog.providers || []).map(provider => [provider.id, {
+    ...provider,
+    products: [],
+  }]));
+  const toProduct = item => {
+    const fields = item.fields || {};
+    const prices = {};
+    for (const [key, value] of Object.entries(fields)) {
+      if (key.startsWith('price.')) prices[key.slice(6)] = value;
+    }
+    if (fields.allowance) {
+      prices.included_quota = fields.allowance.value;
+      prices.quota_unit = fields.allowance.unit;
+    }
+    if (fields.features) prices.features = fields.features;
+    return {
+      id: item.product_id,
+      canonical_id: item.canonical_id,
+      model: fields.name,
+      billing_type: fields.billing_type,
+      context_window: fields.context_window ?? null,
+      modalities: fields.modalities || [],
+      release_date: fields.release_date || null,
+      prices,
+      purchase_url: fields.purchase_url || '',
+      notes: fields.notes || null,
+      plan_category: fields.plan_category || null,
+      featured_on_home: Boolean(fields.featured_on_home),
+      data_status: item.status,
+      stale_fields: item.stale_fields || [],
+    };
+  };
+  for (const item of [...(catalog.models || []), ...(catalog.plans || [])]) {
+    if (!providerMap.has(item.provider_id)) {
+      providerMap.set(item.provider_id, {
+        id: item.provider_id, name: item.provider_id, name_en: item.provider_id,
+        region: 'unknown', website: '', pricing_url: '', products: [],
+      });
+    }
+    providerMap.get(item.provider_id).products.push(toProduct(item));
+  }
+  return {
+    generated_at: catalog.published_at,
+    release_id: catalog.release_id,
+    schema_version: catalog.schema_version,
+    providers: [...providerMap.values()],
+    provider_status: [...providerMap.values()].map(provider => ({
+      id: provider.id,
+      stale: provider.products.some(product => product.data_status !== 'accepted'),
+      last_success_at: catalog.published_at,
+    })),
+  };
+}
 
 // 厂商图标路径（/ui/ 下用相对路径，根路径用 ui/icons/）
 // 图标文件名映射（厂商 id → 实际文件名，不含扩展名）
@@ -27,6 +90,7 @@ const ICON_FILES = {
 };
 const PNG_ICONS = ['volcengine'];
 const iconUrl = (id) => {
+  if (!id) return 'icons/ppx.svg';
   const name = ICON_FILES[id] || id;
   const ext = PNG_ICONS.includes(id) ? 'png' : 'svg';
   // <base href="/ui/"> 已让相对路径基于 /ui/，统一用 icons/相对路径
@@ -1257,7 +1321,9 @@ createApp({
 
     // 图标加载失败时用品牌色+首字母占位
     function onIconError(e, providerId) {
-      const name = (data.value?.providers.find(p => p.id === providerId)?.name) || providerId;
+      const name = String(
+        (data.value?.providers.find(p => p.id === providerId)?.name) || providerId || "?"
+      );
       const letter = name[0] || "?";
       const color = PROVIDER_COLORS[providerId] || "#165dff";
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="${color}"/><text x="24" y="33" font-size="26" font-weight="700" fill="white" text-anchor="middle" font-family="sans-serif">${letter}</text></svg>`;
@@ -1746,13 +1812,19 @@ createApp({
     }
 
     async function loadData() {
-      try {
-        const resp = await fetch(DATA_PATH, { cache: "no-cache" });
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        data.value = await resp.json();
-      } catch (e) {
-        error.value = e.message;
+      const failures = [];
+      for (const path of DATA_PATHS) {
+        try {
+          const resp = await fetch(path, { cache: "no-cache" });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          data.value = catalogV2ToViewData(await resp.json());
+          error.value = null;
+          return;
+        } catch (e) {
+          failures.push(`${path}: ${e.message}`);
+        }
       }
+      error.value = failures.join('；');
     }
 
     onMounted(() => {

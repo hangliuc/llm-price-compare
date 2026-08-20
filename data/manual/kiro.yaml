@@ -9,6 +9,9 @@ name_en: Kiro
 region: us
 website: https://kiro.dev/
 pricing_url: https://kiro.dev/
+source_url: https://kiro.dev/
+verified_at: "2026-07-31T23:59:59Z"
+expires_at: "2026-10-29T23:59:59Z"
 products:
   - id: kiro-free
     model: Kiro Free

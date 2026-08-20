@@ -7,6 +7,9 @@ name_en: Volcengine
 region: cn
 website: https://www.volcengine.com/
 pricing_url: https://www.volcengine.com/docs/82379/1099320
+source_url: https://www.volcengine.com/docs/82379/1099320
+verified_at: "2025-12-09T00:00:00Z"
+expires_at: "2026-03-09T00:00:00Z"
 products:
   - id: doubao-pro-32k-token
     model: doubao-pro-32k

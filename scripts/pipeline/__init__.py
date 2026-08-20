@@ -1,2 +1,0 @@
-"""PPK independent data pipeline."""
-

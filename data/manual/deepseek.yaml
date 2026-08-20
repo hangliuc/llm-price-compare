@@ -7,6 +7,9 @@ name_en: DeepSeek
 region: cn
 website: https://platform.deepseek.com/
 pricing_url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+source_url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+verified_at: "2026-07-31T23:59:59Z"
+expires_at: "2026-10-29T23:59:59Z"
 pricing_url_overseas: https://api-docs.deepseek.com/quick_start/pricing
 products:
   - id: deepseek-v4-flash-cn-token

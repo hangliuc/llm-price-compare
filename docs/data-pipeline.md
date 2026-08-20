@@ -1,6 +1,6 @@
 # PPK 数据获取与发布架构 V2
 
-> 状态：目标架构与迁移设计。本文档取代旧版 Pipeline 设计，作为后续数据模块重构、测试、部署和运维基准。
+> 状态：目标架构与实施记录。本文档取代旧版 Pipeline 设计，作为数据模块开发、测试、部署和运维基准。
 >
 > 核心约束：数据更新不触发代码部署；V2 使用全新的数据库、数据文件和 Schema，不迁移或兼容 V1 数据；不引入 Airflow、Kafka、Celery、Kubernetes 等重型组件。
 
@@ -458,19 +458,23 @@ python3 -m scripts.pipeline_v2.cli review map <review_id> --canonical-id <id>
 Manual V2：
 
 ```yaml
-canonical_id: cursor/cursor-pro
-fields:
-  price.monthly:
-    value: 20
-    currency: USD
-    unit: per_month
+id: cursor
 source_url: https://cursor.com/pricing
 verified_at: 2026-08-19T10:00:00+08:00
 expires_at: 2026-09-19T10:00:00+08:00
-reason: official page is not reliably machine-readable
+products:
+  - id: cursor-pro
+    model: Cursor Pro
+    billing_type: subscription
+    prices:
+      monthly_price: 20
+      currency: USD
 ```
 
-过期 Override 保留但标记 `manual_stale` 并告警，不再因 Pipeline 读取而刷新验证时间。
+这三个元数据属于 Provider 级 Manual 快照：`source_url` 表示人工核对的官网页面，
+`verified_at` 是人真正核对数据的时间，`expires_at` 是最晚复核时间。任务运行时间绝不
+冒充核验时间。过期或缺失元数据会创建 Review；使用到这些 Manual 字段的产品会标记
+`partial/stale`，完整核验任务还会生成 P2 告警。
 
 ## 12. 存储设计
 
@@ -499,19 +503,23 @@ SQLite 开启 WAL、foreign keys、busy timeout。Stage/Decision/Release 使用�
 
 ### 12.2 Raw Artifact 拆出 SQLite
 
-完整 HTML/JSON 使用 gzip 文件，SQLite 只保存索引：
+完整 HTML/JSON 使用 gzip 文件，SQLite 只保存索引。LiteLLM、OpenRouter 保存抓取到的
+原始 JSON；当前官网 Adapter 尚未暴露原始响应时，保存解析后的 Observation 快照并明确
+标记为 `normalized_snapshot`，不会冒充网页原文；Manual 保存本次读取的 YAML 快照。
 
 ```text
 runtime/
-  raw/2026/08/19/<run_id>/<source_id>/<sha256>.json.gz
-  releases/<release_id>/catalog-v2.json.gz
-  public/v2/catalog.json
-  public/v2/status.json
-  public/run_status.json
-  prices.db
+  v2/
+    raw/objects/<hash-prefix>/<sha256>.json.gz
+    releases/<release_id>/catalog.json
+    public/v2/catalog.json
+    public/v2/status.json
+    public/run_status.json
+    prices-v2.db
 ```
 
-这样避免数据库被大段原文快速撑大，同时保留可追溯证据和 hash 去重。
+文件按内容 SHA-256 寻址：相同内容只保存一次 gzip 文件，但每次 Run 仍在 `evidence_v2`
+写独立索引，因此能回答“哪次任务用了哪份证据”，又避免数据库被大段原文撑大。
 
 ### 12.3 Retention / Backup
 
@@ -521,6 +529,14 @@ runtime/
 - Change/Review/Audit：长期；
 - 每周 checkpoint、每月 VACUUM；
 - 每日备份 SQLite 和当前 Release 到不同磁盘或对象存储。
+
+当前已提供 90 天 Evidence 清理命令；清理某个旧 Run 的索引时，如果同一 hash 仍被其他
+Run 引用，原文件不会删除：
+
+```bash
+python3 -m scripts.pipeline_v2.cli maintenance retention --dry-run
+python3 -m scripts.pipeline_v2.cli maintenance retention
+```
 
 ## 13. Pipeline 如何把 V2 数据交给网站
 
@@ -722,16 +738,23 @@ ops/systemd/
 
 ### Phase 5：Review / Manual / Freshness
 
-- 上线 Review CLI；
-- Manual 补齐 verified/expires/source_url；
-- 状态端点表达 partial/LKG age。
+- [x] Review CLI（list/show/approve/reject）；
+- [x] Manual 补齐 `verified_at/expires_at/source_url`，缺失或过期进入 Review；
+- [x] Raw Evidence gzip、SHA-256 去重、SQLite 索引与 90 天引用安全清理；
+- [x] Catalog 产品输出 freshness，状态端点汇总 partial/stale、LKG 字段数和最大 age；
+- [x] Manual stale 在 full-verify 生成 P2 告警。
+
+Phase 5 不把“补齐所有厂商官网 Adapter”当作一次性完成条件。当前核心证据与新鲜度基础
+已经完成；Google、AWS、Qwen 等 Adapter 继续按数据价值逐个增加，避免为了数量引入大量
+脆弱网页采集器。
 
 ### Phase 6：删除旧路径
 
-- 停旧 timer；
-- 删除 `run_daily.py` 和重复 `core/history.py` 写入；
-- 删除旧 SQLite、旧表和仅服务 V1 的运行文件；
-- 移除旧 Provider 级 Reconcile。
+- [x] 停用并从部署脚本清除旧 `ppk-data-pipeline` timer/service；
+- [x] 删除 `run_daily.py`、`query_history.py` 和 `scripts/pipeline/`；
+- [x] 删除旧 SQLite、旧 Schema、`data/prices.json` 和仅服务 V1 的运行文件；
+- [x] 移除旧 Provider 级 Reconcile、ProviderStatus 和 V1 波动检测；
+- [x] V2 原子文件写入、文件锁和告警不再依赖任何 V1 模块。
 
 ## 20. 测试要求
 
@@ -834,3 +857,74 @@ python3 -m scripts.pipeline_v2.cli maintenance retention --dry-run
 - 数据更新不触发 Git 或部署。
 
 先完成 Phase 0～3，在测试目录连续运行并完成关键数据核对，然后直接切换 V2 网站和 V2 数据。不保留旧数据库、不输出旧 Schema，也不做长期双轨；不能省略的是 V2 UI 契约测试、V2 初始 Release 和 V2 Release 回滚验证。
+
+## 25. 当前开发进度
+
+截至 2026-08-20，V2 已是仓库唯一生产数据 Pipeline，代码位于 `scripts/pipeline_v2/`。
+
+已经完成：
+
+- V2 Observation、Field Decision、Product Candidate 领域对象；
+- 全新 SQLite V2 表，不读取 V1 表；
+- 复用现有 Source/Adapter 的抓取结果，但转换为 V2 Observation；
+- Manual 数据转换与结构化 `allowance`；
+- 来源类型优先的字段选择；
+- 产品缺失时的 V2 LKG 保留；
+- V2 Catalog Builder、基础校验和字段级 Change Detection；
+- `/data/v2/catalog.json` 与 `/data/v2/status.json` 原子发布；
+- `payg / plans / full-verify` CLI Profile；
+- `status` 查询命令；
+- 三组 V2 systemd service/timer；
+- Source 失败、Reconcile、Validation、LKG、Publish、Change Detection 测试；
+- Phase 2 Canonical Identity 基础：显式 Alias Registry、仅大小写/空白的安全规范化、来源原始 ID 留存、身份冲突 Review；
+- V2 LiteLLM 采集保留日期后缀，不再沿用 V1 自动删除版本日期的行为；
+- `review list` 命令查询待审核身份冲突；
+- Phase 3 价格漂移保护：仅在币种和单位相同时计算变化比例；超过 20% 记录 warning，超过 50% 时保留该价格字段的 V2 LKG 并创建数据 Review；
+- 价格产品必须具备有效币种，按需模型还必须具备计价单位；
+- 两个权威来源对同一字段给出不同值时创建 Review；有 V2 LKG 时保留旧字段，没有 LKG 时拒绝不完整候选；
+- Review 支持 `list/show/approve/reject`，审批记录操作者、时间、理由和是否接受新基线；
+- 只有 `approve --accept-baseline` 才会放行完全匹配的候选值、币种和单位，未来不同异常值仍会再次阻断；
+- 三次连续 Release 的集成测试已验证“异常值阻断 → 审批新基线 → 新价格发布”的完整闭环。
+- Phase 4 发布门禁：基础 Schema/UI 契约、最低 Provider 数和产品数量下降超过 30% 时阻止发布；
+- 每次成功发布先写入 `runtime/v2/releases/<release_id>/` 不可变版本，再原子切换公开 Catalog；
+- `release list/rollback` 支持查看和恢复任意 V2 Release，回滚不依赖 V1 数据库；
+- 公开 `status.json` 包含当前 Release、checksum、Source 状态与数量，独立 `run_status.json` 记录最近任务成功或失败；
+- Pipeline 失败写入 `alerts_v2`，并复用轻量飞书告警通道；未配置 Webhook 时明确记录 `skipped`，不会静默假装已发送；
+- 前端数据入口已改为 `/data/v2/catalog.json`，并在加载边界将 V2 Catalog 转为现有 Vue 视图模型；
+- 生产 Compose、systemd 和部署 Workflow 已改用三个 V2 Profile，首次部署先生成健康的 V2 初始 Release，再启动 Web；
+- GitHub Pages 预览也在构建期生成 V2 Catalog，不再复制 V1 `prices.json`。
+
+Phase 5 已完成：
+
+- Manual Provider 快照具备机器可读的来源、核验时间和到期时间；没有可靠日期的 Moonshot
+  明确进入 Review，不使用当前任务时间伪造核验；已过期的火山引擎进入 stale Review；
+- `freshness` 随产品发布，LKG 延续上一版观测时间并计算 `lkg_age_hours`；
+- `status.json` 汇总 partial/stale、LKG 字段数、最大 LKG age、Manual stale 和 Evidence 数；
+- LiteLLM/OpenRouter 原始 JSON、Adapter 规范化快照和 Manual 快照以 gzip Evidence 保存，
+  由 SHA-256 去重并通过 `evidence_v2` 追踪到 Run；
+- Evidence 写入失败会让 Run 失败，现网 Catalog 保持不变；Retention 不删除仍被引用的文件；
+- `full-verify` 对新出现的 Manual freshness Review 记录 P2 告警。
+
+Phase 5 隔离环境真实 `full-verify` 验证：15 个 Provider、651 个模型、49 个套餐，6 份
+Evidence 索引对应 6 个 gzip 文件，Release 成功发布；识别出 Moonshot 缺少历史核验日期、
+火山引擎核验已过期，共生成 2 个 Manual Review 和 1 条 P2 告警记录（本地未配置飞书，
+投递状态为 `skipped`，状态可观测而非静默丢失）。
+
+Phase 6 已完成：V1 `scripts/pipeline/`、`run_daily.py`、旧历史查询、旧 SQLite Schema、
+旧 systemd unit、旧 `data/prices.json` 与对应测试均已删除；V2 的原子发布和告警实现已
+收回 `scripts/pipeline_v2/`，不再反向依赖 V1。
+
+当前仍未完成，后续应继续观察：
+
+- Alias Registry 的人工核对和首批映射录入；当前不会自动合并 `-cn`、Preview、日期版或区域版；
+- Google、AWS、Qwen 等新增官方 Adapter；
+- 管理后台（Review CLI 已可用，图形化后台尚未实现）；
+
+本地验证结果：
+
+- Phase 6 清理后全部有效测试：`54 passed, 2 deselected`；删除的 23 个测试仅覆盖已移除的
+  V1 Pipeline、旧序列化、旧状态文件与 Provider 级波动逻辑；
+- 本地非 dry-run 初始 Release：15 个 Provider、651 个模型、49 个套餐；公开状态 `healthy`，所有 Source 成功，不可变 Release 与运行状态文件均已生成；
+- 浏览器 Smoke：V2 首页、按需计费目录和 Compare 均能读取 V2 Catalog；Compare 实际渲染 651 条模型记录；
+- `plans --dry-run`：13 个 Provider、49 个 Plan；
+- 联网 `payg --dry-run`：LiteLLM、OpenRouter 和 3 个官网 Adapter 均成功。保留日期版并执行安全 ID 规范化后生成 11 个 Provider、651 个候选；自动消除仅大小写不同的 MiniMax 重复项。6 组 `-cn`/海外价格记录已核对为不同地区或渠道报价，并在 Alias Registry 中明确标记为“保持独立”，不再重复创建 Review。候选数仍不能直接理解为最终独立模型总数。

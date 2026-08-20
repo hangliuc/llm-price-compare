@@ -45,15 +45,17 @@ for pid, providers in PROVIDER_MAP.items():
         _LITELLM_TO_PID[p] = pid
 
 
-def _normalize_model_id(model_key: str) -> str:
+def _normalize_model_id(model_key: str, strip_date: bool = True) -> str:
     """清理模型 ID：
     - 去掉 litellm_provider/ 前缀（如 'dashscope/qwen-coder' -> 'qwen-coder'）
     - 去掉日期后缀（如 'claude-haiku-4-5-20251001' -> 'claude-haiku-4-5'）
     """
     mid = model_key.split("/", 1)[-1] if "/" in model_key else model_key
-    # 去掉 8 位日期后缀
-    import re
-    mid = re.sub(r"-(\d{8})$", "", mid)
+    if strip_date:
+        # V1 compatibility only. V2 keeps version dates and resolves aliases
+        # explicitly so dated releases are not merged by accident.
+        import re
+        mid = re.sub(r"-(\d{8})$", "", mid)
     return mid
 
 
@@ -68,9 +70,13 @@ class LiteLLMSource(SourceBase):
     source_id = "litellm"
     covers = list(PROVIDER_MAP.keys())
 
+    def __init__(self, preserve_versions: bool = False):
+        self.preserve_versions = preserve_versions
+
     def fetch_all(self) -> dict[str, list[Product]]:
         log.info("fetching %s", _LITELLM_URL)
         data = fetch_json(_LITELLM_URL, timeout=60)
+        self.last_evidence = data
 
         # 顶层有 "sample_spec" 等元字段，模型条目是 dict 且含 litellm_provider
         result: dict[str, list[Product]] = {pid: [] for pid in PROVIDER_MAP}
@@ -94,7 +100,7 @@ class LiteLLMSource(SourceBase):
             if input_cost is None or output_cost is None:
                 continue
 
-            model_id = _normalize_model_id(model_key)
+            model_id = _normalize_model_id(model_key, strip_date=not self.preserve_versions)
             cached_input = _to_per_m(entry.get("cache_read_input_token_cost"))
 
             prices = {

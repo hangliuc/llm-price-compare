@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 from typing import Callable
 
 from scripts.core.alert import send_feishu_alerts
@@ -14,7 +14,6 @@ class AlertDelivery:
 
 
 def deliver_alerts(alerts: list, sender: Callable = send_feishu_alerts) -> AlertDelivery:
-    """Deliver one aggregate alert and expose skipped/failed outcomes."""
     if not alerts:
         return AlertDelivery("feishu", "not_needed", 0)
     if not os.environ.get("FEISHU_WEBHOOK_URL"):
@@ -26,3 +25,15 @@ def deliver_alerts(alerts: list, sender: Callable = send_feishu_alerts) -> Alert
     if delivered:
         return AlertDelivery("feishu", "delivered", len(alerts))
     return AlertDelivery("feishu", "failed", len(alerts), "sender returned false")
+
+
+def deliver_pipeline_alert(severity: str, code: str, message: str) -> tuple[str, str]:
+    """Reuse the lightweight Feishu channel without making it mandatory."""
+    kind = "fatal" if severity == "P0" else "warning"
+    payload = [(kind, "pipeline-v2", f"[{code}] {message}")]
+    delivery = deliver_alerts(payload)
+    return delivery.status, delivery.error
+
+
+def alerting_configured() -> bool:
+    return bool(os.environ.get("FEISHU_WEBHOOK_URL"))

@@ -8,6 +8,9 @@ name_en: Zhipu AI
 region: cn
 website: https://open.bigmodel.cn/
 pricing_url: https://open.bigmodel.cn/pricing
+source_url: https://open.bigmodel.cn/pricing
+verified_at: "2026-07-14T00:00:00Z"
+expires_at: "2026-10-12T00:00:00Z"
 pricing_url_overseas: https://open.bigmodel.ai/pricing
 products:
   # ========== 旗舰文本模型 ==========

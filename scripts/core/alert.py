@@ -3,10 +3,8 @@ import os
 import requests
 
 _ALERT_TEMPLATES = {
-    "failed": "[{i}] 类型: 适配器失败\n厂商: {p}\n错误: {msg}",
-    "warning": "[{i}] 类型: 价格波动警告\n厂商: {p}\n详情: {msg}",
-    "blocked": "[{i}] 类型: 价格波动阻断\n厂商: {p}\n详情: {msg}\n该 provider 已回退至上次成功数据",
-    "fatal": "[{i}] 类型: 全局校验失败\n详情: {msg}\n本次未落盘，站点保留旧数据",
+    "warning": "[{i}] 类型: 数据待处理\n任务: {p}\n详情: {msg}",
+    "fatal": "[{i}] 类型: Pipeline 失败\n任务: {p}\n详情: {msg}\n当前 Release 保持不变",
 }
 
 

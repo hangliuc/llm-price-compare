@@ -66,6 +66,7 @@ class OpenRouterSource(SourceBase):
     def fetch_all(self) -> dict[str, list[Product]]:
         log.info("fetching %s", _OPENROUTER_URL)
         data = fetch_json(_OPENROUTER_URL, timeout=30)
+        self.last_evidence = data
         models = data.get("data", [])
         log.info("openrouter total models: %d", len(models))
 
