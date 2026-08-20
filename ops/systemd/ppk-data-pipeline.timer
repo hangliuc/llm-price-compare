@@ -1,0 +1,10 @@
+[Unit]
+Description=Run PPK data pipeline twice daily
+
+[Timer]
+OnCalendar=*-*-* 07,19:00:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=180
+
+[Install]
+WantedBy=timers.target

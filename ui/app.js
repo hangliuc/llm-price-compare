@@ -2,68 +2,89 @@ const { createApp, ref, computed, onMounted, onBeforeUnmount, nextTick, watch } 
 
 const USD_TO_CNY = 7.2;  // MVP 硬编码汇率
 
-// Production Nginx exposes /data/v2. A repository-root Python server does not
-// have that volume mapping, so localhost may read the same V2 artifact from
-// runtime/. This is a V2-only development fallback, not a V1 prices.json fallback.
-const DATA_PATHS = ["../data/v2/catalog.json"];
+// Production Nginx exposes the V3 catalog at /data/catalog.json. A repository-
+// root Python server can read the same artifact directly from runtime/.
+const DATA_PATHS = ["../data/catalog.json"];
 if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
-  DATA_PATHS.push("../runtime/v2/public/v2/catalog.json");
+  DATA_PATHS.push("../runtime/public/catalog.json");
 }
 
-// V2 Catalog is the public data contract. The current Vue views still consume
-// provider-grouped rows, so adapt once at the network boundary instead of
-// coupling every component to pipeline storage details.
-function catalogV2ToViewData(catalog) {
-  if (!catalog || catalog.schema_version !== '2.0') return catalog;
+// V3 separates model offers and plans. Existing views consume provider-grouped
+// rows, so adapt once at the network boundary.
+function catalogV3ToViewData(catalog) {
+  if (!catalog || catalog.schema_version !== '3.0') return catalog;
   const providerMap = new Map((catalog.providers || []).map(provider => [provider.id, {
     ...provider,
     products: [],
   }]));
-  const toProduct = item => {
-    const fields = item.fields || {};
-    const prices = {};
-    for (const [key, value] of Object.entries(fields)) {
-      if (key.startsWith('price.')) prices[key.slice(6)] = value;
-    }
-    if (fields.allowance) {
-      prices.included_quota = fields.allowance.value;
-      prices.quota_unit = fields.allowance.unit;
-    }
-    if (fields.features) prices.features = fields.features;
-    return {
-      id: item.product_id,
-      canonical_id: item.canonical_id,
-      model: fields.name,
-      billing_type: fields.billing_type,
-      context_window: fields.context_window ?? null,
-      modalities: fields.modalities || [],
-      release_date: fields.release_date || null,
-      prices,
-      purchase_url: fields.purchase_url || '',
-      notes: fields.notes || null,
-      plan_category: fields.plan_category || null,
-      featured_on_home: Boolean(fields.featured_on_home),
-      data_status: item.status,
-      stale_fields: item.stale_fields || [],
-    };
-  };
-  for (const item of [...(catalog.models || []), ...(catalog.plans || [])]) {
-    if (!providerMap.has(item.provider_id)) {
-      providerMap.set(item.provider_id, {
-        id: item.provider_id, name: item.provider_id, name_en: item.provider_id,
-        region: 'unknown', website: '', pricing_url: '', products: [],
+  const ensureProvider = (providerId, providerName) => {
+    if (!providerMap.has(providerId)) {
+      providerMap.set(providerId, {
+        id: providerId, name: providerName || providerId, name_en: providerName || providerId,
+        region: 'unknown', website: '', products: [],
       });
     }
-    providerMap.get(item.provider_id).products.push(toProduct(item));
+    return providerMap.get(providerId);
+  };
+  for (const item of catalog.model_offers || []) {
+    ensureProvider(item.provider_id, item.provider_name).products.push({
+      id: item.offer_id,
+      canonical_id: item.model_id,
+      model: item.model_name,
+      billing_type: 'per_token',
+      context_window: item.context_window ?? null,
+      modalities: item.modalities || [],
+      release_date: item.release_date || null,
+      prices: {
+        input: item.input_per_1m,
+        output: item.output_per_1m,
+        cached_input: item.cache_read_per_1m,
+        cache_write: item.cache_write_per_1m,
+        currency: item.currency,
+      },
+      purchase_url: item.source_url || '',
+      notes: null,
+      plan_category: null,
+      featured_on_home: false,
+      data_status: 'accepted',
+      stale_fields: [],
+    });
   }
+  for (const item of catalog.plans || []) {
+    ensureProvider(item.provider_id, item.provider_name).products.push({
+      id: item.plan_id,
+      canonical_id: item.plan_id,
+      model: item.product_name,
+      billing_type: item.billing_type,
+      context_window: null,
+      modalities: [],
+      release_date: null,
+      prices: {
+        monthly_price: item.monthly_equivalent ?? item.price_amount,
+        first_month_price: item.first_period_price,
+        included_quota: item.included_quota,
+        quota_unit: item.quota_unit,
+        quota_period: item.quota_period,
+        features: item.features || [],
+        currency: item.currency,
+      },
+      purchase_url: item.purchase_url || item.source_url || '',
+      notes: null,
+      plan_category: item.plan_category || null,
+      featured_on_home: Boolean(item.featured_on_home),
+      data_status: 'accepted',
+      stale_fields: [],
+    });
+  }
+  const providers = [...providerMap.values()].filter(provider => provider.products.length);
   return {
     generated_at: catalog.published_at,
     release_id: catalog.release_id,
     schema_version: catalog.schema_version,
-    providers: [...providerMap.values()],
-    provider_status: [...providerMap.values()].map(provider => ({
-      id: provider.id,
-      stale: provider.products.some(product => product.data_status !== 'accepted'),
+    providers,
+    provider_status: providers.map(provider => ({
+      provider_id: provider.id,
+      stale: false,
       last_success_at: catalog.published_at,
     })),
   };
@@ -755,7 +776,8 @@ createApp({
       const value = planPriceValue(row, field);
       if (value == null) return '—';
       if (field === 'monthly_price' && Number(row.prices?.monthly_price) === 0) return '免费';
-      const symbol = displayCurrency.value === 'CNY' ? '¥' : '$';
+      const currency = rowDisplayCurrency(row);
+      const symbol = currencySymbols[currency] || `${currency} `;
       const rounded = Math.abs(value) >= 100 ? value.toFixed(value % 1 ? 1 : 0) : value.toFixed(value % 1 ? 2 : 0);
       return `${symbol}${rounded}`;
     }
@@ -1682,15 +1704,19 @@ createApp({
       return { per_token: "Token", subscription: "订阅", coding_plan: "Coding Plan" }[b] || b;
     }
 
-    // billing 路由下使用本币不换算，其他路由使用 displayCurrency
+    const convertibleCurrencies = new Set(['CNY', 'USD']);
+    const currencySymbols = { CNY: '¥', USD: '$', SGD: 'S$', EUR: '€', GBP: '£', JPY: '¥', INR: '₹' };
+
+    // billing 路由下使用本币不换算；暂未配置汇率的币种在任何页面保持原币展示。
     function rowDisplayCurrency(row) {
-      if (routeName.value === 'billing') return row.prices?.currency || 'CNY';
+      const originalCurrency = row.prices?.currency || 'CNY';
+      if (routeName.value === 'billing' || !convertibleCurrencies.has(originalCurrency)) return originalCurrency;
       return displayCurrency.value;
     }
 
     function currencySymbol(row) {
       const cur = rowDisplayCurrency(row);
-      return cur === 'CNY' ? '¥' : '$';
+      return currencySymbols[cur] || `${cur} `;
     }
 
     function formatPrice(row, field) {
@@ -1703,7 +1729,7 @@ createApp({
         if (origCur === "USD" && dispCur === "CNY") val = (v * USD_TO_CNY).toFixed(2);
         else if (origCur === "CNY" && dispCur === "USD") val = (v / USD_TO_CNY).toFixed(2);
       }
-      const sym = dispCur === "CNY" ? "¥" : "$";
+      const sym = currencySymbols[dispCur] || `${dispCur} `;
       // monthly_price 等非 token 计价字段不加 /1M
       if (field === 'monthly_price' || field === 'first_month_price') {
         return `${sym}${val}`;
@@ -1741,7 +1767,7 @@ createApp({
         if (origCur === "USD" && dispCur === "CNY") val = (val * USD_TO_CNY).toFixed(0);
         else if (origCur === "CNY" && dispCur === "USD") val = (val / USD_TO_CNY).toFixed(2);
       }
-      const sym = dispCur === "CNY" ? "¥" : "$";
+      const sym = currencySymbols[dispCur] || `${dispCur} `;
       return `${sym}${val}`;
     }
 
@@ -1817,7 +1843,7 @@ createApp({
         try {
           const resp = await fetch(path, { cache: "no-cache" });
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-          data.value = catalogV2ToViewData(await resp.json());
+          data.value = catalogV3ToViewData(await resp.json());
           error.value = null;
           return;
         } catch (e) {

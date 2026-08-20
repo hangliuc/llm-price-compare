@@ -27,47 +27,40 @@ jobs:
             fi
             cd llm-price-compare
 
-            # One-time Phase 6 bridge: an old server may have modified the
-            # formerly tracked V1 snapshot. Restore it before pulling the
-            # commit that removes the file, otherwise fast-forward can fail.
-            git restore data/prices.json 2>/dev/null || true
             git pull --ff-only origin master
 
-            mkdir -p runtime/public/v2 runtime/v2/releases
-            chmod 0755 runtime runtime/public runtime/public/v2 runtime/v2 runtime/v2/releases
+            mkdir -p runtime/public runtime/releases runtime/raw
+            chmod 0755 runtime runtime/public runtime/releases runtime/raw
 
             docker compose config --quiet
-            docker compose --profile pipeline build pipeline-v2
+            docker compose --profile pipeline build pipeline
 
-            # Generate and validate the first V2 release before the web process
-            # starts reading /data/v2/catalog.json. Subsequent timer runs update
-            # the same bind-mounted path atomically without rebuilding Nginx.
-            docker compose --profile pipeline run --rm pipeline-v2 run --profile full-verify
-            find runtime/public/v2 -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
-            # Phase 6: the successful V2 release is now the only rollback base.
-            rm -f runtime/prices.db runtime/prices.db-shm runtime/prices.db-wal runtime/pipeline.lock
+            # Only bootstrap data on a fresh server. Normal code deployments do
+            # not fetch or publish data; the systemd timer owns that lifecycle.
+            if [ ! -s runtime/public/catalog.json ] || [ ! -s runtime/public/status.json ]; then
+              docker compose --profile pipeline run --rm pipeline run
+            fi
+            find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
             docker compose up -d --build --remove-orphans web
 
-            # V2 scheduling belongs to the host. Code deployment only syncs the
-            # units; data publication no longer triggers a code deployment.
-            install -m 0644 ops/systemd/ppk-v2-payg.service /etc/systemd/system/ppk-v2-payg.service
-            install -m 0644 ops/systemd/ppk-v2-payg.timer /etc/systemd/system/ppk-v2-payg.timer
-            install -m 0644 ops/systemd/ppk-v2-plans.service /etc/systemd/system/ppk-v2-plans.service
-            install -m 0644 ops/systemd/ppk-v2-plans.timer /etc/systemd/system/ppk-v2-plans.timer
-            install -m 0644 ops/systemd/ppk-v2-full-verify.service /etc/systemd/system/ppk-v2-full-verify.service
-            install -m 0644 ops/systemd/ppk-v2-full-verify.timer /etc/systemd/system/ppk-v2-full-verify.timer
+            systemctl disable --now ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer ppk-v3-candidate.timer 2>/dev/null || true
+            rm -f /etc/systemd/system/ppk-v2-payg.service /etc/systemd/system/ppk-v2-payg.timer
+            rm -f /etc/systemd/system/ppk-v2-plans.service /etc/systemd/system/ppk-v2-plans.timer
+            rm -f /etc/systemd/system/ppk-v2-full-verify.service /etc/systemd/system/ppk-v2-full-verify.timer
+            rm -f /etc/systemd/system/ppk-v3-candidate.service /etc/systemd/system/ppk-v3-candidate.timer
+            install -m 0644 ops/systemd/ppk-data-pipeline.service /etc/systemd/system/ppk-data-pipeline.service
+            install -m 0644 ops/systemd/ppk-data-pipeline.timer /etc/systemd/system/ppk-data-pipeline.timer
             systemctl daemon-reload
-            systemctl disable --now ppk-data-pipeline.timer 2>/dev/null || true
-            rm -f /etc/systemd/system/ppk-data-pipeline.timer /etc/systemd/system/ppk-data-pipeline.service
-            systemctl daemon-reload
-            systemctl enable --now ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer
-            systemctl restart ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer
+            systemctl enable --now ppk-data-pipeline.timer
+            systemctl restart ppk-data-pipeline.timer
+
+            # Remove obsolete runtime artifacts only after the V3 Catalog has
+            # been published successfully.
+            rm -rf runtime/v2 runtime/v3 runtime/public/v2 runtime/public/v3-candidate
 
             docker compose ps
-            systemctl is-active ppk-v2-payg.timer
-            systemctl is-active ppk-v2-plans.timer
-            systemctl is-active ppk-v2-full-verify.timer
+            systemctl is-active ppk-data-pipeline.timer
             curl --fail --silent --show-error http://127.0.0.1:8001/ui/ >/dev/null
-            curl --fail --silent --show-error http://127.0.0.1:8001/data/v2/catalog.json >/dev/null
-            curl --fail --silent --show-error http://127.0.0.1:8001/data/v2/status.json >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/data/catalog.json >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/data/status.json >/dev/null
             echo "Deployed at $(date)"

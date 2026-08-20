@@ -1,25 +1,22 @@
 services:
-  pipeline-v2:
+  pipeline:
     build: .
     profiles: ["pipeline"]
     environment:
       - TZ=Asia/Shanghai
-      - FEISHU_WEBHOOK_URL=${FEISHU_WEBHOOK_URL:-}
-      - PPK_V2_RUNTIME_DIR=/var/lib/ppk/v2
-      - PPK_V2_CATALOG_PATH=/app/public/v2/catalog.json
-      - PPK_V2_STATUS_PATH=/app/public/v2/status.json
-      - PPK_V2_RUN_STATUS_PATH=/app/public/v2/run_status.json
-      - PPK_V2_RELEASES_DIR=/var/lib/ppk/v2/releases
-      - PPK_V2_EVIDENCE_DIR=/var/lib/ppk/v2/raw
-      - PPK_V2_DB_PATH=/var/lib/ppk/v2/prices-v2.db
-      - PPK_V2_MANUAL_DIR=/app/data/manual
-      - PPK_V2_ALIAS_PATH=/app/data/identity/model_aliases.yaml
-      - PPK_V2_LOCK_PATH=/var/lib/ppk/v2/pipeline.lock
+      - PPK_RUNTIME_DIR=/var/lib/ppk
+      - PPK_DB_PATH=/var/lib/ppk/ppk.db
+      - PPK_CATALOG_PATH=/app/public/catalog.json
+      - PPK_STATUS_PATH=/app/public/status.json
+      - PPK_RELEASES_DIR=/var/lib/ppk/releases
+      - PPK_RAW_DIR=/var/lib/ppk/raw
+      - PPK_LOCK_PATH=/var/lib/ppk/pipeline.lock
+      - PPK_MINIMUM_OFFER_COUNT=250
+      - PPK_MINIMUM_PLAN_COUNT=30
     volumes:
-      - ./data:/app/data:ro
       - ./runtime/public:/app/public
       - ./runtime:/var/lib/ppk
-    command: ["run", "--profile", "full-verify"]
+    command: ["run"]
 
   web:
     image: nginx:alpine

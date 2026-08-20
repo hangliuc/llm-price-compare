@@ -1,0 +1,12 @@
+[Unit]
+Description=PPK data pipeline
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/llm-price-compare
+ExecStart=/usr/bin/docker compose --profile pipeline run --rm pipeline run
+TimeoutStartSec=60min
+StandardOutput=journal
+StandardError=journal

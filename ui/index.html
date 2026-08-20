@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PPK · Price Per Token · 主流大模型厂商价格聚合</title>
-  <meta name="description" content="PPK (Price Per Token) 聚合 OpenAI、Anthropic、Google、DeepSeek、智谱、火山引擎等主流大模型厂商的 Token 价格、订阅制与 Coding Plan">
+  <meta name="description" content="PPK (Price Per Token) 聚合 OpenAI、Anthropic、Google、DeepSeek、智谱等主流大模型厂商的 Token 价格、订阅制与 Coding Plan">
   <base href="/ui/">
   <link rel="icon" type="image/svg+xml" href="icons/ppx.svg?v=2">
   <link rel="apple-touch-icon" href="icons/ppx.svg">
@@ -250,7 +250,7 @@
             <h2 class="section-title">不只 Token，<em>也看套餐</em></h2>
             <p class="section-sub">从通用 AI 订阅到 Coding Plan 与开发者套餐，一处查看月费与权益。</p>
           </div>
-          <div class="home-plans-entry" :class="{open: homePlansMenuOpen}" @focusout="closeHomePlansMenuOnFocusOut" @keydown.esc.stop.prevent="closeHomePlansMenu(true)">
+          <div class="home-plans-entry" :class="{open: homePlansMenuOpen}" @click.stop @focusout="closeHomePlansMenuOnFocusOut" @keydown.esc.stop.prevent="closeHomePlansMenu(true)">
             <button type="button" class="section-link home-plans-trigger" aria-haspopup="menu" :aria-expanded="homePlansMenuOpen" aria-controls="home-plans-menu" @click="toggleHomePlansMenu" @keydown.down.prevent="openHomePlansMenuAndFocus">查看全部套餐 <span aria-hidden="true">⌄</span></button>
             <div v-if="homePlansMenuOpen" id="home-plans-menu" class="home-plans-menu" role="menu" aria-label="查看套餐">
               <a href="#/billing/subscription" role="menuitem">订阅制</a>
@@ -276,10 +276,10 @@
         <div class="home-trust-copy">
           <div class="section-eyebrow">OPEN DATA · TRACEABLE</div>
           <h2 class="section-title">价格数据，<em>有迹可循</em></h2>
-          <p>LiteLLM、OpenRouter 与厂商官网三源交叉验证；抓取失败时保留上次成功数据并明确标注状态。</p>
+          <p>按需价格来自 Models.dev，套餐来自厂商官方页面；校验失败时继续使用最近一次成功发布的数据。</p>
         </div>
         <div class="home-trust-facts">
-          <div><strong>{{ successCount }}/{{ providerList.length }}</strong><span>数据源状态正常</span></div>
+          <div><strong>{{ catalogTotalModels }}</strong><span>可比较模型报价</span></div>
           <div><strong>{{ freshnessText }}</strong><span>最近一次数据更新</span></div>
           <a href="https://github.com/hangliuc/llm-price-compare" target="_blank"><strong>Open Source ↗</strong><span>查看代码与数据来源</span></a>
         </div>
@@ -295,7 +295,7 @@
               <details class="faq-item">
                 <summary>这里的价格可靠吗？多久更新一次？</summary>
                 <div class="faq-answer">
-                  <p>价格每日更新，并通过 LiteLLM、OpenRouter 与厂商官网交叉核对。抓取失败或数据异常时会保留上次成功结果，并标注状态。</p>
+                  <p>数据每天自动更新两次。按需价格来自 Models.dev，套餐来自厂商官方页面；抓取或校验失败时不会覆盖最近一次成功发布的数据。</p>
                 </div>
               </details>
               <details class="faq-item">
@@ -989,7 +989,7 @@
 
             <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'subscription'">周期订阅</div>
             <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'subscription'">订阅<em>制</em></h1>
-            <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'subscription'">面向终端用户的产品订阅：固定月费换取额度内不限量使用，直接在厂商产品（ChatGPT、Claude.ai、Cursor）内消费，无需 API 接入</p>
+            <p class="section-sub" v-if="routeName === 'billing' && billingRoute === 'subscription'">面向终端用户的产品订阅：按固定周期付费并使用对应官方权益，直接在 ChatGPT、Claude.ai、Cursor 等产品内消费，无需 API 接入</p>
 
             <div class="section-eyebrow" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">编程套餐</div>
             <h1 class="section-title" v-if="routeName === 'billing' && billingRoute === 'coding_plan'">Coding <em>Plan</em></h1>
@@ -1322,7 +1322,7 @@
 
             <div class="plan-card-price-row">
               <div class="plan-card-price">
-                <span class="plan-card-price-symbol">{{ displayCurrency === 'CNY' ? '¥' : '$' }}</span>
+                <span class="plan-card-price-symbol">{{ currencySymbol(p) }}</span>
                 <span class="plan-card-price-value">{{ formatMonthlyValue(p) }}</span>
                 <span class="plan-card-price-period">/月</span>
               </div>
@@ -1376,9 +1376,9 @@
             PPK（Price Per Token）是一个非商业的大模型价格聚合工具，
             帮助开发者快速对比各主流厂商的 <strong>Token 计费</strong>、
             <strong>订阅制</strong> 与 <strong>Coding Plan</strong>。
-            数据由独立 Pipeline 定时采集公开数据源与厂商定价页面，
-            经归一化、多源仲裁与质量校验后原子发布为 JSON，由前端实时读取。
-            单个数据源或厂商抓取失败时会保留上一次成功数据，不影响其他厂商展示。
+            数据由独立 Pipeline 定时采集 Models.dev 与厂商官方套餐页面，
+            经确定性归一化和质量校验后原子发布为 JSON，由前端实时读取。
+            任一必要来源抓取或校验失败时，本次不会发布，网站继续使用最近一次成功版本。
           </p>
 
           <!-- 数据来源（动态） -->
@@ -1399,47 +1399,41 @@
 
           <!-- 数据采集流程 -->
           <h2>采集<em>流程</em></h2>
-          <p>采用三源交叉验证架构，确保数据准确性：</p>
+          <p>数据链路保持单一职责，不进行多来源字段拼接：</p>
           <ol class="about-flow">
             <li>
-              <span class="about-flow-num">L1</span>
+              <span class="about-flow-num">1</span>
               <div>
-                <strong>LiteLLM</strong> — 社区维护的统一价格 JSON，作为主源采集大部分厂商的 per_token 价格。
+                <strong>Models.dev</strong> — 自动获取模型名称、Input、Output、Cache、Context 与模态等按需计费数据。
               </div>
             </li>
             <li>
-              <span class="about-flow-num">L2</span>
+              <span class="about-flow-num">2</span>
               <div>
-                <strong>OpenRouter API</strong> — 提供 benchmark 指标和元数据，用于交叉验证 L1 数据的准确性。
+                <strong>厂商官方页面</strong> — 每个套餐由对应官方 Adapter 自动抓取价格、计费周期和额度信息。
               </div>
             </li>
             <li>
-              <span class="about-flow-num">L3</span>
+              <span class="about-flow-num">3</span>
               <div>
-                <strong>官网爬虫</strong> — 针对部分厂商（如 DeepSeek、智谱、Cursor）开发专属 Adapter，直接抓取官方定价页。
-              </div>
-            </li>
-            <li>
-              <span class="about-flow-num">M</span>
-              <div>
-                <strong>人工补充</strong> — 订阅制与 Coding Plan 套餐多为 YAML 手工维护，确保套餐详情完整。
+                <strong>校验与发布</strong> — 对数量、必填字段和重复身份进行校验，通过后原子发布完整 Catalog。
               </div>
             </li>
           </ol>
-          <p class="about-note">Pipeline 会对多源数据进行仲裁并标记置信度（high / medium / low / manual）；价格异常、字段缺失或产品数量大幅减少时会阻断候选数据，并回退到 Last Known Good。</p>
+          <p class="about-note">PPK 不人工编辑线上价格，也不在多个来源之间做自动仲裁。数据异常会阻断整次发布，并保留最近一次成功 Catalog。</p>
 
           <!-- 历史数据 -->
           <h2>历史<em>追溯</em></h2>
-          <p>每次任务的 Source、Provider、候选版本、发布版本与字段级价格变化都会写入持久化 SQLite，支持按运行、厂商和产品追踪。数据通过原子替换发布，失败任务不会覆盖线上版本。</p>
+          <p>每次任务、原始响应、Catalog 快照和正式 Release 都写入持久化 SQLite 与快照目录，可按运行和来源追踪。数据通过原子替换发布，失败任务不会覆盖线上版本。</p>
 
           <!-- 技术栈 -->
           <h2>技术<em>栈</em></h2>
           <ul>
-            <li><strong>数据采集</strong>：Python + Playwright + 多源仲裁</li>
+            <li><strong>数据采集</strong>：Python + Requests + Playwright；Models.dev 与官方套餐 Adapter</li>
             <li><strong>数据存储</strong>：SQLite（运行、历史与发布审计）+ JSON（前端数据契约）</li>
             <li><strong>前端</strong>：Vue 3 CDN（无构建步骤）+ Instrument Serif / Geist / Geist Mono 三层字体系统</li>
             <li><strong>调度与部署</strong>：systemd timer + Docker Compose；数据更新无需 Git push 或重建 Web</li>
-            <li><strong>告警</strong>：飞书 Webhook 汇总推送抓取失败、数据阻断与价格异常</li>
+            <li><strong>运行状态</strong>：systemd Journal + SQLite 运行记录与原始响应快照</li>
           </ul>
 
           <!-- 反馈 -->
@@ -1485,6 +1479,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=56"></script>
+  <script src="app.js?v=58"></script>
 </body>
 </html>
