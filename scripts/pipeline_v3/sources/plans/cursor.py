@@ -22,7 +22,8 @@ class CursorPlanAdapter(OfficialPlanAdapter):
     )
 
     def normalize(self, raw: bytes, fetched_at: str) -> list[Plan]:
-        text = visible_text(raw)
+        full_text = visible_text(raw)
+        text = full_text
         # Cursor localizes this page.  Anchor on the plan table itself rather
         # than on the English prose surrounding it.
         table_match = re.search(r"(?:Plan|方案)\s+(?:Price|价格)", text, flags=re.I)
@@ -44,7 +45,9 @@ class CursorPlanAdapter(OfficialPlanAdapter):
             )
             if not match:
                 continue
-            window = match.group(0)
+            # Keep the complete official pricing/features page for feature
+            # extraction; the price regex still anchors on the plan table.
+            window = full_text
             price = 0.0 if is_free else float(match.group(1))
             plans.append(Plan(
                 plan_id=f"cursor/cursor/{slug}",
@@ -85,7 +88,7 @@ class CursorHobbyPlanAdapter(OfficialPlanAdapter):
             monthly_equivalent=0, currency="USD", billing_cadence="monthly",
             purchase_url=self.source_url, source_url=self.source_url,
             source_kind="html", fetched_at=fetched_at,
-            raw={"official_text": match.group(0)},
+            raw={"official_text": text},
         )]
 
 
@@ -113,6 +116,6 @@ class CursorTeamsPlanAdapter(OfficialPlanAdapter):
                 monthly_equivalent=price, currency="USD", billing_cadence="monthly",
                 purchase_url="https://cursor.com/pricing", source_url=self.source_url,
                 source_kind="html", fetched_at=fetched_at,
-                raw={"official_text": match.group(0)},
+                raw={"official_text": text},
             ))
         return require_complete_prices(plans, self.minimum_plan_count, self.source)

@@ -18,6 +18,7 @@ def _plan(*, plan_id: str, product_name: str, fetched_at: str, source_url: str,
           monthly_equivalent: float | None = None, price_status: str = "priced",
           price_scope: str = "per_account", seat_type: str | None = None,
           minimum_seats: int | None = None, featured_on_home: bool = False,
+          features: tuple[str, ...] = (),
           official_text: str = "") -> Plan:
     is_free = price_status == "free"
     return Plan(
@@ -37,6 +38,7 @@ def _plan(*, plan_id: str, product_name: str, fetched_at: str, source_url: str,
         source_kind="static",
         fetched_at=fetched_at,
         featured_on_home=featured_on_home,
+        features=features,
         market="global",
         seat_type=seat_type,
         minimum_seats=minimum_seats,
@@ -64,9 +66,11 @@ class OpenAIProPlanAdapter(OfficialPlanAdapter):
         return [
             _plan(plan_id="openai/chatgpt/pro-5x", product_name="ChatGPT Pro 5x",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=100,
+                  features=("5 倍使用配额", "高级推理模型", "更高 Codex 使用量", "高级图像生成", "深度研究"),
                   official_text=text),
             _plan(plan_id="openai/chatgpt/pro-20x", product_name="ChatGPT Pro 20x",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=200,
+                  features=("20 倍使用配额", "高级推理模型", "更高 Codex 使用量", "高级图像生成", "深度研究"),
                   official_text=text),
         ]
 
@@ -88,11 +92,13 @@ class OpenAIBusinessPlanAdapter(OfficialPlanAdapter):
             _plan(plan_id="openai/chatgpt/business-monthly", product_name="ChatGPT Business（月付）",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=25,
                   price_scope="per_user", seat_type="standard_seat", minimum_seats=2,
+                  features=("团队工作空间", "统一账单", "管理控制台", "Codex 与 AI Credits"),
                   official_text=text),
             _plan(plan_id="openai/chatgpt/business-annual", product_name="ChatGPT Business（年付）",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=240,
                   monthly_equivalent=20, billing_cadence="annual", price_scope="per_user",
-                  seat_type="standard_seat", minimum_seats=2, official_text=text),
+                  seat_type="standard_seat", minimum_seats=2,
+                  features=("团队工作空间", "统一账单", "管理控制台", "Codex 与 AI Credits"), official_text=text),
             _plan(plan_id="openai/chatgpt/business-codex-seat", product_name="ChatGPT Business Codex Seat",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=None,
                   monthly_equivalent=None, price_status="usage_based", price_scope="usage_based",
@@ -100,5 +106,5 @@ class OpenAIBusinessPlanAdapter(OfficialPlanAdapter):
             _plan(plan_id="openai/chatgpt/enterprise", product_name="ChatGPT Enterprise",
                   fetched_at=fetched_at, source_url=self.source_url, price_amount=None,
                   monthly_equivalent=None, price_status="contact_sales", price_scope="per_seat",
-                  seat_type="enterprise_seat", official_text=text),
+                  seat_type="enterprise_seat", features=("企业级安全与管理", "专属工作空间", "管理员控制台", "企业隐私与合规"), official_text=text),
         ]

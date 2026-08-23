@@ -905,27 +905,27 @@
                 <table class="price-table plans-table">
                   <thead><tr>
                     <th class="plans-select-col"><span class="sr-only">选择</span></th>
-                    <th v-if="plansGroupMode === 'none'">厂商</th><th>套餐</th>
-                    <th v-if="currentPlansVisibleFields.includes('monthly')" class="num">月费</th>
+                    <th v-if="plansGroupMode === 'none'" class="plans-provider-col">厂商</th><th class="plans-name-col">套餐</th>
+                    <th v-if="currentPlansVisibleFields.includes('monthly')" class="num plans-monthly-col">月费</th>
                     <th v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('first_month')" class="num">首月价</th>
-                    <th v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')">类型</th>
+                    <th v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')" class="plans-status-col">类型</th>
                     <th v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('quota')">包含额度</th>
-                    <th v-if="currentPlansVisibleFields.includes('features')">主要权益</th><th class="plans-action-col">操作</th>
+                    <th v-if="currentPlansVisibleFields.includes('features')" class="plans-features-col">主要权益</th><th class="plans-action-col">操作</th>
                   </tr></thead>
                   <tbody>
                     <template v-for="row in group.rows" :key="row.id">
                       <tr :class="{selected: isPlanSelected(row)}">
                         <td class="plans-select-col"><label class="compare-row-checkbox"><input type="checkbox" :checked="isPlanSelected(row)" :aria-label="(isPlanSelected(row) ? '移出 ' : '加入 ') + row.model + ' 对比'" @change="togglePlanSelection(row)"><span></span></label></td>
-                        <td v-if="plansGroupMode === 'none'"><div class="provider-cell"><span class="provider-icon provider-icon--xs"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>{{ row.providerName }}</div></td>
-                        <td class="plans-name"><strong>{{ row.model || '—' }}</strong></td>
-                        <td v-if="currentPlansVisibleFields.includes('monthly')" class="num plans-price"><strong>{{ formatPlanPrice(row) }}</strong><small v-if="row.prices.monthly_price !== 0">/ 月</small></td>
+                        <td v-if="plansGroupMode === 'none'" class="plans-provider-col"><div class="provider-cell"><span class="provider-icon provider-icon--xs"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>{{ row.providerName }}</div></td>
+                        <td class="plans-name plans-name-col"><strong>{{ row.model || '—' }}</strong></td>
+                        <td v-if="currentPlansVisibleFields.includes('monthly')" class="num plans-price plans-monthly-col"><strong>{{ formatPlanPrice(row) }}</strong><small v-if="row.prices.monthly_price !== 0">/ 月</small></td>
                         <td v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('first_month')" class="num plans-first-month"><span v-if="row.prices.first_month_price != null && row.prices.first_month_price < row.prices.monthly_price">首月 {{ formatPlanPrice(row, 'first_month_price') }}</span><span v-else>—</span></td>
-                        <td v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')"><span class="plans-status">{{ row.prices.monthly_price === 0 ? 'FREE' : 'PAID' }}</span></td>
+                        <td v-if="billingRoute === 'subscription' && currentPlansVisibleFields.includes('status')" class="plans-status-col"><span class="plans-status">{{ row.prices.monthly_price === 0 ? 'FREE' : 'PAID' }}</span></td>
                         <td v-if="billingRoute === 'coding_plan' && currentPlansVisibleFields.includes('quota')" class="plans-quota">{{ formatPlanQuota(row) }}</td>
-                        <td v-if="currentPlansVisibleFields.includes('features')" class="plans-features"><span>{{ (row.prices.features || []).slice(0, 2).join(' · ') || '—' }}</span><button v-if="(row.prices.features || []).length > 2" type="button" @click="togglePlanExpanded(row.id)">{{ plansExpandedIds.includes(row.id) ? '收起' : '+' + (row.prices.features.length - 2) + ' 更多' }}</button></td>
+                        <td v-if="currentPlansVisibleFields.includes('features')" class="plans-features plans-features-col"><span>{{ planFeatureSummary(row).slice(0, 2).join(' · ') || '官方权益未结构化' }}</span><button v-if="planFeatureSummary(row).length > 2" type="button" @click="togglePlanExpanded(row.id)">{{ plansExpandedIds.includes(row.id) ? '收起' : '+' + (planFeatureSummary(row).length - 2) + ' 更多' }}</button></td>
                         <td class="plans-row-action"><a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a></td>
                       </tr>
-                      <tr v-if="plansExpandedIds.includes(row.id)" class="plans-feature-detail"><td :colspan="currentPlansVisibleFields.length + (plansGroupMode === 'none' ? 4 : 3)"><ul><li v-for="(feature, index) in row.prices.features" :key="index">{{ feature }}</li></ul></td></tr>
+                      <tr v-if="plansExpandedIds.includes(row.id)" class="plans-feature-detail"><td :colspan="currentPlansVisibleFields.length + (plansGroupMode === 'none' ? 4 : 3)"><ul><li v-for="(feature, index) in planFeatureSummary(row)" :key="index">{{ feature }}</li></ul></td></tr>
                     </template>
                   </tbody>
                 </table>
@@ -937,7 +937,7 @@
             <article v-for="row in plansRows" :key="row.id" :class="['plans-mobile-item',{selected:isPlanSelected(row)}]">
               <header><label class="compare-row-checkbox"><input type="checkbox" :checked="isPlanSelected(row)" @change="togglePlanSelection(row)"><span></span></label><span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span><div><small>{{ row.providerName }}</small><strong>{{ row.model }}</strong></div></header>
               <div class="plans-mobile-data"><p><span>月费</span><strong>{{ formatPlanPrice(row) }}<small v-if="row.prices.monthly_price !== 0"> / 月</small></strong></p><p v-if="billingRoute === 'coding_plan'"><span>额度</span><strong>{{ formatPlanQuota(row) }}</strong></p></div>
-              <p class="plans-mobile-feature">{{ (row.prices.features || [])[0] || '—' }}</p>
+              <p class="plans-mobile-feature">{{ planFeatureSummary(row)[0] || '官方权益未结构化' }}</p>
               <a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a>
             </article>
           </div>
@@ -952,7 +952,7 @@
             <div class="compare-matrix-label">Monthly Price</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-monthly'" class="compare-matrix-value">{{ formatPlanPrice(row) }}</div>
             <template v-if="billingRoute === 'coding_plan'"><div class="compare-matrix-label">First Month</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-first'" class="compare-matrix-value">{{ row.prices.first_month_price != null ? formatPlanPrice(row, 'first_month_price') : '—' }}</div><div class="compare-matrix-label">Allowance</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-quota'" class="compare-matrix-value compare-matrix-text">{{ formatPlanQuota(row) }}</div></template>
             <template v-else><div class="compare-matrix-label">Type</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-type'" class="compare-matrix-value compare-matrix-text">{{ row.prices.monthly_price === 0 ? 'Free' : 'Paid' }}</div></template>
-            <div class="compare-matrix-label">Features</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-features'" class="compare-matrix-value compare-matrix-text plans-compare-features">{{ (row.prices.features || []).slice(0,3).join(' · ') || '—' }}</div>
+            <div class="compare-matrix-label">Features</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-features'" class="compare-matrix-value compare-matrix-text plans-compare-features">{{ planFeatureSummary(row).slice(0,3).join(' · ') || '官方权益未结构化' }}</div>
             <div class="compare-matrix-label">Purchase</div><div v-for="row in currentPlanSelectedRows" :key="row.id+'-buy'" class="compare-matrix-value"><a :href="row.purchase_url" target="_blank" rel="noopener">前往订阅</a></div>
           </div></div>
         </section>

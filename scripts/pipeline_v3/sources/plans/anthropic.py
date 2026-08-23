@@ -16,6 +16,7 @@ class AnthropicPlanAdapter(OfficialPlanAdapter):
     minimum_plan_count = 3
 
     _PRODUCTS = (
+        ("free", "Claude Free", "Free", False),
         ("pro", "Claude Pro", "Pro", True),
         ("max-5x", "Claude Max 5x", "Max 5x", False),
         ("max-20x", "Claude Max 20x", "Max 20x", False),
@@ -33,7 +34,13 @@ class AnthropicPlanAdapter(OfficialPlanAdapter):
             window = product_window(text, label, labels[index + 1:])
             if not window:
                 continue
-            price = monthly_usd(window)
+            price = 0.0 if label == "Free" else monthly_usd(window)
+            feature_map = {
+                "Free": ("有限使用", "适合偶尔使用"),
+                "Pro": ("标准使用容量", "适合日常使用"),
+                "Max 5x": ("每个会话拥有 Pro 的 5 倍容量", "适合频繁使用 Claude"),
+                "Max 20x": ("每个会话拥有 Pro 的 20 倍容量", "适合高频协作使用 Claude"),
+            }
             plans.append(Plan(
                 plan_id=f"anthropic/claude/{slug}",
                 provider_id="anthropic",
@@ -46,6 +53,7 @@ class AnthropicPlanAdapter(OfficialPlanAdapter):
                 monthly_equivalent=price,
                 currency="USD",
                 billing_cadence="monthly",
+                features=feature_map[label],
                 purchase_url=self.source_url,
                 source_url=self.source_url,
                 source_kind="html",

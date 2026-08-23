@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from html.parser import HTMLParser
 import re
 from typing import Mapping
@@ -116,4 +116,78 @@ def require_complete_prices(plans: list[Plan], expected_count: int, source: str)
     missing = [item.product_name for item in plans if item.price_amount is None]
     if missing:
         raise ValueError(f"{source}: missing official monthly price for {', '.join(missing)}")
-    return plans
+    # Keep the raw official window for auditability, but also expose a small
+    # structured feature list for the UI. This is deliberately conservative:
+    # when the source does not contain a recognizable benefit phrase we leave
+    # features empty instead of inventing a claim.
+    return [replace(item, features=extract_official_features(item.raw.get("official_text", "")))
+            if not item.features else item for item in plans]
+
+
+_FEATURE_MARKERS = re.compile(
+    r"(?:included|includes|access to|unlimited|priority|credits?|messages?|requests?|"
+    r"code completion|coding|agent|context|models?|storage|generation|"
+    r"包含|支持|提供|额度|积分|消息|请求|代码补全|聊天|模型|存储|生成|优先)",
+    re.I,
+)
+
+
+def extract_official_features(official_text: str, *, limit: int = 4) -> tuple[str, ...]:
+    """Extract benefit-like clauses from an already fetched official window.
+
+    This is not a semantic fallback and does not add product knowledge. It
+    only returns clauses that are present in the captured official text.
+    """
+    if not official_text:
+        return ()
+    chunks = re.split(r"(?<=[.;。；])\s+|\s*[•·▪◦]\s*|\s{2,}", official_text)
+    features: list[str] = []
+    for chunk in chunks:
+        value = re.sub(r"\s+", " ", chunk).strip(" -–—:：")
+        if len(value) < 5 or len(value) > 180 or not _FEATURE_MARKERS.search(value):
+            continue
+        value = translate_feature(value)
+        if value and value not in features:
+            features.append(value)
+        if len(features) >= limit:
+            break
+    return tuple(features)
+
+
+def translate_feature(value: str) -> str:
+    """Convert recognized official benefit phrases into concise Chinese."""
+    patterns = (
+        (r"([\d,]+)\s+completions?\s+per\s+month", lambda m: f"代码补全：每月 {m.group(1)} 次"),
+        (r"access to (?:haiku 4\.5, )?gpt-5 mini,? and more", lambda _: "模型访问：Haiku 4.5、GPT-5 mini 等"),
+        (r"access to open weight models", lambda _: "可使用开放权重模型"),
+        (r"access to premium models", lambda _: "可使用高级模型"),
+        (r"access to (?:the )?github copilot student plan", lambda _: "可使用 GitHub Copilot 学生计划"),
+        (r"community support", lambda _: "社区支持"),
+        (r"no credit card required", lambda _: "无需信用卡"),
+        (r"chat, agent mode, code review, copilot cloud agent, copilot cli, and copilot apps", lambda _: "聊天、Agent 模式、代码审查、云端 Agent 与 Copilot Apps"),
+        (r"for everyday coding with agents in github copilot", lambda _: "面向日常编码的 Agent 编程辅助"),
+        (r"for more complex development with premium models", lambda _: "面向复杂开发的高级模型"),
+        (r"for sustained, high-volume agent workflows with github copilot", lambda _: "面向高频、持续的 Agent 编程工作流"),
+        (r"([\d,]+)\s+credits?", lambda m: f"使用额度：{m.group(1)} credits"),
+        (r"higher usage limits", lambda _: "更高使用额度"),
+        (r"more usage", lambda _: "更多使用量"),
+        (r"web search", lambda _: "联网搜索"),
+        (r"extended thinking", lambda _: "扩展思考"),
+        (r"deep research|research", lambda _: "深度研究"),
+        (r"file uploads?", lambda _: "文件上传"),
+        (r"image generation", lambda _: "图像生成"),
+        (r"projects?", lambda _: "项目空间"),
+        (r"image, music, and video generation models in Gemini and Search", lambda _: "模型访问：Gemini 与 Google 搜索中的图像、音乐和视频生成模型"),
+        (r"features and models in Gemini Notebook", lambda _: "模型访问：Gemini Notebook 中的功能和模型"),
+        (r"Gemini 3 Pro in AI Mode for Google Search", lambda _: "模型访问：Google 搜索 AI 模式中的 Gemini 3 Pro"),
+        (r"features including Deep Search", lambda _: "功能：深度搜索 Deep Search"),
+        (r"Gemini Spark", lambda _: "功能：Gemini Spark"),
+    )
+    for pattern, builder in patterns:
+        match = re.search(pattern, value, flags=re.I)
+        if match:
+            return builder(match)
+    # 已经是中文的官方片段可以保留；纯英文长句不进入前台。
+    if re.search(r"[\u4e00-\u9fff]", value) and not re.search(r"\b(?:included|access|support|plan|price)\b", value, flags=re.I):
+        return value
+    return ""

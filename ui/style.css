@@ -3346,11 +3346,17 @@ body {
 .plans-provider-head strong { font-size: 13px; }
 .plans-provider-head > span:last-child { margin-left: auto; color: var(--ink-faint); font: 500 10px/1 var(--font-mono); }
 .plans-table-wrap { overflow-x: auto; border-radius: 0; box-shadow: none; }
-.plans-table { min-width: 930px; }
+.plans-table { min-width: 930px; table-layout: fixed; }
 .plans-table th { padding-block: 10px; background: var(--bg); color: var(--ink-ghost); }
+.plans-table th.num { text-align: right; }
 .plans-table td { padding-block: 11px; }
 .plans-table tbody tr.selected { background: color-mix(in srgb, var(--accent-soft) 46%, var(--bg)); }
 .plans-select-col { width: 42px; padding-right: 2px !important; text-align: center; }
+.plans-provider-col { width: 150px; }
+.plans-name-col { width: 31%; }
+.plans-monthly-col { width: 112px; }
+.plans-status-col { width: 92px; }
+.plans-features-col { width: auto; }
 .plans-name { min-width: 210px; }
 .plans-name strong { display: block; overflow: hidden; font: 600 11px/1.4 var(--font-mono); text-overflow: ellipsis; white-space: nowrap; }
 .plans-price { min-width: 100px; }

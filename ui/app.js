@@ -809,10 +809,10 @@ createApp({
 
     function planPriceValue(row, field = 'monthly_price') {
       if (field !== 'monthly_price') return row.prices?.[field] == null ? null : Number(row.prices[field]);
-      const value = row.prices?.comparison_monthly_price;
-      if (value != null) return Number(value);
-      if (row.prices?.currency === 'CNY') return Number(row.prices?.monthly_price);
-      return null;
+      // 套餐列表按用户看到的官方月费排序，避免复制/缺失的人民币
+      // 比较价影响同一厂商内的实际价格顺序。
+      const value = row.prices?.monthly_price;
+      return value == null ? null : Number(value);
     }
 
     function formatPlanPrice(row, field = 'monthly_price') {
@@ -852,6 +852,13 @@ createApp({
       if (unit === 'USD') return `$${number} Credits`;
       if (unit === 'base') return `${number}× 基础额度`;
       return `${number} ${unit}`;
+    }
+
+    function planFeatureSummary(row) {
+      const features = row.prices?.features || [];
+      const quota = row.prices?.included_quota;
+      const quotaFeature = quota != null ? `额度：${formatPlanQuota(row)}` : null;
+      return quotaFeature ? [quotaFeature, ...features] : features;
     }
 
     const plansBaseRows = computed(() => {
@@ -1926,7 +1933,7 @@ createApp({
       currentPlanSelectedRows, plansActiveFilterCount, plansSortLabel,
       togglePlansProvider, clearPlansFilters, togglePlansField, setPlansSortOption, setPlansGroupMode, togglePlanExpanded,
       isPlanSelected, togglePlanSelection, removePlanSelection, clearPlanSelection,
-      openPlansCompare, closePlansCompare, formatPlanPrice, formatPlanQuota,
+      openPlansCompare, closePlansCompare, formatPlanPrice, formatPlanQuota, planFeatureSummary,
       filteredRows, homePreviewRows, homeCompareRows, homeCompareCandidates, homeModelPickerIndex, homeModelPickerQuery, homeModelPickerRows, isHomeCompareLowest,
       openHomeModelPicker, selectHomeCompareModel, addHomePreviewToCompare, closeHomeModelPicker, handleHomeModelPickerKeydown,
       homePlanRows, currentRow, totalProducts, staleCount, successCount, freshnessText,
