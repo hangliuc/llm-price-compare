@@ -224,6 +224,24 @@ class V3Store:
         return plans
 
     @staticmethod
+    def published_catalog_offers(catalog_path: Path) -> list[ModelOffer]:
+        """Load the last served offers for safe source-degradation fallback."""
+        try:
+            catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return []
+        allowed = set(ModelOffer.__dataclass_fields__)
+        offers: list[ModelOffer] = []
+        for record in catalog.get("model_offers", []):
+            payload = dict(record)
+            payload["modalities"] = tuple(payload.get("modalities") or ())
+            try:
+                offers.append(ModelOffer(**{key: value for key, value in payload.items() if key in allowed}))
+            except TypeError:
+                continue
+        return offers
+
+    @staticmethod
     def published_catalog_plans_for_source(catalog_path: Path, source_url: str) -> list[Plan]:
         """Load a source-scoped Last Known Good set from the public artifact.
 

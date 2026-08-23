@@ -177,12 +177,28 @@ def run_pipeline(config: V3Config, *, dry_run: bool = False,
                             "retained_from": "last_known_good",
                         }
             previous = store.latest_published_counts()
-            offers = validate_offers(
-                [*source.normalize(payload, fetched_at), *official_offers],
-                minimum_count=config.minimum_offer_count,
-                previous_count=previous[0] if previous else None,
-                maximum_drop_ratio=config.maximum_drop_ratio,
-            )
+            candidate_offers = [*source.normalize(payload, fetched_at), *official_offers]
+            try:
+                offers = validate_offers(
+                    candidate_offers,
+                    minimum_count=config.minimum_offer_count,
+                    previous_count=previous[0] if previous else None,
+                    maximum_drop_ratio=config.maximum_drop_ratio,
+                )
+                offer_source_status = {"status": "healthy", "count": len(offers)}
+            except Exception as exc:
+                # A transient Models.dev regression must not block official
+                # subscription-plan publication. Keep the last known-good
+                # offers and publish the successfully refreshed plans.
+                retained_offers = store.published_catalog_offers(config.catalog_path)
+                if len(retained_offers) < config.minimum_offer_count:
+                    raise
+                offers = retained_offers
+                offer_source_status = {
+                    "status": "stale", "count": len(offers),
+                    "error_type": type(exc).__name__, "error": str(exc),
+                    "retained_from": "last_known_good",
+                }
             if plans:
                 plans = validate_plans(
                     plans,
@@ -210,7 +226,7 @@ def run_pipeline(config: V3Config, *, dry_run: bool = False,
                 "status": "candidate" if dry_run else "healthy",
                 "published_at": None if dry_run else published_at,
                 "sources": {
-                    "models_dev": {"status": "healthy", "fetched_at": fetched_at},
+                    "models_dev": {**offer_source_status, "fetched_at": fetched_at},
                     "daily_fx": {
                         "status": "healthy",
                         "fetched_at": fx_fetched_at,
