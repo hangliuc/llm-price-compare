@@ -30,6 +30,16 @@ PROVIDER_MAPPINGS: dict[str, ProviderMapping] = {
     "zhipuai": ProviderMapping("zhipu", "智谱", "cn"),
 }
 
+# PPK currently serves mainland-China users.  Models.dev is a global
+# directory, so its entries must not be used as commercial pricing for a
+# domestic provider: its endpoint, currency and market can differ materially
+# from the provider's mainland offer.  Those providers are published solely
+# by their verified mainland official adapters.
+DOMESTIC_PROVIDER_IDS = frozenset({
+    "deepseek", "minimax", "moonshot", "qwen", "xiaomi", "zhipu",
+    "volcengine", "opencode",
+})
+
 
 class ModelsDevSource:
     source_id = "models_dev"
@@ -56,6 +66,8 @@ class ModelsDevSource:
         fetched_at = fetched_at or datetime.now(timezone.utc).isoformat()
         offers: list[ModelOffer] = []
         for source_provider_id, mapping in PROVIDER_MAPPINGS.items():
+            if mapping.provider_id in DOMESTIC_PROVIDER_IDS:
+                continue
             provider = payload.get(source_provider_id)
             if not isinstance(provider, dict):
                 continue
@@ -76,10 +88,6 @@ class ModelsDevSource:
                 output_modalities = modalities.get("output") or []
                 all_modalities = tuple(dict.fromkeys([*input_modalities, *output_modalities]))
                 service_tier = _service_tier(source_model_id, model)
-                # Models.dev is the global directory source. A provider being
-                # Chinese does not turn its Models.dev record into a mainland
-                # commercial offer; official regional adapters publish those
-                # separately under their own market IDs.
                 market = "global"
                 access_channel = "unspecified_endpoint"
                 offer_id = "/".join((

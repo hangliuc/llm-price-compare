@@ -19,6 +19,8 @@ from scripts.pipeline_v3.sources.official_offers.kimi import KimiPricingAdapter,
 from scripts.pipeline_v3.sources.official_offers.minimax import MiniMaxPricingAdapter, MiniMaxPricingPage
 from scripts.pipeline_v3.sources.official_offers.zai import ZaiGlobalPricingAdapter
 from scripts.pipeline_v3.sources.official_offers.qwen import QwenModelStudioAdapter
+from scripts.pipeline_v3.sources.official_offers.xiaomi import XiaomiMiMoMainlandPricingAdapter
+from scripts.pipeline_v3.sources.official_offers.zhipu import ZhipuMainlandPricingAdapter
 from scripts.pipeline_v3.sources.plans.anthropic import AnthropicPlanAdapter
 from scripts.pipeline_v3.sources.plans.base import PlanFetch
 from scripts.pipeline_v3.sources.plans.base import monthly_usd
@@ -109,6 +111,13 @@ def test_models_dev_normalizes_only_target_providers():
     assert offers[0].input_per_1m == 3
     assert offers[0].cache_read_per_1m == .3
     assert offers[0].context_window == 200000
+
+
+def test_models_dev_excludes_domestic_provider_prices():
+    payload = models_dev_payload()
+    payload["deepseek"] = payload["anthropic"]
+    offers = ModelsDevSource("https://models.dev/api.json").normalize(payload, "now")
+    assert all(item.provider_id != "deepseek" for item in offers)
 
 
 def test_missing_cache_stays_none():
@@ -432,7 +441,7 @@ def test_monthly_usd_understands_official_chinese_recurring_price():
     assert monthly_usd(text) == 10
 
 
-def test_qwen_official_adapter_keeps_market_and_tier_prices_separate():
+def test_qwen_official_adapter_keeps_mainland_tier_prices_separate():
     raw = """
       <h3>华北 2（北京）</h3>
       <table><tr><th>模型 ID</th><th>模式</th><th>单次请求的输入 Token 数</th><th>输入单价</th><th>输出单价</th></tr>
@@ -443,14 +452,36 @@ def test_qwen_official_adapter_keeps_market_and_tier_prices_separate():
       <tr><td>qwen3-max</td><td>标准</td><td>0&lt;Token≤32K</td><td>8.807 元</td><td>44.035 元</td></tr></table>
     """.encode()
     offers = QwenModelStudioAdapter().normalize(raw, "now")
-    assert len(offers) == 3
+    assert len(offers) == 2
     assert {(item.market, item.pricing_condition) for item in offers} == {
         ("cn_beijing", "input_lte_32k"),
         ("cn_beijing", "input_lte_128k"),
-        ("sg_international", "input_lte_32k"),
     }
     assert all(item.currency == "CNY" and item.access_channel == "official_api" for item in offers)
-    assert len({item.offer_id for item in offers}) == 3
+    assert len({item.offer_id for item in offers}) == 2
+
+
+def test_zhipu_mainland_adapter_parses_official_bundle_prices():
+    raw = '''newModel:{modelList:[
+      {name:"GLM-5.3",upDownText:["1M"],inPrice:["8元"],outPrice:["28元"],storage:"限时免费",hit:["2元"]},
+      {name:"GLM-5.2",upDownText:["1M"],inPrice:["8元"],outPrice:["28元"],storage:"限时免费",hit:["2元"]}
+    ]}'''.encode()
+    offers = ZhipuMainlandPricingAdapter().normalize(raw, "now")
+    glm = next(item for item in offers if item.model_id == "glm-5.2")
+    assert (glm.input_per_1m, glm.output_per_1m, glm.cache_read_per_1m) == (8, 28, 2)
+    assert (glm.currency, glm.market, glm.context_window) == ("CNY", "cn_mainland", 1_000_000)
+
+
+def test_xiaomi_mimo_mainland_adapter_keeps_only_cny_table():
+    raw = '''<h3>模型国内定价</h3><table>
+      <tr><th>模型</th><th>缓存</th><th>输入</th><th>输出</th></tr>
+      <tr><td>mimo-v2.5-pro</td><td>¥0.025</td><td>¥3.00</td><td>¥6.00</td></tr>
+      <tr><td>mimo-v2.5</td><td>¥0.02</td><td>¥1.00</td><td>¥2.00</td></tr>
+    </table><h3>模型海外定价</h3><table><tr><td>mimo-v2.5-pro</td><td>$0.0036</td><td>$0.435</td><td>$0.87</td></tr></table>'''.encode()
+    offers = XiaomiMiMoMainlandPricingAdapter().normalize(raw, "now")
+    pro = next(item for item in offers if item.model_id == "mimo-v2.5-pro")
+    assert (pro.input_per_1m, pro.output_per_1m, pro.cache_read_per_1m) == (3, 6, .025)
+    assert (pro.currency, pro.market, pro.context_window) == ("CNY", "cn_mainland", 1_000_000)
 
 
 def test_deepseek_official_adapter_keeps_peak_and_off_peak_offers_separate():

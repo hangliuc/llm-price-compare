@@ -1,9 +1,4 @@
-"""MiniMax official mainland and international token-API offers.
-
-The two pages are separate commercial markets: the mainland page is CNY and
-the international page is USD.  They are parsed independently and never
-derived from each other by FX conversion.
-"""
+"""MiniMax official mainland token-API offers."""
 
 from __future__ import annotations
 
@@ -38,11 +33,6 @@ MINIMAX_PRICING_PAGES = (
         "minimax_cn_official_pricing",
         "https://platform.minimaxi.com/docs/guides/pricing-paygo",
         "cn_mainland", "CNY", 5,
-    ),
-    MiniMaxPricingPage(
-        "minimax_global_official_pricing",
-        "https://platform.minimax.io/docs/guides/pricing-paygo.md",
-        "global", "USD", 10,
     ),
 )
 

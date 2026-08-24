@@ -16,9 +16,8 @@ const HOME_FLAGSHIP_PROVIDER_RULES = [
 // 首页套餐区采用 4 列 × 2 行的固定预览，避免桌面端出现孤立的末尾卡片。
 const HOME_PLAN_PREVIEW_LIMIT = 8;
 
-// 首页面向中国大陆用户：这些厂商的同模型报价优先采用可验证的大陆
-// 人民币官方价格。没有大陆官方报价时，首页仍以人民币参考价为主，
-// 并保留国际官方原币作为次行说明，避免把折算价伪装成实际结算价。
+// 首页面向中国大陆用户：国内厂商只使用可验证的中国大陆官方人民币
+// 报价；没有大陆官方报价时不展示该模型，避免混入国际结算价。
 const DOMESTIC_PROVIDER_IDS = new Set([
   'qwen', 'deepseek', 'moonshot', 'zhipu', 'minimax', 'xiaomi', 'volcengine', 'opencode',
 ]);
@@ -1536,7 +1535,10 @@ createApp({
       );
       const newestFirst = (a, b) => {
         const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
-        return dateCompare || a.model.localeCompare(b.model, 'zh');
+        // Some official pricing pages do not publish release dates. In that
+        // case prefer the higher model version, e.g. MiniMax-M3 over M2.7,
+        // rather than the alphabetically first name.
+        return dateCompare || b.model.localeCompare(a.model, 'zh', { numeric: true });
       };
       const quoteKey = (row) => String(row.canonical_id || row.model || '')
         .toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -1883,7 +1885,7 @@ createApp({
 
     function homeUsesCnyPriority(row, field) {
       return DOMESTIC_PROVIDER_IDS.has(row.providerId) &&
-        row.prices?.[`comparison_${field}`] != null;
+        row.prices?.currency === 'CNY' && row.prices?.[field] != null;
     }
 
     function formatHomePriceAmount(row, field) {
@@ -1895,12 +1897,11 @@ createApp({
 
     function homePriceCaption(row, field) {
       if (!homeUsesCnyPriority(row, field)) return '官方价 / 1M';
-      return row.prices?.currency === 'CNY' ? '中国大陆官方价 / 1M' : '人民币参考价 / 1M';
+      return '中国大陆官方价 / 1M';
     }
 
     function formatHomeOriginalPrice(row, field) {
-      if (!homeUsesCnyPriority(row, field) || row.prices?.currency === 'CNY') return null;
-      return `国际官方 ${formatPriceAmount(row, field)}`;
+      return null;
     }
 
     function homeCacheNote(row) {

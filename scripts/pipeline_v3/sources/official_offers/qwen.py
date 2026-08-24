@@ -37,7 +37,7 @@ class QwenModelStudioAdapter(OfficialModelOfferAdapter):
         offers: list[ModelOffer] = []
         for table in soup.find_all("table"):
             market = _table_market(table)
-            if not market:
+            if market != "cn_beijing":
                 continue
             headers = " ".join(table.stripped_strings)
             if "输入单价" not in headers or "输出单价" not in headers:

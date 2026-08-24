@@ -1,14 +1,15 @@
 """Official model-offer adapters.
 
-Models.dev remains the global directory. Adapters in this package add only
-official, market-specific offers and must never overwrite it.
+Adapters in this package add verified, market-specific official offers.
+For domestic providers, the published catalogue is mainland-only.
 """
 
 from scripts.pipeline_v3.sources.official_offers.deepseek import DeepSeekPricingAdapter
 from scripts.pipeline_v3.sources.official_offers.kimi import KIMI_MAINLAND_PRICING_PAGES, KimiPricingAdapter
 from scripts.pipeline_v3.sources.official_offers.minimax import MINIMAX_PRICING_PAGES, MiniMaxPricingAdapter
 from scripts.pipeline_v3.sources.official_offers.qwen import QwenModelStudioAdapter
-from scripts.pipeline_v3.sources.official_offers.zai import ZaiGlobalPricingAdapter
+from scripts.pipeline_v3.sources.official_offers.xiaomi import XiaomiMiMoMainlandPricingAdapter
+from scripts.pipeline_v3.sources.official_offers.zhipu import ZhipuMainlandPricingAdapter
 
 
 def experimental_official_offer_adapters(timeout_seconds: int = 45):
@@ -17,15 +18,16 @@ def experimental_official_offer_adapters(timeout_seconds: int = 45):
     return [
         QwenModelStudioAdapter(timeout_seconds=timeout_seconds),
         DeepSeekPricingAdapter(timeout_seconds=timeout_seconds),
+        ZhipuMainlandPricingAdapter(timeout_seconds=timeout_seconds),
+        XiaomiMiMoMainlandPricingAdapter(timeout_seconds=timeout_seconds),
         *(KimiPricingAdapter(page, timeout_seconds=timeout_seconds) for page in KIMI_MAINLAND_PRICING_PAGES),
         *(MiniMaxPricingAdapter(page, timeout_seconds=timeout_seconds) for page in MINIMAX_PRICING_PAGES),
-        ZaiGlobalPricingAdapter(timeout_seconds=timeout_seconds),
     ]
 
 
 __all__ = [
     "DeepSeekPricingAdapter", "KIMI_MAINLAND_PRICING_PAGES", "KimiPricingAdapter",
     "MINIMAX_PRICING_PAGES", "MiniMaxPricingAdapter",
-    "QwenModelStudioAdapter", "experimental_official_offer_adapters",
-    "ZaiGlobalPricingAdapter",
+    "QwenModelStudioAdapter", "XiaomiMiMoMainlandPricingAdapter",
+    "ZhipuMainlandPricingAdapter", "experimental_official_offer_adapters",
 ]
