@@ -22,6 +22,8 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
     # US English storefront so VPN/server region does not turn the catalogue
     # into SGD (or another local currency).
     browser_locale = "en-US"
+    browser_timezone_id = "America/New_York"
+    browser_geolocation = (40.7128, -74.0060)
     specs = (PlanSpec("plus", "ChatGPT Plus", r"(?:ChatGPT\s+)?Plus\b", "general_ai", "subscription", "USD", featured_on_home=True),)
     _plans = (("free", "ChatGPT Free", "Free"), ("go", "ChatGPT Go", "Go"), ("plus", "ChatGPT Plus", "Plus"), ("pro", "ChatGPT Pro", "Pro"))
     _price_pattern = re.compile(

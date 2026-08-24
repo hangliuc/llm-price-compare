@@ -52,15 +52,24 @@ async def _render(
     ready_headings: tuple[str, ...] = (),
     scroll_to_bottom: bool = False,
     locale: str = "zh-CN",
+    timezone_id: str | None = None,
+    geolocation: tuple[float, float] | None = None,
 ) -> FetchResponse:
     from playwright.async_api import async_playwright
 
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch(headless=True)
-        page = await browser.new_page(
-            user_agent=BROWSER_USER_AGENT,
-            locale=locale,
-        )
+        context_options = {
+            "user_agent": BROWSER_USER_AGENT,
+            "locale": locale,
+        }
+        if timezone_id:
+            context_options["timezone_id"] = timezone_id
+        if geolocation:
+            context_options["geolocation"] = {"latitude": geolocation[0], "longitude": geolocation[1]}
+            context_options["permissions"] = ["geolocation"]
+        context = await browser.new_context(**context_options)
+        page = await context.new_page()
         response = await page.goto(
             url,
             wait_until="domcontentloaded",
@@ -87,6 +96,7 @@ async def _render(
         raw = (await page.content()).encode("utf-8")
         status = response.status if response else 200
         headers = await response.all_headers() if response else {}
+        await context.close()
         await browser.close()
         return FetchResponse(raw=raw, http_status=status, headers=headers)
 
@@ -125,12 +135,16 @@ class BrowserFetcher:
         ready_headings: tuple[str, ...] = (),
         scroll_to_bottom: bool = False,
         locale: str = "zh-CN",
+        timezone_id: str | None = None,
+        geolocation: tuple[float, float] | None = None,
     ):
         self.wait_selector = wait_selector
         self.settle_ms = settle_ms
         self.ready_headings = ready_headings
         self.scroll_to_bottom = scroll_to_bottom
         self.locale = locale
+        self.timezone_id = timezone_id
+        self.geolocation = geolocation
 
     def fetch(self, url: str, timeout_seconds: int) -> FetchResponse:
         return _run_coroutine(
@@ -142,5 +156,7 @@ class BrowserFetcher:
                 ready_headings=self.ready_headings,
                 scroll_to_bottom=self.scroll_to_bottom,
                 locale=self.locale,
+                timezone_id=self.timezone_id,
+                geolocation=self.geolocation,
             )
         )

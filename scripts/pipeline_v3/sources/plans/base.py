@@ -29,6 +29,8 @@ class OfficialPlanAdapter(ABC):
     render_ready_headings: tuple[str, ...] = ()
     render_scroll_to_bottom: bool = False
     browser_locale: str = "zh-CN"
+    browser_timezone_id: str | None = None
+    browser_geolocation: tuple[float, float] | None = None
 
     def __init__(self, *, timeout_seconds: int = 45, fetcher=None):
         self.timeout_seconds = timeout_seconds
@@ -39,6 +41,8 @@ class OfficialPlanAdapter(ABC):
                 ready_headings=self.render_ready_headings,
                 scroll_to_bottom=self.render_scroll_to_bottom,
                 locale=self.browser_locale,
+                timezone_id=self.browser_timezone_id,
+                geolocation=self.browser_geolocation,
             )
             if self.fetch_mode == "browser"
             else StaticHttpFetcher()
