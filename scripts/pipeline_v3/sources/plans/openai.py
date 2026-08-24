@@ -12,6 +12,12 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
     source = "openai_chatgpt_plus"
     source_url = "https://openai.com/chatgpt/pricing/"
     minimum_plan_count = 1
+    # chatgpt.com renders the lower tiers lazily.  Do not snapshot the page
+    # until all personal pricing-card headings are visible; a one-card result
+    # would otherwise overwrite the published catalogue with only Free.
+    render_settle_ms = 5000
+    render_ready_headings = ("免费版", "Go", "Plus", "Pro")
+    render_scroll_to_bottom = True
     specs = (PlanSpec("plus", "ChatGPT Plus", r"(?:ChatGPT\s+)?Plus\b", "general_ai", "subscription", "USD", featured_on_home=True),)
     _plans = (("free", "ChatGPT Free", "免费版"), ("go", "ChatGPT Go", "Go"), ("plus", "ChatGPT Plus", "Plus"), ("pro", "ChatGPT Pro", "Pro"))
 

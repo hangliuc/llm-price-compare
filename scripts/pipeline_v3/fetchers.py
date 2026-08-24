@@ -43,7 +43,15 @@ class StaticHttpFetcher:
         )
 
 
-async def _render(url: str, timeout_seconds: int, wait_selector: str | None) -> FetchResponse:
+async def _render(
+    url: str,
+    timeout_seconds: int,
+    wait_selector: str | None,
+    *,
+    settle_ms: int = 1500,
+    ready_headings: tuple[str, ...] = (),
+    scroll_to_bottom: bool = False,
+) -> FetchResponse:
     from playwright.async_api import async_playwright
 
     async with async_playwright() as playwright:
@@ -60,7 +68,21 @@ async def _render(url: str, timeout_seconds: int, wait_selector: str | None) -> 
         if wait_selector:
             await page.wait_for_selector(wait_selector, timeout=timeout_seconds * 1000)
         else:
-            await page.wait_for_timeout(1500)
+            await page.wait_for_timeout(settle_ms)
+        if scroll_to_bottom:
+            # Several pricing sites defer lower cards until they enter the
+            # viewport.  Trigger that work before snapshotting the DOM.
+            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            await page.wait_for_timeout(settle_ms)
+        if ready_headings:
+            await page.wait_for_function(
+                """required => required.every(label =>
+                    [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+                        .some(node => node.textContent.trim() === label)
+                )""",
+                arg=list(ready_headings),
+                timeout=timeout_seconds * 1000,
+            )
         raw = (await page.content()).encode("utf-8")
         status = response.status if response else 200
         headers = await response.all_headers() if response else {}
@@ -94,8 +116,27 @@ def _run_coroutine(coroutine):
 class BrowserFetcher:
     """Render an official JavaScript page in headless Chromium."""
 
-    def __init__(self, wait_selector: str | None = None):
+    def __init__(
+        self,
+        wait_selector: str | None = None,
+        *,
+        settle_ms: int = 1500,
+        ready_headings: tuple[str, ...] = (),
+        scroll_to_bottom: bool = False,
+    ):
         self.wait_selector = wait_selector
+        self.settle_ms = settle_ms
+        self.ready_headings = ready_headings
+        self.scroll_to_bottom = scroll_to_bottom
 
     def fetch(self, url: str, timeout_seconds: int) -> FetchResponse:
-        return _run_coroutine(_render(url, timeout_seconds, self.wait_selector))
+        return _run_coroutine(
+            _render(
+                url,
+                timeout_seconds,
+                self.wait_selector,
+                settle_ms=self.settle_ms,
+                ready_headings=self.ready_headings,
+                scroll_to_bottom=self.scroll_to_bottom,
+            )
+        )

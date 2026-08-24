@@ -25,11 +25,19 @@ class OfficialPlanAdapter(ABC):
     minimum_plan_count: int = 1
     fetch_mode: str = "static"
     wait_selector: str | None = None
+    render_settle_ms: int = 1500
+    render_ready_headings: tuple[str, ...] = ()
+    render_scroll_to_bottom: bool = False
 
     def __init__(self, *, timeout_seconds: int = 45, fetcher=None):
         self.timeout_seconds = timeout_seconds
         self.fetcher = fetcher or (
-            BrowserFetcher(self.wait_selector)
+            BrowserFetcher(
+                self.wait_selector,
+                settle_ms=self.render_settle_ms,
+                ready_headings=self.render_ready_headings,
+                scroll_to_bottom=self.render_scroll_to_bottom,
+            )
             if self.fetch_mode == "browser"
             else StaticHttpFetcher()
         )
