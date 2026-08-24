@@ -12,7 +12,7 @@ from scripts.pipeline_v3.fx import DailyFxSource
 from scripts.pipeline_v3.comparison import apply_comparison_values
 from scripts.pipeline_v3.models import ModelOffer, Plan
 from scripts.pipeline_v3.probe import probe_plan_adapters
-from scripts.pipeline_v3.runner import run_pipeline
+from scripts.pipeline_v3.runner import run_pipeline, scoped_previous_offer_count
 from scripts.pipeline_v3.sources.models_dev import ModelsDevSource
 from scripts.pipeline_v3.sources.official_offers.deepseek import DeepSeekPricingAdapter
 from scripts.pipeline_v3.sources.official_offers.kimi import KimiPricingAdapter, KimiPricingPage
@@ -133,6 +133,19 @@ def test_duplicate_offer_is_rejected():
 def test_large_offer_drop_is_rejected():
     with pytest.raises(ValidationError, match="dropped"):
         validate_offers([offer()], previous_count=10)
+
+
+def test_scope_adjusted_previous_offer_count_excludes_legacy_domestic_global_prices():
+    global_domestic = offer(
+        provider_id="zhipu", market="global", currency="USD",
+        offer_id="zhipu/glm/global/official_api/standard",
+    )
+    mainland_domestic = offer(
+        provider_id="zhipu", market="cn_mainland", currency="CNY",
+        offer_id="zhipu/glm/cn_mainland/official_api/standard",
+    )
+    international = offer(offer_id="anthropic/claude/global/official_api/standard")
+    assert scoped_previous_offer_count(3, [global_domestic, mainland_domestic, international]) == 2
 
 
 def test_plan_source_is_required():

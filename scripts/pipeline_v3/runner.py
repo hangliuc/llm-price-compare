@@ -12,7 +12,7 @@ from scripts.pipeline_v3.config import V3Config
 from scripts.pipeline_v3.fx import DailyFxSource
 from scripts.pipeline_v3.models import Plan
 from scripts.pipeline_v3.publisher import FileLock, publish_release
-from scripts.pipeline_v3.sources.models_dev import ModelsDevSource
+from scripts.pipeline_v3.sources.models_dev import DOMESTIC_PROVIDER_IDS, ModelsDevSource
 from scripts.pipeline_v3.sources.official_offers.base import OfficialModelOfferAdapter
 from scripts.pipeline_v3.sources.plans.base import OfficialPlanAdapter
 from scripts.pipeline_v3.storage import V3Store, canonical_json, checksum
@@ -21,6 +21,23 @@ from scripts.pipeline_v3.validate import validate_offers, validate_plans
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def scoped_previous_offer_count(previous_count: int | None,
+                                previous_offers) -> int | None:
+    """Keep the offer-drop guard meaningful across the domestic-source cutover.
+
+    Historical releases could include global offers for Chinese providers. They
+    are no longer part of the catalogue contract and must not force a fallback
+    to precisely those stale records when the new scoped catalogue is smaller.
+    """
+    if not previous_count or not previous_offers:
+        return previous_count
+    retained = [offer for offer in previous_offers if not (
+        offer.provider_id in DOMESTIC_PROVIDER_IDS
+        and (offer.market not in {"cn_mainland", "cn_beijing"} or offer.currency != "CNY")
+    )]
+    return len(retained)
 
 
 def run_pipeline(config: V3Config, *, dry_run: bool = False,
@@ -177,12 +194,15 @@ def run_pipeline(config: V3Config, *, dry_run: bool = False,
                             "retained_from": "last_known_good",
                         }
             previous = store.latest_published_counts()
+            previous_offers = store.published_catalog_offers(config.catalog_path)
+            previous_offer_count = scoped_previous_offer_count(
+                previous[0] if previous else None, previous_offers)
             candidate_offers = [*source.normalize(payload, fetched_at), *official_offers]
             try:
                 offers = validate_offers(
                     candidate_offers,
                     minimum_count=config.minimum_offer_count,
-                    previous_count=previous[0] if previous else None,
+                    previous_count=previous_offer_count,
                     maximum_drop_ratio=config.maximum_drop_ratio,
                 )
                 offer_source_status = {"status": "healthy", "count": len(offers)}
