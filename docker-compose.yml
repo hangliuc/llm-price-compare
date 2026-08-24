@@ -23,7 +23,7 @@ services:
     container_name: llm-price-web
     restart: unless-stopped
     ports:
-      - "8001:80"
+      - "127.0.0.1:8001:80"
     volumes:
       - ./ui:/usr/share/nginx/html/ui:ro
       - ./runtime/public:/usr/share/nginx/html/data:ro
