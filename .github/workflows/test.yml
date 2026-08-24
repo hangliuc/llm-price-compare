@@ -18,5 +18,10 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Run tests (skip browser)
+        env:
+          # Tests import the repository's `scripts` package.  The pytest
+          # console entry point does not reliably put the checkout root on
+          # sys.path in GitHub Actions.
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest scripts/ -v -m "not browser"
+          python -m pytest scripts/ -v -m "not browser"
