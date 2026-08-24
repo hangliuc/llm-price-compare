@@ -51,6 +51,7 @@ async def _render(
     settle_ms: int = 1500,
     ready_headings: tuple[str, ...] = (),
     scroll_to_bottom: bool = False,
+    locale: str = "zh-CN",
 ) -> FetchResponse:
     from playwright.async_api import async_playwright
 
@@ -58,7 +59,7 @@ async def _render(
         browser = await playwright.chromium.launch(headless=True)
         page = await browser.new_page(
             user_agent=BROWSER_USER_AGENT,
-            locale="zh-CN",
+            locale=locale,
         )
         response = await page.goto(
             url,
@@ -123,11 +124,13 @@ class BrowserFetcher:
         settle_ms: int = 1500,
         ready_headings: tuple[str, ...] = (),
         scroll_to_bottom: bool = False,
+        locale: str = "zh-CN",
     ):
         self.wait_selector = wait_selector
         self.settle_ms = settle_ms
         self.ready_headings = ready_headings
         self.scroll_to_bottom = scroll_to_bottom
+        self.locale = locale
 
     def fetch(self, url: str, timeout_seconds: int) -> FetchResponse:
         return _run_coroutine(
@@ -138,5 +141,6 @@ class BrowserFetcher:
                 settle_ms=self.settle_ms,
                 ready_headings=self.ready_headings,
                 scroll_to_bottom=self.scroll_to_bottom,
+                locale=self.locale,
             )
         )

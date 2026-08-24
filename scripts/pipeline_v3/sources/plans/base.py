@@ -28,6 +28,7 @@ class OfficialPlanAdapter(ABC):
     render_settle_ms: int = 1500
     render_ready_headings: tuple[str, ...] = ()
     render_scroll_to_bottom: bool = False
+    browser_locale: str = "zh-CN"
 
     def __init__(self, *, timeout_seconds: int = 45, fetcher=None):
         self.timeout_seconds = timeout_seconds
@@ -37,6 +38,7 @@ class OfficialPlanAdapter(ABC):
                 settle_ms=self.render_settle_ms,
                 ready_headings=self.render_ready_headings,
                 scroll_to_bottom=self.render_scroll_to_bottom,
+                locale=self.browser_locale,
             )
             if self.fetch_mode == "browser"
             else StaticHttpFetcher()
