@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=66">
+  <link rel="stylesheet" href="style.css?v=67">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 <body>
@@ -177,25 +177,25 @@
           <div>
             <div class="section-eyebrow">LIVE PRICING · OFFICIAL</div>
             <h2 class="section-title">先看价格，<em>再做选择</em></h2>
-            <p class="section-sub">浏览各厂商最新旗舰模型的输入、输出与缓存官方报价；人民币参考价仅用于跨币种排序与比较。</p>
+            <p class="section-sub">浏览各厂商最新旗舰模型的输入、输出与缓存报价；国内厂商优先展示中国大陆官方人民币价，人民币参考价仅用于跨币种排序与比较。</p>
           </div>
           <a href="#/billing/per_token" class="section-link home-pricing-cta">查看全部价格 →</a>
         </div>
         <div class="home-price-table">
           <div class="home-price-row home-price-head" aria-hidden="true">
-            <span>Model</span><span><b>Input</b><small>官方价 / 1M tokens</small></span><span><b>Output</b><small>官方价 / 1M tokens</small></span><span><b>Cache</b><small>官方价 / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
+            <span>Model</span><span><b>Input</b><small>报价 / 1M tokens</small></span><span><b>Output</b><small>报价 / 1M tokens</small></span><span><b>Cache</b><small>报价 / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
           </div>
           <div v-for="row in homePreviewRows" :key="row.id" class="home-price-row">
-            <a :href="'#/provider/' + row.providerId" class="home-price-model" :aria-label="'查看 ' + row.providerName + ' 的 ' + row.model + ' 详细价格'">
+            <a :href="'#/provider/' + row.providerId" class="home-price-model" :aria-label="'查看 ' + row.providerName + ' 的 ' + homeModelName(row) + ' 详细价格'">
               <span class="provider-icon"><img :src="iconUrl(row.providerId)" :alt="row.providerName" @error="onIconError($event, row.providerId)"></span>
-              <span><b>{{ row.model }}</b><small>{{ row.providerName }}</small></span>
+              <span><b>{{ homeModelName(row) }}</b><small>{{ row.providerName }}</small></span>
             </a>
-            <span class="home-price-value"><small>Input · 官方价 / 1M</small>{{ formatPriceAmount(row, 'input') }}</span>
-            <span class="home-price-value"><small>Output · 官方价 / 1M</small>{{ formatPriceAmount(row, 'output') }}</span>
-            <span class="home-price-value"><small>Cache · 官方价 / 1M</small>{{ formatPriceAmount(row, 'cached_input') }}</span>
+            <span class="home-price-value"><small>Input · {{ homePriceCaption(row, 'input') }}</small><b>{{ formatHomePriceAmount(row, 'input') }}</b><em v-if="formatHomeOriginalPrice(row, 'input')">{{ formatHomeOriginalPrice(row, 'input') }}</em><em v-else-if="formatReferenceCny(row, 'input')">{{ formatReferenceCny(row, 'input') }}</em></span>
+            <span class="home-price-value"><small>Output · {{ homePriceCaption(row, 'output') }}</small><b>{{ formatHomePriceAmount(row, 'output') }}</b><em v-if="formatHomeOriginalPrice(row, 'output')">{{ formatHomeOriginalPrice(row, 'output') }}</em><em v-else-if="formatReferenceCny(row, 'output')">{{ formatReferenceCny(row, 'output') }}</em></span>
+            <span class="home-price-value"><small>Cache · {{ homePriceCaption(row, 'cached_input') }}</small><b>{{ formatHomePriceAmount(row, 'cached_input') }}</b><em v-if="homeCacheNote(row)">{{ homeCacheNote(row) }}</em><em v-else-if="formatHomeOriginalPrice(row, 'cached_input')">{{ formatHomeOriginalPrice(row, 'cached_input') }}</em><em v-else-if="formatReferenceCny(row, 'cached_input')">{{ formatReferenceCny(row, 'cached_input') }}</em></span>
             <span class="home-price-context">
               <small>Context</small><span>{{ formatContext(row.context_window) }}</span>
-              <button type="button" class="home-price-compare-action" :aria-label="'将 ' + row.model + ' 加入模型比较'" title="加入下方模型比较" @click="addHomePreviewToCompare(row)">→</button>
+              <a :href="row.purchase_url" target="_blank" rel="noopener" class="home-price-source-link" :aria-label="'打开 ' + homeModelName(row) + ' 的官方定价页'" title="打开官方定价页">→</a>
             </span>
           </div>
         </div>
@@ -547,9 +547,9 @@
                     <span><strong :title="row.model">{{ row.model || '—' }}</strong><small>{{ row.providerName }} · {{ marketLabel(row.market) }}<template v-if="accessChannelLabel(row.access_channel)"> · {{ accessChannelLabel(row.access_channel) }}</template><template v-if="pricingConditionLabel(row.pricing_condition)"> · {{ pricingConditionLabel(row.pricing_condition) }}</template></small></span>
                   </div>
                 </td>
-                <td v-if="compareVisibleFields.includes('input')" class="num">{{ formatPriceAmount(row, 'input') }}</td>
-                <td v-if="compareVisibleFields.includes('output')" class="num">{{ formatPriceAmount(row, 'output') }}</td>
-                <td v-if="compareVisibleFields.includes('cached_input')" class="num">{{ formatPriceAmount(row, 'cached_input') }}</td>
+                <td v-if="compareVisibleFields.includes('input')" class="num"><b>{{ formatPriceAmount(row, 'input') }}</b><small v-if="formatReferenceCny(row, 'input')">{{ formatReferenceCny(row, 'input') }}</small></td>
+                <td v-if="compareVisibleFields.includes('output')" class="num"><b>{{ formatPriceAmount(row, 'output') }}</b><small v-if="formatReferenceCny(row, 'output')">{{ formatReferenceCny(row, 'output') }}</small></td>
+                <td v-if="compareVisibleFields.includes('cached_input')" class="num"><b>{{ formatPriceAmount(row, 'cached_input') }}</b><small v-if="formatReferenceCny(row, 'cached_input')">{{ formatReferenceCny(row, 'cached_input') }}</small></td>
                 <td v-if="compareVisibleFields.includes('context_window')" class="num">{{ formatContext(row.context_window) }}</td>
                 <td v-if="compareVisibleFields.includes('modalities')" class="modalities-cell">{{ (row.modalities || []).join(', ') || '—' }}</td>
                 <td v-if="compareVisibleFields.includes('release_date')" class="mono">{{ row.release_date || '—' }}</td>
@@ -592,9 +592,9 @@
               </div>
 
               <div class="compare-matrix-label">Provider</div><div v-for="row in compareSelectedRows" :key="row.id + '-provider'" class="compare-matrix-value compare-matrix-text">{{ row.providerName }}</div>
-              <div class="compare-matrix-label">Input / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-input'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'input')}]"><strong>{{ formatPriceAmount(row, 'input') }}</strong><small>{{ formatReferenceCny(row, 'input') }}</small></div>
-              <div class="compare-matrix-label">Output / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-output'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'output')}]"><strong>{{ formatPriceAmount(row, 'output') }}</strong><small>{{ formatReferenceCny(row, 'output') }}</small></div>
-              <div class="compare-matrix-label">Cache / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-cache'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'cached_input')}]"><strong>{{ formatPriceAmount(row, 'cached_input') }}</strong><small>{{ formatReferenceCny(row, 'cached_input') }}</small></div>
+              <div class="compare-matrix-label">Input / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-input'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'input')}]"><strong>{{ formatPriceAmount(row, 'input') }}</strong><small v-if="formatReferenceCny(row, 'input')">{{ formatReferenceCny(row, 'input') }}</small></div>
+              <div class="compare-matrix-label">Output / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-output'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'output')}]"><strong>{{ formatPriceAmount(row, 'output') }}</strong><small v-if="formatReferenceCny(row, 'output')">{{ formatReferenceCny(row, 'output') }}</small></div>
+              <div class="compare-matrix-label">Cache / 1M</div><div v-for="row in compareSelectedRows" :key="row.id + '-cache'" :class="['compare-matrix-value', {lowest: isCompareLowest(row, 'cached_input')}]"><strong>{{ formatPriceAmount(row, 'cached_input') }}</strong><small v-if="formatReferenceCny(row, 'cached_input')">{{ formatReferenceCny(row, 'cached_input') }}</small></div>
               <div class="compare-matrix-label">Context</div><div v-for="row in compareSelectedRows" :key="row.id + '-context'" class="compare-matrix-value">{{ formatContext(row.context_window) }}</div>
               <div class="compare-matrix-label">模态</div><div v-for="row in compareSelectedRows" :key="row.id + '-modalities'" class="compare-matrix-value compare-matrix-text">{{ (row.modalities || []).join(' · ') || '—' }}</div>
             </div>
@@ -826,14 +826,6 @@
                 </div>
               </details>
               <details class="compare-menu">
-                <summary>Free / Paid</summary>
-                <div class="compare-menu-panel">
-                  <button type="button" :class="{active: plansPriceKindFilter === ''}" @click="plansPriceKindFilter = ''">全部</button>
-                  <button type="button" :class="{active: plansPriceKindFilter === 'free'}" @click="plansPriceKindFilter = 'free'">免费</button>
-                  <button type="button" :class="{active: plansPriceKindFilter === 'paid'}" @click="plansPriceKindFilter = 'paid'">付费</button>
-                </div>
-              </details>
-              <details class="compare-menu">
                 <summary>月费范围</summary>
                 <div class="compare-menu-panel">
                   <p class="compare-menu-hint">统一按 CNY 判断</p>
@@ -884,7 +876,6 @@
           <div v-if="plansActiveFilterCount || plansSearchQuery" class="compare-active-filters">
             <span v-if="plansSearchQuery" class="compare-filter-token">“{{ plansSearchQuery }}” <button type="button" @click="plansSearchQuery = ''">×</button></span>
             <span v-for="id in plansProviderFilters" :key="id" class="compare-filter-token">{{ plansProviderOptions.find(p => p.id === id)?.name || id }} <button type="button" @click="togglePlansProvider(id)">×</button></span>
-            <span v-if="plansPriceKindFilter" class="compare-filter-token">{{ plansPriceKindFilter === 'free' ? '免费' : '付费' }} <button type="button" @click="plansPriceKindFilter = ''">×</button></span>
             <span v-if="plansPriceRangeFilter" class="compare-filter-token">{{ {lt50:'< ¥50','50to150':'¥50–150','150to500':'¥150–500',gte500:'≥ ¥500'}[plansPriceRangeFilter] }} <button type="button" @click="plansPriceRangeFilter = ''">×</button></span>
             <span v-if="plansQuotaTypeFilter" class="compare-filter-token">{{ plansQuotaTypeOptions.find(t => t.key === plansQuotaTypeFilter)?.label }} <button type="button" @click="plansQuotaTypeFilter = ''">×</button></span>
             <button type="button" class="compare-clear-filters" @click="clearPlansFilters">清除全部</button>
@@ -1460,6 +1451,6 @@
     </footer>
   </div>
 
-  <script src="app.js?v=58"></script>
+  <script src="app.js?v=59"></script>
 </body>
 </html>

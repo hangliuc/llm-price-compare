@@ -13,6 +13,16 @@ const HOME_FLAGSHIP_PROVIDER_RULES = [
   { providerId: 'minimax', modelPatterns: [/^MiniMax-M\d+(?:\.\d+)?$/i] },
 ];
 
+// 首页套餐区采用 4 列 × 2 行的固定预览，避免桌面端出现孤立的末尾卡片。
+const HOME_PLAN_PREVIEW_LIMIT = 8;
+
+// 首页面向中国大陆用户：这些厂商的同模型报价优先采用可验证的大陆
+// 人民币官方价格。没有大陆官方报价时，才以发布时的人民币参考价作为
+// 主展示，并明确保留原始国际报价，绝不把换算价伪装成官方人民币价。
+const DOMESTIC_PROVIDER_IDS = new Set([
+  'qwen', 'deepseek', 'moonshot', 'zhipu', 'minimax', 'xiaomi', 'volcengine', 'opencode',
+]);
+
 // Production Nginx exposes the V3 catalog at /data/catalog.json. A repository-
 // root Python server can read the same artifact directly from runtime/.
 const DATA_PATHS = ["../data/catalog.json"];
@@ -63,6 +73,15 @@ function catalogV3ToViewData(catalog) {
       access_channel: item.access_channel || 'unspecified_endpoint',
       pricing_condition: item.pricing_condition || 'standard',
       source_id: item.source_id || 'models_dev',
+      // The aggregate Model Studio price table sometimes states that context
+      // caching has a discount without publishing the exact cache-hit price.
+      // Preserve that official qualifier instead of making a missing value
+      // look like the model does not support caching.
+      cache_discount_note: item.cache_discount_note || (
+        item.raw?.cells?.some(cell => String(cell).includes('上下文缓存') && String(cell).includes('折扣'))
+          ? '上下文缓存享有折扣'
+          : null
+      ),
       purchase_url: item.source_url || '',
       notes: null,
       plan_category: null,
@@ -100,6 +119,7 @@ function catalogV3ToViewData(catalog) {
       purchase_url: item.purchase_url || item.source_url || '',
       notes: null,
       plan_category: item.plan_category || null,
+      is_free: Boolean(item.is_free),
       featured_on_home: Boolean(item.featured_on_home),
       data_status: 'accepted',
       stale_fields: [],
@@ -267,7 +287,6 @@ createApp({
     // Subscription / Coding Plan 共用的 Plans Explorer 状态。
     const plansSearchQuery = ref('');
     const plansProviderFilters = ref([]);
-    const plansPriceKindFilter = ref('');
     const plansPriceRangeFilter = ref('');
     const plansQuotaTypeFilter = ref('');
     const plansSortOption = ref('monthlyPrice:asc');
@@ -454,6 +473,8 @@ createApp({
       for (const p of data.value.providers) {
         const status = providerStatusMap.value[p.id] || {};
         for (const prod of p.products) {
+          // 免费套餐不参与页面展示；按需计费的 0 元字段不在此规则范围内。
+          if ((prod.billing_type === 'subscription' || prod.billing_type === 'coding_plan') && prod.is_free === true) continue;
           rows.push({
             id: `${p.id}:${prod.id}`,
             providerId: p.id,
@@ -886,8 +907,6 @@ createApp({
       const q = plansSearchQuery.value.trim().toLowerCase();
       if (q) rows = rows.filter(row => (row.model || '').toLowerCase().includes(q) || row.providerName.toLowerCase().includes(q));
       if (plansProviderFilters.value.length) rows = rows.filter(row => plansProviderFilters.value.includes(row.providerId));
-      if (plansPriceKindFilter.value === 'free') rows = rows.filter(row => Number(row.prices?.monthly_price) === 0);
-      if (plansPriceKindFilter.value === 'paid') rows = rows.filter(row => Number(row.prices?.monthly_price) > 0);
       if (plansPriceRangeFilter.value) {
         rows = rows.filter(row => {
           const value = planPriceValue(row, 'monthly_price');
@@ -927,7 +946,7 @@ createApp({
       .map(id => plansBaseRows.value.find(row => row.id === id))
       .filter(Boolean));
     const plansActiveFilterCount = computed(() => plansProviderFilters.value.length +
-      Number(Boolean(plansPriceKindFilter.value)) + Number(Boolean(plansPriceRangeFilter.value)) + Number(Boolean(plansQuotaTypeFilter.value)));
+      Number(Boolean(plansPriceRangeFilter.value)) + Number(Boolean(plansQuotaTypeFilter.value)));
     const plansSortLabel = computed(() => plansSortOption.value.endsWith(':desc') ? '月费从高到低' : '月费从低到高');
 
     function togglePlansProvider(id) {
@@ -938,7 +957,6 @@ createApp({
     function clearPlansFilters() {
       plansSearchQuery.value = '';
       plansProviderFilters.value = [];
-      plansPriceKindFilter.value = '';
       plansPriceRangeFilter.value = '';
       plansQuotaTypeFilter.value = '';
     }
@@ -1520,11 +1538,24 @@ createApp({
         const dateCompare = (b.release_date || '').localeCompare(a.release_date || '');
         return dateCompare || a.model.localeCompare(b.model, 'zh');
       };
+      const quoteKey = (row) => String(row.canonical_id || row.model || '')
+        .toLowerCase().replace(/[^a-z0-9]/g, '');
+      const mainlandQuoteFor = (row, providerRows) => {
+        if (!DOMESTIC_PROVIDER_IDS.has(row.providerId)) return row;
+        const sameModel = providerRows.filter(candidate =>
+          candidate.prices?.currency === 'CNY' &&
+          ['cn_mainland', 'cn_beijing'].includes(candidate.market || '') &&
+          quoteKey(candidate) === quoteKey(row)
+        );
+        return sameModel.sort((a, b) =>
+          (a.market === 'cn_mainland' ? -1 : 0) - (b.market === 'cn_mainland' ? -1 : 0)
+        )[0] || row;
+      };
       const selected = HOME_FLAGSHIP_PROVIDER_RULES.flatMap(({ providerId, modelPatterns }) => {
         const providerRows = rows.filter(row => row.providerId === providerId);
         for (const pattern of modelPatterns) {
           const latest = providerRows.filter(row => pattern.test(row.model)).sort(newestFirst)[0];
-          if (latest) return [latest];
+          if (latest) return [mainlandQuoteFor(latest, providerRows)];
         }
         return [];
       });
@@ -1650,14 +1681,31 @@ createApp({
       options[nextIndex].focus();
     }
 
-    // 首页套餐预览由数据层显式策展，不再跨币种比较月费或按最低价自动选品。
-    const homePlanRows = computed(() =>
-      allRows.value.filter(r =>
-        (r.billing_type === 'coding_plan' || r.billing_type === 'subscription') &&
-        r.featured_on_home === true &&
-        r.prices?.monthly_price != null
-      )
-    );
+    // 首页套餐预览优先展示不同厂商：先取每家厂商的精选套餐，再用同厂商
+    // 的其它付费套餐补齐，以维持 4 列 × 2 行的完整布局。
+    const homePlanRows = computed(() => {
+      const candidates = allRows.value.filter(row =>
+        (row.billing_type === 'coding_plan' || row.billing_type === 'subscription') &&
+        row.prices?.monthly_price != null
+      );
+      const featuredFirst = [...candidates].sort((a, b) =>
+        Number(b.featured_on_home === true) - Number(a.featured_on_home === true)
+      );
+      const rows = [];
+      const displayedProviders = new Set();
+      for (const row of featuredFirst) {
+        if (displayedProviders.has(row.providerId)) continue;
+        rows.push(row);
+        displayedProviders.add(row.providerId);
+        if (rows.length === HOME_PLAN_PREVIEW_LIMIT) return rows;
+      }
+      for (const row of featuredFirst) {
+        if (rows.includes(row)) continue;
+        rows.push(row);
+        if (rows.length === HOME_PLAN_PREVIEW_LIMIT) break;
+      }
+      return rows;
+    });
 
     // Hero ticker: 最低价卡片 + 随机展示 2 张
     const perTokenRows = computed(() =>
@@ -1811,13 +1859,62 @@ createApp({
     }
 
     function formatReferenceCny(row, field) {
+      // CNY is already the official price for this offer. Repeating the same
+      // number as an "approximate" value adds noise and can imply that it was
+      // converted, so only show this secondary line for another original
+      // currency.
+      if (rowDisplayCurrency(row) === 'CNY') return null;
       const value = field === 'monthly_price'
         ? row.prices?.comparison_monthly_price
         : row.prices?.[`comparison_${field}`];
-      if (value == null) return '—';
+      if (value == null) return null;
       const amount = Number(value);
+      if (!Number.isFinite(amount)) return null;
       const rounded = amount >= 100 ? amount.toFixed(amount % 1 ? 1 : 0) : amount.toFixed(amount % 1 ? 2 : 0);
       return `≈ ¥${rounded}`;
+    }
+
+    function formatCnyAmount(value) {
+      const amount = Number(value);
+      if (!Number.isFinite(amount)) return '—';
+      const decimals = amount >= 100 ? (amount % 1 ? 1 : 0) : (amount % 1 ? 2 : 0);
+      return `¥${amount.toFixed(decimals)}`;
+    }
+
+    function homeUsesCnyPriority(row, field) {
+      return DOMESTIC_PROVIDER_IDS.has(row.providerId) &&
+        row.prices?.[`comparison_${field}`] != null;
+    }
+
+    function formatHomePriceAmount(row, field) {
+      if (homeUsesCnyPriority(row, field)) {
+        return formatCnyAmount(row.prices[`comparison_${field}`]);
+      }
+      return formatPriceAmount(row, field);
+    }
+
+    function homePriceCaption(row, field) {
+      if (!homeUsesCnyPriority(row, field)) return '官方价 / 1M';
+      return row.prices?.currency === 'CNY' ? '中国大陆官方价 / 1M' : '人民币参考价 / 1M';
+    }
+
+    function formatHomeOriginalPrice(row, field) {
+      if (!homeUsesCnyPriority(row, field) || row.prices?.currency === 'CNY') return null;
+      return `国际官方 ${formatPriceAmount(row, field)}`;
+    }
+
+    function homeCacheNote(row) {
+      return row.prices?.cached_input == null ? row.cache_discount_note : null;
+    }
+
+    function homeModelName(row) {
+      // Kimi 的大陆官方文档以 API ID（kimi-k3）作为模型名；首页沿用
+      // 与国际目录一致的产品命名，避免同一模型看起来像两款产品。
+      if (row.providerId === 'moonshot') {
+        const match = /^kimi-(k.+)$/i.exec(row.model || '');
+        if (match) return `Kimi ${match[1].replace(/^k(\d)/i, 'K$1').replace(/-/g, ' ')}`;
+      }
+      return row.model;
     }
 
     function comparisonReferenceDate() {
@@ -1926,7 +2023,7 @@ createApp({
       catalogProviderFilters, catalogModalityFilters, toggleCatalogProvider, toggleCatalogModality,
       catalogVisibleFields, catalogFieldOptions, clearCatalogFilters, toggleCatalogField,
       sortCatalogBy, catalogSortIndicator, goToCompareWorkspace,
-      plansSearchQuery, plansProviderFilters, plansPriceKindFilter, plansPriceRangeFilter,
+      plansSearchQuery, plansProviderFilters, plansPriceRangeFilter,
       plansQuotaTypeFilter, plansSortOption, plansGroupMode, plansExpandedIds, plansCompareOpen,
       plansSelectionNotice, plansBaseRows, plansProviderCount, plansProviderOptions,
       plansQuotaTypeOptions, plansRows, plansGroups, currentPlansVisibleFields,
@@ -1946,7 +2043,7 @@ createApp({
       providerBillingTabs, providerBillingTab, providerCurrentRows,
       displayRows, billingCardGroups, billingCurrencyTab, billingCnyCount, billingUsdCount,
       feedbackUrl, toggleFilter, sortBy, toggleExpand, billingLabel, billingLabelShort,
-      formatPrice, formatPriceAmount, formatReferenceCny, comparisonReferenceDate, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
+      formatPrice, formatPriceAmount, formatReferenceCny, formatHomePriceAmount, homePriceCaption, formatHomeOriginalPrice, homeCacheNote, homeModelName, comparisonReferenceDate, formatContext, formatMonthly, formatMonthlyValue, formatQuota, benchmarkText, textNote, staleHours, iconUrl, onIconError, goHash, currencySymbol,
     };
   },
 }).mount("#app");
