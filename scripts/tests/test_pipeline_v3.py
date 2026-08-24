@@ -230,14 +230,14 @@ def test_google_plan_adapter_ignores_early_marketing_mention():
     raw = b"""
       <main>
         <p>Google AI Pro. Study smarter with higher access.</p>
-        <h2>Google AI Plus</h2><p>$6.98 SGD /mo</p>
-        <h2>Google AI Pro</h2><p>$28.99 SGD /mo</p>
-        <h2>Google AI Ultra</h2><p>From $139.99 SGD /mo</p>
+        <h2>Google AI Plus</h2><p>$9.99 /mo</p>
+        <h2>Google AI Pro</h2><p>$19.99 /mo</p>
+        <h2>Google AI Ultra</h2><p>From $100 /mo</p>
       </main>
     """
     plans = GooglePlanAdapter().normalize(raw, "now")
-    assert [item.price_amount for item in plans] == [6.98, 28.99, 139.99]
-    assert all(item.currency == "SGD" for item in plans)
+    assert [item.price_amount for item in plans] == [9.99, 19.99, 100]
+    assert all(item.currency == "USD" for item in plans)
 
 
 def test_openai_plan_adapter_reads_us_prices_from_official_go_announcement():
@@ -374,15 +374,14 @@ def test_declarative_adapter_never_uses_a_hardcoded_price_fallback():
         OpenCodePlanAdapter().normalize(raw, "now")
 
 
-def test_google_adapter_preserves_official_regional_currency():
+def test_google_adapter_rejects_regional_currency():
     raw = b"""
       <p>Google AI Plus $6.98 SGD /mo</p>
       <p>Google AI Pro $28.99 SGD /mo</p>
       <p>Google AI Ultra From $139.99 SGD /mo</p>
     """
-    plans = GooglePlanAdapter().normalize(raw, "now")
-    assert [item.price_amount for item in plans] == [6.98, 28.99, 139.99]
-    assert {item.currency for item in plans} == {"SGD"}
+    with pytest.raises(ValueError, match="expected 3"):
+        GooglePlanAdapter().normalize(raw, "now")
 
 
 def test_zhipu_adapter_uses_standard_monthly_price_not_discounted_price():

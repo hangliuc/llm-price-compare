@@ -12,9 +12,18 @@ from scripts.pipeline_v3.sources.plans.base import (
 
 class GooglePlanAdapter(OfficialPlanAdapter):
     source = "google_ai_plans"
-    source_url = "https://one.google.com/about/google-ai-plans/?hl=en-US"
+    # `hl=en-US` only changes language; the default endpoint still derives
+    # billing currency from the crawler's IP.  The intl/en_us endpoint is
+    # Google's dedicated US storefront and provides the USD catalogue.
+    source_url = "https://one.google.com/intl/en_us/about/google-ai-plans/"
     fetch_mode = "browser"
     minimum_plan_count = 3
+    render_settle_ms = 3500
+    render_ready_headings = ("Google AI Plus", "Google AI Pro", "Google AI Ultra")
+    render_scroll_to_bottom = True
+    browser_locale = "en-US"
+    browser_timezone_id = "America/New_York"
+    browser_geolocation = (40.7128, -74.0060)
     _plans = (
         ("plus", "Google AI Plus"),
         ("pro", "Google AI Pro"),
@@ -24,14 +33,10 @@ class GooglePlanAdapter(OfficialPlanAdapter):
     @staticmethod
     def _regional_price(window: str) -> tuple[float | None, str | None]:
         patterns = (
-            ("SGD", re.compile(
-                r"(?:From\s+)?(?:\$\s*)?(?:SGD\s*)?([0-9]+(?:\.[0-9]+)?)\s*SGD\s*/\s*mo",
-                re.I,
-            )),
-            ("SGD", re.compile(
-                r"SGD\s*([0-9]+(?:\.[0-9]+)?)\s*/\s*mo", re.I)),
             ("USD", re.compile(
                 r"(?:From\s+)?\$\s*([0-9]+(?:\.[0-9]+)?)\s*/\s*mo", re.I)),
+            ("USD", re.compile(
+                r"(?:From\s+)?USD\s*([0-9]+(?:\.[0-9]+)?)\s*/\s*mo", re.I)),
         )
         for currency, pattern in patterns:
             match = pattern.search(window)
