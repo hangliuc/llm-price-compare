@@ -26,4 +26,6 @@ services:
       - "127.0.0.1:8001:80"
     volumes:
       - ./ui:/usr/share/nginx/html/ui:ro
+      - ./ui/robots.txt:/usr/share/nginx/html/robots.txt:ro
+      - ./ui/sitemap.xml:/usr/share/nginx/html/sitemap.xml:ro
       - ./runtime/public:/usr/share/nginx/html/data:ro
