@@ -518,6 +518,7 @@ def test_minimax_adapters_keep_mainland_and_global_offers_independent():
     cn_raw = '''
     | **模型** | **输入价格**<br /> 元/百万 tokens | **输出价格** <br /> 元/百万 tokens | **缓存读取**<br /> 元/百万 tokens | **缓存写入**<br /> 元/百万 tokens |
     | :--- | :---: | :---: | :---: | :---: |
+    | **MiniMax-M3**<br />≤ 512k 输入 tokens 永久五折 | ~~4.20~~ 2.10 | ~~16.80~~ 8.40 | ~~0.84~~ 0.42 | —— |
     | **MiniMax-M2.7** | 2.1 | 8.4 | 0.42 | 2.625 |
     '''.encode()
     global_raw = '''
@@ -526,9 +527,14 @@ def test_minimax_adapters_keep_mainland_and_global_offers_independent():
     | :--- | :--- | :--- | :--- |
     | **MiniMax-M3**<br />≤ 512k input tokens | ~~\\$0.60~~ \\$0.30 / M tokens | ~~\\$2.40~~ \\$1.20 / M tokens | ~~\\$0.12~~ \\$0.06 / M tokens |
     '''.encode()
-    cn = MiniMaxPricingAdapter(MiniMaxPricingPage("fixture_cn", "https://example.test/cn", "cn_mainland", "CNY", 1)).normalize(cn_raw, "now")[0]
+    cn_offers = MiniMaxPricingAdapter(MiniMaxPricingPage("fixture_cn", "https://example.test/cn", "cn_mainland", "CNY", 1)).normalize(cn_raw, "now")
+    cn = next(item for item in cn_offers if item.model_id == "minimax-m2.7")
+    cn_m3 = next(item for item in cn_offers if item.model_id == "minimax-m3")
     global_offer = MiniMaxPricingAdapter(MiniMaxPricingPage("fixture_global", "https://example.test/global", "global", "USD", 1)).normalize(global_raw, "now")[0]
     assert (cn.input_per_1m, cn.output_per_1m, cn.cache_read_per_1m, cn.cache_write_per_1m) == (2.1, 8.4, .42, 2.625)
+    assert (cn_m3.input_per_1m, cn_m3.output_per_1m, cn_m3.cache_read_per_1m, cn_m3.cache_write_per_1m) == (2.1, 8.4, .42, None)
+    assert cn_m3.context_window == 1_000_000
+    assert cn_m3.raw["context_source_url"] == "https://www.minimax.io/models/text/m3"
     assert (global_offer.input_per_1m, global_offer.output_per_1m, global_offer.cache_read_per_1m) == (.3, 1.2, .06)
     assert (cn.market, cn.currency) == ("cn_mainland", "CNY")
     assert (global_offer.market, global_offer.currency, global_offer.pricing_condition) == ("global", "USD", "input_lte_512k")

@@ -183,7 +183,7 @@
         </div>
         <div class="home-price-table">
           <div class="home-price-row home-price-head" aria-hidden="true">
-            <span>Model</span><span><b>Input</b><small>报价 / 1M tokens</small></span><span><b>Output</b><small>报价 / 1M tokens</small></span><span><b>Cache</b><small>报价 / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span>
+            <span>Model</span><span><b>Input</b><small>报价 / 1M tokens</small></span><span><b>Output</b><small>报价 / 1M tokens</small></span><span><b>Cache</b><small>报价 / 1M tokens</small></span><span><b>Context</b><small>tokens</small></span><span class="home-price-action-head">查看</span>
           </div>
           <div v-for="row in homePreviewRows" :key="row.id" class="home-price-row">
             <a :href="'#/provider/' + row.providerId" class="home-price-model" :aria-label="'查看 ' + row.providerName + ' 的 ' + homeModelName(row) + ' 详细价格'">
@@ -195,7 +195,11 @@
             <span class="home-price-value"><small>Cache · {{ homePriceCaption(row, 'cached_input') }}</small><b>{{ formatHomePriceAmount(row, 'cached_input') }}</b><em v-if="homeCacheNote(row)">{{ homeCacheNote(row) }}</em><em v-else-if="formatHomeOriginalPrice(row, 'cached_input')">{{ formatHomeOriginalPrice(row, 'cached_input') }}</em><em v-else-if="formatReferenceCny(row, 'cached_input')">{{ formatReferenceCny(row, 'cached_input') }}</em></span>
             <span class="home-price-context">
               <small>Context</small><span>{{ formatContext(row.context_window) }}</span>
-              <a :href="row.purchase_url" target="_blank" rel="noopener" class="home-price-source-link" :aria-label="'打开 ' + homeModelName(row) + ' 的官方定价页'" title="打开官方定价页">→</a>
+            </span>
+            <span class="home-price-action">
+              <a :href="row.purchase_url" target="_blank" rel="noopener" class="home-price-source-link" :aria-label="'打开 ' + homeModelName(row) + ' 的官方定价页'" title="打开官方定价页">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
             </span>
           </div>
         </div>

@@ -17,8 +17,8 @@ const HOME_FLAGSHIP_PROVIDER_RULES = [
 const HOME_PLAN_PREVIEW_LIMIT = 8;
 
 // 首页面向中国大陆用户：这些厂商的同模型报价优先采用可验证的大陆
-// 人民币官方价格。没有大陆官方报价时，才以发布时的人民币参考价作为
-// 主展示，并明确保留原始国际报价，绝不把换算价伪装成官方人民币价。
+// 人民币官方价格。没有大陆官方报价时，首页仍以人民币参考价为主，
+// 并保留国际官方原币作为次行说明，避免把折算价伪装成实际结算价。
 const DOMESTIC_PROVIDER_IDS = new Set([
   'qwen', 'deepseek', 'moonshot', 'zhipu', 'minimax', 'xiaomi', 'volcengine', 'opencode',
 ]);
