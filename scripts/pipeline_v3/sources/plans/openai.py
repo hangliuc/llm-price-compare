@@ -15,6 +15,19 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
     specs = (PlanSpec("plus", "ChatGPT Plus", r"(?:ChatGPT\s+)?Plus\b", "general_ai", "subscription", "USD", featured_on_home=True),)
     _plans = (("free", "ChatGPT Free", "免费版"), ("go", "ChatGPT Go", "Go"), ("plus", "ChatGPT Plus", "Plus"), ("pro", "ChatGPT Pro", "Pro"))
 
+    @staticmethod
+    def _plan_window(text: str, label: str) -> str:
+        """Find a pricing-card occurrence, not a menu or comparison-table label."""
+        pattern = re.escape(label) if label == "免费版" else rf"\b{re.escape(label)}\b"
+        for match in re.finditer(pattern, text, flags=re.I):
+            window = text[match.start():match.start() + 1800]
+            if label == "免费版" or re.search(
+                r"(?:SGD|USD|\$)\s*[0-9]+(?:\.[0-9]+)?\s*/?\s*(?:月|mo(?:nth)?)",
+                window, re.I,
+            ):
+                return window
+        return ""
+
     def normalize(self, raw: bytes, fetched_at: str) -> list[Plan]:
         text = visible_text(raw)
         features = {
@@ -25,16 +38,16 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
         }
         plans = []
         for slug, product_name, label in self._plans:
-            anchors = {"免费版": "免费版 日常任务", "Go": "Go 扩展访问权限", "Plus": "Plus 以更先进", "Pro": "Pro 大幅提升"}
-            start = text.find(anchors[label])
-            if start < 0 and label == "Plus":
-                start = text.find("Plus")
-            if start < 0: continue
-            window = text[start:start + 1800]
+            window = self._plan_window(text, label)
+            if not window: continue
             price_match = re.search(r"(?:SGD|USD|\$)\s*([0-9]+(?:\.[0-9]+)?)\s*/?\s*(?:月|mo(?:nth)?)", window, re.I)
             is_free = label == "免费版"
             if not price_match and not is_free: continue
             price = 0.0 if is_free else float(price_match.group(1))
             currency = "SGD" if price_match and "SGD" in price_match.group(0).upper() else "USD"
             plans.append(Plan(plan_id=f"openai/chatgpt/{slug}", provider_id="openai", provider_name="OpenAI", product_name=product_name, plan_category="general_ai", billing_type="subscription", is_free=is_free, price_amount=price, monthly_equivalent=price, currency=currency, billing_cadence="monthly", purchase_url=self.source_url, source_url=self.source_url, source_kind="browser", fetched_at=fetched_at, featured_on_home=slug == "plus", features=tuple(x for x in features[label] if x in window), raw={"official_text": window}))
-        return require_complete_prices(plans, self.minimum_plan_count, self.source)
+        # Help Center fixtures intentionally expose Plus only. A real pricing
+        # page must yield all personal cards, otherwise retain last-known-good
+        # plans rather than publishing a destructive partial result.
+        expected = 4 if "免费版" in text else self.minimum_plan_count
+        return require_complete_prices(plans, expected, self.source)

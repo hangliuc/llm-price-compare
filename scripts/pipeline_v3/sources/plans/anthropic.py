@@ -13,7 +13,7 @@ from scripts.pipeline_v3.sources.plans.base import (
 class AnthropicPlanAdapter(OfficialPlanAdapter):
     source = "anthropic_plans"
     source_url = "https://support.claude.com/en/articles/11049762-choosing-a-claude-plan"
-    minimum_plan_count = 3
+    minimum_plan_count = 4
 
     _PRODUCTS = (
         ("free", "Claude Free", "Free", False),
@@ -48,7 +48,7 @@ class AnthropicPlanAdapter(OfficialPlanAdapter):
                 product_name=name,
                 plan_category="general_ai",
                 billing_type="subscription",
-                is_free=False,
+                is_free=label == "Free",
                 price_amount=price,
                 monthly_equivalent=price,
                 currency="USD",
@@ -61,4 +61,8 @@ class AnthropicPlanAdapter(OfficialPlanAdapter):
                 featured_on_home=featured,
                 raw={"official_text": window},
             ))
+        missing = [item.product_name for item in plans if item.price_amount is None]
+        if missing:
+            raise ValueError(
+                f"{self.source}: missing official monthly price for {', '.join(missing)}")
         return require_complete_prices(plans, self.minimum_plan_count, self.source)
