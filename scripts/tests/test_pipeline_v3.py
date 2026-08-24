@@ -240,19 +240,23 @@ def test_google_plan_adapter_ignores_early_marketing_mention():
     assert all(item.currency == "SGD" for item in plans)
 
 
-def test_openai_plan_adapter_reads_plus_from_official_help_page():
+def test_openai_plan_adapter_reads_us_prices_from_official_go_announcement():
     raw = b"""
-      <main><h1>What is ChatGPT Plus?</h1>
-      <p>ChatGPT Plus is available for $20/month.</p></main>
+      <main>ChatGPT Go at $8 USD/month
+      ChatGPT Plus at $20 USD/month
+      ChatGPT Pro at $200 USD/month</main>
     """
     plans = OpenAIPlanAdapter().normalize(raw, "now")
     assert [(item.product_name, item.price_amount, item.currency) for item in plans] == [
-        ("ChatGPT Plus", 20, "USD")
+        ("ChatGPT Free", 0, "USD"),
+        ("ChatGPT Go", 8, "USD"),
+        ("ChatGPT Plus", 20, "USD"),
+        ("ChatGPT Pro", 200, "USD"),
     ]
-    assert plans[0].featured_on_home is True
+    assert plans[2].featured_on_home is True
 
 
-def test_openai_plan_adapter_does_not_take_free_price_from_navigation():
+def test_openai_plan_adapter_rejects_localized_prices():
     raw = """
       <main>免费版 Go Plus Pro
       <h2>免费版</h2><p>SGD 0 /月</p>
@@ -260,13 +264,8 @@ def test_openai_plan_adapter_does_not_take_free_price_from_navigation():
       <h2>Plus</h2><p>SGD 30 /月</p>
       <h2>Pro</h2><p>起价 SGD 138 /月</p></main>
     """.encode()
-    plans = OpenAIPlanAdapter().normalize(raw, "now")
-    assert [(item.product_name, item.price_amount, item.currency) for item in plans] == [
-        ("ChatGPT Free", 0, "SGD"),
-        ("ChatGPT Go", 11, "SGD"),
-        ("ChatGPT Plus", 30, "SGD"),
-        ("ChatGPT Pro", 138, "SGD"),
-    ]
+    with pytest.raises(ValueError, match="expected 4"):
+        OpenAIPlanAdapter().normalize(raw, "now")
 
 
 def test_openai_pro_adapter_requires_and_emits_both_official_tiers():
@@ -347,7 +346,6 @@ def test_kiro_plan_adapter_reads_current_five_tiers_and_credits():
 
 @pytest.mark.parametrize("adapter_type", [
     MoonshotPlanAdapter,
-    OpenAIPlanAdapter,
     OpenCodePlanAdapter,
     XiaomiPlanAdapter,
 ])
