@@ -252,6 +252,23 @@ def test_openai_plan_adapter_reads_plus_from_official_help_page():
     assert plans[0].featured_on_home is True
 
 
+def test_openai_plan_adapter_does_not_take_free_price_from_navigation():
+    raw = """
+      <main>免费版 Go Plus Pro
+      <h2>免费版</h2><p>SGD 0 /月</p>
+      <h2>Go</h2><p>SGD 11 /月</p>
+      <h2>Plus</h2><p>SGD 30 /月</p>
+      <h2>Pro</h2><p>起价 SGD 138 /月</p></main>
+    """.encode()
+    plans = OpenAIPlanAdapter().normalize(raw, "now")
+    assert [(item.product_name, item.price_amount, item.currency) for item in plans] == [
+        ("ChatGPT Free", 0, "SGD"),
+        ("ChatGPT Go", 11, "SGD"),
+        ("ChatGPT Plus", 30, "SGD"),
+        ("ChatGPT Pro", 138, "SGD"),
+    ]
+
+
 def test_openai_pro_adapter_requires_and_emits_both_official_tiers():
     raw = b"""
       <main><p>The $100/month Pro plan provides 5x the usage of Plus.</p>

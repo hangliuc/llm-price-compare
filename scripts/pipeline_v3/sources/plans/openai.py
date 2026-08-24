@@ -20,17 +20,38 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
     render_scroll_to_bottom = True
     specs = (PlanSpec("plus", "ChatGPT Plus", r"(?:ChatGPT\s+)?Plus\b", "general_ai", "subscription", "USD", featured_on_home=True),)
     _plans = (("free", "ChatGPT Free", "免费版"), ("go", "ChatGPT Go", "Go"), ("plus", "ChatGPT Plus", "Plus"), ("pro", "ChatGPT Pro", "Pro"))
+    _price_pattern = re.compile(
+        r"(?:起价\s*)?(?:SGD|USD|\$)\s*([0-9]+(?:\.[0-9]+)?)\s*/?\s*(?:月|mo(?:nth)?)",
+        re.I,
+    )
 
     @staticmethod
     def _plan_window(text: str, label: str) -> str:
         """Find a pricing-card occurrence, not a menu or comparison-table label."""
         pattern = re.escape(label) if label == "免费版" else rf"\b{re.escape(label)}\b"
+        plan_labels = tuple(item[2] for item in OpenAIPlanAdapter._plans)
         for match in re.finditer(pattern, text, flags=re.I):
             window = text[match.start():match.start() + 1800]
-            if label == "免费版" or re.search(
-                r"(?:SGD|USD|\$)\s*[0-9]+(?:\.[0-9]+)?\s*/?\s*(?:月|mo(?:nth)?)",
-                window, re.I,
+            price_match = OpenAIPlanAdapter._price_pattern.search(window)
+            if not price_match:
+                continue
+            # Header/navigation text contains all plan names before the Free
+            # card.  It must not be associated with the first price that
+            # happens to follow it (SGD 0), otherwise every paid tier becomes
+            # zero-priced.  A genuine card reaches its own price before any
+            # other card heading.
+            before_price = window[:price_match.start()]
+            other_labels = (name for name in plan_labels if name != label)
+            if any(
+                re.search(
+                    re.escape(other) if other == "免费版" else rf"\b{re.escape(other)}\b",
+                    before_price,
+                    flags=re.I,
+                )
+                for other in other_labels
             ):
+                continue
+            if label == "免费版" or price_match:
                 return window
         return ""
 
@@ -46,7 +67,7 @@ class OpenAIPlanAdapter(OfficialPlanAdapter):
         for slug, product_name, label in self._plans:
             window = self._plan_window(text, label)
             if not window: continue
-            price_match = re.search(r"(?:SGD|USD|\$)\s*([0-9]+(?:\.[0-9]+)?)\s*/?\s*(?:月|mo(?:nth)?)", window, re.I)
+            price_match = self._price_pattern.search(window)
             is_free = label == "免费版"
             if not price_match and not is_free: continue
             price = 0.0 if is_free else float(price_match.group(1))
