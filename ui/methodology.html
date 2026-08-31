@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLMPPK 数据方法说明：大模型价格如何采集与比较</title>
+  <meta name="description" content="了解 LLMPPK 如何采集、校验和发布大模型 API Token 价格、订阅制与 Coding Plan 数据，以及如何理解跨币种比较结果。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://llmppk.top/methodology.html">
+  <style>body{max-width:760px;margin:48px auto;padding:0 24px;color:#202631;font:16px/1.75 system-ui,-apple-system,"Noto Sans SC",sans-serif}h1{font-size:32px;line-height:1.3}h2{margin-top:2.2em;font-size:23px}a{color:#165dff}li{margin:.45em 0}.note{padding:16px 18px;background:#f4f7ff;border-radius:10px}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"LLMPPK 数据方法说明","url":"https://llmppk.top/methodology.html","inLanguage":"zh-CN","about":["大模型定价数据","Token API 价格","数据质量"]}</script>
+</head>
+<body>
+  <main>
+    <p><a href="/">← 返回 LLMPPK</a></p>
+    <h1>LLMPPK 数据方法说明</h1>
+    <p>LLMPPK（Price Per Token）是面向开发者的非商业大模型价格聚合与比较工具。本站帮助用户比较 API Token 计费、订阅制与 AI Coding Plan；它不替代厂商的最终报价或结算页面。</p>
+    <h2>数据范围</h2>
+    <ul>
+      <li><strong>按需 API：</strong>输入、输出、缓存 Token 价格、上下文窗口及模态等信息。</li>
+      <li><strong>订阅与 Coding Plan：</strong>月费、周期、额度与已公开权益。</li>
+      <li><strong>市场与币种：</strong>不同官方市场、购买渠道或服务层级的报价分别保留，不基于 IP、语言或 Cookie 推测适用价格。</li>
+    </ul>
+    <h2>来源、采集与发布</h2>
+    <p>国际按需目录来自 Models.dev；国内及特定市场报价由已验证的厂商官方市场 Adapter 获取；订阅与 Coding Plan 来自厂商官方页面或 Adapter。数据每天自动更新两次，经字段、数量和重复身份等校验后，以完整 Catalog 原子发布。</p>
+    <p>当必要来源抓取或校验失败时，系统不会发布不完整数据，而会继续提供最近一次成功版本。每次运行、原始响应、Catalog 快照与 Release 均保留用于追溯。</p>
+    <h2>如何比较价格</h2>
+    <p>官方原币价格始终保留。跨币种排序和比较使用发布时保存的日度人民币参考汇率，这个参考值只服务于统一比较，不代表厂商实际结算币种或汇率。请分别查看输入、输出和缓存价格，并结合上下文、模态、地区、税费、限额与服务条款选型。</p>
+    <p class="note"><strong>重要：</strong>价格、可用地区、税费、套餐权益和限额可能随时调整。作出购买或生产决策前，请以厂商官方定价页与结算页为准。</p>
+    <h2>纠错与引用</h2>
+    <p>欢迎通过 <a href="https://github.com/hangliuc/llm-price-compare/issues">GitHub Issues</a> 提交纠错或新增厂商建议。引用本站数据时，请标注访问日期、模型/套餐、市场及币种，并在可能时附上厂商官方价格链接。</p>
+  </main>
+</body>
+</html>

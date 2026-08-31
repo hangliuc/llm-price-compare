@@ -3,26 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LLMPPK · 大模型价格对比 | Token API 价格、订阅与 Coding Plan</title>
-  <meta name="description" content="LLMPPK（PPK · Price Per Token）聚合 OpenAI、Anthropic、Google、DeepSeek、智谱等主流大模型厂商的 Token API 价格、订阅制与 Coding Plan，帮助开发者快速对比与选型。">
-  <meta name="robots" content="index,follow">
+  <title>LLMPPK：大模型 API Token 价格对比、订阅与 Coding Plan</title>
+  <meta name="description" content="LLMPPK（PPK · Price Per Token）汇总 OpenAI、Anthropic、Google、DeepSeek、智谱等主流大模型的官方 API Token 价格、订阅制与 AI Coding Plan。按输入、输出、缓存、上下文和市场快速对比，辅助模型选型。">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://llmppk.top/">
   <base href="/ui/">
   <link rel="icon" type="image/svg+xml" href="icons/ppx.svg?v=2">
   <link rel="apple-touch-icon" href="icons/ppx.svg">
-  <meta property="og:image" content="icons/ppx.svg">
-  <meta property="og:title" content="LLMPPK · 大模型价格对比">
-  <meta property="og:description" content="主流大模型厂商的 Token API 价格、订阅制与 Coding Plan 对比。">
+  <meta name="theme-color" content="#f4f7ff">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://llmppk.top/ui/icons/ppx.svg">
+  <meta property="og:title" content="LLMPPK：大模型 API Token 价格对比">
+  <meta property="og:description" content="对比主流大模型的 API Token 价格、订阅制与 Coding Plan；保留官方市场与原币报价。">
   <meta property="og:url" content="https://llmppk.top/">
   <meta property="og:site_name" content="LLMPPK">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LLMPPK：大模型 API Token 价格对比">
+  <meta name="twitter:description" content="主流大模型的官方 API 价格、订阅制与 Coding Plan 对比。">
+  <meta name="twitter:image" content="https://llmppk.top/ui/icons/ppx.svg">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "LLMPPK",
-      "alternateName": "PPK · Price Per Token",
-      "url": "https://llmppk.top/",
-      "description": "大模型 Token API 价格、订阅制与 Coding Plan 对比。"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://llmppk.top/#website",
+          "name": "LLMPPK",
+          "alternateName": ["PPK", "Price Per Token"],
+          "url": "https://llmppk.top/",
+          "inLanguage": "zh-CN",
+          "description": "大模型 API Token 价格、订阅制与 Coding Plan 对比。"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://llmppk.top/#organization",
+          "name": "LLMPPK",
+          "url": "https://llmppk.top/",
+          "logo": "https://llmppk.top/ui/icons/ppx.svg",
+          "sameAs": ["https://github.com/hangliuc/llm-price-compare"]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://llmppk.top/#webpage",
+          "url": "https://llmppk.top/",
+          "name": "LLMPPK：大模型 API Token 价格对比、订阅与 Coding Plan",
+          "description": "比较主流大模型厂商的官方 Token API 价格、订阅制与 AI Coding Plan。",
+          "isPartOf": {"@id": "https://llmppk.top/#website"},
+          "about": ["大语言模型", "API 定价", "Token 计费", "AI Coding Plan"],
+          "inLanguage": "zh-CN"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://llmppk.top/#faq",
+          "mainEntity": [
+            {"@type": "Question", "name": "这里的价格可靠吗？多久更新一次？", "acceptedAnswer": {"@type": "Answer", "text": "数据每天自动更新两次。按需目录来自 Models.dev 与已验证的官方市场 Adapter；套餐来自厂商官方页面。人民币参考价使用发布时保存的日度汇率快照，抓取或校验失败时不会覆盖最近一次成功发布的数据。"}},
+            {"@type": "Question", "name": "按需计费和套餐有什么区别？", "acceptedAnswer": {"@type": "Answer", "text": "按需计费按实际 Token 用量收费，适合 API 调用；套餐按周期或额度购买，适合用量相对固定的订阅和编程场景。"}},
+            {"@type": "Question", "name": "Input、Output 和 Cache Read 是什么？", "acceptedAnswer": {"@type": "Answer", "text": "Input 是发送给模型的内容，Output 是模型生成的回复；Cache Read 是读取已缓存上下文的费用，通常低于普通输入价。"}}
+          ]
+        }
+      ]
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1468,6 +1509,22 @@
       </div>
     </footer>
   </div>
+
+  <noscript>
+    <main class="noscript-content">
+      <h1>LLMPPK：大模型 API Token 价格对比</h1>
+      <p>LLMPPK（Price Per Token）是一个面向开发者的非商业大模型价格聚合与比较工具，汇总主流厂商的官方 API Token 价格、订阅制与 AI Coding Plan。</p>
+      <h2>可以比较什么</h2>
+      <ul>
+        <li>按需 API：输入、输出、缓存 Token 价格、上下文窗口与模型模态。</li>
+        <li>订阅与 Coding Plan：月费、计费周期、额度和权益。</li>
+        <li>不同官方市场：保留官方原币价格；人民币参考价仅用于统一排序与比较。</li>
+      </ul>
+      <h2>数据与更新</h2>
+      <p>按需目录来自 Models.dev 与已验证的厂商官方市场页面；套餐来自厂商官方页面。数据每天自动更新两次，并在校验通过后发布；校验失败时保留最近一次成功版本。实际价格、可用地区、税费及权益以厂商结算页为准。</p>
+      <p>请启用 JavaScript 使用完整的筛选和价格对比功能。也可阅读 <a href="methodology.html">数据方法说明</a>。</p>
+    </main>
+  </noscript>
 
   <script src="app.js?v=59"></script>
 </body>

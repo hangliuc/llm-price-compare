@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 import tempfile
 
+from scripts.pipeline_v3.seo import render_seo_assets
+
 
 class FileLock:
     def __init__(self, path: Path):
@@ -55,4 +57,5 @@ def publish_release(catalog_path: Path, status_path: Path, releases_dir: Path,
     atomic_write_json(release_status, status)
     atomic_write_json(catalog_path, catalog)
     atomic_write_json(status_path, status)
+    render_seo_assets(catalog, catalog_path.parent / "seo")
     return release_catalog, release_status

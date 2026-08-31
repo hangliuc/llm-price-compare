@@ -38,6 +38,7 @@ from scripts.pipeline_v3.sources.plans.qwen import QwenTokenPlanAdapter
 from scripts.pipeline_v3.sources.plans.xiaomi import XiaomiPlanAdapter
 from scripts.pipeline_v3.sources.plans.zhipu import ZhipuPlanAdapter
 from scripts.pipeline_v3.storage import V3Store
+from scripts.pipeline_v3.seo import render_seo_assets
 from scripts.pipeline_v3.validate import ValidationError, validate_offers, validate_plans
 
 
@@ -158,6 +159,17 @@ def test_catalog_contains_separate_business_entities():
     assert catalog["schema_version"] == "3.1"
     assert len(catalog["model_offers"]) == 1
     assert len(catalog["plans"]) == 1
+
+
+def test_seo_renderer_creates_indexable_provider_page_and_sitemap(tmp_path):
+    catalog = build_catalog("r1", "2026-01-02T00:00:00Z", [offer()], [plan()])
+    output = tmp_path / "public" / "seo"
+    render_seo_assets(catalog, output)
+    page = (output / "providers" / "anthropic" / "index.html").read_text(encoding="utf-8")
+    sitemap = (output / "sitemap.xml").read_text(encoding="utf-8")
+    assert "Anthropic API Token 价格对比" in page
+    assert "Claude Test" in page
+    assert "https://llmppk.top/providers/anthropic/" in sitemap
 
 
 def test_store_upgrades_an_existing_v30_database_before_creating_market_index(tmp_path):
