@@ -45,6 +45,9 @@ jobs:
             elif ! grep -q '"schema_version"[[:space:]]*:[[:space:]]*"3.1"' runtime/public/catalog.json; then
               docker compose --profile pipeline run --rm pipeline run --official-markets
             fi
+            # The current catalog is enough to build static SEO pages; do not
+            # wait for the next scheduled data refresh after a code deploy.
+            docker compose --profile pipeline run --rm pipeline render-seo
             find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
             docker compose up -d --build --remove-orphans web
 
@@ -68,4 +71,5 @@ jobs:
             curl --fail --silent --show-error http://127.0.0.1:8001/ui/ >/dev/null
             curl --fail --silent --show-error http://127.0.0.1:8001/data/catalog.json >/dev/null
             curl --fail --silent --show-error http://127.0.0.1:8001/data/status.json >/dev/null
+            curl --fail --silent --show-error http://127.0.0.1:8001/providers/openai/ >/dev/null
             echo "Deployed at $(date)"

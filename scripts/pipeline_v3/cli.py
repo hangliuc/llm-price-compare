@@ -5,6 +5,7 @@ from pathlib import Path
 from scripts.pipeline_v3.config import V3Config
 from scripts.pipeline_v3.probe import probe_official_offer_adapters, probe_plan_adapters
 from scripts.pipeline_v3.runner import run_pipeline
+from scripts.pipeline_v3.seo import render_seo_assets
 from scripts.pipeline_v3.sources.official_offers import experimental_official_offer_adapters
 from scripts.pipeline_v3.sources.plans import all_plan_adapters, verified_plan_adapters
 from scripts.pipeline_v3.storage import V3Store
@@ -23,6 +24,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="migration diagnostic only: skip plans; production publishing must not use this",
     )
     commands.add_parser("status", help="show latest V3 run")
+    commands.add_parser(
+        "render-seo",
+        help="render crawlable provider pages and sitemap from the current published catalog",
+    )
     commands.add_parser(
         "probe-plans",
         help="check every official plan source without publishing",
@@ -49,6 +54,14 @@ def main(argv=None) -> int:
                 if args.official_markets else None
             ),
         )
+    elif args.command == "render-seo":
+        catalog = json.loads(config.catalog_path.read_text(encoding="utf-8"))
+        render_seo_assets(catalog, config.catalog_path.parent / "seo")
+        result = {
+            "status": "healthy",
+            "release_id": catalog.get("release_id"),
+            "provider_pages": len(catalog.get("providers", [])),
+        }
     elif args.command == "status":
         store = V3Store(config.db_path)
         try:
