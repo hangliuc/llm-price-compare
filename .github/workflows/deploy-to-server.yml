@@ -49,7 +49,9 @@ jobs:
             # wait for the next scheduled data refresh after a code deploy.
             docker compose --profile pipeline run --rm pipeline render-seo
             find runtime/public -maxdepth 1 -type f -name '*.json' -exec chmod 0644 {} \;
-            docker compose up -d --build --remove-orphans web
+            # Nginx configuration is bind-mounted; force recreation so a
+            # changed config file is actually reloaded on every deploy.
+            docker compose up -d --build --force-recreate --remove-orphans web
 
             systemctl disable --now ppk-v2-payg.timer ppk-v2-plans.timer ppk-v2-full-verify.timer ppk-v3-candidate.timer 2>/dev/null || true
             rm -f /etc/systemd/system/ppk-v2-payg.service /etc/systemd/system/ppk-v2-payg.timer
