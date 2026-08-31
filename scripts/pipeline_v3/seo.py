@@ -94,6 +94,10 @@ def render_seo_assets(catalog: dict, output_dir: Path) -> None:
     parent = output_dir.parent
     parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix=".seo-", dir=parent))
+    # These files are bind-mounted into the unprivileged Nginx container.
+    # mkdtemp defaults to 0700, which would make otherwise valid pages appear
+    # as 404/403 to the web server after the atomic directory replacement.
+    os.chmod(temporary, 0o755)
     try:
         provider_offers: dict[str, list[dict]] = defaultdict(list)
         provider_plans: dict[str, list[dict]] = defaultdict(list)
