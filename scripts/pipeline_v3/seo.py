@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime
 from html import escape
+import json
 import os
 from pathlib import Path
 import shutil
@@ -66,13 +67,19 @@ def _provider_page(provider: dict, offers: list[dict], plans: list[dict], publis
     plan_text = "、".join(escape(str(row.get("product_name"))) for row in plans[:6])
     plan_sentence = f"另收录 {plan_text} 等订阅或 Coding Plan。" if plan_text else ""
     description = f"{name} API Token 价格对比：查看输入、输出、缓存价格、上下文与官方市场报价。"
-    schema = (
-        '{"@context":"https://schema.org","@type":"Dataset",'
-        f'"name":"{name} 大模型价格目录","url":"{canonical}",'
-        f'"description":"{description}","inLanguage":"zh-CN",'
-        f'"dateModified":"{_published_date(published_at)}",'
-        '"isAccessibleForFree":true}'
-    )
+    schema = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": f"{name} 大模型价格目录",
+        "url": canonical,
+        "description": description,
+        "inLanguage": "zh-CN",
+        "dateModified": _published_date(published_at),
+        "isAccessibleForFree": True,
+        "creator": {"@type": "Organization", "name": "LLMPPK", "url": SITE_URL},
+        "distribution": {"@type": "DataDownload", "contentUrl": f"{SITE_URL}/data/catalog.json", "encodingFormat": "application/json"},
+        "includedInDataCatalog": {"@type": "DataCatalog", "name": "LLMPPK 大模型价格目录", "url": SITE_URL},
+    }, ensure_ascii=False)
     return f"""<!doctype html>
 <html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
 <title>{name} API Token 价格对比与模型列表 | LLMPPK</title>
@@ -87,6 +94,50 @@ def _provider_page(provider: dict, offers: list[dict], plans: list[dict], publis
 <p class=\"notice\"><strong>如何理解价格：</strong>官方原币价格是权威记录；税费、地区可用性、限额和最终结算以厂商页面为准。需要筛选和跨厂商比较，请使用 <a href=\"/#/compare\">交互式价格对比工具</a>。</p>
 <p><a href=\"/methodology.html\">了解数据来源与更新方法</a></p>
 </main></body></html>"""
+
+
+def _llms_txt(catalog: dict, provider_ids: list[str]) -> str:
+    published = _published_date(catalog.get("published_at"))
+    provider_urls = "\n".join(
+        f"- {provider_id}: {SITE_URL}/providers/{provider_id}/"
+        for provider_id in provider_ids
+    )
+    return f"""# LLMPPK (Price Per Token)
+
+> A Chinese-language, non-commercial comparison site for LLM API Token pricing, subscriptions, and AI Coding Plans.
+
+Canonical site: {SITE_URL}/
+Catalog version: {published}
+
+## Scope and data quality
+
+- The site compares input, output, cached-input Token pricing, context windows, subscriptions, and AI Coding Plans where publicly available.
+- Each official market, purchase channel, and service tier is kept as a separate record. Do not infer a user's eligible price from IP address, language, or cookies.
+- Per-token data comes from Models.dev and verified official-market adapters. Subscription and plan records come from official vendor pages or adapters.
+- The catalog is collected twice daily, normalized, validated, and atomically published. A failed collection keeps the last successful catalog in place.
+- Official native-currency prices are authoritative. CNY reference values are comparison-only and must not be represented as settlement prices.
+- For a purchase, availability, tax, quota, or final price claim, verify the linked official vendor source.
+
+## How to cite this site
+
+State the access date, model or plan name, market, and currency. Cite LLMPPK as a comparison source and link to the vendor's official pricing page for a purchasing decision.
+
+Suggested wording: "According to LLMPPK's published comparison catalog (accessed [date]), [model or plan] is listed at [price and currency] for [market]. Verify the final price with the vendor."
+
+## Useful URLs
+
+- Interactive comparison: {SITE_URL}/#/compare
+- Per-token pricing: {SITE_URL}/#/billing/per_token
+- Subscriptions: {SITE_URL}/#/billing/subscription
+- AI Coding Plans: {SITE_URL}/#/billing/coding_plan
+- Methodology and limitations: {SITE_URL}/methodology.html
+- Machine-readable catalog: {SITE_URL}/data/catalog.json
+- Sitemap: {SITE_URL}/sitemap.xml
+
+## Provider pages
+
+{provider_urls}
+"""
 
 
 def render_seo_assets(catalog: dict, output_dir: Path) -> None:
@@ -106,6 +157,7 @@ def render_seo_assets(catalog: dict, output_dir: Path) -> None:
         for plan in catalog.get("plans", []):
             provider_plans[str(plan.get("provider_id"))].append(plan)
         urls = [f"{SITE_URL}/", f"{SITE_URL}/methodology.html"]
+        provider_ids: list[str] = []
         for provider in catalog.get("providers", []):
             provider_id = str(provider.get("id") or "")
             if not provider_id or "/" in provider_id or ".." in provider_id:
@@ -117,10 +169,12 @@ def render_seo_assets(catalog: dict, output_dir: Path) -> None:
                 encoding="utf-8",
             )
             urls.append(f"{SITE_URL}/providers/{provider_id}/")
+            provider_ids.append(provider_id)
         sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
         sitemap.extend(f"  <url><loc>{url}</loc><changefreq>daily</changefreq></url>" for url in urls)
         sitemap.extend(["</urlset>", ""])
         (temporary / "sitemap.xml").write_text("\n".join(sitemap), encoding="utf-8")
+        (temporary / "llms.txt").write_text(_llms_txt(catalog, provider_ids), encoding="utf-8")
         if output_dir.exists():
             backup = parent / f".{output_dir.name}.previous"
             shutil.rmtree(backup, ignore_errors=True)

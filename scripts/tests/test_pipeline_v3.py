@@ -167,9 +167,12 @@ def test_seo_renderer_creates_indexable_provider_page_and_sitemap(tmp_path):
     render_seo_assets(catalog, output)
     page = (output / "providers" / "anthropic" / "index.html").read_text(encoding="utf-8")
     sitemap = (output / "sitemap.xml").read_text(encoding="utf-8")
+    llms = (output / "llms.txt").read_text(encoding="utf-8")
     assert "Anthropic API Token 价格对比" in page
     assert "Claude Test" in page
     assert "https://llmppk.top/providers/anthropic/" in sitemap
+    assert "Official native-currency prices are authoritative" in llms
+    assert "https://llmppk.top/providers/anthropic/" in llms
 
 
 def test_store_upgrades_an_existing_v30_database_before_creating_market_index(tmp_path):
