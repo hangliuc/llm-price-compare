@@ -202,6 +202,7 @@ const CODING_TOOL_PROVIDER_IDS = new Set(['cursor', 'kiro', 'githubcopilot', 'op
 // AI Coding IDE 生态：独立于价格库，便于后续增删产品而不改模板。
 const CODING_IDES = [
   { id: 'cursor', name: 'Cursor', logo: 'icons/cursor.svg', url: 'https://www.cursor.com/', category: 'AI 原生 IDE', description: '面向 AI 编程工作流的代码编辑器' },
+  { id: 'workbuddy', name: 'WorkBuddy', logo: 'icons/workbuddy.svg', url: 'https://www.workbuddy.ai/', category: 'AI 工作台', description: '面向全场景办公的 AI 工作伙伴' },
   { id: 'trae', name: 'Trae', logo: 'icons/trae.png', url: 'https://www.trae.ai/', category: 'AI 原生 IDE', description: '以 Agent 为核心的开发环境' },
   { id: 'windsurf', name: 'Windsurf', logo: 'icons/windsurf.png', url: 'https://windsurf.com/', category: 'Agentic IDE', description: '编辑器与编码 Agent 协同工作' },
   { id: 'qoder', name: 'Qoder', logo: 'icons/qoder.png', url: 'https://qoder.com/', category: 'Agentic IDE', description: '面向真实软件任务的智能开发平台' },
