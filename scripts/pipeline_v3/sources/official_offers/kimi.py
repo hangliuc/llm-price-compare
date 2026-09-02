@@ -89,18 +89,37 @@ class KimiPricingAdapter(OfficialModelOfferAdapter):
 
 
 def _extract_rows(text: str) -> list[list[str]]:
-    """Return literal DocTable rows without executing the documentation JSX."""
+    """Return pricing rows from the DocTable or Markdown representation.
+
+    Kimi's documentation has used both a JSX ``DocTable`` declaration and a
+    rendered Markdown table.  Keep the former parser for old snapshots, but
+    accept the latter so a presentation change does not block the full
+    catalog release.
+    """
 
     match = _ROWS.search(text)
-    if not match:
-        raise ValueError("Kimi official pricing rows not found")
-    try:
-        rows = json.loads(re.sub(r",\s*\]$", "]", match.group(1)))
-    except json.JSONDecodeError as exc:
-        raise ValueError("Kimi official pricing rows are not valid JSON") from exc
-    if not isinstance(rows, list) or not all(isinstance(row, list) for row in rows):
-        raise ValueError("Kimi official pricing rows have an unexpected shape")
-    return [[str(value) for value in row] for row in rows]
+    if match:
+        try:
+            rows = json.loads(re.sub(r",\s*\]$", "]", match.group(1)))
+        except json.JSONDecodeError as exc:
+            raise ValueError("Kimi official pricing rows are not valid JSON") from exc
+        if not isinstance(rows, list) or not all(isinstance(row, list) for row in rows):
+            raise ValueError("Kimi official pricing rows have an unexpected shape")
+        return [[str(value) for value in row] for row in rows]
+
+    # Fallback for rendered Markdown tables.  Ignore the header and separator;
+    # the normalizer below still validates the six expected pricing columns.
+    rows = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not (line.startswith("|") and line.endswith("|")):
+            continue
+        cells = [cell.strip() for cell in line[1:-1].split("|")]
+        if len(cells) == 6 and not all(set(cell.replace(" ", "")) <= set("-:") for cell in cells):
+            rows.append(cells)
+    if rows:
+        return rows
+    raise ValueError("Kimi official pricing rows not found")
 
 
 __all__ = ["KIMI_MAINLAND_PRICING_PAGES", "KimiPricingAdapter", "KimiPricingPage"]

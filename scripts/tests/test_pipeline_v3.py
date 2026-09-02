@@ -550,6 +550,18 @@ def test_kimi_official_adapter_reads_native_cny_cache_input_output_and_context()
     assert (code.market, code.currency, code.access_channel) == ("cn_mainland", "CNY", "official_api")
 
 
+def test_kimi_official_adapter_reads_rendered_markdown_table():
+    raw = '''
+    | Model | Unit | Cache Read | Input | Output | Context |
+    | --- | --- | --- | --- | --- | --- |
+    | kimi-k2.6 | 1M tokens | ¥0.50 | ¥2.00 | ¥8.00 | 262,144 tokens |
+    '''.encode()
+    adapter = KimiPricingAdapter(KimiPricingPage("fixture_kimi", "https://example.test/kimi.md"))
+    offers = adapter.normalize(raw, "now")
+    assert len(offers) == 1
+    assert (offers[0].cache_read_per_1m, offers[0].input_per_1m, offers[0].output_per_1m) == (0.5, 2, 8)
+
+
 def test_zai_global_adapter_keeps_official_usd_and_real_zero_free_prices():
     raw = '''
     # Pricing
