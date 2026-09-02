@@ -17,6 +17,7 @@ from scripts.pipeline_v3.sources.official_offers.base import OfficialModelOfferA
 
 
 _ROWS = re.compile(r"rows=\{\s*(\[\s*\[.*?\]\s*,?\s*\])\s*\}", re.S)
+_ROWS_BLOCK = re.compile(r"rows\s*=\s*\{(.*?)\}", re.S)
 _AMOUNT = re.compile(r"¥\s*([0-9]+(?:\.[0-9]+)?)")
 _CONTEXT = re.compile(r"([0-9][0-9,]*)\s*tokens", re.I)
 
@@ -106,6 +107,25 @@ def _extract_rows(text: str) -> list[list[str]]:
         if not isinstance(rows, list) or not all(isinstance(row, list) for row in rows):
             raise ValueError("Kimi official pricing rows have an unexpected shape")
         return [[str(value) for value in row] for row in rows]
+
+    # The current docs emit JSX over multiple lines, e.g. rows={[ followed by
+    # one JSON array per line and a trailing comma.  Parse each row separately
+    # so whitespace and the trailing comma do not affect extraction.
+    block = _ROWS_BLOCK.search(text)
+    if block:
+        rows = []
+        for line in block.group(1).splitlines():
+            candidate = line.strip().rstrip(",")
+            if not (candidate.startswith("[") and candidate.endswith("]")):
+                continue
+            try:
+                row = json.loads(candidate)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(row, list):
+                rows.append([str(value) for value in row])
+        if rows:
+            return rows
 
     # Fallback for rendered Markdown tables.  Ignore the header and separator;
     # the normalizer below still validates the six expected pricing columns.

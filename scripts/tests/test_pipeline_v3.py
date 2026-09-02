@@ -562,6 +562,23 @@ def test_kimi_official_adapter_reads_rendered_markdown_table():
     assert (offers[0].cache_read_per_1m, offers[0].input_per_1m, offers[0].output_per_1m) == (0.5, 2, 8)
 
 
+def test_kimi_official_adapter_reads_multiline_doc_table_rows():
+    raw = '''
+    <DocTable
+      columns={[{ title: "模型" }]}
+      rows={[
+        ["kimi-k3", "1M tokens", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
+      ]}
+    />
+    '''.encode()
+    adapter = KimiPricingAdapter(KimiPricingPage("fixture_kimi", "https://example.test/kimi.md"))
+    offers = adapter.normalize(raw, "now")
+    assert len(offers) == 1
+    assert offers[0].model_id == "kimi-k3"
+    assert (offers[0].cache_read_per_1m, offers[0].input_per_1m, offers[0].output_per_1m) == (2, 20, 100)
+    assert offers[0].context_window == 1048576
+
+
 def test_zai_global_adapter_keeps_official_usd_and_real_zero_free_prices():
     raw = '''
     # Pricing
