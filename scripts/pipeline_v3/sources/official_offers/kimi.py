@@ -32,7 +32,6 @@ KIMI_MAINLAND_PRICING_PAGES = (
     KimiPricingPage("kimi_official_k3", "https://platform.kimi.com/docs/pricing/chat-k3.md"),
     KimiPricingPage("kimi_official_k27_code", "https://platform.kimi.com/docs/pricing/chat-k27-code.md"),
     KimiPricingPage("kimi_official_k26", "https://platform.kimi.com/docs/pricing/chat-k26.md"),
-    KimiPricingPage("kimi_official_k25", "https://platform.kimi.com/docs/pricing/chat-k25.md"),
 )
 
 
